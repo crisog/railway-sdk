@@ -1,4 +1,5 @@
-import type { GraphQLError } from 'graphql';
+import { print, Kind, type GraphQLError, type OperationDefinitionNode } from 'graphql';
+import type { TypedDocumentNode } from '@graphql-typed-document-node/core';
 import {
   MissingTokenError,
   requireTokenFromEnv,
@@ -18,6 +19,10 @@ export interface GraphQLRequestOptions<TVariables = Record<string, unknown>> {
   query: string;
   variables?: TVariables;
   operationName?: string;
+  headers?: Record<string, string>;
+}
+
+export interface GraphQLDocumentRequestOptions {
   headers?: Record<string, string>;
 }
 
@@ -113,4 +118,30 @@ export class RailwayClient {
 
     return payload.data;
   }
+
+  async requestDocument<TData = unknown, TVariables = Record<string, unknown>>(
+    document: TypedDocumentNode<TData, TVariables>,
+    variables?: TVariables,
+    options: GraphQLDocumentRequestOptions = {},
+  ): Promise<TData> {
+    const operationName = inferOperationName(document);
+
+    return this.request<TData, TVariables>({
+      query: print(document),
+      variables,
+      operationName,
+      headers: options.headers,
+    });
+  }
 }
+
+const inferOperationName = <TData, TVariables>(
+  document: TypedDocumentNode<TData, TVariables>,
+): string | undefined => {
+  const operationDefinition = document.definitions.find(
+    (definition): definition is OperationDefinitionNode =>
+      definition.kind === Kind.OPERATION_DEFINITION && Boolean(definition.name),
+  );
+
+  return operationDefinition?.name?.value;
+};

@@ -1,0 +1,3 @@
+mutation apiTokenCreate($input: ApiTokenCreateInput!) {
+  apiTokenCreate(input: $input)
+}

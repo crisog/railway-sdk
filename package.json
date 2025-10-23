@@ -12,15 +12,20 @@
   "devDependencies": {
     "@graphql-codegen/cli": "^6.0.1",
     "@graphql-codegen/introspection": "^5.0.0",
+    "@graphql-codegen/typed-document-node": "^6.0.2",
+    "@graphql-codegen/typescript": "^5.0.2",
+    "@graphql-codegen/typescript-operations": "^5.0.2",
     "@types/bun": "latest"
   },
   "peerDependencies": {
     "typescript": "^5.9.3"
   },
   "scripts": {
-    "codegen:introspect": "graphql-codegen --config codegen.ts"
+    "codegen:introspect": "graphql-codegen --config codegen.ts",
+    "generate:operations": "bun scripts/generate-operations.ts"
   },
   "dependencies": {
+    "@graphql-typed-document-node/core": "^3.2.0",
     "graphql": "^16.11.0"
   }
 }
