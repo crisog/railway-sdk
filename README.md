@@ -56,13 +56,13 @@ This script introspects each `.graphql` document, derives the correct `TypedDocu
 Create a `RailwayClient` and call the generated helpers:
 
 ```ts
-import { RailwayClient, me, apiTokenCreate } from "railway-sdk";
+import { RailwayClient, me, apiTokenCreate } from 'railway-sdk';
 
 const client = RailwayClient.fromEnv();
 
 const meData = await me(client);
 const newToken = await apiTokenCreate(client, {
-  input: { name: "CI Token", workspaceId: "workspace_123" },
+  input: { name: 'CI Token', workspaceId: 'workspace_123' },
 });
 ```
 
@@ -71,8 +71,8 @@ Every GraphQL document under `src/graphql` is surfaced through an async function
 If you need lower-level control, you can still execute typed documents directly:
 
 ```ts
-import { RailwayClient } from "railway-sdk";
-import { MeDocument } from "railway-sdk/src/generated/graphql";
+import { RailwayClient } from 'railway-sdk';
+import { MeDocument } from 'railway-sdk/src/generated/graphql';
 
 const client = RailwayClient.fromEnv();
 const meData = await client.requestDocument(MeDocument);

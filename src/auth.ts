@@ -8,15 +8,14 @@ export interface EnvToken {
 
 export class MissingTokenError extends Error {
   constructor(
-    message =
-      'Missing Railway API token. Provide one via RailwayClient options or environment variables.',
+    message = 'Missing Railway API token. Provide one via RailwayClient options or environment variables.',
   ) {
     super(message);
     this.name = 'MissingTokenError';
   }
 }
 
-const tokenSources: ReadonlyArray<{ env: string; type: TokenType }> = Object.freeze([
+const tokenSources: readonly { env: string; type: TokenType }[] = Object.freeze([
   { env: 'RAILWAY_API_TOKEN', type: 'account' },
   { env: 'RAILWAY_TEAM_TOKEN', type: 'team' },
   { env: 'RAILWAY_PROJECT_TOKEN', type: 'project' },

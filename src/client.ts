@@ -1,11 +1,6 @@
 import { print, Kind, type GraphQLError, type OperationDefinitionNode } from 'graphql';
 import type { TypedDocumentNode } from '@graphql-typed-document-node/core';
-import {
-  MissingTokenError,
-  requireTokenFromEnv,
-  resolveAuthHeader,
-  type TokenType,
-} from './auth';
+import { MissingTokenError, requireTokenFromEnv, resolveAuthHeader, type TokenType } from './auth';
 
 export interface RailwayClientOptions {
   token: string;

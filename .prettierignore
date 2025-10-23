@@ -51,3 +51,8 @@ jspm_packages/
 .yarn-integrity
 
 .next
+
+# generated files
+src/generated/**
+src/graphql/**
+schema/**

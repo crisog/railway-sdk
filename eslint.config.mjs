@@ -6,9 +6,9 @@ import tseslint from 'typescript-eslint';
 
 export default defineConfig(
   {
-    ignores: ['dist/**', 'node_modules/**']
+    ignores: ['dist/**', 'node_modules/**'],
   },
   eslint.configs.recommended,
   tseslint.configs.strict,
-  tseslint.configs.stylistic
+  tseslint.configs.stylistic,
 );
