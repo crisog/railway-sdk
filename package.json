@@ -1,0 +1,16 @@
+{
+  "name": "railway-sdk",
+  "module": "index.ts",
+  "type": "module",
+  "devDependencies": {
+    "@graphql-codegen/cli": "^6.0.1",
+    "@graphql-codegen/introspection": "^5.0.0",
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "graphql": "^16.11.0"
+  }
+}
