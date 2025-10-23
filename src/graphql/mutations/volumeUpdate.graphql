@@ -1,0 +1,12 @@
+# Update a persistent volume in a project
+mutation volumeUpdate($input: VolumeUpdateInput!, $volumeId: String!) {
+  volumeUpdate(input: $input, volumeId: $volumeId) {
+    __typename
+    createdAt
+    id
+    name
+    # project
+    projectId
+    # volumeInstances
+  }
+}

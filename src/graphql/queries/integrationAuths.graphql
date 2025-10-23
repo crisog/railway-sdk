@@ -1,0 +1,8 @@
+# Get all integration auths for a user
+query integrationAuths($after: String, $before: String, $first: Int, $last: Int) {
+  integrationAuths(after: $after, before: $before, first: $first, last: $last) {
+    __typename
+    # edges
+    # pageInfo
+  }
+}

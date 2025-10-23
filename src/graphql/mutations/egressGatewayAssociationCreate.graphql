@@ -1,0 +1,8 @@
+# Create a new egress gateway association for a service instance
+mutation egressGatewayAssociationCreate($input: EgressGatewayCreateInput!) {
+  egressGatewayAssociationCreate(input: $input) {
+    __typename
+    ipv4
+    region
+  }
+}

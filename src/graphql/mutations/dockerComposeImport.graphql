@@ -1,0 +1,13 @@
+# Create services and volumes from docker compose
+mutation dockerComposeImport($environmentId: String!, $projectId: String!, $skipStagingPatch: Boolean, $yaml: String!) {
+  dockerComposeImport(
+    environmentId: $environmentId
+    projectId: $projectId
+    skipStagingPatch: $skipStagingPatch
+    yaml: $yaml
+  ) {
+    __typename
+    errors
+    patch
+  }
+}

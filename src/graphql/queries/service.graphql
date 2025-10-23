@@ -1,0 +1,20 @@
+# Get a service by ID
+query service($id: String!) {
+  service(id: $id) {
+    __typename
+    createdAt
+    deletedAt
+    # deployments
+    featureFlags
+    icon
+    id
+    name
+    # project
+    projectId
+    # repoTriggers
+    # serviceInstances
+    templateServiceId
+    templateThreadSlug
+    updatedAt
+  }
+}

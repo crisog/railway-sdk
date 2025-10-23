@@ -1,0 +1,4 @@
+# Updates a service domain.
+mutation serviceDomainUpdate($input: ServiceDomainUpdateInput!) {
+  serviceDomainUpdate(input: $input)
+}

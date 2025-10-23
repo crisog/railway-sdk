@@ -1,0 +1,17 @@
+# Get a private network endpoint for a service instance.
+query privateNetworkEndpoint($environmentId: String!, $privateNetworkId: String!, $serviceId: String!) {
+  privateNetworkEndpoint(
+    environmentId: $environmentId
+    privateNetworkId: $privateNetworkId
+    serviceId: $serviceId
+  ) {
+    __typename
+    createdAt
+    deletedAt
+    dnsName
+    privateIps
+    publicId
+    serviceInstanceId
+    tags
+  }
+}

@@ -1,0 +1,8 @@
+# Checks if a service domain is available
+query serviceDomainAvailable($domain: String!) {
+  serviceDomainAvailable(domain: $domain) {
+    __typename
+    available
+    message
+  }
+}

@@ -1,0 +1,8 @@
+# Update a service instance
+mutation serviceInstanceUpdate($environmentId: String, $input: ServiceInstanceUpdateInput!, $serviceId: String!) {
+  serviceInstanceUpdate(
+    environmentId: $environmentId
+    input: $input
+    serviceId: $serviceId
+  )
+}

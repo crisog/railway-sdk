@@ -1,0 +1,11 @@
+# Update a webhook on a project
+mutation webhookUpdate($id: String!, $input: WebhookUpdateInput!) {
+  webhookUpdate(id: $id, input: $input) {
+    __typename
+    filters
+    id
+    lastStatus
+    projectId
+    url
+  }
+}

@@ -1,0 +1,16 @@
+# Update the email preferences for a user
+mutation preferencesUpdate($input: PreferencesUpdateData!) {
+  preferencesUpdate(input: $input) {
+    __typename
+    buildFailedEmail
+    changelogEmail
+    communityEmail
+    deployCrashedEmail
+    ephemeralEnvironmentEmail
+    id
+    marketingEmail
+    # preferenceOverrides
+    subprocessorUpdatesEmail
+    usageEmail
+  }
+}

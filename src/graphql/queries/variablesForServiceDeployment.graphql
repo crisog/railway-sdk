@@ -1,0 +1,8 @@
+# All rendered variables that are required for a service deployment.
+query variablesForServiceDeployment($environmentId: String!, $projectId: String!, $serviceId: String!) {
+  variablesForServiceDeployment(
+    environmentId: $environmentId
+    projectId: $projectId
+    serviceId: $serviceId
+  )
+}

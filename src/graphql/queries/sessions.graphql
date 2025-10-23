@@ -1,0 +1,8 @@
+# Gets all sessions for authenticated user.
+query sessions($after: String, $before: String, $first: Int, $last: Int) {
+  sessions(after: $after, before: $before, first: $first, last: $last) {
+    __typename
+    # edges
+    # pageInfo
+  }
+}

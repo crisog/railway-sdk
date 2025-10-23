@@ -1,0 +1,21 @@
+# Renames an environment.
+mutation environmentRename($id: String!, $input: EnvironmentRenameInput!) {
+  environmentRename(id: $id, input: $input) {
+    __typename
+    createdAt
+    deletedAt
+    # deploymentTriggers
+    # deployments
+    id
+    isEphemeral
+    # meta
+    name
+    projectId
+    # serviceInstances
+    # sourceEnvironment
+    unmergedChangesCount
+    updatedAt
+    # variables
+    # volumeInstances
+  }
+}

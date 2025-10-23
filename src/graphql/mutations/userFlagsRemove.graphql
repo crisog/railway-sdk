@@ -1,0 +1,4 @@
+# Remove a flag on the user.
+mutation userFlagsRemove($input: UserFlagsRemoveInput!) {
+  userFlagsRemove(input: $input)
+}

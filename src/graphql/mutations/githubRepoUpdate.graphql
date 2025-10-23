@@ -1,0 +1,4 @@
+# Updates a GitHub repo through the linked template
+mutation githubRepoUpdate($input: GitHubRepoUpdateInput!) {
+  githubRepoUpdate(input: $input)
+}

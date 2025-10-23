@@ -1,0 +1,4 @@
+# Unsubscribe from the Beta program.
+mutation userBetaLeave {
+  userBetaLeave
+}

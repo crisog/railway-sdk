@@ -1,0 +1,10 @@
+# Create an integration for a project
+mutation integrationCreate($input: IntegrationCreateInput!) {
+  integrationCreate(input: $input) {
+    __typename
+    config
+    id
+    name
+    projectId
+  }
+}

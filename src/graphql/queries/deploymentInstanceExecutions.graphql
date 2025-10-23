@@ -1,0 +1,14 @@
+# Get the deployment instance executions for a deployment.
+query deploymentInstanceExecutions($after: String, $before: String, $first: Int, $input: DeploymentInstanceExecutionListInput!, $last: Int) {
+  deploymentInstanceExecutions(
+    after: $after
+    before: $before
+    first: $first
+    input: $input
+    last: $last
+  ) {
+    __typename
+    # edges
+    # pageInfo
+  }
+}

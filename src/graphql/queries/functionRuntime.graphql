@@ -1,0 +1,10 @@
+# Get information about a specific function runtime
+query functionRuntime($name: FunctionRuntimeName!) {
+  functionRuntime(name: $name) {
+    __typename
+    image # The image of the function runtime
+    # latestVersion # The latest version of the function runtime
+    name # The name of the function runtime
+    # versions # The versions of the function runtime
+  }
+}

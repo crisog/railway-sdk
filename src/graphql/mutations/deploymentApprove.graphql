@@ -1,0 +1,4 @@
+# Approves a deployment.
+mutation deploymentApprove($id: String!) {
+  deploymentApprove(id: $id)
+}

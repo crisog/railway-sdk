@@ -1,0 +1,12 @@
+# Create a persistent volume in a project
+mutation volumeCreate($input: VolumeCreateInput!) {
+  volumeCreate(input: $input) {
+    __typename
+    createdAt
+    id
+    name
+    # project
+    projectId
+    # volumeInstances
+  }
+}

@@ -1,0 +1,4 @@
+# Clear all egress gateway associations for a service instance
+mutation egressGatewayAssociationsClear($input: EgressGatewayServiceTargetInput!) {
+  egressGatewayAssociationsClear(input: $input)
+}

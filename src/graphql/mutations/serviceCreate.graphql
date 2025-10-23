@@ -1,0 +1,20 @@
+# Creates a new service.
+mutation serviceCreate($input: ServiceCreateInput!) {
+  serviceCreate(input: $input) {
+    __typename
+    createdAt
+    deletedAt
+    # deployments
+    featureFlags
+    icon
+    id
+    name
+    # project
+    projectId
+    # repoTriggers
+    # serviceInstances
+    templateServiceId
+    templateThreadSlug
+    updatedAt
+  }
+}

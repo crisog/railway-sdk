@@ -1,0 +1,4 @@
+# Validates the token for a 2FA action or for a login request.
+mutation twoFactorInfoValidate($input: TwoFactorInfoValidateInput!) {
+  twoFactorInfoValidate(input: $input)
+}

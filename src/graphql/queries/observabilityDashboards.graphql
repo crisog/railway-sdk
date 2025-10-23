@@ -1,0 +1,14 @@
+# Get all observability dashboards for an environment
+query observabilityDashboards($after: String, $before: String, $environmentId: String!, $first: Int, $last: Int) {
+  observabilityDashboards(
+    after: $after
+    before: $before
+    environmentId: $environmentId
+    first: $first
+    last: $last
+  ) {
+    __typename
+    # edges
+    # pageInfo
+  }
+}

@@ -1,0 +1,8 @@
+# Gets all API tokens for the authenticated user.
+query apiTokens($after: String, $before: String, $first: Int, $last: Int) {
+  apiTokens(after: $after, before: $before, first: $first, last: $last) {
+    __typename
+    # edges
+    # pageInfo
+  }
+}

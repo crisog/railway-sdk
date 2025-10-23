@@ -1,0 +1,4 @@
+# Change the User's account email if there is a valid change email request.
+mutation emailChangeConfirm($nonce: String!) {
+  emailChangeConfirm(nonce: $nonce)
+}

@@ -1,0 +1,4 @@
+# Gets the image URL for a Notion image block
+query changelogBlockImage($id: String!) {
+  changelogBlockImage(id: $id)
+}

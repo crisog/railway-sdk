@@ -1,0 +1,16 @@
+# Get the email preferences for a user
+query preferences($token: String) {
+  preferences(token: $token) {
+    __typename
+    buildFailedEmail
+    changelogEmail
+    communityEmail
+    deployCrashedEmail
+    ephemeralEnvironmentEmail
+    id
+    marketingEmail
+    # preferenceOverrides
+    subprocessorUpdatesEmail
+    usageEmail
+  }
+}

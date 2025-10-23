@@ -1,0 +1,12 @@
+# All domains for a service instance
+query domains($environmentId: String!, $projectId: String!, $serviceId: String!) {
+  domains(
+    environmentId: $environmentId
+    projectId: $projectId
+    serviceId: $serviceId
+  ) {
+    __typename
+    # customDomains
+    # serviceDomains
+  }
+}

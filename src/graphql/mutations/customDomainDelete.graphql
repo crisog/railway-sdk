@@ -1,0 +1,4 @@
+# Deletes a custom domain.
+mutation customDomainDelete($id: String!) {
+  customDomainDelete(id: $id)
+}

@@ -1,0 +1,4 @@
+# Upserts a variable.
+mutation variableUpsert($input: VariableUpsertInput!) {
+  variableUpsert(input: $input)
+}

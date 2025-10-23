@@ -1,0 +1,4 @@
+# Deploys all connected triggers for an environment.
+mutation environmentTriggersDeploy($input: EnvironmentTriggersDeployInput!) {
+  environmentTriggersDeploy(input: $input)
+}

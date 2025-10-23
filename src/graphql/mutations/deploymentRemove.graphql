@@ -1,0 +1,4 @@
+# Removes a deployment.
+mutation deploymentRemove($id: String!) {
+  deploymentRemove(id: $id)
+}

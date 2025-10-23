@@ -1,0 +1,36 @@
+# Get a service instance belonging to a service and environment
+query serviceInstance($environmentId: String!, $serviceId: String!) {
+  serviceInstance(environmentId: $environmentId, serviceId: $serviceId) {
+    __typename
+    buildCommand
+    builder
+    createdAt
+    cronSchedule
+    deletedAt
+    # domains
+    environmentId
+    healthcheckPath
+    healthcheckTimeout
+    id
+    isUpdatable
+    # latestDeployment
+    nextCronRunAt
+    nixpacksPlan
+    numReplicas
+    preDeployCommand
+    railpackInfo
+    railwayConfigFile
+    region
+    restartPolicyMaxRetries
+    restartPolicyType
+    rootDirectory
+    serviceId
+    serviceName
+    sleepApplication
+    # source
+    startCommand
+    updatedAt
+    upstreamUrl
+    watchPatterns
+  }
+}

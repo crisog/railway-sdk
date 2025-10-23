@@ -1,0 +1,18 @@
+# Configure a shared variable.
+mutation sharedVariableConfigure($input: SharedVariableConfigureInput!) {
+  sharedVariableConfigure(input: $input) {
+    __typename
+    createdAt
+    # environment
+    environmentId
+    id
+    isSealed
+    name
+    # plugin
+    pluginId
+    references
+    # service
+    serviceId
+    updatedAt
+  }
+}

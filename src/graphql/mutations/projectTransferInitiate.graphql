@@ -1,0 +1,4 @@
+# Initiate the transfer of project ownership
+mutation projectTransferInitiate($input: ProjectTransferInitiateInput!) {
+  projectTransferInitiate(input: $input)
+}

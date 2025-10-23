@@ -1,0 +1,4 @@
+# Rolls back to a deployment.
+mutation deploymentRollback($id: String!) {
+  deploymentRollback(id: $id)
+}

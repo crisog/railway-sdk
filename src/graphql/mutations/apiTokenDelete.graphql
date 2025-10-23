@@ -1,0 +1,4 @@
+# Deletes an API token.
+mutation apiTokenDelete($id: String!) {
+  apiTokenDelete(id: $id)
+}

@@ -1,0 +1,4 @@
+# Delete a project token
+mutation projectTokenDelete($id: String!) {
+  projectTokenDelete(id: $id)
+}

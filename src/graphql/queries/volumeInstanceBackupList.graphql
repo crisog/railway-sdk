@@ -1,0 +1,14 @@
+# List backups of a volume instance
+query volumeInstanceBackupList($volumeInstanceId: String!) {
+  volumeInstanceBackupList(volumeInstanceId: $volumeInstanceId) {
+    __typename
+    createdAt
+    creatorId
+    expiresAt
+    externalId
+    id
+    name
+    referencedMB
+    usedMB
+  }
+}

@@ -1,0 +1,4 @@
+# Auth a login session for a user
+mutation loginSessionAuth($input: LoginSessionAuthInput!) {
+  loginSessionAuth(input: $input)
+}

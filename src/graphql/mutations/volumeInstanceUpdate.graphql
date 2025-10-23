@@ -1,0 +1,8 @@
+# Update a volume instance. If no environmentId is provided, all volume instances for the volume will be updated.
+mutation volumeInstanceUpdate($environmentId: String, $input: VolumeInstanceUpdateInput!, $volumeId: String!) {
+  volumeInstanceUpdate(
+    environmentId: $environmentId
+    input: $input
+    volumeId: $volumeId
+  )
+}

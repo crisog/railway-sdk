@@ -1,0 +1,4 @@
+# Initiate an email change request for a user
+mutation emailChangeInitiate($newEmail: String!) {
+  emailChangeInitiate(newEmail: $newEmail)
+}

@@ -1,0 +1,4 @@
+# Deletes a project with a 48 hour grace period.
+mutation projectScheduleDelete($id: String!) {
+  projectScheduleDelete(id: $id)
+}

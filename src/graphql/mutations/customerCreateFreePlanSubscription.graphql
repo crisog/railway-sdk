@@ -1,0 +1,4 @@
+# Create a free plan subscription for a customer
+mutation customerCreateFreePlanSubscription($id: String!) {
+  customerCreateFreePlanSubscription(id: $id)
+}

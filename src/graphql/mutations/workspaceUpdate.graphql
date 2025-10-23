@@ -1,0 +1,4 @@
+# Update a workspace by id
+mutation workspaceUpdate($id: String!, $input: WorkspaceUpdateInput!) {
+  workspaceUpdate(id: $id, input: $input)
+}

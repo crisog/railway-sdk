@@ -1,0 +1,4 @@
+# Unpublishes a template.
+mutation templateUnpublish($id: String!) {
+  templateUnpublish(id: $id)
+}

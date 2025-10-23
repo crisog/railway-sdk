@@ -1,0 +1,4 @@
+# Delete a persistent volume in a project
+mutation volumeDelete($volumeId: String!) {
+  volumeDelete(volumeId: $volumeId)
+}

@@ -1,0 +1,4 @@
+# Set flags on the authenticated user.
+mutation userFlagsSet($input: UserFlagsSetInput!) {
+  userFlagsSet(input: $input)
+}

@@ -1,0 +1,4 @@
+# Ejects a service from the template and creates a new repo in the provided org.
+mutation templateServiceSourceEject($input: TemplateServiceSourceEjectInput!) {
+  templateServiceSourceEject(input: $input)
+}

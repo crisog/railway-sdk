@@ -1,0 +1,7 @@
+# Generates a new set of recovery codes for the authenticated user.
+mutation recoveryCodeGenerate {
+  recoveryCodeGenerate {
+    __typename
+    recoveryCodes
+  }
+}

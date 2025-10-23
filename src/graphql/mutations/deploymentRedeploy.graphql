@@ -1,0 +1,25 @@
+# Redeploys a deployment.
+mutation deploymentRedeploy($id: String!, $usePreviousImageTag: Boolean) {
+  deploymentRedeploy(id: $id, usePreviousImageTag: $usePreviousImageTag) {
+    __typename
+    canRedeploy
+    canRollback
+    createdAt
+    # creator
+    deploymentStopped # Check if a deployment's instances have all stopped
+    # environment
+    environmentId
+    id
+    meta
+    projectId
+    # service
+    serviceId
+    snapshotId
+    # sockets
+    staticUrl
+    status
+    suggestAddServiceDomain
+    updatedAt
+    url
+  }
+}

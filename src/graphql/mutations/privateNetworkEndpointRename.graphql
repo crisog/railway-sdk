@@ -1,0 +1,8 @@
+# Rename a private network endpoint.
+mutation privateNetworkEndpointRename($dnsName: String!, $id: String!, $privateNetworkId: String!) {
+  privateNetworkEndpointRename(
+    dnsName: $dnsName
+    id: $id
+    privateNetworkId: $privateNetworkId
+  )
+}

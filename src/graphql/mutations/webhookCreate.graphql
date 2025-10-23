@@ -1,0 +1,11 @@
+# Create a webhook on a project
+mutation webhookCreate($input: WebhookCreateInput!) {
+  webhookCreate(input: $input) {
+    __typename
+    filters
+    id
+    lastStatus
+    projectId
+    url
+  }
+}

@@ -1,0 +1,16 @@
+# All deployment triggers.
+query deploymentTriggers($after: String, $before: String, $environmentId: String!, $first: Int, $last: Int, $projectId: String!, $serviceId: String!) {
+  deploymentTriggers(
+    after: $after
+    before: $before
+    environmentId: $environmentId
+    first: $first
+    last: $last
+    projectId: $projectId
+    serviceId: $serviceId
+  ) {
+    __typename
+    # edges
+    # pageInfo
+  }
+}

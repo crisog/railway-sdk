@@ -1,0 +1,4 @@
+# Remove the usage limit for a customer
+mutation usageLimitRemove($input: UsageLimitRemoveInput!) {
+  usageLimitRemove(input: $input)
+}

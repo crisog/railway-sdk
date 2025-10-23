@@ -1,0 +1,4 @@
+# Deletes an environment.
+mutation environmentDelete($id: String!) {
+  environmentDelete(id: $id)
+}

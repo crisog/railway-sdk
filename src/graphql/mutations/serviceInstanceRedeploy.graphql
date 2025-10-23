@@ -1,0 +1,4 @@
+# Redeploy a service instance
+mutation serviceInstanceRedeploy($environmentId: String!, $serviceId: String!) {
+  serviceInstanceRedeploy(environmentId: $environmentId, serviceId: $serviceId)
+}

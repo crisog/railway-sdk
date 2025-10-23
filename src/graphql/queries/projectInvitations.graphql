@@ -1,0 +1,12 @@
+# Get invitations for a project
+query projectInvitations($id: String!) {
+  projectInvitations(id: $id) {
+    __typename
+    email
+    expiresAt
+    id
+    # inviter
+    isExpired
+    # project
+  }
+}

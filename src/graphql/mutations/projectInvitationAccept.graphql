@@ -1,0 +1,10 @@
+# Accept a project invitation using the invite code
+mutation projectInvitationAccept($code: String!) {
+  projectInvitationAccept(code: $code) {
+    __typename
+    id
+    projectId
+    role
+    userId
+  }
+}

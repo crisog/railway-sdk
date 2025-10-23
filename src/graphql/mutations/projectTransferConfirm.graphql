@@ -1,0 +1,4 @@
+# Confirm the transfer of project ownership
+mutation projectTransferConfirm($input: ProjectTransferConfirmInput!) {
+  projectTransferConfirm(input: $input)
+}

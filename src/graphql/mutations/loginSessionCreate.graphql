@@ -1,0 +1,4 @@
+# Start a CLI login session
+mutation loginSessionCreate {
+  loginSessionCreate
+}

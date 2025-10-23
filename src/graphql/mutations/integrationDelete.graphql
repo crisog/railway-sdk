@@ -1,0 +1,4 @@
+# Delete an integration for a project
+mutation integrationDelete($id: String!) {
+  integrationDelete(id: $id)
+}

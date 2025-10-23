@@ -1,0 +1,14 @@
+# Get the deployment events for a deployment
+query deploymentEvents($after: String, $before: String, $first: Int, $id: String!, $last: Int) {
+  deploymentEvents(
+    after: $after
+    before: $before
+    first: $first
+    id: $id
+    last: $last
+  ) {
+    __typename
+    # edges
+    # pageInfo
+  }
+}

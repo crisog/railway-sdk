@@ -1,0 +1,8 @@
+# Check if an endpoint name is available.
+query privateNetworkEndpointNameAvailable($environmentId: String!, $prefix: String!, $privateNetworkId: String!) {
+  privateNetworkEndpointNameAvailable(
+    environmentId: $environmentId
+    prefix: $prefix
+    privateNetworkId: $privateNetworkId
+  )
+}

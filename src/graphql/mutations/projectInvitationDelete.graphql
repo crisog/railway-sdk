@@ -1,0 +1,4 @@
+# Delete an invitation for a project
+mutation projectInvitationDelete($id: String!) {
+  projectInvitationDelete(id: $id)
+}

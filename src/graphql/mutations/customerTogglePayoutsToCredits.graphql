@@ -1,0 +1,4 @@
+# Toggle whether a customer is automatically withdrawing to credits
+mutation customerTogglePayoutsToCredits($customerId: String!, $input: customerTogglePayoutsToCreditsInput!) {
+  customerTogglePayoutsToCredits(customerId: $customerId, input: $input)
+}

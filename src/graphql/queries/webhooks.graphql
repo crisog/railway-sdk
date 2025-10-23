@@ -1,0 +1,14 @@
+# Get all webhooks for a project
+query webhooks($after: String, $before: String, $first: Int, $last: Int, $projectId: String!) {
+  webhooks(
+    after: $after
+    before: $before
+    first: $first
+    last: $last
+    projectId: $projectId
+  ) {
+    __typename
+    # edges
+    # pageInfo
+  }
+}

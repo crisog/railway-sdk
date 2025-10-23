@@ -1,0 +1,12 @@
+# Get public Railway stats.
+query publicStats {
+  publicStats {
+    __typename
+    totalDeploymentsLastMonth
+    totalLogsLastMonth
+    totalProjects
+    totalRequestsLastMonth
+    totalServices
+    totalUsers
+  }
+}

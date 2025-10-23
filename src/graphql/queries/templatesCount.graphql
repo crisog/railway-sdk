@@ -1,0 +1,4 @@
+# Count all published templates.
+query templatesCount {
+  templatesCount
+}

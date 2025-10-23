@@ -1,0 +1,21 @@
+# Find a single environment
+query environment($id: String!) {
+  environment(id: $id) {
+    __typename
+    createdAt
+    deletedAt
+    # deploymentTriggers
+    # deployments
+    id
+    isEphemeral
+    # meta
+    name
+    projectId
+    # serviceInstances
+    # sourceEnvironment
+    unmergedChangesCount
+    updatedAt
+    # variables
+    # volumeInstances
+  }
+}

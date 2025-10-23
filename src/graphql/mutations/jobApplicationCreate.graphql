@@ -1,0 +1,4 @@
+# Creates a new job application.
+mutation jobApplicationCreate($input: JobApplicationCreateInput!, $resume: Upload!) {
+  jobApplicationCreate(input: $input, resume: $resume)
+}

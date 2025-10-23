@@ -1,0 +1,12 @@
+# Get an invite code by the code
+query inviteCode($code: String!) {
+  inviteCode(code: $code) {
+    __typename
+    code
+    createdAt
+    id
+    # project
+    projectId
+    role
+  }
+}

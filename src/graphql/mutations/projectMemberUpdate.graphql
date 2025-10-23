@@ -1,0 +1,11 @@
+# Change the role for a user within a project
+mutation projectMemberUpdate($input: ProjectMemberUpdateInput!) {
+  projectMemberUpdate(input: $input) {
+    __typename
+    avatar
+    email
+    id
+    name
+    role
+  }
+}

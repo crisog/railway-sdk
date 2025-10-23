@@ -1,0 +1,7 @@
+# Manage schedule for backups of a volume instance
+mutation volumeInstanceBackupScheduleUpdate($kinds: [VolumeInstanceBackupScheduleKind!]!, $volumeInstanceId: String!) {
+  volumeInstanceBackupScheduleUpdate(
+    kinds: $kinds
+    volumeInstanceId: $volumeInstanceId
+  )
+}

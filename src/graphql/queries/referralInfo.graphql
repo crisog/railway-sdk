@@ -1,0 +1,10 @@
+# Gets the ReferralInfo for the authenticated user.
+query referralInfo($workspaceId: String!) {
+  referralInfo(workspaceId: $workspaceId) {
+    __typename
+    code
+    id
+    # referralStats
+    status
+  }
+}

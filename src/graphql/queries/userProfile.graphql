@@ -1,0 +1,18 @@
+# Get the public profile for a user
+query userProfile($username: String!) {
+  userProfile(username: $username) {
+    __typename
+    avatar
+    createdAt
+    customerId
+    id
+    isTrialing
+    name
+    # profile
+    # publicProjects # Gets all public projects for a user.
+    # publishedTemplates
+    state
+    totalDeploys
+    username
+  }
+}

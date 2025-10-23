@@ -1,0 +1,4 @@
+# Reset an observability dashboard to default dashboard items
+mutation observabilityDashboardReset($id: String!) {
+  observabilityDashboardReset(id: $id)
+}

@@ -1,0 +1,11 @@
+# Get resource access rules for project-specific actions
+query projectResourceAccess($projectId: String!) {
+  projectResourceAccess(projectId: $projectId) {
+    __typename
+    # customDomain
+    # databaseDeployment
+    # deployment
+    # environment
+    # plugin
+  }
+}

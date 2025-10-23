@@ -1,0 +1,13 @@
+# Create or get a private network endpoint.
+mutation privateNetworkEndpointCreateOrGet($input: PrivateNetworkEndpointCreateOrGetInput!) {
+  privateNetworkEndpointCreateOrGet(input: $input) {
+    __typename
+    createdAt
+    deletedAt
+    dnsName
+    privateIps
+    publicId
+    serviceInstanceId
+    tags
+  }
+}

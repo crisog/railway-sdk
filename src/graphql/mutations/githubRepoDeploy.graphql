@@ -1,0 +1,4 @@
+# Deploys a GitHub repo
+mutation githubRepoDeploy($input: GitHubRepoDeployInput!) {
+  githubRepoDeploy(input: $input)
+}

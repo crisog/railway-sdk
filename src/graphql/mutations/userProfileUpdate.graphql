@@ -1,0 +1,4 @@
+# Updates the profile for the authenticated user
+mutation userProfileUpdate($input: UserProfileUpdateInput!) {
+  userProfileUpdate(input: $input)
+}

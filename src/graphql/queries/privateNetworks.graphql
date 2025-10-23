@@ -1,0 +1,15 @@
+# List private networks for an environment.
+query privateNetworks($environmentId: String!) {
+  privateNetworks(environmentId: $environmentId) {
+    __typename
+    createdAt
+    deletedAt
+    dnsName
+    environmentId
+    name
+    networkId
+    projectId
+    publicId
+    tags
+  }
+}

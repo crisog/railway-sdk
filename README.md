@@ -39,48 +39,34 @@ bun run generate:operations -- --only=me,apiTokenCreate
 bun run generate:operations -- --force
 ```
 
-Documents are written to `src/graphql/queries` and `src/graphql/mutations`, keyed by their operation names. Re-run `bun run codegen:introspect` after adding or regenerating documents.
+Documents are written to `src/graphql/queries` and `src/graphql/mutations`, keyed by their operation names. The generator validates each document against the current introspection dump and skips anything the active schema no longer supports. Re-run `bun run codegen:introspect` after adding or regenerating documents.
 
 ### Using the Client
 
 Create a `RailwayClient` and call the provided helpers:
 
 ```ts
-import { RailwayClient, fetchCurrentUser, createApiToken } from 'railway-sdk';
+import { RailwayClient, fetchCurrentUser, createApiToken } from "railway-sdk";
 
 const client = RailwayClient.fromEnv();
 
 const me = await fetchCurrentUser(client);
 const newToken = await createApiToken(client, {
-  input: { name: 'CI Token', workspaceId: 'workspace_123' },
+  input: { name: "CI Token", workspaceId: "workspace_123" },
 });
 ```
 
 If you need lower-level control, you can still execute typed documents directly:
 
 ```ts
-import { RailwayClient } from 'railway-sdk';
-import { MeDocument } from 'railway-sdk/src/generated/graphql';
+import { RailwayClient } from "railway-sdk";
+import { MeDocument } from "railway-sdk/src/generated/graphql";
 
 const client = RailwayClient.fromEnv();
 const me = await client.requestDocument(MeDocument);
 ```
 
 The client automatically determines the appropriate authentication header for account, team, and project tokens.
-
-### Baseline Operations
-
-Two starter operations ship with the SDK:
-
-- `fetchCurrentUser` (`src/operations/account.ts`) wraps the `Me` query and returns the current account details.
-- `createApiToken` (`src/operations/apiTokens.ts`) creates a new API token when supplied with `ApiTokenCreateInput`.
-
-These helpers rely on the generated artifacts in `src/generated/graphql.ts`. Add new `.graphql` documents under `src/graphql/` and rerun `bun run codegen:introspect` to grow the SDK surface.
-
-### Next Steps
-
-- Add new `.graphql` documents under `src/graphql/` and extend `codegen.ts` with additional plugins such as `typescript`, `typescript-operations`, and `typed-document-node`.
-- Use the generated types to build higher-level SDK helpers around common workflows (projects, services, deployments, variables, etc).
 
 ---
 

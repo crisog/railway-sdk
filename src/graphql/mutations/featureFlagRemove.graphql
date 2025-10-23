@@ -1,0 +1,4 @@
+# Remove a feature flag for a user
+mutation featureFlagRemove($input: FeatureFlagToggleInput!) {
+  featureFlagRemove(input: $input)
+}

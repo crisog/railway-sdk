@@ -1,0 +1,8 @@
+# Gets the status of a workflow
+query workflowStatus($workflowId: String!) {
+  workflowStatus(workflowId: $workflowId) {
+    __typename
+    error
+    status
+  }
+}

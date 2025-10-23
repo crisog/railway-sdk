@@ -1,0 +1,8 @@
+# Commit the provided patch to the environment.
+mutation environmentPatchCommit($commitMessage: String, $environmentId: String!, $patch: EnvironmentConfig) {
+  environmentPatchCommit(
+    commitMessage: $commitMessage
+    environmentId: $environmentId
+    patch: $patch
+  )
+}

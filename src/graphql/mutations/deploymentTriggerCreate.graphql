@@ -1,0 +1,16 @@
+# Creates a deployment trigger.
+mutation deploymentTriggerCreate($input: DeploymentTriggerCreateInput!) {
+  deploymentTriggerCreate(input: $input) {
+    __typename
+    baseEnvironmentOverrideId
+    branch
+    checkSuites
+    environmentId
+    id
+    projectId
+    provider
+    repository
+    serviceId
+    validCheckSuites
+  }
+}

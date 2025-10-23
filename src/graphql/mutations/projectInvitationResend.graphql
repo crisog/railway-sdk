@@ -1,0 +1,12 @@
+# Resend an invitation for a project
+mutation projectInvitationResend($id: String!) {
+  projectInvitationResend(id: $id) {
+    __typename
+    email
+    expiresAt
+    id
+    # inviter
+    isExpired
+    # project
+  }
+}

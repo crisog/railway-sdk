@@ -1,0 +1,11 @@
+# Remove user from a project
+mutation projectMemberRemove($input: ProjectMemberRemoveInput!) {
+  projectMemberRemove(input: $input) {
+    __typename
+    avatar
+    email
+    id
+    name
+    role
+  }
+}

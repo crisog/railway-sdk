@@ -1,0 +1,4 @@
+# Deletes a deployment trigger.
+mutation deploymentTriggerDelete($id: String!) {
+  deploymentTriggerDelete(id: $id)
+}

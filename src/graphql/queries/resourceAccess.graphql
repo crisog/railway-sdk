@@ -1,0 +1,8 @@
+# Get resource access for the current user or team
+query resourceAccess($explicitResourceOwner: ExplicitOwnerInput!) {
+  resourceAccess(explicitResourceOwner: $explicitResourceOwner) {
+    __typename
+    # deployment
+    # project
+  }
+}

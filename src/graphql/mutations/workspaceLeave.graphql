@@ -1,0 +1,4 @@
+# Leave a workspace
+mutation workspaceLeave($id: String!) {
+  workspaceLeave(id: $id)
+}

@@ -1,0 +1,4 @@
+# Deletes a plugin.
+mutation pluginDelete($environmentId: String, $id: String!) {
+  pluginDelete(environmentId: $environmentId, id: $id)
+}

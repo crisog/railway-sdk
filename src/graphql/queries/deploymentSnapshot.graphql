@@ -1,0 +1,10 @@
+# Find a single DeploymentSnapshot
+query deploymentSnapshot($deploymentId: String!) {
+  deploymentSnapshot(deploymentId: $deploymentId) {
+    __typename
+    createdAt
+    id
+    updatedAt
+    variables
+  }
+}

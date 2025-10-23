@@ -1,0 +1,4 @@
+# Verify if a login session is valid
+mutation loginSessionVerify($code: String!) {
+  loginSessionVerify(code: $code)
+}

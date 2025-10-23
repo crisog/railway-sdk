@@ -1,0 +1,9 @@
+# Get the current status of the platform
+query platformStatus {
+  platformStatus {
+    __typename
+    # incident
+    isStable
+    # maintenance
+  }
+}

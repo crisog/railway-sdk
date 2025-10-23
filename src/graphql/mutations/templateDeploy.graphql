@@ -1,0 +1,8 @@
+# Deploys a template.
+mutation templateDeploy($input: TemplateDeployInput!) {
+  templateDeploy(input: $input) {
+    __typename
+    projectId
+    workflowId
+  }
+}

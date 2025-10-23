@@ -1,0 +1,4 @@
+# Invite a user by email to a project
+mutation projectInviteUser($id: String!, $input: ProjectInviteUserInput!) {
+  projectInviteUser(id: $id, input: $input)
+}

@@ -1,0 +1,8 @@
+# Gets the TwoFactorInfo for the authenticated user.
+query twoFactorInfo {
+  twoFactorInfo {
+    __typename
+    hasRecoveryCodes
+    isVerified
+  }
+}

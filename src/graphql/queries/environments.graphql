@@ -1,0 +1,15 @@
+# Gets all environments for a project.
+query environments($after: String, $before: String, $first: Int, $isEphemeral: Boolean, $last: Int, $projectId: String!) {
+  environments(
+    after: $after
+    before: $before
+    first: $first
+    isEphemeral: $isEphemeral
+    last: $last
+    projectId: $projectId
+  ) {
+    __typename
+    # edges
+    # pageInfo
+  }
+}

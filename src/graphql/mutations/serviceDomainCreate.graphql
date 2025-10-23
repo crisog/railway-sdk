@@ -1,0 +1,17 @@
+# Creates a new service domain.
+mutation serviceDomainCreate($input: ServiceDomainCreateInput!) {
+  serviceDomainCreate(input: $input) {
+    __typename
+    createdAt
+    deletedAt
+    domain
+    edgeId
+    environmentId
+    id
+    projectId
+    serviceId
+    suffix
+    targetPort
+    updatedAt
+  }
+}

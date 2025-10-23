@@ -1,0 +1,8 @@
+# All egress gateways assigned to a service instance
+query egressGateways($environmentId: String!, $serviceId: String!) {
+  egressGateways(environmentId: $environmentId, serviceId: $serviceId) {
+    __typename
+    ipv4
+    region
+  }
+}

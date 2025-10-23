@@ -1,0 +1,4 @@
+# Destroy preferences overrides for a specific resource belonging to a user
+mutation preferenceOverridesDestroyForResource($input: PreferenceOverridesDestroyData!) {
+  preferenceOverridesDestroyForResource(input: $input)
+}

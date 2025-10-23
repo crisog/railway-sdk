@@ -1,7 +1,30 @@
-query Me {
+# Gets the authenticated user.
+query me {
   me {
-    id
-    name
+    __typename
+    agreedFairUse
+    avatar
+    banReason
+    createdAt
     email
+    featureFlags
+    flags
+    has2FA
+    id
+    isAdmin
+    isConductor
+    isVerified
+    lastLogin
+    name
+    # profile
+    # projects
+    # providerAuths
+    registrationStatus
+    riskLevel
+    # teams
+    termsAgreedOn
+    username
+    # workspace
+    # workspaces # Workspaces user is member of
   }
 }

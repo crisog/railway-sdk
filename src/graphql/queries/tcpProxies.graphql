@@ -1,0 +1,15 @@
+# All TCP proxies for a service instance
+query tcpProxies($environmentId: String!, $serviceId: String!) {
+  tcpProxies(environmentId: $environmentId, serviceId: $serviceId) {
+    __typename
+    applicationPort
+    createdAt
+    deletedAt
+    domain
+    environmentId
+    id
+    proxyPort
+    serviceId
+    updatedAt
+  }
+}

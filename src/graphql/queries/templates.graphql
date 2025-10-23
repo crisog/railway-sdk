@@ -1,0 +1,14 @@
+# Get all published templates.
+query templates($after: String, $before: String, $first: Int, $last: Int, $recommended: Boolean) {
+  templates(
+    after: $after
+    before: $before
+    first: $first
+    last: $last
+    recommended: $recommended
+  ) {
+    __typename
+    # edges
+    # pageInfo
+  }
+}

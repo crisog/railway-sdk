@@ -1,0 +1,33 @@
+# Claims a project.
+mutation projectClaim($id: String!, $workspaceId: String!) {
+  projectClaim(id: $id, workspaceId: $workspaceId) {
+    __typename
+    # baseEnvironment
+    baseEnvironmentId
+    botPrEnvironments
+    createdAt
+    deletedAt
+    # deploymentTriggers
+    # deployments
+    description
+    # environments
+    expiredAt
+    # groups
+    id
+    isPublic
+    isTempProject
+    # members
+    name
+    # plugins
+    prDeploys
+    # projectPermissions
+    # services
+    subscriptionPlanLimit
+    subscriptionType
+    # team
+    teamId
+    updatedAt
+    # volumes
+    # webhooks
+  }
+}

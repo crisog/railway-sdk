@@ -1,0 +1,16 @@
+# Updates a deployment trigger.
+mutation deploymentTriggerUpdate($id: String!, $input: DeploymentTriggerUpdateInput!) {
+  deploymentTriggerUpdate(id: $id, input: $input) {
+    __typename
+    baseEnvironmentOverrideId
+    branch
+    checkSuites
+    environmentId
+    id
+    projectId
+    provider
+    repository
+    serviceId
+    validCheckSuites
+  }
+}

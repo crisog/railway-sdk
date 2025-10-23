@@ -1,0 +1,4 @@
+# Check if a repo name is available
+query githubIsRepoNameAvailable($fullRepoName: String!) {
+  githubIsRepoNameAvailable(fullRepoName: $fullRepoName)
+}

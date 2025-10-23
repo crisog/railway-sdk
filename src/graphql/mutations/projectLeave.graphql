@@ -1,0 +1,4 @@
+# Leave project as currently authenticated user
+mutation projectLeave($id: String!) {
+  projectLeave(id: $id)
+}

@@ -1,0 +1,34 @@
+# Publishes a template.
+mutation templatePublish($id: String!, $input: TemplatePublishInput!) {
+  templatePublish(id: $id, input: $input) {
+    __typename
+    activeProjects
+    canvasConfig
+    category
+    code
+    communityThreadSlug
+    config
+    createdAt
+    # creator
+    demoProjectId
+    description
+    # guides
+    health
+    id
+    image
+    isApproved
+    isV2Template
+    languages
+    metadata
+    name
+    projects
+    readme
+    serializedConfig
+    # services
+    # similarTemplates
+    status
+    tags
+    teamId
+    totalPayout
+  }
+}

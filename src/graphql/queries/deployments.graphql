@@ -1,0 +1,14 @@
+# Get all deployments
+query deployments($after: String, $before: String, $first: Int, $input: DeploymentListInput!, $last: Int) {
+  deployments(
+    after: $after
+    before: $before
+    first: $first
+    input: $input
+    last: $last
+  ) {
+    __typename
+    # edges
+    # pageInfo
+  }
+}

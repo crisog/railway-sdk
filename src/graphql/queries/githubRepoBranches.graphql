@@ -1,0 +1,7 @@
+# Get branches for a GitHub repo that the authenticated user has access to
+query githubRepoBranches($owner: String!, $repo: String!) {
+  githubRepoBranches(owner: $owner, repo: $repo) {
+    __typename
+    name
+  }
+}

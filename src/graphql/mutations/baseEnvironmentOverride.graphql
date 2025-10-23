@@ -1,0 +1,4 @@
+# Sets the base environment override for a deployment trigger.
+mutation baseEnvironmentOverride($id: String!, $input: BaseEnvironmentOverrideInput!) {
+  baseEnvironmentOverride(id: $id, input: $input)
+}

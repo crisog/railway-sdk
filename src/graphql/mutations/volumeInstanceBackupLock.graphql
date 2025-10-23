@@ -1,0 +1,7 @@
+# Removes backup expiration date
+mutation volumeInstanceBackupLock($volumeInstanceBackupId: String!, $volumeInstanceId: String!) {
+  volumeInstanceBackupLock(
+    volumeInstanceBackupId: $volumeInstanceBackupId
+    volumeInstanceId: $volumeInstanceId
+  )
+}

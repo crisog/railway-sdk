@@ -1,0 +1,9 @@
+# Deploy a service instance
+mutation serviceInstanceDeploy($commitSha: String, $environmentId: String!, $latestCommit: Boolean, $serviceId: String!) {
+  serviceInstanceDeploy(
+    commitSha: $commitSha
+    environmentId: $environmentId
+    latestCommit: $latestCommit
+    serviceId: $serviceId
+  )
+}

@@ -1,0 +1,4 @@
+# Restarts a deployment.
+mutation deploymentRestart($id: String!) {
+  deploymentRestart(id: $id)
+}

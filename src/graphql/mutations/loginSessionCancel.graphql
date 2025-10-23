@@ -1,0 +1,4 @@
+# Cancel a login session
+mutation loginSessionCancel($code: String!) {
+  loginSessionCancel(code: $code)
+}

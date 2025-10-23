@@ -1,0 +1,20 @@
+# Updates a service.
+mutation serviceUpdate($id: String!, $input: ServiceUpdateInput!) {
+  serviceUpdate(id: $id, input: $input) {
+    __typename
+    createdAt
+    deletedAt
+    # deployments
+    featureFlags
+    icon
+    id
+    name
+    # project
+    projectId
+    # repoTriggers
+    # serviceInstances
+    templateServiceId
+    templateThreadSlug
+    updatedAt
+  }
+}

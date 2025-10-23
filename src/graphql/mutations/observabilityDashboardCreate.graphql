@@ -1,0 +1,4 @@
+# Create an observability dashboard
+mutation observabilityDashboardCreate($input: ObservabilityDashboardCreateInput!) {
+  observabilityDashboardCreate(input: $input)
+}

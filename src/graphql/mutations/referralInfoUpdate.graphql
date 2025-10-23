@@ -1,0 +1,10 @@
+# Updates the ReferralInfo for the authenticated user.
+mutation referralInfoUpdate($input: ReferralInfoUpdateInput!) {
+  referralInfoUpdate(input: $input) {
+    __typename
+    code
+    id
+    # referralStats
+    status
+  }
+}

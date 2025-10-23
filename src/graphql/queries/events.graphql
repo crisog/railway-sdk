@@ -1,0 +1,16 @@
+# Gets the events for a project.
+query events($after: String, $before: String, $environmentId: String, $filter: EventFilterInput, $first: Int, $last: Int, $projectId: String!) {
+  events(
+    after: $after
+    before: $before
+    environmentId: $environmentId
+    filter: $filter
+    first: $first
+    last: $last
+    projectId: $projectId
+  ) {
+    __typename
+    # edges
+    # pageInfo
+  }
+}

@@ -1,0 +1,10 @@
+# Get an integration auth by provider providerId
+query integrationAuth($provider: String!, $providerId: String!) {
+  integrationAuth(provider: $provider, providerId: $providerId) {
+    __typename
+    id
+    # integrations
+    provider
+    providerId
+  }
+}

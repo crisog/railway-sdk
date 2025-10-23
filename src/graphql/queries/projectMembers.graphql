@@ -1,0 +1,11 @@
+# Gets users who belong to a project along with their role
+query projectMembers($projectId: String!) {
+  projectMembers(projectId: $projectId) {
+    __typename
+    avatar
+    email
+    id
+    name
+    role
+  }
+}

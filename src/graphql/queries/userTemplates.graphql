@@ -1,0 +1,8 @@
+# Get all templates for the current user.
+query userTemplates($after: String, $before: String, $first: Int, $last: Int) {
+  userTemplates(after: $after, before: $before, first: $first, last: $last) {
+    __typename
+    # edges
+    # pageInfo
+  }
+}

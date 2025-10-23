@@ -1,0 +1,8 @@
+# Get the Herokus apps for the current user
+query herokuApps {
+  herokuApps {
+    __typename
+    id
+    name
+  }
+}

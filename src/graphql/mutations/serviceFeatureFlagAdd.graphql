@@ -1,0 +1,4 @@
+# Add a feature flag for a service
+mutation serviceFeatureFlagAdd($input: ServiceFeatureFlagToggleInput!) {
+  serviceFeatureFlagAdd(input: $input)
+}

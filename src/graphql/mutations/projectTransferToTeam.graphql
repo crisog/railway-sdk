@@ -1,0 +1,4 @@
+# Transfer a project to a team
+mutation projectTransferToTeam($id: String!, $input: ProjectTransferToTeamInput!) {
+  projectTransferToTeam(id: $id, input: $input)
+}

@@ -1,0 +1,6 @@
+query nodes($ids: [ID!]!) {
+  nodes(ids: $ids) {
+    __typename
+    id
+  }
+}

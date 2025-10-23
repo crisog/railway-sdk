@@ -1,0 +1,7 @@
+# Setup 2FA authorization for authenticated user.
+mutation twoFactorInfoCreate($input: TwoFactorInfoCreateInput!) {
+  twoFactorInfoCreate(input: $input) {
+    __typename
+    recoveryCodes
+  }
+}

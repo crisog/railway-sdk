@@ -1,0 +1,18 @@
+# Creates a new plugin.
+mutation pluginCreate($input: PluginCreateInput!) {
+  pluginCreate(input: $input) {
+    __typename
+    # containers
+    createdAt
+    deletedAt
+    deprecatedAt
+    friendlyName
+    id
+    logsEnabled
+    migrationDatabaseServiceId
+    name
+    # project
+    status
+    # variables
+  }
+}

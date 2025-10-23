@@ -1,0 +1,20 @@
+# Remove the upstream URL from all service instances for this service
+mutation serviceRemoveUpstreamUrl($id: String!) {
+  serviceRemoveUpstreamUrl(id: $id) {
+    __typename
+    createdAt
+    deletedAt
+    # deployments
+    featureFlags
+    icon
+    id
+    name
+    # project
+    projectId
+    # repoTriggers
+    # serviceInstances
+    templateServiceId
+    templateThreadSlug
+    updatedAt
+  }
+}

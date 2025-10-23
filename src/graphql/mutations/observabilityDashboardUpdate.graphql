@@ -1,0 +1,4 @@
+# Update an observability dashboard
+mutation observabilityDashboardUpdate($id: String!, $input: [ObservabilityDashboardUpdateInput!]!) {
+  observabilityDashboardUpdate(id: $id, input: $input)
+}

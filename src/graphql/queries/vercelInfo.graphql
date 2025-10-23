@@ -1,0 +1,7 @@
+# Get information about the user's Vercel accounts
+query vercelInfo {
+  vercelInfo {
+    __typename
+    # accounts
+  }
+}

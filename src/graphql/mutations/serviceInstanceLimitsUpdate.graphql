@@ -1,0 +1,4 @@
+# Update the resource limits for a service instance
+mutation serviceInstanceLimitsUpdate($input: ServiceInstanceLimitsUpdateInput!) {
+  serviceInstanceLimitsUpdate(input: $input)
+}

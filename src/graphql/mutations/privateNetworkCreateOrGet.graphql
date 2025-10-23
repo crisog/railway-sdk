@@ -1,0 +1,15 @@
+# Create or get a private network.
+mutation privateNetworkCreateOrGet($input: PrivateNetworkCreateOrGetInput!) {
+  privateNetworkCreateOrGet(input: $input) {
+    __typename
+    createdAt
+    deletedAt
+    dnsName
+    environmentId
+    name
+    networkId
+    projectId
+    publicId
+    tags
+  }
+}

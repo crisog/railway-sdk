@@ -1,0 +1,10 @@
+# Restore a volume instance from a backup
+mutation volumeInstanceBackupRestore($volumeInstanceBackupId: String!, $volumeInstanceId: String!) {
+  volumeInstanceBackupRestore(
+    volumeInstanceBackupId: $volumeInstanceBackupId
+    volumeInstanceId: $volumeInstanceId
+  ) {
+    __typename
+    workflowId
+  }
+}

@@ -1,0 +1,4 @@
+# Get a list of scopes the user has installed the installation to
+query githubWritableScopes {
+  githubWritableScopes
+}

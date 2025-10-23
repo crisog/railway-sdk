@@ -1,0 +1,20 @@
+# Duplicate a service, including its configuration, variables, and volumes.
+mutation serviceDuplicate($environmentId: String!, $serviceId: String!) {
+  serviceDuplicate(environmentId: $environmentId, serviceId: $serviceId) {
+    __typename
+    createdAt
+    deletedAt
+    # deployments
+    featureFlags
+    icon
+    id
+    name
+    # project
+    projectId
+    # repoTriggers
+    # serviceInstances
+    templateServiceId
+    templateThreadSlug
+    updatedAt
+  }
+}

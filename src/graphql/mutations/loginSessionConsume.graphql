@@ -1,0 +1,4 @@
+# Get a token for a login session if it exists
+mutation loginSessionConsume($code: String!) {
+  loginSessionConsume(code: $code)
+}

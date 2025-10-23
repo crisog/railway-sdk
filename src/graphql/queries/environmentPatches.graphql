@@ -1,0 +1,14 @@
+# Get the patches for an environment
+query environmentPatches($after: String, $before: String, $environmentId: String!, $first: Int, $last: Int) {
+  environmentPatches(
+    after: $after
+    before: $before
+    environmentId: $environmentId
+    first: $first
+    last: $last
+  ) {
+    __typename
+    # edges
+    # pageInfo
+  }
+}

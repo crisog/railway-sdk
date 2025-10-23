@@ -1,0 +1,18 @@
+# Fetch details for a custom domain
+query customDomain($id: String!, $projectId: String!) {
+  customDomain(id: $id, projectId: $projectId) {
+    __typename
+    # cnameCheck
+    createdAt
+    deletedAt
+    domain
+    edgeId
+    environmentId
+    id
+    projectId
+    serviceId
+    # status
+    targetPort
+    updatedAt
+  }
+}

@@ -1,0 +1,4 @@
+# Generate a Slack channel for a workspace
+mutation workspaceUpsertSlackChannel($id: String!) {
+  workspaceUpsertSlackChannel(id: $id)
+}

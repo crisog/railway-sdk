@@ -1,0 +1,8 @@
+# Checks if user has access to GitHub repository
+query gitHubRepoAccessAvailable($fullRepoName: String!) {
+  gitHubRepoAccessAvailable(fullRepoName: $fullRepoName) {
+    __typename
+    hasAccess
+    isPublic
+  }
+}

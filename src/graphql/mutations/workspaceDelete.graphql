@@ -1,0 +1,4 @@
+# Delete a workspace and all data associated with it
+mutation workspaceDelete($id: String!) {
+  workspaceDelete(id: $id)
+}

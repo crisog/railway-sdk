@@ -1,0 +1,7 @@
+# Get the total kickback earnings for a user.
+query userKickbackEarnings($userId: String!) {
+  userKickbackEarnings(userId: $userId) {
+    __typename
+    total_amount
+  }
+}

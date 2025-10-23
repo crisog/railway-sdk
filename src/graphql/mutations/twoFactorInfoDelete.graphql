@@ -1,0 +1,4 @@
+# Deletes the TwoFactorInfo for the authenticated user.
+mutation twoFactorInfoDelete {
+  twoFactorInfoDelete
+}

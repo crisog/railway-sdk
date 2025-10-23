@@ -1,0 +1,10 @@
+# Update an integration for a project
+mutation integrationUpdate($id: String!, $input: IntegrationUpdateInput!) {
+  integrationUpdate(id: $id, input: $input) {
+    __typename
+    config
+    id
+    name
+    projectId
+  }
+}

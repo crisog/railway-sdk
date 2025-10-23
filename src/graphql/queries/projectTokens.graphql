@@ -1,0 +1,14 @@
+# Get all project tokens for a project
+query projectTokens($after: String, $before: String, $first: Int, $last: Int, $projectId: String!) {
+  projectTokens(
+    after: $after
+    before: $before
+    first: $first
+    last: $last
+    projectId: $projectId
+  ) {
+    __typename
+    # edges
+    # pageInfo
+  }
+}

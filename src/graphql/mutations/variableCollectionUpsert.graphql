@@ -1,0 +1,4 @@
+# Upserts a collection of variables.
+mutation variableCollectionUpsert($input: VariableCollectionUpsertInput!) {
+  variableCollectionUpsert(input: $input)
+}

@@ -1,0 +1,17 @@
+# Fetch logs for a deployment
+query deploymentLogs($deploymentId: String!, $endDate: DateTime, $filter: String, $limit: Int, $startDate: DateTime) {
+  deploymentLogs(
+    deploymentId: $deploymentId
+    endDate: $endDate
+    filter: $filter
+    limit: $limit
+    startDate: $startDate
+  ) {
+    __typename
+    # attributes # The attributes that were parsed from a structured log
+    message # The contents of the log message
+    severity # The severity of the log message (eg. err)
+    # tags # The tags that were associated with the log
+    timestamp # The timestamp of the log message in format RFC3339 (nano)
+  }
+}

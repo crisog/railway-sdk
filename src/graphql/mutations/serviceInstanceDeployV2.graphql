@@ -1,0 +1,8 @@
+# Deploy a service instance. Returns a deployment ID
+mutation serviceInstanceDeployV2($commitSha: String, $environmentId: String!, $serviceId: String!) {
+  serviceInstanceDeployV2(
+    commitSha: $commitSha
+    environmentId: $environmentId
+    serviceId: $serviceId
+  )
+}

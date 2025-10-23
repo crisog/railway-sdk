@@ -1,0 +1,4 @@
+# Agree to the fair use policy for the currently authenticated user
+mutation fairUseAgree($agree: Boolean!) {
+  fairUseAgree(agree: $agree)
+}

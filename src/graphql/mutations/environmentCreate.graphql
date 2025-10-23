@@ -1,0 +1,21 @@
+# Creates a new environment.
+mutation environmentCreate($input: EnvironmentCreateInput!) {
+  environmentCreate(input: $input) {
+    __typename
+    createdAt
+    deletedAt
+    # deploymentTriggers
+    # deployments
+    id
+    isEphemeral
+    # meta
+    name
+    projectId
+    # serviceInstances
+    # sourceEnvironment
+    unmergedChangesCount
+    updatedAt
+    # variables
+    # volumeInstances
+  }
+}

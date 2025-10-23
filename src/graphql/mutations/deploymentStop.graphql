@@ -1,0 +1,4 @@
+# Stops a deployment.
+mutation deploymentStop($id: String!) {
+  deploymentStop(id: $id)
+}

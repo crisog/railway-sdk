@@ -1,0 +1,20 @@
+# Disconnect a service from a repo
+mutation serviceDisconnect($id: String!) {
+  serviceDisconnect(id: $id) {
+    __typename
+    createdAt
+    deletedAt
+    # deployments
+    featureFlags
+    icon
+    id
+    name
+    # project
+    projectId
+    # repoTriggers
+    # serviceInstances
+    templateServiceId
+    templateThreadSlug
+    updatedAt
+  }
+}

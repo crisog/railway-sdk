@@ -1,0 +1,4 @@
+# Delete a private network endpoint.
+mutation privateNetworkEndpointDelete($id: String!) {
+  privateNetworkEndpointDelete(id: $id)
+}

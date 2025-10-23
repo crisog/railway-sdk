@@ -1,0 +1,4 @@
+# Add a feature flag for a user
+mutation featureFlagAdd($input: FeatureFlagToggleInput!) {
+  featureFlagAdd(input: $input)
+}

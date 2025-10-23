@@ -1,0 +1,4 @@
+# Deletes a variable.
+mutation variableDelete($input: VariableDeleteInput!) {
+  variableDelete(input: $input)
+}

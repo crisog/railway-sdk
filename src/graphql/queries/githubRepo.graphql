@@ -1,0 +1,11 @@
+# Checks if user has access to GitHub repository
+query githubRepo($fullRepoName: String!) {
+  githubRepo(fullRepoName: $fullRepoName) {
+    __typename
+    defaultBranch
+    fullName
+    id
+    isPrivate
+    name
+  }
+}

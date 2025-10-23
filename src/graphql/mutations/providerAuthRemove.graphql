@@ -1,0 +1,4 @@
+# Deletes a ProviderAuth.
+mutation providerAuthRemove($id: String!) {
+  providerAuthRemove(id: $id)
+}

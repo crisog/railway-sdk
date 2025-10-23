@@ -1,0 +1,19 @@
+# Get the workspace
+query workspace($workspaceId: String!) {
+  workspace(workspaceId: $workspaceId) {
+    __typename
+    avatar
+    banReason
+    createdAt
+    # customer
+    discordRole
+    id
+    name
+    preferredRegion
+    # referredUsers
+    slackChannelId
+    subscriptionModel
+    supportTierOverride
+    # team
+  }
+}

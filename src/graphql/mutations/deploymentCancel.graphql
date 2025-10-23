@@ -1,0 +1,4 @@
+# Cancels a deployment.
+mutation deploymentCancel($id: String!) {
+  deploymentCancel(id: $id)
+}

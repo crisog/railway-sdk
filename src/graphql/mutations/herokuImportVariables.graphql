@@ -1,0 +1,4 @@
+# Import variables from a Heroku app into a Railway service. Returns the number of variables imports
+mutation herokuImportVariables($input: HerokuImportVariablesInput!) {
+  herokuImportVariables(input: $input)
+}

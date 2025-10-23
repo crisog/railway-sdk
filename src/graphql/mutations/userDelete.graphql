@@ -1,0 +1,4 @@
+# Delete the currently authenticated user
+mutation userDelete {
+  userDelete
+}

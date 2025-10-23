@@ -1,0 +1,4 @@
+# Set the usage limit for a customer
+mutation usageLimitSet($input: UsageLimitSetInput!) {
+  usageLimitSet(input: $input)
+}

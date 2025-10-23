@@ -1,0 +1,4 @@
+# Check if the upstream repo for a service has an update available
+query serviceInstanceIsUpdatable($environmentId: String!, $serviceId: String!) {
+  serviceInstanceIsUpdatable(environmentId: $environmentId, serviceId: $serviceId)
+}

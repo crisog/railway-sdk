@@ -1,0 +1,4 @@
+# Validates a recovery code.
+mutation recoveryCodeValidate($input: RecoveryCodeValidateInput!) {
+  recoveryCodeValidate(input: $input)
+}

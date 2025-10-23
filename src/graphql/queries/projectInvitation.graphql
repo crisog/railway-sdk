@@ -1,0 +1,24 @@
+# Get a project invitation by code
+query projectInvitation($code: String!) {
+  projectInvitation(code: $code) {
+    __typename
+    ... on InviteCode {
+      __typename
+      code
+      createdAt
+      id
+      # project
+      projectId
+      role
+    }
+    ... on ProjectInvitation {
+      __typename
+      email
+      expiresAt
+      id
+      # inviter
+      isExpired
+      # project
+    }
+  }
+}

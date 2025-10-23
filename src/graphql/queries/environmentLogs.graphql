@@ -1,0 +1,19 @@
+# Fetch logs for a project environment. Build logs are excluded unless a snapshot ID is explicitly provided in the filter
+query environmentLogs($afterDate: String, $afterLimit: Int, $anchorDate: String, $beforeDate: String, $beforeLimit: Int, $environmentId: String!, $filter: String) {
+  environmentLogs(
+    afterDate: $afterDate
+    afterLimit: $afterLimit
+    anchorDate: $anchorDate
+    beforeDate: $beforeDate
+    beforeLimit: $beforeLimit
+    environmentId: $environmentId
+    filter: $filter
+  ) {
+    __typename
+    # attributes # The attributes that were parsed from a structured log
+    message # The contents of the log message
+    severity # The severity of the log message (eg. err)
+    # tags # The tags that were associated with the log
+    timestamp # The timestamp of the log message in format RFC3339 (nano)
+  }
+}

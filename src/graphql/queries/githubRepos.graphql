@@ -1,0 +1,12 @@
+# Get a list of repos for a user that Railway has access to
+query githubRepos {
+  githubRepos {
+    __typename
+    defaultBranch
+    fullName
+    id
+    installationId
+    isPrivate
+    name
+  }
+}

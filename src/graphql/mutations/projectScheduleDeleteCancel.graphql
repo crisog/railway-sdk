@@ -1,0 +1,4 @@
+# Cancel scheduled deletion of a project
+mutation projectScheduleDeleteCancel($id: String!) {
+  projectScheduleDeleteCancel(id: $id)
+}

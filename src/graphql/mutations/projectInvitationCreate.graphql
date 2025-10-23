@@ -1,0 +1,12 @@
+# Create an invitation for a project
+mutation projectInvitationCreate($id: String!, $input: ProjectInvitee!) {
+  projectInvitationCreate(id: $id, input: $input) {
+    __typename
+    email
+    expiresAt
+    id
+    # inviter
+    isExpired
+    # project
+  }
+}

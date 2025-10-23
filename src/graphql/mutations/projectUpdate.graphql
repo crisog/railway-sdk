@@ -1,0 +1,33 @@
+# Updates a project.
+mutation projectUpdate($id: String!, $input: ProjectUpdateInput!) {
+  projectUpdate(id: $id, input: $input) {
+    __typename
+    # baseEnvironment
+    baseEnvironmentId
+    botPrEnvironments
+    createdAt
+    deletedAt
+    # deploymentTriggers
+    # deployments
+    description
+    # environments
+    expiredAt
+    # groups
+    id
+    isPublic
+    isTempProject
+    # members
+    name
+    # plugins
+    prDeploys
+    # projectPermissions
+    # services
+    subscriptionPlanLimit
+    subscriptionType
+    # team
+    teamId
+    updatedAt
+    # volumes
+    # webhooks
+  }
+}

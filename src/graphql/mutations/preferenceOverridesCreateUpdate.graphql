@@ -1,0 +1,4 @@
+# Create/Updates preferences overrides for a specific resource belonging to a user
+mutation preferenceOverridesCreateUpdate($input: PreferenceOverridesCreateUpdateData!) {
+  preferenceOverridesCreateUpdate(input: $input)
+}

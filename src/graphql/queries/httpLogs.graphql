@@ -1,0 +1,36 @@
+# Fetch HTTP logs for a deployment
+query httpLogs($afterDate: String, $afterLimit: Int, $anchorDate: String, $beforeDate: String, $beforeLimit: Int, $deploymentId: String!, $endDate: String, $filter: String, $limit: Int, $startDate: String) {
+  httpLogs(
+    afterDate: $afterDate
+    afterLimit: $afterLimit
+    anchorDate: $anchorDate
+    beforeDate: $beforeDate
+    beforeLimit: $beforeLimit
+    deploymentId: $deploymentId
+    endDate: $endDate
+    filter: $filter
+    limit: $limit
+    startDate: $startDate
+  ) {
+    __typename
+    clientUa # The client user agent
+    deploymentId # The deployment ID that was requested
+    deploymentInstanceId # The deployment instance ID that was requested
+    downstreamProto # The downstream HTTP protocol version
+    edgeRegion # The edge region the client connected to
+    host # The requested host
+    httpStatus # The http status of the log
+    method # The request HTTP method
+    path # The requested path
+    requestId # The unique request ID
+    responseDetails # Details about the upstream response
+    rxBytes # Received bytes
+    srcIp # The source IP of the request
+    timestamp # The timestamp the log was created
+    totalDuration # The total duration the request took
+    txBytes # Outgoing bytes
+    upstreamAddress # The upstream address
+    upstreamProto # The upstream HTTP protocol version
+    upstreamRqDuration # How long the upstream request took to respond
+  }
+}

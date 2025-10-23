@@ -1,0 +1,14 @@
+# Get a single project token by the value in the header
+query projectToken {
+  projectToken {
+    __typename
+    createdAt
+    displayToken
+    # environment
+    environmentId
+    id
+    name
+    # project
+    projectId
+  }
+}

@@ -1,0 +1,4 @@
+# Force delete a scheduled deletion of a project (skips the grace period)
+mutation projectScheduleDeleteForce($id: String!) {
+  projectScheduleDeleteForce(id: $id)
+}

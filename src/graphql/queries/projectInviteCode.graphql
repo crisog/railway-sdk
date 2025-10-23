@@ -1,0 +1,12 @@
+# Get an invite code for a project for a specifc role
+query projectInviteCode($projectId: String!, $role: ProjectRole!) {
+  projectInviteCode(projectId: $projectId, role: $role) {
+    __typename
+    code
+    createdAt
+    id
+    # project
+    projectId
+    role
+  }
+}

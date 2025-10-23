@@ -1,0 +1,4 @@
+# Delete all private networks for an environment.
+mutation privateNetworksForEnvironmentDelete($environmentId: String!) {
+  privateNetworksForEnvironmentDelete(environmentId: $environmentId)
+}

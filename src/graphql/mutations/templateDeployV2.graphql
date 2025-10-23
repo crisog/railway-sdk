@@ -1,0 +1,8 @@
+# Deploys a template using the serialized template config
+mutation templateDeployV2($input: TemplateDeployV2Input!) {
+  templateDeployV2(input: $input) {
+    __typename
+    projectId
+    workflowId
+  }
+}
