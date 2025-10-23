@@ -41,20 +41,32 @@ bun run generate:operations -- --force
 
 Documents are written to `src/graphql/queries` and `src/graphql/mutations`, keyed by their operation names. The generator validates each document against the current introspection dump and skips anything the active schema no longer supports. Re-run `bun run codegen:introspect` after adding or regenerating documents.
 
+### Emitting TypeScript Wrappers
+
+After updating operations and regenerating types, create strongly-typed helpers in `src/operations/generated.ts`:
+
+```bash
+bun run generate:wrappers
+```
+
+This script introspects each `.graphql` document, derives the correct `TypedDocumentNode` import from `src/generated/graphql.ts`, and emits a thin wrapper that calls `client.requestDocument`. All wrappers are exported from the package root for convenient imports.
+
 ### Using the Client
 
-Create a `RailwayClient` and call the provided helpers:
+Create a `RailwayClient` and call the generated helpers:
 
 ```ts
-import { RailwayClient, fetchCurrentUser, createApiToken } from "railway-sdk";
+import { RailwayClient, me, apiTokenCreate } from "railway-sdk";
 
 const client = RailwayClient.fromEnv();
 
-const me = await fetchCurrentUser(client);
-const newToken = await createApiToken(client, {
+const meData = await me(client);
+const newToken = await apiTokenCreate(client, {
   input: { name: "CI Token", workspaceId: "workspace_123" },
 });
 ```
+
+Every GraphQL document under `src/graphql` is surfaced through an async function in `src/operations/generated.ts` (re-exported by the package). Each helper enforces the correct variables type and accepts optional `GraphQLDocumentRequestOptions`.
 
 If you need lower-level control, you can still execute typed documents directly:
 
@@ -63,7 +75,7 @@ import { RailwayClient } from "railway-sdk";
 import { MeDocument } from "railway-sdk/src/generated/graphql";
 
 const client = RailwayClient.fromEnv();
-const me = await client.requestDocument(MeDocument);
+const meData = await client.requestDocument(MeDocument);
 ```
 
 The client automatically determines the appropriate authentication header for account, team, and project tokens.

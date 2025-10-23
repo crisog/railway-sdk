@@ -1,12 +1,6 @@
 import { promises as fs } from 'fs';
 import path from 'path';
-import {
-  buildClientSchema,
-  GraphQLSchema,
-  IntrospectionQuery,
-  parse,
-  validate,
-} from 'graphql';
+import { buildClientSchema, GraphQLSchema, IntrospectionQuery, parse, validate } from 'graphql';
 
 interface GraphQLCollection {
   item?: CollectionGroup[];
@@ -68,7 +62,6 @@ const parseArgs = (): CliOptions => {
 
   for (const arg of args) {
     if (arg === '--help') {
-      // eslint-disable-next-line no-console
       console.log(usage);
       process.exit(0);
     } else if (arg.startsWith('--collection=')) {
@@ -94,7 +87,6 @@ const parseArgs = (): CliOptions => {
     } else if (arg === '--force') {
       options.force = true;
     } else {
-      // eslint-disable-next-line no-console
       console.warn(`Unknown argument: ${arg}`);
     }
   }
@@ -159,7 +151,9 @@ const loadSchema = async (options: CliOptions): Promise<GraphQLSchema | null> =>
     const raw = await fs.readFile(schemaPath, 'utf8');
     const json = JSON.parse(raw) as IntrospectionQuery | { data?: IntrospectionQuery };
     const introspection: IntrospectionQuery =
-      'data' in json && json.data ? (json.data as IntrospectionQuery) : (json as IntrospectionQuery);
+      'data' in json && json.data
+        ? (json.data as IntrospectionQuery)
+        : (json as IntrospectionQuery);
 
     if (!introspection.__schema) {
       throw new Error('Introspection JSON missing __schema property.');
@@ -167,7 +161,6 @@ const loadSchema = async (options: CliOptions): Promise<GraphQLSchema | null> =>
 
     return buildClientSchema(introspection);
   } catch (error) {
-    // eslint-disable-next-line no-console
     console.warn(
       `Could not load schema from ${schemaPath}. Skipping validation. Reason: ${(error as Error).message}`,
     );
@@ -222,7 +215,6 @@ async function main(): Promise<void> {
       if (!options.force) {
         try {
           await fs.access(filePath);
-          // eslint-disable-next-line no-console
           console.log(`Skipping existing operation: ${path.relative(process.cwd(), filePath)}`);
           continue;
         } catch {
@@ -242,17 +234,14 @@ async function main(): Promise<void> {
           const validationErrors = validate(schema, documentNode);
           if (validationErrors.length > 0) {
             const reasons = validationErrors.map((error) => error.message).join('; ');
-            // eslint-disable-next-line no-console
-            console.warn(
-              `Skipping invalid operation ${operationName}: ${reasons}`,
-            );
+
+            console.warn(`Skipping invalid operation ${operationName}: ${reasons}`);
             if (options.force) {
               await removeIfExists(filePath);
             }
             continue;
           }
         } catch (error) {
-          // eslint-disable-next-line no-console
           console.warn(
             `Skipping unparsable operation ${operationName}: ${(error as Error).message}`,
           );
@@ -266,7 +255,6 @@ async function main(): Promise<void> {
       const description = resolveDescription(entry);
       const fileContents = prependDescription(description, query);
       await fs.writeFile(filePath, fileContents, 'utf8');
-      // eslint-disable-next-line no-console
       console.log(`Wrote ${path.relative(process.cwd(), filePath)}`);
     }
   }
