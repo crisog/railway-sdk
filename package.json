@@ -1,7 +1,14 @@
 {
   "name": "railway-sdk",
-  "module": "index.ts",
+  "module": "./src/index.ts",
   "type": "module",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": {
+      "import": "./src/index.ts",
+      "types": "./src/index.ts"
+    }
+  },
   "devDependencies": {
     "@graphql-codegen/cli": "^6.0.1",
     "@graphql-codegen/introspection": "^5.0.0",
@@ -9,6 +16,9 @@
   },
   "peerDependencies": {
     "typescript": "^5.9.3"
+  },
+  "scripts": {
+    "codegen:introspect": "graphql-codegen --config codegen.ts"
   },
   "dependencies": {
     "graphql": "^16.11.0"
