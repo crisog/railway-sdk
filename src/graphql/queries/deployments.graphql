@@ -8,7 +8,27 @@ query deployments($after: String, $before: String, $first: Int, $input: Deployme
     last: $last
   ) {
     __typename
-    # edges
-    # pageInfo
+    edges {
+      cursor
+      node {
+        id
+        status
+        createdAt
+        updatedAt
+        projectId
+        serviceId
+        environmentId
+        url
+        staticUrl
+        canRedeploy
+        canRollback
+      }
+    }
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      endCursor
+    }
   }
 }
