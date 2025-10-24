@@ -125,6 +125,7 @@ import {
   ProjectMembersDocument,
   ProjectMemberUpdateDocument,
   ProjectResourceAccessDocument,
+  ProjectsDocument,
   ProjectScheduleDeleteDocument,
   ProjectScheduleDeleteCancelDocument,
   ProjectScheduleDeleteForceDocument,
@@ -345,6 +346,7 @@ import {
   type ProjectMembersQueryVariables,
   type ProjectMemberUpdateMutationVariables,
   type ProjectResourceAccessQueryVariables,
+  type ProjectsQueryVariables,
   type ProjectScheduleDeleteMutationVariables,
   type ProjectScheduleDeleteCancelMutationVariables,
   type ProjectScheduleDeleteForceMutationVariables,
@@ -1291,6 +1293,13 @@ export const projectResourceAccess = (
   variables: ProjectResourceAccessQueryVariables,
   options?: GraphQLDocumentRequestOptions,
 ) => client.requestDocument(ProjectResourceAccessDocument, variables, options);
+
+/** Gets all projects for a user or workspace */
+export const projects = (
+  client: RailwayClient,
+  variables?: ProjectsQueryVariables,
+  options?: GraphQLDocumentRequestOptions,
+) => client.requestDocument(ProjectsDocument, variables, options);
 
 /** Deletes a project with a 48 hour grace period. */
 export const projectScheduleDelete = (

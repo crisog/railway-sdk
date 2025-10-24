@@ -1,0 +1,33 @@
+# Gets all projects for a user or workspace
+query projects($after: String, $before: String, $first: Int, $includeDeleted: Boolean, $last: Int, $userId: String, $workspaceId: String) {
+  projects(
+    after: $after
+    before: $before
+    first: $first
+    includeDeleted: $includeDeleted
+    last: $last
+    userId: $userId
+    workspaceId: $workspaceId
+  ) {
+    __typename
+    edges {
+      cursor
+      node {
+        id
+        name
+        description
+        createdAt
+        updatedAt
+        isPublic
+        isTempProject
+        teamId
+      }
+    }
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      endCursor
+    }
+  }
+}
