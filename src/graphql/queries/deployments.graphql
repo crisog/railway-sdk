@@ -17,6 +17,10 @@ query deployments($after: String, $before: String, $first: Int, $input: Deployme
         updatedAt
         projectId
         serviceId
+        service {
+          id
+          name
+        }
         environmentId
         url
         staticUrl
