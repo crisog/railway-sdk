@@ -34,7 +34,7 @@
   "scripts": {
     "codegen:introspect": "graphql-codegen --config codegen.ts",
     "generate:operations": "bun scripts/generate-operations.ts",
-    "generate:wrappers": "bun scripts/generate-operation-wrappers.ts",
+    "generate:wrappers": "bun scripts/generate-wrappers.ts",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "format": "prettier --write .",

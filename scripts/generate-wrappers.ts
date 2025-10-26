@@ -142,7 +142,8 @@ const generateFile = async (operations: OperationMeta[]): Promise<void> => {
   }
 
   const header = [
-    `import { RailwayClient, type GraphQLDocumentRequestOptions } from '../client';`,
+    `import { RailwayClient } from '../client';`,
+    `import type { GraphQLDocumentRequestOptions } from '../client';`,
     `import {`,
     ...Array.from(documentImports)
       .map((name) => `  ${name},`)
@@ -174,27 +175,33 @@ const generateFile = async (operations: OperationMeta[]): Promise<void> => {
 
 const buildParameters = (operation: OperationMeta): string => {
   const base = 'client: RailwayClient';
-  const options = 'options?: GraphQLDocumentRequestOptions';
+  const optionsType = 'GraphQLDocumentRequestOptions';
 
   if (!operation.hasVariables) {
-    return `${base}, ${options}`;
+    return `${base}, request?: { options?: ${optionsType} }`;
   }
 
-  const variablesParam = operation.hasRequiredVariables
-    ? `variables: ${operation.variablesTypeName}`
-    : `variables?: ${operation.variablesTypeName}`;
+  const payloadType = `{ variables${operation.hasRequiredVariables ? '' : '?'}: ${operation.variablesTypeName}; options?: ${optionsType} }`;
 
-  return `${base}, ${variablesParam}, ${options}`;
+  const requestParam = operation.hasRequiredVariables
+    ? `request: ${payloadType}`
+    : `request?: ${payloadType}`;
+
+  return `${base}, ${requestParam}`;
 };
 
 const buildCallExpression = (operation: OperationMeta): string => {
   const baseCall = `client.requestDocument(${operation.documentName}`;
 
   if (!operation.hasVariables) {
-    return `${baseCall}, undefined, options)`;
+    return `${baseCall}, undefined, request?.options)`;
   }
 
-  return `${baseCall}, variables, options)`;
+  if (operation.hasRequiredVariables) {
+    return `${baseCall}, request.variables, request?.options)`;
+  }
+
+  return `${baseCall}, request?.variables, request?.options)`;
 };
 
 async function main(): Promise<void> {
