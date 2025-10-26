@@ -49,34 +49,24 @@ After updating operations and regenerating types, create strongly-typed helpers 
 bun run generate:wrappers
 ```
 
-This script introspects each `.graphql` document, derives the correct `TypedDocumentNode` import from `src/generated/graphql.ts`, and emits a thin wrapper that calls `client.requestDocument`. All wrappers are exported from the package root for convenient imports.
+This script introspects each `.graphql` document, derives the correct `TypedDocumentNode` import from `src/generated/graphql.ts`, and emits a thin wrapper that calls `client.requestDocument`. The generated helpers feed the namespaced SDK surface (e.g. `client.projects.create`) and are also re-exported from the package root for granular imports when you prefer direct access.
 
 ### Using the Client
 
-Create a `RailwayClient` and call the generated helpers:
-
-```ts
-import { RailwayClient, me, apiTokenCreate } from 'railway-sdk';
-
-const client = RailwayClient.fromEnv();
-
-const meData = await me(client);
-const newToken = await apiTokenCreate(client, {
-  input: { name: 'CI Token', workspaceId: 'workspace_123' },
-});
-```
-
-Every GraphQL document under `src/graphql` is surfaced through an async function in `src/operations/generated.ts` (re-exported by the package). Each helper enforces the correct variables type and accepts optional `GraphQLDocumentRequestOptions`.
-
-If you need lower-level control, you can still execute typed documents directly:
+Create a `RailwayClient` and use the namespaced helpers:
 
 ```ts
 import { RailwayClient } from 'railway-sdk';
-import { MeDocument } from 'railway-sdk/src/generated/graphql';
 
 const client = RailwayClient.fromEnv();
-const meData = await client.requestDocument(MeDocument);
+
+const meData = await client.account.me();
+const newToken = await client.apiTokens.create({
+  variables: { input: { name: 'CI Token', workspaceId: 'workspace_123' } },
+});
 ```
+
+Every GraphQL document under `src/graphql` is surfaced both through the namespaced client and as the original async function exports in `src/operations/generated.ts`. Each helper enforces the correct variables type and accepts optional `GraphQLDocumentRequestOptions`.
 
 The client automatically determines the appropriate authentication header for account, team, and project tokens.
 

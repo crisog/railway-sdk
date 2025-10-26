@@ -9,6 +9,7 @@ export {
   type RetryContext,
   type RetryOptions,
 } from './client';
+export { createRailwayApi } from './client/api';
 export {
   MissingTokenError,
   resolveAuthHeader,
