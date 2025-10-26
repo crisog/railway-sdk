@@ -34,7 +34,6 @@ import {
   DeploymentTriggerUpdateDocument,
   DockerComposeImportDocument,
   DomainsDocument,
-  DomainStatusDocument,
   EgressGatewayAssociationCreateDocument,
   EgressGatewayAssociationsClearDocument,
   EgressGatewaysDocument,
@@ -88,15 +87,6 @@ import {
   ObservabilityDashboardsDocument,
   ObservabilityDashboardUpdateDocument,
   PlatformStatusDocument,
-  PluginDocument,
-  PluginCreateDocument,
-  PluginDeleteDocument,
-  PluginLogsDocument,
-  PluginResetDocument,
-  PluginResetCredentialsDocument,
-  PluginRestartDocument,
-  PluginStartDocument,
-  PluginUpdateDocument,
   PreferenceOverridesCreateUpdateDocument,
   PreferenceOverridesDestroyForResourceDocument,
   PreferencesDocument,
@@ -136,7 +126,6 @@ import {
   ProjectTokensDocument,
   ProjectTransferConfirmDocument,
   ProjectTransferInitiateDocument,
-  ProjectTransferToTeamDocument,
   ProjectUpdateDocument,
   ProviderAuthRemoveDocument,
   PublicStatsDocument,
@@ -154,7 +143,6 @@ import {
   ServiceDomainCreateDocument,
   ServiceDomainDeleteDocument,
   ServiceDomainUpdateDocument,
-  ServiceDuplicateDocument,
   ServiceFeatureFlagAddDocument,
   ServiceFeatureFlagRemoveDocument,
   ServiceInstanceDocument,
@@ -170,14 +158,10 @@ import {
   SessionsDocument,
   SharedVariableConfigureDocument,
   TcpProxiesDocument,
-  TcpProxyCreateDocument,
   TcpProxyDeleteDocument,
-  TeamDocument,
-  TeamTemplatesDocument,
   TemplateDocument,
   TemplateCloneDocument,
   TemplateDeleteDocument,
-  TemplateDeployDocument,
   TemplateDeployV2Document,
   TemplateGenerateDocument,
   TemplatePublishDocument,
@@ -198,10 +182,8 @@ import {
   UserDiscordDisconnectDocument,
   UserFlagsRemoveDocument,
   UserFlagsSetDocument,
-  UserKickbackEarningsDocument,
   UserProfileDocument,
   UserProfileUpdateDocument,
-  UserTemplatesDocument,
   UserTermsUpdateDocument,
   VariableCollectionUpsertDocument,
   VariableDeleteDocument,
@@ -262,7 +244,6 @@ import {
   type DeploymentTriggerUpdateMutationVariables,
   type DockerComposeImportMutationVariables,
   type DomainsQueryVariables,
-  type DomainStatusQueryVariables,
   type EgressGatewayAssociationCreateMutationVariables,
   type EgressGatewayAssociationsClearMutationVariables,
   type EgressGatewaysQueryVariables,
@@ -309,15 +290,6 @@ import {
   type ObservabilityDashboardResetMutationVariables,
   type ObservabilityDashboardsQueryVariables,
   type ObservabilityDashboardUpdateMutationVariables,
-  type PluginQueryVariables,
-  type PluginCreateMutationVariables,
-  type PluginDeleteMutationVariables,
-  type PluginLogsQueryVariables,
-  type PluginResetMutationVariables,
-  type PluginResetCredentialsMutationVariables,
-  type PluginRestartMutationVariables,
-  type PluginStartMutationVariables,
-  type PluginUpdateMutationVariables,
   type PreferenceOverridesCreateUpdateMutationVariables,
   type PreferenceOverridesDestroyForResourceMutationVariables,
   type PreferencesQueryVariables,
@@ -356,7 +328,6 @@ import {
   type ProjectTokensQueryVariables,
   type ProjectTransferConfirmMutationVariables,
   type ProjectTransferInitiateMutationVariables,
-  type ProjectTransferToTeamMutationVariables,
   type ProjectUpdateMutationVariables,
   type ProviderAuthRemoveMutationVariables,
   type RecoveryCodeValidateMutationVariables,
@@ -372,7 +343,6 @@ import {
   type ServiceDomainCreateMutationVariables,
   type ServiceDomainDeleteMutationVariables,
   type ServiceDomainUpdateMutationVariables,
-  type ServiceDuplicateMutationVariables,
   type ServiceFeatureFlagAddMutationVariables,
   type ServiceFeatureFlagRemoveMutationVariables,
   type ServiceInstanceQueryVariables,
@@ -388,14 +358,10 @@ import {
   type SessionsQueryVariables,
   type SharedVariableConfigureMutationVariables,
   type TcpProxiesQueryVariables,
-  type TcpProxyCreateMutationVariables,
   type TcpProxyDeleteMutationVariables,
-  type TeamQueryVariables,
-  type TeamTemplatesQueryVariables,
   type TemplateQueryVariables,
   type TemplateCloneMutationVariables,
   type TemplateDeleteMutationVariables,
-  type TemplateDeployMutationVariables,
   type TemplateDeployV2MutationVariables,
   type TemplateGenerateMutationVariables,
   type TemplatePublishMutationVariables,
@@ -409,10 +375,8 @@ import {
   type UsageLimitSetMutationVariables,
   type UserFlagsRemoveMutationVariables,
   type UserFlagsSetMutationVariables,
-  type UserKickbackEarningsQueryVariables,
   type UserProfileQueryVariables,
   type UserProfileUpdateMutationVariables,
-  type UserTemplatesQueryVariables,
   type VariableCollectionUpsertMutationVariables,
   type VariableDeleteMutationVariables,
   type VariablesForServiceDeploymentQueryVariables,
@@ -712,12 +676,6 @@ export const domains = (
   client: RailwayClient,
   request: { variables: DomainsQueryVariables; options?: GraphQLDocumentRequestOptions },
 ) => client.requestDocument(DomainsDocument, request.variables, request?.options);
-
-/** Domain with status */
-export const domainStatus = (
-  client: RailwayClient,
-  request: { variables: DomainStatusQueryVariables; options?: GraphQLDocumentRequestOptions },
-) => client.requestDocument(DomainStatusDocument, request.variables, request?.options);
 
 /** Create a new egress gateway association for a service instance */
 export const egressGatewayAssociationCreate = (
@@ -1127,63 +1085,6 @@ export const platformStatus = (
   request?: { options?: GraphQLDocumentRequestOptions },
 ) => client.requestDocument(PlatformStatusDocument, undefined, request?.options);
 
-/** Get a plugin by ID. */
-export const plugin = (
-  client: RailwayClient,
-  request: { variables: PluginQueryVariables; options?: GraphQLDocumentRequestOptions },
-) => client.requestDocument(PluginDocument, request.variables, request?.options);
-
-/** Creates a new plugin. */
-export const pluginCreate = (
-  client: RailwayClient,
-  request: { variables: PluginCreateMutationVariables; options?: GraphQLDocumentRequestOptions },
-) => client.requestDocument(PluginCreateDocument, request.variables, request?.options);
-
-/** Deletes a plugin. */
-export const pluginDelete = (
-  client: RailwayClient,
-  request: { variables: PluginDeleteMutationVariables; options?: GraphQLDocumentRequestOptions },
-) => client.requestDocument(PluginDeleteDocument, request.variables, request?.options);
-
-/** Fetch logs for a plugin */
-export const pluginLogs = (
-  client: RailwayClient,
-  request: { variables: PluginLogsQueryVariables; options?: GraphQLDocumentRequestOptions },
-) => client.requestDocument(PluginLogsDocument, request.variables, request?.options);
-
-/** Reset envs and container for a plugin in an environment */
-export const pluginReset = (
-  client: RailwayClient,
-  request: { variables: PluginResetMutationVariables; options?: GraphQLDocumentRequestOptions },
-) => client.requestDocument(PluginResetDocument, request.variables, request?.options);
-
-/** Resets the credentials for a plugin in an environment */
-export const pluginResetCredentials = (
-  client: RailwayClient,
-  request: {
-    variables: PluginResetCredentialsMutationVariables;
-    options?: GraphQLDocumentRequestOptions;
-  },
-) => client.requestDocument(PluginResetCredentialsDocument, request.variables, request?.options);
-
-/** Restarts a plugin. */
-export const pluginRestart = (
-  client: RailwayClient,
-  request: { variables: PluginRestartMutationVariables; options?: GraphQLDocumentRequestOptions },
-) => client.requestDocument(PluginRestartDocument, request.variables, request?.options);
-
-/** Force start a plugin */
-export const pluginStart = (
-  client: RailwayClient,
-  request: { variables: PluginStartMutationVariables; options?: GraphQLDocumentRequestOptions },
-) => client.requestDocument(PluginStartDocument, request.variables, request?.options);
-
-/** Updates an existing plugin. */
-export const pluginUpdate = (
-  client: RailwayClient,
-  request: { variables: PluginUpdateMutationVariables; options?: GraphQLDocumentRequestOptions },
-) => client.requestDocument(PluginUpdateDocument, request.variables, request?.options);
-
 /** Create/Updates preferences overrides for a specific resource belonging to a user */
 export const preferenceOverridesCreateUpdate = (
   client: RailwayClient,
@@ -1522,15 +1423,6 @@ export const projectTransferInitiate = (
   },
 ) => client.requestDocument(ProjectTransferInitiateDocument, request.variables, request?.options);
 
-/** Transfer a project to a team */
-export const projectTransferToTeam = (
-  client: RailwayClient,
-  request: {
-    variables: ProjectTransferToTeamMutationVariables;
-    options?: GraphQLDocumentRequestOptions;
-  },
-) => client.requestDocument(ProjectTransferToTeamDocument, request.variables, request?.options);
-
 /** Updates a project. */
 export const projectUpdate = (
   client: RailwayClient,
@@ -1657,15 +1549,6 @@ export const serviceDomainUpdate = (
   },
 ) => client.requestDocument(ServiceDomainUpdateDocument, request.variables, request?.options);
 
-/** Duplicate a service, including its configuration, variables, and volumes. */
-export const serviceDuplicate = (
-  client: RailwayClient,
-  request: {
-    variables: ServiceDuplicateMutationVariables;
-    options?: GraphQLDocumentRequestOptions;
-  },
-) => client.requestDocument(ServiceDuplicateDocument, request.variables, request?.options);
-
 /** Add a feature flag for a service */
 export const serviceFeatureFlagAdd = (
   client: RailwayClient,
@@ -1788,29 +1671,11 @@ export const tcpProxies = (
   request: { variables: TcpProxiesQueryVariables; options?: GraphQLDocumentRequestOptions },
 ) => client.requestDocument(TcpProxiesDocument, request.variables, request?.options);
 
-/** Creates a new TCP proxy for a service instance. */
-export const tcpProxyCreate = (
-  client: RailwayClient,
-  request: { variables: TcpProxyCreateMutationVariables; options?: GraphQLDocumentRequestOptions },
-) => client.requestDocument(TcpProxyCreateDocument, request.variables, request?.options);
-
 /** Deletes a TCP proxy by id */
 export const tcpProxyDelete = (
   client: RailwayClient,
   request: { variables: TcpProxyDeleteMutationVariables; options?: GraphQLDocumentRequestOptions },
 ) => client.requestDocument(TcpProxyDeleteDocument, request.variables, request?.options);
-
-/** Find a team by ID */
-export const team = (
-  client: RailwayClient,
-  request: { variables: TeamQueryVariables; options?: GraphQLDocumentRequestOptions },
-) => client.requestDocument(TeamDocument, request.variables, request?.options);
-
-/** Get all templates for a team. */
-export const teamTemplates = (
-  client: RailwayClient,
-  request: { variables: TeamTemplatesQueryVariables; options?: GraphQLDocumentRequestOptions },
-) => client.requestDocument(TeamTemplatesDocument, request.variables, request?.options);
 
 /** Get a template by code or GitHub owner and repo. */
 export const template = (
@@ -1829,12 +1694,6 @@ export const templateDelete = (
   client: RailwayClient,
   request: { variables: TemplateDeleteMutationVariables; options?: GraphQLDocumentRequestOptions },
 ) => client.requestDocument(TemplateDeleteDocument, request.variables, request?.options);
-
-/** Deploys a template. */
-export const templateDeploy = (
-  client: RailwayClient,
-  request: { variables: TemplateDeployMutationVariables; options?: GraphQLDocumentRequestOptions },
-) => client.requestDocument(TemplateDeployDocument, request.variables, request?.options);
 
 /** Deploys a template using the serialized template config */
 export const templateDeployV2 = (
@@ -1981,15 +1840,6 @@ export const userFlagsSet = (
   request: { variables: UserFlagsSetMutationVariables; options?: GraphQLDocumentRequestOptions },
 ) => client.requestDocument(UserFlagsSetDocument, request.variables, request?.options);
 
-/** Get the total kickback earnings for a user. */
-export const userKickbackEarnings = (
-  client: RailwayClient,
-  request: {
-    variables: UserKickbackEarningsQueryVariables;
-    options?: GraphQLDocumentRequestOptions;
-  },
-) => client.requestDocument(UserKickbackEarningsDocument, request.variables, request?.options);
-
 /** Get the public profile for a user */
 export const userProfile = (
   client: RailwayClient,
@@ -2004,12 +1854,6 @@ export const userProfileUpdate = (
     options?: GraphQLDocumentRequestOptions;
   },
 ) => client.requestDocument(UserProfileUpdateDocument, request.variables, request?.options);
-
-/** Get all templates for the current user. */
-export const userTemplates = (
-  client: RailwayClient,
-  request?: { variables?: UserTemplatesQueryVariables; options?: GraphQLDocumentRequestOptions },
-) => client.requestDocument(UserTemplatesDocument, request?.variables, request?.options);
 
 /** Update date of TermsAgreedOn */
 export const userTermsUpdate = (

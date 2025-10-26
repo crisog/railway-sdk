@@ -1,4 +1,0 @@
-# Reset envs and container for a plugin in an environment
-mutation pluginReset($id: String!, $input: ResetPluginInput!) {
-  pluginReset(id: $id, input: $input)
-}

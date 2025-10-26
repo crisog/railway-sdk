@@ -1,4 +1,0 @@
-# Force start a plugin
-mutation pluginStart($id: String!, $input: PluginRestartInput!) {
-  pluginStart(id: $id, input: $input)
-}

@@ -241,6 +241,22 @@ async function main(): Promise<void> {
             }
             continue;
           }
+
+          // Check if operation is deprecated
+          const queryType = schema.getQueryType();
+          const mutationType = schema.getMutationType();
+          const field =
+            queryType?.getFields()[operationName] || mutationType?.getFields()[operationName];
+
+          if (field?.deprecationReason) {
+            console.warn(
+              `Skipping deprecated operation ${operationName}: ${field.deprecationReason}`,
+            );
+            if (options.force) {
+              await removeIfExists(filePath);
+            }
+            continue;
+          }
         } catch (error) {
           console.warn(
             `Skipping unparsable operation ${operationName}: ${(error as Error).message}`,
