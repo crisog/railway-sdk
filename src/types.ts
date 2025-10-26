@@ -1,5 +1,5 @@
 import type { GraphQLError } from 'graphql';
-import type { TokenType } from '../auth';
+import type { TokenType } from './auth';
 
 export interface GraphQLRequestSignal {
   readonly aborted: boolean;

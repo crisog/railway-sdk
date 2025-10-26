@@ -16,7 +16,7 @@ interface OperationMeta {
 }
 
 const GRAPHQL_ROOT = path.resolve(process.cwd(), 'src/graphql');
-const OUTPUT_PATH = path.resolve(process.cwd(), 'src/operations/generated.ts');
+const OUTPUT_PATH = path.resolve(process.cwd(), 'src/generated/operations.ts');
 
 const collectGraphQLFiles = async (directory: string): Promise<string[]> => {
   const entries = await fs.readdir(directory, { withFileTypes: true });
@@ -143,12 +143,12 @@ const generateFile = async (operations: OperationMeta[]): Promise<void> => {
 
   const header = [
     `import { RailwayClient } from '../client';`,
-    `import type { GraphQLDocumentRequestOptions } from '../client';`,
+    `import type { GraphQLDocumentRequestOptions } from '../types';`,
     `import {`,
     ...Array.from(documentImports)
       .map((name) => `  ${name},`)
       .concat(Array.from(variableTypeImports).map((typeName) => `  type ${typeName},`)),
-    `} from '../generated/graphql';`,
+    `} from './graphql';`,
     '',
   ].join('\n');
 

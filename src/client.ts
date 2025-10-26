@@ -1,7 +1,6 @@
 import { print, Kind, type OperationDefinitionNode } from 'graphql';
 import type { TypedDocumentNode } from '@graphql-typed-document-node/core';
-import { MissingTokenError, requireTokenFromEnv, resolveAuthHeader, type TokenType } from '../auth';
-import { createRailwayApi, type RailwayApi } from './api';
+import { MissingTokenError, requireTokenFromEnv, resolveAuthHeader, type TokenType } from './auth';
 import type {
   GraphQLDocumentRequestOptions,
   GraphQLRequestOptions,
@@ -168,16 +167,6 @@ const executeWithRetry = async <T>(
   throw new Error('Retry attempts exhausted without completing request.');
 };
 
-export type {
-  GraphQLDocumentRequestOptions,
-  GraphQLRequestBaseOptions,
-  GraphQLRequestOptions,
-  GraphQLRequestSignal,
-  RailwayClientOptions,
-  RetryContext,
-  RetryOptions,
-} from './types';
-
 const parseResponse = async <TData>(response: Response): Promise<TData> => {
   let rawBody: string | undefined;
 
@@ -261,23 +250,4 @@ const inferOperationName = <TData, TVariables>(
   );
 
   return operationDefinition?.name?.value;
-};
-
-export type Railway = RailwayApi & { client: RailwayClient };
-
-export const createRailway = (options: RailwayClientOptions): Railway => {
-  const client = new RailwayClient(options);
-  const api = createRailwayApi(client);
-  return { ...api, client };
-};
-
-export const createRailwayFromEnv = (
-  partialOptions: Omit<Partial<RailwayClientOptions>, 'token'> = {},
-): Railway => {
-  const envToken = requireTokenFromEnv();
-  return createRailway({
-    ...partialOptions,
-    token: envToken.token,
-    tokenType: envToken.type,
-  });
 };

@@ -1,9 +1,7 @@
+export { GraphQLRequestError, RailwayClient } from './client';
+export { createRailway, createRailwayFromEnv, type Railway } from './railway';
+export { createRailwayApi, type RailwayApi } from './api';
 export {
-  GraphQLRequestError,
-  RailwayClient,
-  createRailway,
-  createRailwayFromEnv,
-  type Railway,
   type GraphQLRequestBaseOptions,
   type GraphQLRequestSignal,
   type GraphQLDocumentRequestOptions,
@@ -11,8 +9,7 @@ export {
   type RailwayClientOptions,
   type RetryContext,
   type RetryOptions,
-} from './client';
-export { createRailwayApi, type RailwayApi } from './client/api';
+} from './types';
 export {
   MissingTokenError,
   resolveAuthHeader,
@@ -20,4 +17,4 @@ export {
   TOKEN_ENV_PRIORITY,
 } from './auth';
 export type { TokenType, EnvToken } from './auth';
-export * from './operations/generated';
+export * from './generated/operations';

@@ -1,5 +1,5 @@
-import * as operations from '../operations/generated';
-import type { RailwayClient } from './index';
+import * as operations from './generated/operations';
+import type { RailwayClient } from './client';
 
 type BindShape<Shape> = Shape extends (...args: infer Params) => infer Result
   ? Params extends [RailwayClient, ...infer Tail]
