@@ -49,26 +49,6 @@ export class RailwayClient {
 
   private readonly baseHeaders: Record<string, string>;
 
-  readonly apiTokens: RailwayApi['apiTokens'];
-  readonly account: RailwayApi['account'];
-  readonly auth: RailwayApi['auth'];
-  readonly billing: RailwayApi['billing'];
-  readonly deployments: RailwayApi['deployments'];
-  readonly domains: RailwayApi['domains'];
-  readonly environments: RailwayApi['environments'];
-  readonly integrations: RailwayApi['integrations'];
-  readonly networking: RailwayApi['networking'];
-  readonly observability: RailwayApi['observability'];
-  readonly preferences: RailwayApi['preferences'];
-  readonly projects: RailwayApi['projects'];
-  readonly services: RailwayApi['services'];
-  readonly templates: RailwayApi['templates'];
-  readonly variables: RailwayApi['variables'];
-  readonly volumes: RailwayApi['volumes'];
-  readonly webhooks: RailwayApi['webhooks'];
-  readonly workspaces: RailwayApi['workspaces'];
-  readonly misc: RailwayApi['misc'];
-
   constructor(options: RailwayClientOptions) {
     this.token = options.token;
     this.tokenType = options.tokenType ?? 'account';
@@ -91,27 +71,6 @@ export class RailwayClient {
       ...options.headers,
       ...resolveAuthHeader(this.token, this.tokenType),
     };
-
-    const api = createRailwayApi(this);
-    this.apiTokens = api.apiTokens;
-    this.account = api.account;
-    this.auth = api.auth;
-    this.billing = api.billing;
-    this.deployments = api.deployments;
-    this.domains = api.domains;
-    this.environments = api.environments;
-    this.integrations = api.integrations;
-    this.networking = api.networking;
-    this.observability = api.observability;
-    this.preferences = api.preferences;
-    this.projects = api.projects;
-    this.services = api.services;
-    this.templates = api.templates;
-    this.variables = api.variables;
-    this.volumes = api.volumes;
-    this.webhooks = api.webhooks;
-    this.workspaces = api.workspaces;
-    this.misc = api.misc;
   }
 
   async request<TData = unknown, TVariables = Record<string, unknown>>(
@@ -302,4 +261,23 @@ const inferOperationName = <TData, TVariables>(
   );
 
   return operationDefinition?.name?.value;
+};
+
+export type Railway = RailwayApi & { client: RailwayClient };
+
+export const createRailway = (options: RailwayClientOptions): Railway => {
+  const client = new RailwayClient(options);
+  const api = createRailwayApi(client);
+  return { ...api, client };
+};
+
+export const createRailwayFromEnv = (
+  partialOptions: Omit<Partial<RailwayClientOptions>, 'token'> = {},
+): Railway => {
+  const envToken = requireTokenFromEnv();
+  return createRailway({
+    ...partialOptions,
+    token: envToken.token,
+    tokenType: envToken.type,
+  });
 };

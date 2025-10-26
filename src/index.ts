@@ -1,6 +1,9 @@
 export {
   GraphQLRequestError,
   RailwayClient,
+  createRailway,
+  createRailwayFromEnv,
+  type Railway,
   type GraphQLRequestBaseOptions,
   type GraphQLRequestSignal,
   type GraphQLDocumentRequestOptions,
@@ -9,7 +12,7 @@ export {
   type RetryContext,
   type RetryOptions,
 } from './client';
-export { createRailwayApi } from './client/api';
+export { createRailwayApi, type RailwayApi } from './client/api';
 export {
   MissingTokenError,
   resolveAuthHeader,
