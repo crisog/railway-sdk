@@ -1,6 +1,8 @@
 import { RailwayClient } from '../client';
 import type { GraphQLDocumentRequestOptions } from '../types';
 import {
+  AdminVolumeInstancesForVolumeDocument,
+  AllPlatformFeatureFlagsDocument,
   ApiTokenCreateDocument,
   ApiTokenDeleteDocument,
   ApiTokensDocument,
@@ -43,12 +45,16 @@ import {
   EnvironmentCreateDocument,
   EnvironmentDeleteDocument,
   EnvironmentLogsDocument,
+  EnvironmentPatchDocument,
   EnvironmentPatchCommitDocument,
   EnvironmentPatchesDocument,
   EnvironmentRenameDocument,
   EnvironmentsDocument,
+  EnvironmentStagedChangesDocument,
   EnvironmentTriggersDeployDocument,
+  EstimatedUsageDocument,
   EventsDocument,
+  ExternalWorkspacesDocument,
   FairUseAgreeDocument,
   FeatureFlagAddDocument,
   FeatureFlagRemoveDocument,
@@ -80,12 +86,15 @@ import {
   LoginSessionCreateDocument,
   LoginSessionVerifyDocument,
   MeDocument,
+  MetricsDocument,
   NodeDocument,
   NodesDocument,
   ObservabilityDashboardCreateDocument,
   ObservabilityDashboardResetDocument,
   ObservabilityDashboardsDocument,
   ObservabilityDashboardUpdateDocument,
+  PasskeyDeleteDocument,
+  PasskeysDocument,
   PlatformStatusDocument,
   PreferenceOverridesCreateUpdateDocument,
   PreferenceOverridesDestroyForResourceDocument,
@@ -124,6 +133,7 @@ import {
   ProjectTokenCreateDocument,
   ProjectTokenDeleteDocument,
   ProjectTokensDocument,
+  ProjectTransferDocument,
   ProjectTransferConfirmDocument,
   ProjectTransferInitiateDocument,
   ProjectUpdateDocument,
@@ -133,6 +143,7 @@ import {
   RecoveryCodeValidateDocument,
   ReferralInfoDocument,
   ReferralInfoUpdateDocument,
+  RegionsDocument,
   ResourceAccessDocument,
   ServiceDocument,
   ServiceConnectDocument,
@@ -149,6 +160,8 @@ import {
   ServiceInstanceDeployDocument,
   ServiceInstanceDeployV2Document,
   ServiceInstanceIsUpdatableDocument,
+  ServiceInstanceLimitOverrideDocument,
+  ServiceInstanceLimitsDocument,
   ServiceInstanceLimitsUpdateDocument,
   ServiceInstanceRedeployDocument,
   ServiceInstanceUpdateDocument,
@@ -170,11 +183,16 @@ import {
   TemplateServiceSourceEjectDocument,
   TemplateSourceForProjectDocument,
   TemplateUnpublishDocument,
+  TrustedDomainCreateDocument,
+  TrustedDomainDeleteDocument,
+  TrustedDomainsDocument,
   TwoFactorInfoDocument,
   TwoFactorInfoCreateDocument,
   TwoFactorInfoDeleteDocument,
   TwoFactorInfoSecretDocument,
   TwoFactorInfoValidateDocument,
+  UpsertSlackChannelDocument,
+  UsageDocument,
   UsageLimitRemoveDocument,
   UsageLimitSetDocument,
   UserBetaLeaveDocument,
@@ -187,11 +205,13 @@ import {
   UserTermsUpdateDocument,
   VariableCollectionUpsertDocument,
   VariableDeleteDocument,
+  VariablesDocument,
   VariablesForServiceDeploymentDocument,
   VariableUpsertDocument,
   VercelInfoDocument,
   VolumeCreateDocument,
   VolumeDeleteDocument,
+  VolumeInstanceDocument,
   VolumeInstanceBackupCreateDocument,
   VolumeInstanceBackupDeleteDocument,
   VolumeInstanceBackupListDocument,
@@ -207,10 +227,18 @@ import {
   WebhookUpdateDocument,
   WorkflowStatusDocument,
   WorkspaceDocument,
+  WorkspaceByCodeDocument,
   WorkspaceDeleteDocument,
+  WorkspaceInviteCodeCreateDocument,
+  WorkspaceInviteCodeUseDocument,
   WorkspaceLeaveDocument,
+  WorkspacePermissionChangeDocument,
+  WorkspaceTemplatesDocument,
   WorkspaceUpdateDocument,
   WorkspaceUpsertSlackChannelDocument,
+  WorkspaceUserInviteDocument,
+  WorkspaceUserRemoveDocument,
+  type AdminVolumeInstancesForVolumeQueryVariables,
   type ApiTokenCreateMutationVariables,
   type ApiTokenDeleteMutationVariables,
   type ApiTokensQueryVariables,
@@ -253,12 +281,16 @@ import {
   type EnvironmentCreateMutationVariables,
   type EnvironmentDeleteMutationVariables,
   type EnvironmentLogsQueryVariables,
+  type EnvironmentPatchQueryVariables,
   type EnvironmentPatchCommitMutationVariables,
   type EnvironmentPatchesQueryVariables,
   type EnvironmentRenameMutationVariables,
   type EnvironmentsQueryVariables,
+  type EnvironmentStagedChangesQueryVariables,
   type EnvironmentTriggersDeployMutationVariables,
+  type EstimatedUsageQueryVariables,
   type EventsQueryVariables,
+  type ExternalWorkspacesQueryVariables,
   type FairUseAgreeMutationVariables,
   type FeatureFlagAddMutationVariables,
   type FeatureFlagRemoveMutationVariables,
@@ -284,12 +316,15 @@ import {
   type LoginSessionCancelMutationVariables,
   type LoginSessionConsumeMutationVariables,
   type LoginSessionVerifyMutationVariables,
+  type MetricsQueryVariables,
   type NodeQueryVariables,
   type NodesQueryVariables,
   type ObservabilityDashboardCreateMutationVariables,
   type ObservabilityDashboardResetMutationVariables,
   type ObservabilityDashboardsQueryVariables,
   type ObservabilityDashboardUpdateMutationVariables,
+  type PasskeyDeleteMutationVariables,
+  type PasskeysQueryVariables,
   type PreferenceOverridesCreateUpdateMutationVariables,
   type PreferenceOverridesDestroyForResourceMutationVariables,
   type PreferencesQueryVariables,
@@ -326,6 +361,7 @@ import {
   type ProjectTokenCreateMutationVariables,
   type ProjectTokenDeleteMutationVariables,
   type ProjectTokensQueryVariables,
+  type ProjectTransferMutationVariables,
   type ProjectTransferConfirmMutationVariables,
   type ProjectTransferInitiateMutationVariables,
   type ProjectUpdateMutationVariables,
@@ -333,6 +369,7 @@ import {
   type RecoveryCodeValidateMutationVariables,
   type ReferralInfoQueryVariables,
   type ReferralInfoUpdateMutationVariables,
+  type RegionsQueryVariables,
   type ResourceAccessQueryVariables,
   type ServiceQueryVariables,
   type ServiceConnectMutationVariables,
@@ -349,6 +386,8 @@ import {
   type ServiceInstanceDeployMutationVariables,
   type ServiceInstanceDeployV2MutationVariables,
   type ServiceInstanceIsUpdatableQueryVariables,
+  type ServiceInstanceLimitOverrideQueryVariables,
+  type ServiceInstanceLimitsQueryVariables,
   type ServiceInstanceLimitsUpdateMutationVariables,
   type ServiceInstanceRedeployMutationVariables,
   type ServiceInstanceUpdateMutationVariables,
@@ -369,8 +408,13 @@ import {
   type TemplateServiceSourceEjectMutationVariables,
   type TemplateSourceForProjectQueryVariables,
   type TemplateUnpublishMutationVariables,
+  type TrustedDomainCreateMutationVariables,
+  type TrustedDomainDeleteMutationVariables,
+  type TrustedDomainsQueryVariables,
   type TwoFactorInfoCreateMutationVariables,
   type TwoFactorInfoValidateMutationVariables,
+  type UpsertSlackChannelMutationVariables,
+  type UsageQueryVariables,
   type UsageLimitRemoveMutationVariables,
   type UsageLimitSetMutationVariables,
   type UserFlagsRemoveMutationVariables,
@@ -379,10 +423,12 @@ import {
   type UserProfileUpdateMutationVariables,
   type VariableCollectionUpsertMutationVariables,
   type VariableDeleteMutationVariables,
+  type VariablesQueryVariables,
   type VariablesForServiceDeploymentQueryVariables,
   type VariableUpsertMutationVariables,
   type VolumeCreateMutationVariables,
   type VolumeDeleteMutationVariables,
+  type VolumeInstanceQueryVariables,
   type VolumeInstanceBackupCreateMutationVariables,
   type VolumeInstanceBackupDeleteMutationVariables,
   type VolumeInstanceBackupListQueryVariables,
@@ -398,11 +444,24 @@ import {
   type WebhookUpdateMutationVariables,
   type WorkflowStatusQueryVariables,
   type WorkspaceQueryVariables,
+  type WorkspaceByCodeQueryVariables,
   type WorkspaceDeleteMutationVariables,
+  type WorkspaceInviteCodeCreateMutationVariables,
+  type WorkspaceInviteCodeUseMutationVariables,
   type WorkspaceLeaveMutationVariables,
+  type WorkspacePermissionChangeMutationVariables,
+  type WorkspaceTemplatesQueryVariables,
   type WorkspaceUpdateMutationVariables,
   type WorkspaceUpsertSlackChannelMutationVariables,
+  type WorkspaceUserInviteMutationVariables,
+  type WorkspaceUserRemoveMutationVariables,
 } from './graphql';
+/** Get all volume instances for a given volume */
+export const adminVolumeInstancesForVolume = (client: RailwayClient, request: { variables: AdminVolumeInstancesForVolumeQueryVariables; options?: GraphQLDocumentRequestOptions }) => client.requestDocument(AdminVolumeInstancesForVolumeDocument, request.variables, request?.options);
+
+/** Returns the platform feature flags enabled for the current user */
+export const allPlatformFeatureFlags = (client: RailwayClient, request?: { options?: GraphQLDocumentRequestOptions }) => client.requestDocument(AllPlatformFeatureFlagsDocument, undefined, request?.options);
+
 /** Creates a new API token. */
 export const apiTokenCreate = (client: RailwayClient, request: { variables: ApiTokenCreateMutationVariables; options?: GraphQLDocumentRequestOptions }) => client.requestDocument(ApiTokenCreateDocument, request.variables, request?.options);
 
@@ -529,6 +588,9 @@ export const environmentDelete = (client: RailwayClient, request: { variables: E
 /** Fetch logs for a project environment. Build logs are excluded unless a snapshot ID is explicitly provided in the filter */
 export const environmentLogs = (client: RailwayClient, request: { variables: EnvironmentLogsQueryVariables; options?: GraphQLDocumentRequestOptions }) => client.requestDocument(EnvironmentLogsDocument, request.variables, request?.options);
 
+/** Get a single environment patch by ID */
+export const environmentPatch = (client: RailwayClient, request: { variables: EnvironmentPatchQueryVariables; options?: GraphQLDocumentRequestOptions }) => client.requestDocument(EnvironmentPatchDocument, request.variables, request?.options);
+
 /** Commit the provided patch to the environment. */
 export const environmentPatchCommit = (client: RailwayClient, request: { variables: EnvironmentPatchCommitMutationVariables; options?: GraphQLDocumentRequestOptions }) => client.requestDocument(EnvironmentPatchCommitDocument, request.variables, request?.options);
 
@@ -541,11 +603,20 @@ export const environmentRename = (client: RailwayClient, request: { variables: E
 /** Gets all environments for a project. */
 export const environments = (client: RailwayClient, request: { variables: EnvironmentsQueryVariables; options?: GraphQLDocumentRequestOptions }) => client.requestDocument(EnvironmentsDocument, request.variables, request?.options);
 
+/** Get the latest staged commit for an environment */
+export const environmentStagedChanges = (client: RailwayClient, request: { variables: EnvironmentStagedChangesQueryVariables; options?: GraphQLDocumentRequestOptions }) => client.requestDocument(EnvironmentStagedChangesDocument, request.variables, request?.options);
+
 /** Deploys all connected triggers for an environment. */
 export const environmentTriggersDeploy = (client: RailwayClient, request: { variables: EnvironmentTriggersDeployMutationVariables; options?: GraphQLDocumentRequestOptions }) => client.requestDocument(EnvironmentTriggersDeployDocument, request.variables, request?.options);
 
+/** Get the estimated total cost of a project */
+export const estimatedUsage = (client: RailwayClient, request: { variables: EstimatedUsageQueryVariables; options?: GraphQLDocumentRequestOptions }) => client.requestDocument(EstimatedUsageDocument, request.variables, request?.options);
+
 /** Gets the events for a project. */
 export const events = (client: RailwayClient, request: { variables: EventsQueryVariables; options?: GraphQLDocumentRequestOptions }) => client.requestDocument(EventsDocument, request.variables, request?.options);
+
+/** Get workspaces the user can access externally */
+export const externalWorkspaces = (client: RailwayClient, request?: { variables?: ExternalWorkspacesQueryVariables; options?: GraphQLDocumentRequestOptions }) => client.requestDocument(ExternalWorkspacesDocument, request?.variables, request?.options);
 
 /** Agree to the fair use policy for the currently authenticated user */
 export const fairUseAgree = (client: RailwayClient, request: { variables: FairUseAgreeMutationVariables; options?: GraphQLDocumentRequestOptions }) => client.requestDocument(FairUseAgreeDocument, request.variables, request?.options);
@@ -640,6 +711,9 @@ export const loginSessionVerify = (client: RailwayClient, request: { variables: 
 /** Gets the authenticated user. */
 export const me = (client: RailwayClient, request?: { options?: GraphQLDocumentRequestOptions }) => client.requestDocument(MeDocument, undefined, request?.options);
 
+/** Get metrics for the provided scope */
+export const metrics = (client: RailwayClient, request: { variables: MetricsQueryVariables; options?: GraphQLDocumentRequestOptions }) => client.requestDocument(MetricsDocument, request.variables, request?.options);
+
 export const node = (client: RailwayClient, request: { variables: NodeQueryVariables; options?: GraphQLDocumentRequestOptions }) => client.requestDocument(NodeDocument, request.variables, request?.options);
 
 export const nodes = (client: RailwayClient, request: { variables: NodesQueryVariables; options?: GraphQLDocumentRequestOptions }) => client.requestDocument(NodesDocument, request.variables, request?.options);
@@ -655,6 +729,12 @@ export const observabilityDashboards = (client: RailwayClient, request: { variab
 
 /** Update an observability dashboard */
 export const observabilityDashboardUpdate = (client: RailwayClient, request: { variables: ObservabilityDashboardUpdateMutationVariables; options?: GraphQLDocumentRequestOptions }) => client.requestDocument(ObservabilityDashboardUpdateDocument, request.variables, request?.options);
+
+/** Deletes a Passkey */
+export const passkeyDelete = (client: RailwayClient, request: { variables: PasskeyDeleteMutationVariables; options?: GraphQLDocumentRequestOptions }) => client.requestDocument(PasskeyDeleteDocument, request.variables, request?.options);
+
+/** Gets all passkeys for the authenticated user. */
+export const passkeys = (client: RailwayClient, request?: { variables?: PasskeysQueryVariables; options?: GraphQLDocumentRequestOptions }) => client.requestDocument(PasskeysDocument, request?.variables, request?.options);
 
 /** Get the current status of the platform */
 export const platformStatus = (client: RailwayClient, request?: { options?: GraphQLDocumentRequestOptions }) => client.requestDocument(PlatformStatusDocument, undefined, request?.options);
@@ -770,6 +850,9 @@ export const projectTokenDelete = (client: RailwayClient, request: { variables: 
 /** Get all project tokens for a project */
 export const projectTokens = (client: RailwayClient, request: { variables: ProjectTokensQueryVariables; options?: GraphQLDocumentRequestOptions }) => client.requestDocument(ProjectTokensDocument, request.variables, request?.options);
 
+/** Transfer a project to a workspace */
+export const projectTransfer = (client: RailwayClient, request: { variables: ProjectTransferMutationVariables; options?: GraphQLDocumentRequestOptions }) => client.requestDocument(ProjectTransferDocument, request.variables, request?.options);
+
 /** Confirm the transfer of project ownership */
 export const projectTransferConfirm = (client: RailwayClient, request: { variables: ProjectTransferConfirmMutationVariables; options?: GraphQLDocumentRequestOptions }) => client.requestDocument(ProjectTransferConfirmDocument, request.variables, request?.options);
 
@@ -796,6 +879,9 @@ export const referralInfo = (client: RailwayClient, request: { variables: Referr
 
 /** Updates the ReferralInfo for the authenticated user. */
 export const referralInfoUpdate = (client: RailwayClient, request: { variables: ReferralInfoUpdateMutationVariables; options?: GraphQLDocumentRequestOptions }) => client.requestDocument(ReferralInfoUpdateDocument, request.variables, request?.options);
+
+/** List available regions */
+export const regions = (client: RailwayClient, request?: { variables?: RegionsQueryVariables; options?: GraphQLDocumentRequestOptions }) => client.requestDocument(RegionsDocument, request?.variables, request?.options);
 
 /** Get resource access for the current user or team */
 export const resourceAccess = (client: RailwayClient, request: { variables: ResourceAccessQueryVariables; options?: GraphQLDocumentRequestOptions }) => client.requestDocument(ResourceAccessDocument, request.variables, request?.options);
@@ -844,6 +930,12 @@ export const serviceInstanceDeployV2 = (client: RailwayClient, request: { variab
 
 /** Check if the upstream repo for a service has an update available */
 export const serviceInstanceIsUpdatable = (client: RailwayClient, request: { variables: ServiceInstanceIsUpdatableQueryVariables; options?: GraphQLDocumentRequestOptions }) => client.requestDocument(ServiceInstanceIsUpdatableDocument, request.variables, request?.options);
+
+/** Get the resource limit overrides for a service instance */
+export const serviceInstanceLimitOverride = (client: RailwayClient, request: { variables: ServiceInstanceLimitOverrideQueryVariables; options?: GraphQLDocumentRequestOptions }) => client.requestDocument(ServiceInstanceLimitOverrideDocument, request.variables, request?.options);
+
+/** Get the merged resource limits for a service instance */
+export const serviceInstanceLimits = (client: RailwayClient, request: { variables: ServiceInstanceLimitsQueryVariables; options?: GraphQLDocumentRequestOptions }) => client.requestDocument(ServiceInstanceLimitsDocument, request.variables, request?.options);
 
 /** Update the resource limits for a service instance */
 export const serviceInstanceLimitsUpdate = (client: RailwayClient, request: { variables: ServiceInstanceLimitsUpdateMutationVariables; options?: GraphQLDocumentRequestOptions }) => client.requestDocument(ServiceInstanceLimitsUpdateDocument, request.variables, request?.options);
@@ -908,6 +1000,15 @@ export const templateSourceForProject = (client: RailwayClient, request: { varia
 /** Unpublishes a template. */
 export const templateUnpublish = (client: RailwayClient, request: { variables: TemplateUnpublishMutationVariables; options?: GraphQLDocumentRequestOptions }) => client.requestDocument(TemplateUnpublishDocument, request.variables, request?.options);
 
+/** Create a new trusted domain for a workspace */
+export const trustedDomainCreate = (client: RailwayClient, request: { variables: TrustedDomainCreateMutationVariables; options?: GraphQLDocumentRequestOptions }) => client.requestDocument(TrustedDomainCreateDocument, request.variables, request?.options);
+
+/** Delete a trusted domain */
+export const trustedDomainDelete = (client: RailwayClient, request: { variables: TrustedDomainDeleteMutationVariables; options?: GraphQLDocumentRequestOptions }) => client.requestDocument(TrustedDomainDeleteDocument, request.variables, request?.options);
+
+/** Get all trusted domains for a workspace */
+export const trustedDomains = (client: RailwayClient, request: { variables: TrustedDomainsQueryVariables; options?: GraphQLDocumentRequestOptions }) => client.requestDocument(TrustedDomainsDocument, request.variables, request?.options);
+
 /** Gets the TwoFactorInfo for the authenticated user. */
 export const twoFactorInfo = (client: RailwayClient, request?: { options?: GraphQLDocumentRequestOptions }) => client.requestDocument(TwoFactorInfoDocument, undefined, request?.options);
 
@@ -922,6 +1023,12 @@ export const twoFactorInfoSecret = (client: RailwayClient, request?: { options?:
 
 /** Validates the token for a 2FA action or for a login request. */
 export const twoFactorInfoValidate = (client: RailwayClient, request: { variables: TwoFactorInfoValidateMutationVariables; options?: GraphQLDocumentRequestOptions }) => client.requestDocument(TwoFactorInfoValidateDocument, request.variables, request?.options);
+
+/** Generate a Slack channel for a workspace */
+export const upsertSlackChannel = (client: RailwayClient, request: { variables: UpsertSlackChannelMutationVariables; options?: GraphQLDocumentRequestOptions }) => client.requestDocument(UpsertSlackChannelDocument, request.variables, request?.options);
+
+/** Get aggregated usage for a project or workspace */
+export const usage = (client: RailwayClient, request: { variables: UsageQueryVariables; options?: GraphQLDocumentRequestOptions }) => client.requestDocument(UsageDocument, request.variables, request?.options);
 
 /** Remove the usage limit for a customer */
 export const usageLimitRemove = (client: RailwayClient, request: { variables: UsageLimitRemoveMutationVariables; options?: GraphQLDocumentRequestOptions }) => client.requestDocument(UsageLimitRemoveDocument, request.variables, request?.options);
@@ -959,6 +1066,9 @@ export const variableCollectionUpsert = (client: RailwayClient, request: { varia
 /** Deletes a variable. */
 export const variableDelete = (client: RailwayClient, request: { variables: VariableDeleteMutationVariables; options?: GraphQLDocumentRequestOptions }) => client.requestDocument(VariableDeleteDocument, request.variables, request?.options);
 
+/** Get environment variables for a project or service */
+export const variables = (client: RailwayClient, request: { variables: VariablesQueryVariables; options?: GraphQLDocumentRequestOptions }) => client.requestDocument(VariablesDocument, request.variables, request?.options);
+
 /** All rendered variables that are required for a service deployment. */
 export const variablesForServiceDeployment = (client: RailwayClient, request: { variables: VariablesForServiceDeploymentQueryVariables; options?: GraphQLDocumentRequestOptions }) => client.requestDocument(VariablesForServiceDeploymentDocument, request.variables, request?.options);
 
@@ -973,6 +1083,9 @@ export const volumeCreate = (client: RailwayClient, request: { variables: Volume
 
 /** Delete a persistent volume in a project */
 export const volumeDelete = (client: RailwayClient, request: { variables: VolumeDeleteMutationVariables; options?: GraphQLDocumentRequestOptions }) => client.requestDocument(VolumeDeleteDocument, request.variables, request?.options);
+
+/** Get a single volume instance by ID */
+export const volumeInstance = (client: RailwayClient, request: { variables: VolumeInstanceQueryVariables; options?: GraphQLDocumentRequestOptions }) => client.requestDocument(VolumeInstanceDocument, request.variables, request?.options);
 
 /** Create backup of a volume instance */
 export const volumeInstanceBackupCreate = (client: RailwayClient, request: { variables: VolumeInstanceBackupCreateMutationVariables; options?: GraphQLDocumentRequestOptions }) => client.requestDocument(VolumeInstanceBackupCreateDocument, request.variables, request?.options);
@@ -1019,14 +1132,35 @@ export const workflowStatus = (client: RailwayClient, request: { variables: Work
 /** Get the workspace */
 export const workspace = (client: RailwayClient, request: { variables: WorkspaceQueryVariables; options?: GraphQLDocumentRequestOptions }) => client.requestDocument(WorkspaceDocument, request.variables, request?.options);
 
+/** Find a workspace by invite code */
+export const workspaceByCode = (client: RailwayClient, request: { variables: WorkspaceByCodeQueryVariables; options?: GraphQLDocumentRequestOptions }) => client.requestDocument(WorkspaceByCodeDocument, request.variables, request?.options);
+
 /** Delete a workspace and all data associated with it */
 export const workspaceDelete = (client: RailwayClient, request: { variables: WorkspaceDeleteMutationVariables; options?: GraphQLDocumentRequestOptions }) => client.requestDocument(WorkspaceDeleteDocument, request.variables, request?.options);
 
+/** Get an invite code for a workspace and role */
+export const workspaceInviteCodeCreate = (client: RailwayClient, request: { variables: WorkspaceInviteCodeCreateMutationVariables; options?: GraphQLDocumentRequestOptions }) => client.requestDocument(WorkspaceInviteCodeCreateDocument, request.variables, request?.options);
+
+/** Use an invite code to join a workspace */
+export const workspaceInviteCodeUse = (client: RailwayClient, request: { variables: WorkspaceInviteCodeUseMutationVariables; options?: GraphQLDocumentRequestOptions }) => client.requestDocument(WorkspaceInviteCodeUseDocument, request.variables, request?.options);
+
 /** Leave a workspace */
 export const workspaceLeave = (client: RailwayClient, request: { variables: WorkspaceLeaveMutationVariables; options?: GraphQLDocumentRequestOptions }) => client.requestDocument(WorkspaceLeaveDocument, request.variables, request?.options);
+
+/** Change permissions for a user in a workspace */
+export const workspacePermissionChange = (client: RailwayClient, request: { variables: WorkspacePermissionChangeMutationVariables; options?: GraphQLDocumentRequestOptions }) => client.requestDocument(WorkspacePermissionChangeDocument, request.variables, request?.options);
+
+/** Get all templates for a workspace */
+export const workspaceTemplates = (client: RailwayClient, request: { variables: WorkspaceTemplatesQueryVariables; options?: GraphQLDocumentRequestOptions }) => client.requestDocument(WorkspaceTemplatesDocument, request.variables, request?.options);
 
 /** Update a workspace by id */
 export const workspaceUpdate = (client: RailwayClient, request: { variables: WorkspaceUpdateMutationVariables; options?: GraphQLDocumentRequestOptions }) => client.requestDocument(WorkspaceUpdateDocument, request.variables, request?.options);
 
 /** Generate a Slack channel for a workspace */
 export const workspaceUpsertSlackChannel = (client: RailwayClient, request: { variables: WorkspaceUpsertSlackChannelMutationVariables; options?: GraphQLDocumentRequestOptions }) => client.requestDocument(WorkspaceUpsertSlackChannelDocument, request.variables, request?.options);
+
+/** Invite a user by email to a workspace */
+export const workspaceUserInvite = (client: RailwayClient, request: { variables: WorkspaceUserInviteMutationVariables; options?: GraphQLDocumentRequestOptions }) => client.requestDocument(WorkspaceUserInviteDocument, request.variables, request?.options);
+
+/** Remove a user from a workspace */
+export const workspaceUserRemove = (client: RailwayClient, request: { variables: WorkspaceUserRemoveMutationVariables; options?: GraphQLDocumentRequestOptions }) => client.requestDocument(WorkspaceUserRemoveDocument, request.variables, request?.options);
