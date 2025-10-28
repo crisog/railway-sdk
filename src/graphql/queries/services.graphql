@@ -1,0 +1,34 @@
+# Get services for a project
+query services(
+  $projectId: String!
+  $after: String
+  $before: String
+  $first: Int
+  $last: Int
+) {
+  project(id: $projectId) {
+    id
+    services(after: $after, before: $before, first: $first, last: $last) {
+      edges {
+        cursor
+        node {
+          id
+          name
+          icon
+          createdAt
+          updatedAt
+          deletedAt
+          projectId
+          templateServiceId
+          templateThreadSlug
+        }
+      }
+      pageInfo {
+        hasNextPage
+        hasPreviousPage
+        startCursor
+        endCursor
+      }
+    }
+  }
+}

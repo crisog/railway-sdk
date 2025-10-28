@@ -166,6 +166,7 @@ import {
   ServiceInstanceRedeployDocument,
   ServiceInstanceUpdateDocument,
   ServiceRemoveUpstreamUrlDocument,
+  ServicesDocument,
   ServiceUpdateDocument,
   SessionDeleteDocument,
   SessionsDocument,
@@ -392,6 +393,7 @@ import {
   type ServiceInstanceRedeployMutationVariables,
   type ServiceInstanceUpdateMutationVariables,
   type ServiceRemoveUpstreamUrlMutationVariables,
+  type ServicesQueryVariables,
   type ServiceUpdateMutationVariables,
   type SessionDeleteMutationVariables,
   type SessionsQueryVariables,
@@ -948,6 +950,9 @@ export const serviceInstanceUpdate = (client: RailwayClient, request: { variable
 
 /** Remove the upstream URL from all service instances for this service */
 export const serviceRemoveUpstreamUrl = (client: RailwayClient, request: { variables: ServiceRemoveUpstreamUrlMutationVariables; options?: GraphQLDocumentRequestOptions }) => client.requestDocument(ServiceRemoveUpstreamUrlDocument, request.variables, request?.options);
+
+/** Get services for a project */
+export const services = (client: RailwayClient, request: { variables: ServicesQueryVariables; options?: GraphQLDocumentRequestOptions }) => client.requestDocument(ServicesDocument, request.variables, request?.options);
 
 /** Updates a service. */
 export const serviceUpdate = (client: RailwayClient, request: { variables: ServiceUpdateMutationVariables; options?: GraphQLDocumentRequestOptions }) => client.requestDocument(ServiceUpdateDocument, request.variables, request?.options);

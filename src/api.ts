@@ -280,6 +280,7 @@ const namespaceShape = {
   },
   services: {
     get: operations.service,
+    list: operations.services,
     create: operations.serviceCreate,
     update: operations.serviceUpdate,
     delete: operations.serviceDelete,
