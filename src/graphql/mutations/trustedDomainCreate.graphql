@@ -1,0 +1,4 @@
+# Create a new trusted domain for a workspace
+mutation trustedDomainCreate($input: WorkspaceTrustedDomainCreateInput!) {
+  trustedDomainCreate(input: $input)
+}

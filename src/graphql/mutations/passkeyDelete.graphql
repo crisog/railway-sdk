@@ -1,0 +1,4 @@
+# Deletes a Passkey
+mutation passkeyDelete($id: String!) {
+  passkeyDelete(id: $id)
+}

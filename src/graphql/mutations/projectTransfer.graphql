@@ -1,0 +1,4 @@
+# Transfer a project to a workspace
+mutation projectTransfer($input: ProjectTransferInput!, $projectId: String!) {
+  projectTransfer(input: $input, projectId: $projectId)
+}

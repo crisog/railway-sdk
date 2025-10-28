@@ -1,0 +1,22 @@
+# Use an invite code to join a workspace
+mutation workspaceInviteCodeUse($code: String!) {
+  workspaceInviteCodeUse(code: $code) {
+    __typename
+    adoptionLevel
+    allowDeprecatedRegions
+    createdAt
+    id
+    name
+    plan
+    preferredRegion
+    subscriptionModel
+    updatedAt
+    # adoptionHistory
+    # apiTokenRateLimit
+    # customer
+    # members
+    # projects
+    # referredUsers
+    # team
+  }
+}

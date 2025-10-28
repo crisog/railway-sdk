@@ -1,0 +1,4 @@
+# Invite a user by email to a workspace
+mutation workspaceUserInvite($input: WorkspaceUserInviteInput!, $workspaceId: String!) {
+  workspaceUserInvite(input: $input, workspaceId: $workspaceId)
+}

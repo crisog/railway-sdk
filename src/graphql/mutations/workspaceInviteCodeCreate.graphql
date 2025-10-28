@@ -1,0 +1,4 @@
+# Get an invite code for a workspace and role
+mutation workspaceInviteCodeCreate($input: WorkspaceInviteCodeCreateInput!, $workspaceId: String!) {
+  workspaceInviteCodeCreate(input: $input, workspaceId: $workspaceId)
+}

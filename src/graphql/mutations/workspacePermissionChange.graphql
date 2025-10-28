@@ -1,0 +1,4 @@
+# Change permissions for a user in a workspace
+mutation workspacePermissionChange($input: WorkspacePermissionChangeInput!) {
+  workspacePermissionChange(input: $input)
+}

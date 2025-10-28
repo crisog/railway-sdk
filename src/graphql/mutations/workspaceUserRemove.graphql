@@ -1,0 +1,4 @@
+# Remove a user from a workspace
+mutation workspaceUserRemove($input: WorkspaceUserRemoveInput!, $workspaceId: String!) {
+  workspaceUserRemove(input: $input, workspaceId: $workspaceId)
+}

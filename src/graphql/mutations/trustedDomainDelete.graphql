@@ -1,0 +1,4 @@
+# Delete a trusted domain
+mutation trustedDomainDelete($id: String!) {
+  trustedDomainDelete(id: $id)
+}
