@@ -1,0 +1,14 @@
+# Get all templates for a workspace
+query workspaceTemplates($after: String, $before: String, $first: Int, $last: Int, $workspaceId: String!) {
+  workspaceTemplates(
+    after: $after
+    before: $before
+    first: $first
+    last: $last
+    workspaceId: $workspaceId
+  ) {
+    __typename
+    # edges
+    # pageInfo
+  }
+}

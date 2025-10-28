@@ -1,0 +1,10 @@
+# Returns the platform feature flags enabled for the current user
+query allPlatformFeatureFlags {
+  allPlatformFeatureFlags {
+    __typename
+    flag
+    rolloutPercentage
+    status
+    type
+  }
+}

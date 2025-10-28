@@ -1,0 +1,28 @@
+# Get aggregated usage for a project or workspace
+query usage($endDate: DateTime, $groupBy: [MetricTag!], $includeDeleted: Boolean, $measurements: [MetricMeasurement!]!, $projectId: String, $startDate: DateTime, $workspaceId: String) {
+  usage(
+    endDate: $endDate
+    groupBy: $groupBy
+    includeDeleted: $includeDeleted
+    measurements: $measurements
+    projectId: $projectId
+    startDate: $startDate
+    workspaceId: $workspaceId
+  ) {
+    __typename
+    measurement
+    tags {
+      __typename
+      deploymentId
+      deploymentInstanceId
+      environmentId
+      pluginId
+      projectId
+      region
+      serviceId
+      volumeId
+      volumeInstanceId
+    }
+    value
+  }
+}

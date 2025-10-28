@@ -1,0 +1,8 @@
+# Gets all passkeys for the authenticated user.
+query passkeys($after: String, $before: String, $first: Int, $last: Int) {
+  passkeys(after: $after, before: $before, first: $first, last: $last) {
+    __typename
+    # edges
+    # pageInfo
+  }
+}

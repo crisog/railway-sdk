@@ -1,0 +1,14 @@
+# Get all trusted domains for a workspace
+query trustedDomains($after: String, $before: String, $first: Int, $last: Int, $workspaceId: String!) {
+  trustedDomains(
+    after: $after
+    before: $before
+    first: $first
+    last: $last
+    workspaceId: $workspaceId
+  ) {
+    __typename
+    # edges
+    # pageInfo
+  }
+}

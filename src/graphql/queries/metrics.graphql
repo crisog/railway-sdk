@@ -1,0 +1,52 @@
+# Get metrics for the provided scope
+query metrics(
+  $averagingWindowSeconds: Int
+  $endDate: DateTime
+  $environmentId: String
+  $groupBy: [MetricTag!]
+  $includeDeleted: Boolean
+  $measurements: [MetricMeasurement!]!
+  $projectId: String
+  $sampleRateSeconds: Int
+  $serviceId: String
+  $startDate: DateTime!
+  $volumeId: String
+  $volumeInstanceExternalId: String
+  $workspaceId: String
+) {
+  metrics(
+    averagingWindowSeconds: $averagingWindowSeconds
+    endDate: $endDate
+    environmentId: $environmentId
+    groupBy: $groupBy
+    includeDeleted: $includeDeleted
+    measurements: $measurements
+    projectId: $projectId
+    sampleRateSeconds: $sampleRateSeconds
+    serviceId: $serviceId
+    startDate: $startDate
+    volumeId: $volumeId
+    volumeInstanceExternalId: $volumeInstanceExternalId
+    workspaceId: $workspaceId
+  ) {
+    __typename
+    measurement
+    tags {
+      __typename
+      deploymentId
+      deploymentInstanceId
+      environmentId
+      pluginId
+      projectId
+      region
+      serviceId
+      volumeId
+      volumeInstanceId
+    }
+    values {
+      __typename
+      ts
+      value
+    }
+  }
+}

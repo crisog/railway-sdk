@@ -1,0 +1,4 @@
+# Get the merged resource limits for a service instance
+query serviceInstanceLimits($environmentId: String!, $serviceId: String!) {
+  serviceInstanceLimits(environmentId: $environmentId, serviceId: $serviceId)
+}

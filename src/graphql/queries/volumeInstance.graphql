@@ -1,0 +1,20 @@
+# Get a single volume instance by ID
+query volumeInstance($id: String!) {
+  volumeInstance(id: $id) {
+    __typename
+    createdAt
+    currentSizeMB
+    environmentId
+    externalId
+    id
+    mountPath
+    region
+    serviceId
+    sizeMB
+    state
+    volumeId
+    # environment
+    # service
+    # volume
+  }
+}

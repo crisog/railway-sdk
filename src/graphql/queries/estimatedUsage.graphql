@@ -1,0 +1,14 @@
+# Get the estimated total cost of a project
+query estimatedUsage($includeDeleted: Boolean, $measurements: [MetricMeasurement!]!, $projectId: String, $workspaceId: String) {
+  estimatedUsage(
+    includeDeleted: $includeDeleted
+    measurements: $measurements
+    projectId: $projectId
+    workspaceId: $workspaceId
+  ) {
+    __typename
+    estimatedValue
+    measurement
+    projectId
+  }
+}

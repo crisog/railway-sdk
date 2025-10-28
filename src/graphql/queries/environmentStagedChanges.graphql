@@ -1,0 +1,16 @@
+# Get the latest staged commit for an environment
+query environmentStagedChanges($environmentId: String!) {
+  environmentStagedChanges(environmentId: $environmentId) {
+    __typename
+    appliedAt
+    # appliedBy
+    createdAt
+    environmentId
+    id
+    lastAppliedError
+    message
+    status
+    updatedAt
+    # environment
+  }
+}

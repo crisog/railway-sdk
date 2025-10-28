@@ -1,0 +1,9 @@
+# Get environment variables for a project or service
+query variables($environmentId: String!, $projectId: String!, $serviceId: String, $unrendered: Boolean) {
+  variables(
+    environmentId: $environmentId
+    projectId: $projectId
+    serviceId: $serviceId
+    unrendered: $unrendered
+  )
+}

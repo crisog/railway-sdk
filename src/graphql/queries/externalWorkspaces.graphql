@@ -1,0 +1,22 @@
+# Get workspaces the user can access externally
+query externalWorkspaces($projectId: String) {
+  externalWorkspaces(projectId: $projectId) {
+    __typename
+    allowDeprecatedRegions
+    avatar
+    createdAt
+    customerState
+    hasBAA
+    id
+    isTrialing
+    name
+    plan
+    preferredRegion
+    teamId
+    # banReason
+    # customerId
+    # discordRole
+    # projects
+    # supportTierOverride
+  }
+}

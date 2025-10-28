@@ -1,0 +1,4 @@
+# Get the resource limit overrides for a service instance
+query serviceInstanceLimitOverride($environmentId: String!, $serviceId: String!) {
+  serviceInstanceLimitOverride(environmentId: $environmentId, serviceId: $serviceId)
+}

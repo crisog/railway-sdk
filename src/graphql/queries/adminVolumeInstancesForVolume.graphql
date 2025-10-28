@@ -1,0 +1,20 @@
+# Get all volume instances for a given volume
+query adminVolumeInstancesForVolume($volumeId: String!) {
+  adminVolumeInstancesForVolume(volumeId: $volumeId) {
+    __typename
+    createdAt
+    currentSizeMB
+    environmentId
+    externalId
+    id
+    mountPath
+    region
+    serviceId
+    sizeMB
+    state
+    volumeId
+    # environment
+    # service
+    # volume
+  }
+}

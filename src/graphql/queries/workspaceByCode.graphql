@@ -1,0 +1,22 @@
+# Find a workspace by invite code
+query workspaceByCode($code: String!) {
+  workspaceByCode(code: $code) {
+    __typename
+    adoptionLevel
+    allowDeprecatedRegions
+    createdAt
+    id
+    name
+    plan
+    preferredRegion
+    subscriptionModel
+    updatedAt
+    # adoptionHistory
+    # apiTokenRateLimit
+    # customer
+    # members
+    # projects
+    # referredUsers
+    # team
+  }
+}

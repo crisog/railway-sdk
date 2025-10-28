@@ -1,0 +1,13 @@
+# List available regions
+query regions($projectId: String) {
+  regions(projectId: $projectId) {
+    __typename
+    country
+    location
+    name
+    railwayMetal
+    region
+    workspaceId
+    # deploymentConstraints
+  }
+}
