@@ -1,5 +1,5 @@
 {
-  "name": "railway-sdk",
+  "name": "@crisog/railway-sdk",
   "module": "./src/index.ts",
   "type": "module",
   "types": "./src/index.ts",
