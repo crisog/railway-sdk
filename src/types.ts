@@ -11,6 +11,7 @@ export interface RetryContext {
   attempt: number;
   error: unknown;
   response?: Response;
+  signal?: GraphQLRequestSignal;
 }
 
 export interface RetryOptions {

@@ -6,6 +6,7 @@ import type {
   GraphQLRequestOptions,
   GraphQLResponse,
   RailwayClientOptions,
+  GraphQLRequestSignal,
   RetryContext,
   RetryOptions,
 } from './types';
@@ -90,20 +91,24 @@ export class RailwayClient {
     const retryOptions = options.retry ?? this.retryOptions;
     const signal = options.signal;
 
-    return executeWithRetry<TData>(async () => {
-      const requestInit: RequestInit = {
-        method: 'POST',
-        headers,
-        body,
-      };
+    return executeWithRetry<TData>(
+      async () => {
+        const requestInit: RequestInit = {
+          method: 'POST',
+          headers,
+          body,
+        };
 
-      if (signal) {
-        requestInit.signal = signal as unknown as AbortSignal;
-      }
+        if (signal) {
+          requestInit.signal = signal as unknown as AbortSignal;
+        }
 
-      const response = await fetchImpl(this.endpoint, requestInit);
-      return parseResponse<TData>(response);
-    }, retryOptions);
+        const response = await fetchImpl(this.endpoint, requestInit);
+        return parseResponse<TData>(response);
+      },
+      retryOptions,
+      signal,
+    );
   }
 
   async requestDocument<TData = unknown, TVariables = Record<string, unknown>>(
@@ -128,6 +133,7 @@ export class RailwayClient {
 const executeWithRetry = async <T>(
   operation: () => Promise<T>,
   retryOptions?: RetryOptions,
+  signal?: GraphQLRequestSignal,
 ): Promise<T> => {
   const config = retryOptions && retryOptions.maxAttempts > 0 ? retryOptions : undefined;
   const maxAttempts = config?.maxAttempts && config.maxAttempts > 0 ? config.maxAttempts : 1;
@@ -146,11 +152,13 @@ const executeWithRetry = async <T>(
         response: error instanceof GraphQLRequestError ? error.response : undefined,
       };
 
-      if (config.shouldRetry) {
-        const shouldRetry = await config.shouldRetry(context);
-        if (!shouldRetry) {
-          throw error;
-        }
+      if (signal) {
+        context.signal = signal;
+      }
+
+      const shouldRetry = await evaluateRetry(config, context, signal);
+      if (!shouldRetry) {
+        throw error;
       }
 
       await config.onRetry?.(context);
@@ -239,6 +247,38 @@ const parseResponse = async <TData>(response: Response): Promise<TData> => {
 
 const delay = async (duration: number): Promise<void> => {
   await new Promise((resolve) => setTimeout(resolve, duration));
+};
+
+const evaluateRetry = async (
+  config: RetryOptions,
+  context: RetryContext,
+  signal?: GraphQLRequestSignal,
+): Promise<boolean> => {
+  if (isAbortError(context.error) || signal?.aborted) {
+    return false;
+  }
+
+  if (config.shouldRetry) {
+    return Boolean(await config.shouldRetry(context));
+  }
+
+  return false;
+};
+
+const isAbortError = (error: unknown): boolean => {
+  if (!error) {
+    return false;
+  }
+
+  if (typeof DOMException !== 'undefined' && error instanceof DOMException) {
+    return error.name === 'AbortError';
+  }
+
+  if (error instanceof Error) {
+    return error.name === 'AbortError';
+  }
+
+  return false;
 };
 
 const inferOperationName = <TData, TVariables>(
