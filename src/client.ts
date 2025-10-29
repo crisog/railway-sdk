@@ -137,11 +137,13 @@ const executeWithRetry = async <T>(
 ): Promise<T> => {
   const config = retryOptions && retryOptions.maxAttempts > 0 ? retryOptions : undefined;
   const maxAttempts = config?.maxAttempts && config.maxAttempts > 0 ? config.maxAttempts : 1;
+  let lastError: unknown;
 
   for (let attempt = 1; attempt <= maxAttempts; attempt += 1) {
     try {
       return await operation();
     } catch (error) {
+      lastError = error;
       if (!config || attempt >= maxAttempts) {
         throw error;
       }
@@ -172,7 +174,7 @@ const executeWithRetry = async <T>(
     }
   }
 
-  throw new Error('Retry attempts exhausted without completing request.');
+  throw lastError ?? new Error('Retry attempts exhausted without completing request.');
 };
 
 const parseResponse = async <TData>(response: Response): Promise<TData> => {
