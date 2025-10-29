@@ -1,75 +1,136 @@
-# railway-sdk
+# Railway SDK
 
-A lightweight TypeScript SDK and tooling for Railway's public GraphQL API.
+A lightweight TypeScript SDK and tooling around Railway's public GraphQL API. It ships a minimal client, generated operation helpers, and scripts that keep local documents aligned with the platform schema.
 
-## Getting Started
+## Installation
 
-Install dependencies with Bun:
-
-```bash
-bun install
-```
-
-### Generating the GraphQL Schema
-
-The SDK relies on an introspection dump of the Railway schema. Before running code generation, set one of the supported tokens in your environment:
-
-- `RAILWAY_API_TOKEN` for personal/account tokens
-- `RAILWAY_TEAM_TOKEN` for team tokens
-- `RAILWAY_PROJECT_TOKEN` for project tokens
-
-Then run:
+Install the package together with your preferred package manager:
 
 ```bash
-bun run codegen:introspect
+npm install @crisog/railway-sdk
 ```
 
-This command fetches the schema from `https://backboard.railway.com/graphql/v2` and writes a minified introspection JSON file to `schema/railway-introspection.json`.
-It also generates typed operation artifacts in `src/generated/graphql.ts` for every document in `src/graphql/`.
+## Authentication
 
-### Generating Operation Documents
-
-Railway ships a Postman/Insomnia collection (`railway_graphql_collection.json`) that contains ready-made operations. Use the helper script to materialise `.graphql` files:
+Most operations require an API token. You can pass the token directly when constructing a client or rely on the built‑in environment discovery:
 
 ```bash
-# Generate a subset of operations
-bun run generate:operations -- --only=me,apiTokenCreate
-
-# Regenerate all operations and overwrite existing files
-bun run generate:operations -- --force
+export RAILWAY_API_TOKEN=rw_acc_...
 ```
 
-Documents are written to `src/graphql/queries` and `src/graphql/mutations`, keyed by their operation names. The generator validates each document against the current introspection dump and skips anything the active schema no longer supports. Re-run `bun run codegen:introspect` after adding or regenerating documents.
+Supported environment variables, in lookup order:
 
-### Emitting TypeScript Wrappers
+1. `RAILWAY_API_TOKEN` (account / personal tokens)
+2. `RAILWAY_TEAM_TOKEN`
+3. `RAILWAY_PROJECT_TOKEN`
 
-After updating operations and regenerating types, create strongly-typed helpers in `src/operations/generated.ts`:
+If no token is discovered, the helpers throw `MissingTokenError`.
 
-```bash
-bun run generate:wrappers
-```
-
-This script introspects each `.graphql` document, derives the correct `TypedDocumentNode` import from `src/generated/graphql.ts`, and emits a thin wrapper that calls `client.requestDocument`. The generated helpers feed the namespaced SDK surface (e.g. `client.projects.create`) and are also re-exported from the package root for granular imports when you prefer direct access.
-
-### Using the Client
-
-Create a `RailwayClient` and use the namespaced helpers:
+## Quick Start
 
 ```ts
-import { RailwayClient } from 'railway-sdk';
+import { createRailwayFromEnv } from '@crisog/railway-sdk';
 
-const client = RailwayClient.fromEnv();
+const railway = createRailwayFromEnv();
 
-const meData = await client.account.me();
-const newToken = await client.apiTokens.create({
-  variables: { input: { name: 'CI Token', workspaceId: 'workspace_123' } },
+const { me } = await railway.account.me();
+console.log(`Logged in as ${me.email}`);
+```
+
+`createRailwayFromEnv` and `createRailway` provide two ways to initialise the same namespaced API surface (`railway.projects.list`, `railway.account.me`, etc.).
+
+- Use `createRailwayFromEnv()` when your Railway token lives in environment variables. You can pass extra client options (custom headers, retries, fetch) via the optional argument.
+- Use `createRailway(options)` when you need to supply the token programmatically (for example, when pulling it from a secret store).
+
+```ts
+import { createRailway } from '@crisog/railway-sdk';
+
+const railway = createRailway({
+  token: myToken,
+  tokenType: 'team',
 });
 ```
 
-Every GraphQL document under `src/graphql` is surfaced both through the namespaced client and as the original async function exports in `src/operations/generated.ts`. Each helper enforces the correct variables type and accepts optional `GraphQLDocumentRequestOptions`.
+## Generated Operations
 
-The client automatically determines the appropriate authentication header for account, team, and project tokens.
+The SDK re-exports every generated wrapper from `src/generated/operations.ts`. You can cherry‑pick individual helpers if you prefer tree-shaken imports:
 
----
+```ts
+import { createRailwayFromEnv, projects } from '@crisog/railway-sdk';
 
-This project runs on Bun v1.2.13. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
+const railway = createRailwayFromEnv();
+const result = await projects(railway.client, {
+  variables: { first: 5 },
+});
+```
+
+Each helper enforces the correct variables shape and accepts optional `GraphQLDocumentRequestOptions` (custom headers, alternate `fetch`, abort signals, retry configuration, …).
+
+## Retries & Cancellation
+
+Pass retry configuration through the creation helpers:
+
+```ts
+const railway = createRailwayFromEnv({
+  retry: {
+    maxAttempts: 3,
+    shouldRetry: ({ error, response }) => response?.status >= 500 || error instanceof TypeError, // network errors
+    delayMs: (attempt) => attempt * 250,
+  },
+});
+```
+
+Retries never run by default. `shouldRetry` must return `true` to trigger another attempt. Aborted requests (AbortController, `signal.aborted`, etc.) are never retried and bubble the original abort error back to the caller.
+
+## Error Handling
+
+- Transport or GraphQL-level failures throw `GraphQLRequestError`. Inspect `error.response`, `error.body`, or `error.rawBody` for more details.
+- Missing or empty tokens throw `MissingTokenError`.
+- The low-level helpers propagate any other runtime errors (JSON parsing, fetch failures, abort signals).
+
+## Code Generation Workflow
+
+The repository includes scripts for keeping schema artifacts and wrappers in sync:
+
+1. **Fetch the latest schema**
+
+   ```bash
+   bun run codegen:introspect
+   ```
+
+   Requires a valid token; writes `schema/railway-introspection.json` and regenerates `src/generated/graphql.ts`.
+
+2. **Emit typed wrappers**
+
+   ```bash
+   bun run generate:wrappers
+   ```
+
+   Produces `src/generated/operations.ts`, which powers the namespaced API surface.
+
+Run both commands whenever the upstream schema changes or after adding/editing `.graphql` documents under `src/graphql/`.
+
+## Examples
+
+Example scripts live under `examples/`. Execute them with Bun:
+
+```bash
+bun run examples/me.ts
+```
+
+Available scripts:
+
+- `examples/me.ts` – basic authenticated call using the high-level API.
+- `examples/projects.ts` – list the first few projects with pagination variables.
+
+Feel free to copy these as starting points for your own tooling.
+
+## Development
+
+```bash
+bun install
+bun run lint
+bun run typecheck
+```
+
+Bun 1.2+ is recommended. The project enforces strict TypeScript options; run formatting/linting before submitting changes.

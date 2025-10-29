@@ -6,7 +6,7 @@ async function main() {
 
   // Use the high-level API
   const { me } = await railway.account.me();
-  console.log(me.agreedFairUse);
+  console.log(`Logged in as ${me.email}`);
 
   // Advanced: Access the underlying client for custom GraphQL queries
   // const customData = await railway.client.request({ query: '...' });
