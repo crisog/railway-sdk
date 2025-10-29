@@ -18,6 +18,8 @@
     "@graphql-codegen/typescript-operations": "^5.0.2",
     "@graphql-typed-document-node/core": "^3.2.0",
     "@types/bun": "latest",
+    "@semantic-release/github": "^10.3.3",
+    "@semantic-release/npm": "^11.0.3",
     "@typescript-eslint/eslint-plugin": "^8.45.0",
     "@typescript-eslint/parser": "^8.45.0",
     "eslint": "^9.37.0",
@@ -26,6 +28,7 @@
     "husky": "^9.1.7",
     "lint-staged": "^16.1.5",
     "prettier": "3.6.2",
+    "semantic-release": "^24.2.3",
     "typescript-eslint": "^8.45.0"
   },
   "peerDependencies": {
@@ -37,7 +40,8 @@
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "format": "prettier --write .",
-    "prepare": "node .husky/install.mjs"
+    "prepare": "node .husky/install.mjs",
+    "release": "semantic-release"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
