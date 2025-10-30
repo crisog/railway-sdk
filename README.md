@@ -54,6 +54,35 @@ const railway = createRailway({
 });
 ```
 
+## Supported Namespaced Methods
+
+Both helpers return a `Railway` client with these namespaces. Use them to discover what each part of the API can do:
+
+| Namespace | Summary |
+| --- | --- |
+| `projects` | Cover the full project lifecycle: CRUD, membership, invitations, feature flags, schedules, tokens, access checks, and workflows. |
+| `services` | Manage services and deployments, including instance operations, domains, feature flags, and runtimes. |
+| `deployments` | Inspect and operate deployments: approvals, retries, logs/events, triggers, and snapshots. |
+| `domains` | Work with custom domains attached to Railway services. |
+| `account` | Manage the authenticated account: profile, email updates, invites, flags, beta access, terms, and deletion. |
+| `environments` | Manage environment lifecycle, logs, configuration patches, and deploy triggers. |
+| `networking` | Administer private networks, endpoints, egress gateways, nodes, and TCP proxies. |
+| `templates` | Discover, clone, generate, publish, or delete templates (including project sources). |
+| `volumes` | Create, update, delete volumes, and administer backups and schedules. |
+| `variables` | Upsert and manage variables, collections, and shared configurations. |
+| `auth` | Handle login sessions, recovery codes, active sessions, and two-factor authentication flows. |
+| `apiTokens` | Create, list, and revoke personal API tokens. |
+| `billing` | Control customer subscriptions, referral info, usage limits, and fair use acknowledgements. |
+| `integrations` | Configure third-party integrations (GitHub, Heroku, Vercel, providers) and their auth records. |
+| `observability` | Access platform observability dashboards, logs, and events. |
+| `preferences` | Retrieve and update user preferences plus per-resource overrides. |
+| `webhooks` | Create, update, delete, and list project webhooks. |
+| `workspaces` | Inspect and update workspaces, leave/delete them, and configure Slack channels. |
+| `misc` | Miscellaneous public platform endpoints such as changelog assets and status. |
+
+
+> Refer to `src/api.ts` for the precise helper mapping and regenerate wrappers after schema or document changes (`bun run generate:wrappers`).
+
 ## Generated Operations
 
 The SDK re-exports every generated wrapper from `src/generated/operations.ts`. You can cherry‑pick individual helpers if you prefer tree-shaken imports:
