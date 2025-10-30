@@ -17,6 +17,9 @@
     "README.md",
     "LICENSE"
   ],
+  "engines": {
+    "node": ">=20.19.0"
+  },
   "devDependencies": {
     "@eslint/js": "^9.37.0",
     "@graphql-codegen/cli": "^6.0.1",
@@ -32,7 +35,6 @@
     "@semantic-release/npm": "^11.0.3",
     "@typescript-eslint/eslint-plugin": "^8.45.0",
     "@typescript-eslint/parser": "^8.45.0",
-    "esbuild": "^0.25.1",
     "eslint": "^9.37.0",
     "eslint-config-prettier": "^9.1.0",
     "graphql": "^16.11.0",
@@ -40,6 +42,7 @@
     "lint-staged": "^16.1.5",
     "prettier": "3.6.2",
     "semantic-release": "^24.2.3",
+    "tsdown": "^0.15.12",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.45.0"
   },
@@ -47,7 +50,7 @@
     "typescript": "^5.9.3"
   },
   "scripts": {
-    "build": "bun run scripts/build.ts && tsc --project tsconfig.build.json",
+    "build": "tsdown",
     "codegen:introspect": "graphql-codegen --config codegen.ts",
     "generate:wrappers": "bun scripts/generate-wrappers.ts",
     "lint": "eslint .",

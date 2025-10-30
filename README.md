@@ -10,6 +10,9 @@ Install the package together with your preferred package manager:
 npm install @crisog/railway-sdk
 ```
 
+> **Note**  
+> The SDK is published as ESM-only. Import it using `import`/dynamic `import()`; CommonJS `require()` is not supported.
+
 ## Authentication
 
 Most operations require an API token. You can pass the token directly when constructing a client or rely on the built‑in environment discovery:
