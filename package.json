@@ -18,6 +18,8 @@
     "@graphql-codegen/typescript-operations": "^5.0.2",
     "@graphql-typed-document-node/core": "^3.2.0",
     "@types/bun": "latest",
+    "@commitlint/cli": "^19.5.0",
+    "@commitlint/config-conventional": "^19.5.0",
     "@semantic-release/github": "^10.3.3",
     "@semantic-release/npm": "^11.0.3",
     "@typescript-eslint/eslint-plugin": "^8.45.0",
@@ -41,13 +43,16 @@
     "typecheck": "tsc --noEmit",
     "format": "prettier --write .",
     "prepare": "node .husky/install.mjs",
+    "commitlint": "commitlint",
     "release": "semantic-release"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
       "eslint --fix",
-      "prettier --write",
-      "tsc --noEmit"
+      "prettier --write"
+    ],
+    "*.{ts,tsx}": [
+      "bash -c 'tsc --noEmit'"
     ]
   }
 }
