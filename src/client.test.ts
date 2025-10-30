@@ -13,10 +13,9 @@ type FetchInit = FetchParams[1];
 
 const createFetchMock = (
   implementation: (input: FetchInput, init?: FetchInit) => Promise<Response>,
-) => {
+): typeof fetch => {
   const fn = mock(implementation);
-  Object.assign(fn, { preconnect: mock(async () => false) });
-  return fn;
+  return Object.assign(fn, { preconnect: mock(async () => false) }) as unknown as typeof fetch;
 };
 
 const createClient = (overrides: Omit<RailwayClientOptions, 'token'>): RailwayClient =>
@@ -80,7 +79,7 @@ describe('RailwayClient', () => {
     });
 
     const client = createClient({
-      fetch: fetchMock as unknown as typeof fetch,
+      fetch: fetchMock,
       endpoint: TEST_ENDPOINT,
     });
 
@@ -104,7 +103,7 @@ describe('RailwayClient', () => {
     });
 
     const client = createClient({
-      fetch: fetchMock as unknown as typeof fetch,
+      fetch: fetchMock,
       endpoint: TEST_ENDPOINT,
     });
 
@@ -147,7 +146,7 @@ describe('RailwayClient', () => {
     );
 
     const client = createClient({
-      fetch: fetchMock as unknown as typeof fetch,
+      fetch: fetchMock,
       endpoint: TEST_ENDPOINT,
     });
 
@@ -179,7 +178,7 @@ describe('RailwayClient', () => {
     const onRetry = mock(async () => undefined);
 
     const client = createClient({
-      fetch: fetchMock as unknown as typeof fetch,
+      fetch: fetchMock,
       endpoint: TEST_ENDPOINT,
       retry: {
         maxAttempts: 2,
@@ -209,7 +208,7 @@ describe('RailwayClient', () => {
     });
 
     const client = RailwayClient.fromEnv({
-      fetch: fetchMock as unknown as typeof fetch,
+      fetch: fetchMock,
       endpoint: TEST_ENDPOINT,
     });
     const result = await client.request({ query: '{ __typename }' });
