@@ -89,6 +89,8 @@ import {
   MetricsDocument,
   NodeDocument,
   NodesDocument,
+  NotificationDeliveriesDocument,
+  NotificationDeliveriesMarkAsReadDocument,
   ObservabilityDashboardCreateDocument,
   ObservabilityDashboardResetDocument,
   ObservabilityDashboardsDocument,
@@ -230,6 +232,7 @@ import {
   WorkspaceDocument,
   WorkspaceByCodeDocument,
   WorkspaceDeleteDocument,
+  WorkspaceIdentityProvidersDocument,
   WorkspaceInviteCodeCreateDocument,
   WorkspaceInviteCodeUseDocument,
   WorkspaceLeaveDocument,
@@ -320,6 +323,8 @@ import {
   type MetricsQueryVariables,
   type NodeQueryVariables,
   type NodesQueryVariables,
+  type NotificationDeliveriesQueryVariables,
+  type NotificationDeliveriesMarkAsReadMutationVariables,
   type ObservabilityDashboardCreateMutationVariables,
   type ObservabilityDashboardResetMutationVariables,
   type ObservabilityDashboardsQueryVariables,
@@ -448,6 +453,7 @@ import {
   type WorkspaceQueryVariables,
   type WorkspaceByCodeQueryVariables,
   type WorkspaceDeleteMutationVariables,
+  type WorkspaceIdentityProvidersQueryVariables,
   type WorkspaceInviteCodeCreateMutationVariables,
   type WorkspaceInviteCodeUseMutationVariables,
   type WorkspaceLeaveMutationVariables,
@@ -719,6 +725,12 @@ export const metrics = (client: RailwayClient, request: { variables: MetricsQuer
 export const node = (client: RailwayClient, request: { variables: NodeQueryVariables; options?: GraphQLDocumentRequestOptions }) => client.requestDocument(NodeDocument, request.variables, request?.options);
 
 export const nodes = (client: RailwayClient, request: { variables: NodesQueryVariables; options?: GraphQLDocumentRequestOptions }) => client.requestDocument(NodesDocument, request.variables, request?.options);
+
+/** Gets notification deliveries for the authenticated user */
+export const notificationDeliveries = (client: RailwayClient, request?: { variables?: NotificationDeliveriesQueryVariables; options?: GraphQLDocumentRequestOptions }) => client.requestDocument(NotificationDeliveriesDocument, request?.variables, request?.options);
+
+/** Marks notification deliveries as read */
+export const notificationDeliveriesMarkAsRead = (client: RailwayClient, request: { variables: NotificationDeliveriesMarkAsReadMutationVariables; options?: GraphQLDocumentRequestOptions }) => client.requestDocument(NotificationDeliveriesMarkAsReadDocument, request.variables, request?.options);
 
 /** Create an observability dashboard */
 export const observabilityDashboardCreate = (client: RailwayClient, request: { variables: ObservabilityDashboardCreateMutationVariables; options?: GraphQLDocumentRequestOptions }) => client.requestDocument(ObservabilityDashboardCreateDocument, request.variables, request?.options);
@@ -1142,6 +1154,9 @@ export const workspaceByCode = (client: RailwayClient, request: { variables: Wor
 
 /** Delete a workspace and all data associated with it */
 export const workspaceDelete = (client: RailwayClient, request: { variables: WorkspaceDeleteMutationVariables; options?: GraphQLDocumentRequestOptions }) => client.requestDocument(WorkspaceDeleteDocument, request.variables, request?.options);
+
+/** Gets all identity providers of a workspace */
+export const workspaceIdentityProviders = (client: RailwayClient, request: { variables: WorkspaceIdentityProvidersQueryVariables; options?: GraphQLDocumentRequestOptions }) => client.requestDocument(WorkspaceIdentityProvidersDocument, request.variables, request?.options);
 
 /** Get an invite code for a workspace and role */
 export const workspaceInviteCodeCreate = (client: RailwayClient, request: { variables: WorkspaceInviteCodeCreateMutationVariables; options?: GraphQLDocumentRequestOptions }) => client.requestDocument(WorkspaceInviteCodeCreateDocument, request.variables, request?.options);

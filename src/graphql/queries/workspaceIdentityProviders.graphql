@@ -1,0 +1,44 @@
+# Gets all identity providers of a workspace
+query workspaceIdentityProviders(
+  $workspaceId: String!
+  $after: String
+  $before: String
+  $first: Int
+  $last: Int
+) {
+  workspaceIdentityProviders(
+    workspaceId: $workspaceId
+    after: $after
+    before: $before
+    first: $first
+    last: $last
+  ) {
+    __typename
+    edges {
+      __typename
+      cursor
+      node {
+        __typename
+        id
+        createdAt
+        updatedAt
+        workspaceId
+        enforcementEnabledAt
+        connection {
+          __typename
+          provider
+          status
+          createdAt
+          updatedAt
+        }
+      }
+    }
+    pageInfo {
+      __typename
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      endCursor
+    }
+  }
+}

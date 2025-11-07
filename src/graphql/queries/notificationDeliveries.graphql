@@ -1,0 +1,57 @@
+# Gets notification deliveries for the authenticated user
+query notificationDeliveries(
+  $after: String
+  $before: String
+  $first: Int
+  $last: Int
+  $filter: NotificationDeliveryFilterInput
+) {
+  notificationDeliveries(
+    after: $after
+    before: $before
+    first: $first
+    last: $last
+    filter: $filter
+  ) {
+    __typename
+    edges {
+      __typename
+      cursor
+      node {
+        __typename
+        id
+        createdAt
+        readAt
+        status
+        type
+        updatedAt
+        userId
+        notificationInstance {
+          __typename
+          id
+          createdAt
+          environmentId
+          eventId
+          eventType
+          projectId
+          resolvedAt
+          resourceId
+          resourceType
+          serviceId
+          severity
+          status
+          updatedAt
+          volumeId
+          workspaceId
+        }
+      }
+    }
+    pageInfo {
+      __typename
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      endCursor
+    }
+  }
+}

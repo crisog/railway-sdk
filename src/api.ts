@@ -204,6 +204,10 @@ const namespaceShape = {
       list: operations.nodes,
     },
   },
+  notifications: {
+    deliveries: operations.notificationDeliveries,
+    markAsRead: operations.notificationDeliveriesMarkAsRead,
+  },
   observability: {
     dashboards: {
       create: operations.observabilityDashboardCreate,
@@ -368,6 +372,7 @@ const namespaceShape = {
     delete: operations.workspaceDelete,
     leave: operations.workspaceLeave,
     upsertSlackChannel: operations.workspaceUpsertSlackChannel,
+    identityProviders: operations.workspaceIdentityProviders,
   },
   misc: {
     changelogBlockImage: operations.changelogBlockImage,

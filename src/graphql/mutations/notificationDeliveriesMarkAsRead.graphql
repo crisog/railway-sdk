@@ -1,0 +1,4 @@
+# Marks notification deliveries as read
+mutation notificationDeliveriesMarkAsRead($deliveryIds: [String!]!) {
+  notificationDeliveriesMarkAsRead(deliveryIds: $deliveryIds)
+}
