@@ -25,6 +25,18 @@ query me {
     termsAgreedOn
     username
     # workspace
-    # workspaces # Workspaces user is member of
+    workspaces {
+      __typename
+      id
+      name
+      avatar
+      createdAt
+      preferredRegion
+      subscriptionModel
+      supportTierOverride
+      banReason
+      discordRole
+      slackChannelId
+    }
   }
 }
