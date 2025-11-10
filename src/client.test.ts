@@ -2,7 +2,8 @@ import { afterEach, describe, expect, mock, test } from 'bun:test';
 import { Kind } from 'graphql';
 import type { TypedDocumentNode } from '@graphql-typed-document-node/core';
 
-import { GraphQLRequestError, RailwayClient } from './client';
+import { RailwayClient } from './client';
+import { GraphQLRequestError } from './errors';
 import type { RailwayClientOptions } from './types';
 
 const TEST_ENDPOINT = 'https://example.com/graphql';
@@ -89,7 +90,12 @@ describe('RailwayClient', () => {
       operationName: 'CustomOp',
     });
 
-    expect(result).toEqual({ ok: true });
+    expect(result.isOk()).toBe(true);
+    if (result.isErr()) {
+      throw result.error;
+    }
+
+    expect(result.value).toEqual({ ok: true });
     expect(fetchMock).toHaveBeenCalledTimes(1);
   });
 
@@ -133,7 +139,12 @@ describe('RailwayClient', () => {
     } as unknown as TypedDocumentNode<{ test: string }, { id: string }>;
 
     const result = await client.requestDocument(document, { id: '123' });
-    expect(result).toEqual({ test: 'value' });
+    expect(result.isOk()).toBe(true);
+    if (result.isErr()) {
+      throw result.error;
+    }
+
+    expect(result.value).toEqual({ test: 'value' });
     expect(fetchMock).toHaveBeenCalledTimes(1);
   });
 
@@ -150,15 +161,14 @@ describe('RailwayClient', () => {
       endpoint: TEST_ENDPOINT,
     });
 
-    let caught: unknown;
-    try {
-      await client.request({ query: '{ __typename }' });
-    } catch (error) {
-      caught = error;
+    const result = await client.request({ query: '{ __typename }' });
+    expect(result.isErr()).toBe(true);
+    if (result.isOk()) {
+      throw new Error('Expected GraphQLRequestError');
     }
 
-    expect(caught).toBeInstanceOf(GraphQLRequestError);
-    const graphError = caught as GraphQLRequestError;
+    const graphError = result.error;
+    expect(graphError).toBeInstanceOf(GraphQLRequestError);
     expect(graphError.body?.errors?.[0]?.message).toBe('Boom!');
     expect(fetchMock).toHaveBeenCalledTimes(1);
   });
@@ -189,7 +199,12 @@ describe('RailwayClient', () => {
 
     const result = await client.request({ query: '{ __typename }' });
 
-    expect(result).toEqual({ ok: true });
+    expect(result.isOk()).toBe(true);
+    if (result.isErr()) {
+      throw result.error;
+    }
+
+    expect(result.value).toEqual({ ok: true });
     expect(fetchMock).toHaveBeenCalledTimes(2);
     expect(shouldRetry).toHaveBeenCalledTimes(1);
     expect(onRetry).toHaveBeenCalledTimes(1);
@@ -213,7 +228,12 @@ describe('RailwayClient', () => {
     });
     const result = await client.request({ query: '{ __typename }' });
 
-    expect(result).toEqual({ ok: true });
+    expect(result.isOk()).toBe(true);
+    if (result.isErr()) {
+      throw result.error;
+    }
+
+    expect(result.value).toEqual({ ok: true });
     expect(fetchMock).toHaveBeenCalledTimes(1);
   });
 });

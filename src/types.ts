@@ -1,5 +1,6 @@
 import type { GraphQLError } from 'graphql';
 import type { TokenType } from './auth';
+import type { GraphQLRequestError } from './errors';
 
 export interface GraphQLRequestSignal {
   readonly aborted: boolean;
@@ -9,7 +10,7 @@ export interface GraphQLRequestSignal {
 
 export interface RetryContext {
   attempt: number;
-  error: unknown;
+  error: GraphQLRequestError;
   response?: Response;
   signal?: GraphQLRequestSignal;
 }

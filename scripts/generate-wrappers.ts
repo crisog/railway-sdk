@@ -132,10 +132,12 @@ const generateFile = async (operations: OperationMeta[]): Promise<void> => {
   const sorted = operations.sort((a, b) => a.name.localeCompare(b.name));
 
   const documentImports = new Set<string>();
+  const dataTypeImports = new Set<string>();
   const variableTypeImports = new Set<string>();
 
   for (const op of sorted) {
     documentImports.add(op.documentName);
+    dataTypeImports.add(op.dataTypeName);
     if (op.variablesTypeName) {
       variableTypeImports.add(op.variablesTypeName);
     }
@@ -144,10 +146,13 @@ const generateFile = async (operations: OperationMeta[]): Promise<void> => {
   const header = [
     `import { RailwayClient } from '../client';`,
     `import type { GraphQLDocumentRequestOptions } from '../types';`,
+    `import type { ResultAsync } from 'neverthrow';`,
+    `import type { GraphQLRequestError } from '../errors';`,
     `import {`,
-    ...Array.from(documentImports)
-      .map((name) => `  ${name},`)
-      .concat(Array.from(variableTypeImports).map((typeName) => `  type ${typeName},`)),
+    ...Array.from(documentImports).map((name) => `  ${name},`),
+    ...Array.from(new Set<string>([...dataTypeImports, ...variableTypeImports])).map(
+      (typeName) => `  type ${typeName},`,
+    ),
     `} from './graphql';`,
     '',
   ].join('\n');
@@ -162,7 +167,8 @@ const generateFile = async (operations: OperationMeta[]): Promise<void> => {
 
       const params = buildParameters(op);
       const call = buildCallExpression(op);
-      lines.push(`export const ${op.functionName} = (${params}) => ${call};`);
+      const returnType = buildReturnType(op);
+      lines.push(`export const ${op.functionName} = (${params}): ${returnType} => ${call};`);
       return lines.join('\n');
     })
     .join('\n\n');
@@ -203,6 +209,9 @@ const buildCallExpression = (operation: OperationMeta): string => {
 
   return `${baseCall}, request?.variables, request?.options)`;
 };
+
+const buildReturnType = (operation: OperationMeta): string =>
+  `ResultAsync<${operation.dataTypeName}, GraphQLRequestError>`;
 
 async function main(): Promise<void> {
   const files = await collectGraphQLFiles(GRAPHQL_ROOT);

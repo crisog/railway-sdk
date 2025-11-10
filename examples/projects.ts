@@ -3,7 +3,7 @@ import { createRailwayFromEnv } from '../src/index';
 async function main() {
   const railway = createRailwayFromEnv();
 
-  const { projects } = await railway.projects.list({
+  const projectsResult = await railway.projects.list({
     variables: {
       after: null,
       before: null,
@@ -14,6 +14,12 @@ async function main() {
       workspaceId: null,
     },
   });
+
+  if (projectsResult.isErr()) {
+    throw projectsResult.error;
+  }
+
+  const { projects } = projectsResult.value;
 
   for (const edge of projects.edges) {
     console.log(`${edge.node.id} – ${edge.node.name}`);
