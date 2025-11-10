@@ -69,5 +69,8 @@
     "*.{ts,tsx}": [
       "bash -c 'tsc --noEmit'"
     ]
+  },
+  "dependencies": {
+    "neverthrow": "^8.2.0"
   }
 }

@@ -1,5 +1,6 @@
 import { print, Kind, type OperationDefinitionNode } from 'graphql';
 import type { TypedDocumentNode } from '@graphql-typed-document-node/core';
+import { err, ok, ResultAsync } from 'neverthrow';
 import { MissingTokenError, requireTokenFromEnv, resolveAuthHeader, type TokenType } from './auth';
 import type {
   GraphQLDocumentRequestOptions,
@@ -10,21 +11,17 @@ import type {
   RetryContext,
   RetryOptions,
 } from './types';
+import {
+  GraphQLRequestError,
+  NetworkError,
+  NotFoundError,
+  PermissionError,
+  ValidationError,
+} from './errors';
+
+export { GraphQLRequestError } from './errors';
 
 const DEFAULT_ENDPOINT = 'https://backboard.railway.com/graphql/v2';
-
-export class GraphQLRequestError extends Error {
-  constructor(
-    message: string,
-    readonly response: Response,
-    readonly body: GraphQLResponse<unknown> | null,
-    readonly rawBody?: string,
-    options?: ErrorOptions,
-  ) {
-    super(message, options);
-    this.name = 'GraphQLRequestError';
-  }
-}
 
 export class RailwayClient {
   static fromEnv(partialOptions: Omit<Partial<RailwayClientOptions>, 'token'> = {}): RailwayClient {
@@ -73,9 +70,9 @@ export class RailwayClient {
     };
   }
 
-  async request<TData = unknown, TVariables = Record<string, unknown>>(
+  request<TData = unknown, TVariables = Record<string, unknown>>(
     options: GraphQLRequestOptions<TVariables>,
-  ): Promise<TData> {
+  ): ResultAsync<TData, GraphQLRequestError> {
     const headers = {
       ...this.baseHeaders,
       ...options.headers,
@@ -92,30 +89,33 @@ export class RailwayClient {
     const signal = options.signal;
 
     return executeWithRetry<TData>(
-      async () => {
-        const requestInit: RequestInit = {
-          method: 'POST',
-          headers,
-          body,
-        };
+      () =>
+        ResultAsync.fromPromise(
+          (async () => {
+            const requestInit: RequestInit = {
+              method: 'POST',
+              headers,
+              body,
+            };
 
-        if (signal) {
-          requestInit.signal = signal as unknown as AbortSignal;
-        }
+            if (signal) {
+              requestInit.signal = signal as unknown as AbortSignal;
+            }
 
-        const response = await fetchImpl(this.endpoint, requestInit);
-        return parseResponse<TData>(response);
-      },
+            return fetchImpl(this.endpoint, requestInit);
+          })(),
+          (error) => toNetworkError(error),
+        ).andThen((response) => parseResponse<TData>(response)),
       retryOptions,
       signal,
     );
   }
 
-  async requestDocument<TData = unknown, TVariables = Record<string, unknown>>(
+  requestDocument<TData = unknown, TVariables = Record<string, unknown>>(
     document: TypedDocumentNode<TData, TVariables>,
     variables?: TVariables,
     options: GraphQLDocumentRequestOptions = {},
-  ): Promise<TData> {
+  ): ResultAsync<TData, GraphQLRequestError> {
     const operationName = inferOperationName(document);
 
     return this.request<TData, TVariables>({
@@ -130,28 +130,33 @@ export class RailwayClient {
   }
 }
 
-const executeWithRetry = async <T>(
-  operation: () => Promise<T>,
+const executeWithRetry = <T>(
+  operation: () => ResultAsync<T, GraphQLRequestError>,
   retryOptions?: RetryOptions,
   signal?: GraphQLRequestSignal,
-): Promise<T> => {
+): ResultAsync<T, GraphQLRequestError> => {
   const config = retryOptions && retryOptions.maxAttempts > 0 ? retryOptions : undefined;
   const maxAttempts = config?.maxAttempts && config.maxAttempts > 0 ? config.maxAttempts : 1;
-  let lastError: unknown;
 
-  for (let attempt = 1; attempt <= maxAttempts; attempt += 1) {
-    try {
-      return await operation();
-    } catch (error) {
-      lastError = error;
+  const runner = async (): Promise<T> => {
+    let lastError: GraphQLRequestError | undefined;
+
+    for (let attempt = 1; attempt <= maxAttempts; attempt += 1) {
+      const result = await operation();
+      if (result.isOk()) {
+        return result.value;
+      }
+
+      lastError = result.error;
+
       if (!config || attempt >= maxAttempts) {
-        throw error;
+        throw lastError;
       }
 
       const context: RetryContext = {
         attempt,
-        error,
-        response: error instanceof GraphQLRequestError ? error.response : undefined,
+        error: lastError,
+        response: lastError.response,
       };
 
       if (signal) {
@@ -160,7 +165,7 @@ const executeWithRetry = async <T>(
 
       const shouldRetry = await evaluateRetry(config, context, signal);
       if (!shouldRetry) {
-        throw error;
+        throw lastError;
       }
 
       await config.onRetry?.(context);
@@ -172,79 +177,144 @@ const executeWithRetry = async <T>(
         await delay(delayValue);
       }
     }
-  }
 
-  throw lastError ?? new Error('Retry attempts exhausted without completing request.');
+    throw (
+      lastError ?? new GraphQLRequestError('Retry attempts exhausted without completing request.')
+    );
+  };
+
+  return ResultAsync.fromPromise(runner(), (error) =>
+    error instanceof GraphQLRequestError
+      ? error
+      : new GraphQLRequestError(
+          error instanceof Error ? error.message : 'Request failed.',
+          undefined,
+          null,
+          undefined,
+          error instanceof Error ? { cause: error } : undefined,
+        ),
+  );
 };
 
-const parseResponse = async <TData>(response: Response): Promise<TData> => {
-  let rawBody: string | undefined;
+const parseResponse = <TData>(response: Response): ResultAsync<TData, GraphQLRequestError> =>
+  ResultAsync.fromPromise(
+    response.text(),
+    (error) =>
+      new GraphQLRequestError(
+        'Failed to read response body.',
+        response,
+        null,
+        undefined,
+        error instanceof Error ? { cause: error } : undefined,
+      ),
+  ).andThen((rawBody) => {
+    if (!rawBody) {
+      const message = response.statusText || 'GraphQL response did not include data.';
+      return err(new GraphQLRequestError(message, response, null, rawBody));
+    }
 
-  try {
-    rawBody = await response.text();
-  } catch (error) {
-    throw new GraphQLRequestError(
-      'Failed to read response body.',
-      response,
-      null,
-      undefined,
-      error instanceof Error ? { cause: error } : undefined,
-    );
+    let payload: GraphQLResponse<TData> | null = null;
+
+    try {
+      payload = JSON.parse(rawBody) as GraphQLResponse<TData>;
+    } catch (error) {
+      return err(
+        new GraphQLRequestError(
+          'Failed to parse JSON response body.',
+          response,
+          null,
+          rawBody,
+          error instanceof Error ? { cause: error } : undefined,
+        ),
+      );
+    }
+
+    if (!payload || typeof payload !== 'object') {
+      return err(
+        new GraphQLRequestError(
+          'GraphQL response body was not a valid GraphQL payload.',
+          response,
+          null,
+          rawBody,
+        ),
+      );
+    }
+
+    const normalizedPayload = payload as GraphQLResponse<TData>;
+    const hasGraphQLErrors =
+      Array.isArray(normalizedPayload.errors) && normalizedPayload.errors.length > 0;
+
+    if (!response.ok || hasGraphQLErrors) {
+      return err(categorizeError(response, normalizedPayload, rawBody));
+    }
+
+    if (normalizedPayload.data === undefined) {
+      return err(
+        new GraphQLRequestError(
+          'GraphQL response did not include data.',
+          response,
+          normalizedPayload,
+          rawBody,
+        ),
+      );
+    }
+
+    return ok(normalizedPayload.data);
+  });
+
+const categorizeError = (
+  response: Response,
+  payload: GraphQLResponse<unknown> | null,
+  rawBody?: string,
+): GraphQLRequestError => {
+  const message = buildErrorMessage(response, payload);
+
+  if (response.status === 404) {
+    return new NotFoundError(message, response, payload, rawBody);
   }
 
-  if (!rawBody) {
-    const message = response.statusText || 'GraphQL response did not include data.';
-    throw new GraphQLRequestError(message, response, null, rawBody);
+  if (response.status === 400) {
+    return new ValidationError(message, response, payload, rawBody);
   }
 
-  let payload: GraphQLResponse<TData> | null = null;
-
-  try {
-    payload = JSON.parse(rawBody) as GraphQLResponse<TData>;
-  } catch (error) {
-    throw new GraphQLRequestError(
-      'Failed to parse JSON response body.',
-      response,
-      null,
-      rawBody,
-      error instanceof Error ? { cause: error } : undefined,
-    );
+  if (response.status === 401 || response.status === 403) {
+    return new PermissionError(message, response, payload, rawBody);
   }
 
-  if (!payload || typeof payload !== 'object') {
-    throw new GraphQLRequestError(
-      'GraphQL response body was not a valid GraphQL payload.',
-      response,
-      null,
-      rawBody,
-    );
+  if (response.status === 0) {
+    return new NetworkError(message, response, payload, rawBody);
   }
 
-  const normalizedPayload = payload as GraphQLResponse<TData>;
-  const hasGraphQLErrors =
-    Array.isArray(normalizedPayload.errors) && normalizedPayload.errors.length > 0;
+  return new GraphQLRequestError(message, response, payload, rawBody);
+};
 
-  if (!response.ok || hasGraphQLErrors) {
-    const message =
-      (normalizedPayload.errors && normalizedPayload.errors.length > 0
-        ? normalizedPayload.errors.map((error) => error.message).join('\n')
-        : undefined) ||
-      response.statusText ||
-      'GraphQL request failed.';
+const buildErrorMessage = (
+  response: Response,
+  payload: GraphQLResponse<unknown> | null,
+): string => {
+  const graphqlMessage =
+    payload?.errors && payload.errors.length > 0
+      ? payload.errors.map((error) => error.message).join('\n')
+      : undefined;
 
-    throw new GraphQLRequestError(message, response, normalizedPayload, rawBody);
+  return graphqlMessage || response.statusText || 'GraphQL request failed.';
+};
+
+const toNetworkError = (error: unknown): GraphQLRequestError => {
+  if (error instanceof GraphQLRequestError) {
+    return error;
   }
 
-  if (normalizedPayload.data === undefined) {
-    throw new GraphQLRequestError(
-      'GraphQL response did not include data.',
-      response,
-      normalizedPayload,
-      rawBody,
-    );
-  }
+  const message =
+    error instanceof Error && error.message ? error.message : 'Network request failed.';
 
-  return normalizedPayload.data;
+  return new NetworkError(
+    message,
+    undefined,
+    null,
+    undefined,
+    error instanceof Error ? { cause: error } : undefined,
+  );
 };
 
 const delay = async (duration: number): Promise<void> => {

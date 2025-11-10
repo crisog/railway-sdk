@@ -124,11 +124,19 @@ describe('Railway namespace', () => {
     expect(railway.client).toBeInstanceOf(RailwayClient);
 
     const meResult = await railway.account.me();
-    expect(meResult.me.email).toBe('user@example.com');
+    expect(meResult.isOk()).toBe(true);
+    if (meResult.isErr()) {
+      throw meResult.error;
+    }
+    expect(meResult.value.me.email).toBe('user@example.com');
 
     const projectsResult = await railway.projects.list({ variables: projectListVariables });
-    expect(projectsResult.projects.edges).toHaveLength(1);
-    expect(projectsResult.projects.edges[0]?.node.name).toBe('Test Project');
+    expect(projectsResult.isOk()).toBe(true);
+    if (projectsResult.isErr()) {
+      throw projectsResult.error;
+    }
+    expect(projectsResult.value.projects.edges).toHaveLength(1);
+    expect(projectsResult.value.projects.edges[0]?.node.name).toBe('Test Project');
 
     expect(operations).toEqual(['me', 'projects']);
     expect(fetchMock).toHaveBeenCalledTimes(2);

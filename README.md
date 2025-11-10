@@ -36,14 +36,21 @@ import { createRailwayFromEnv } from '@crisog/railway-sdk';
 
 const railway = createRailwayFromEnv();
 
-const { me } = await railway.account.me();
-console.log(`Logged in as ${me.email}`);
+const meResult = await railway.account.me();
+
+if (meResult.isErr()) {
+  throw meResult.error;
+}
+
+console.log(`Logged in as ${meResult.value.me.email}`);
 ```
 
 `createRailwayFromEnv` and `createRailway` provide two ways to initialise the same namespaced API surface (`railway.projects.list`, `railway.account.me`, etc.).
 
 - Use `createRailwayFromEnv()` when your Railway token lives in environment variables. You can pass extra client options (custom headers, retries, fetch) via the optional argument.
 - Use `createRailway(options)` when you need to supply the token programmatically (for example, when pulling it from a secret store).
+
+Every generated helper returns `ResultAsync<TData, GraphQLRequestError>`. Awaiting the helper yields a `Result`; branch with `.isOk()` / `.isErr()`, `unwrapOr`, or `.match()` to handle success and failure explicitly.
 
 ```ts
 import { createRailway } from '@crisog/railway-sdk';
@@ -116,9 +123,19 @@ Retries never run by default. `shouldRetry` must return `true` to trigger anothe
 
 ## Error Handling
 
-- Transport or GraphQL-level failures throw `GraphQLRequestError`. Inspect `error.response`, `error.body`, or `error.rawBody` for more details.
-- Missing or empty tokens throw `MissingTokenError`.
-- The low-level helpers propagate any other runtime errors (JSON parsing, fetch failures, abort signals).
+- Generated operations resolve to `ResultAsync<TData, GraphQLRequestError>`. The `Err` variant includes `GraphQLRequestError` (or subclasses such as `NetworkError`, `NotFoundError`, `PermissionError`, `ValidationError`).
+- Inspect `error.response`, `error.body`, or `error.rawBody` on the error instance for full context.
+- Missing or empty tokens still throw `MissingTokenError` during client construction.
+
+## Response Utilities
+
+The SDK ships a few helpers that build on `neverthrow` results:
+
+- `unwrapField(result, 'field')` – ensures the top-level field exists before returning it.
+- `unwrapArray(result, 'field')` – validates the field is an array.
+- `unwrapNested(result, ['path', 'to', 'field'])` – walks nested objects safely.
+
+All helpers preserve the original error type when the upstream result is `Err`, and produce a `ResponseFieldError` when the requested field is missing.
 
 ## Code Generation Workflow
 

@@ -1,4 +1,11 @@
-export { GraphQLRequestError, RailwayClient } from './client';
+export { RailwayClient } from './client';
+export {
+  GraphQLRequestError,
+  NotFoundError,
+  PermissionError,
+  ValidationError,
+  NetworkError,
+} from './errors';
 export { createRailway, createRailwayFromEnv, type Railway } from './railway';
 export { createRailwayApi, type RailwayApi } from './api';
 export {
@@ -17,4 +24,5 @@ export {
   TOKEN_ENV_PRIORITY,
 } from './auth';
 export type { TokenType, EnvToken } from './auth';
+export { unwrapField, unwrapArray, unwrapNested, ResponseFieldError } from './response';
 export * from './generated/operations';
