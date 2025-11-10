@@ -1,5 +1,9 @@
 {
   "name": "@crisog/railway-sdk",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/crisog/railway-sdk"
+  },
   "version": "0.0.3",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
