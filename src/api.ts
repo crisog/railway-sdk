@@ -346,6 +346,7 @@ const namespaceShape = {
     update: operations.volumeUpdate,
     delete: operations.volumeDelete,
     instance: {
+      get: operations.volumeInstance,
       update: operations.volumeInstanceUpdate,
       backups: {
         create: operations.volumeInstanceBackupCreate,

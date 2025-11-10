@@ -16,6 +16,23 @@ query environment($id: String!) {
     unmergedChangesCount
     updatedAt
     # variables
-    # volumeInstances
+    volumeInstances {
+      edges {
+        node {
+          __typename
+          id
+          environmentId
+          volumeId
+          mountPath
+          state
+          createdAt
+          currentSizeMB
+          sizeMB
+          region
+          serviceId
+          externalId
+        }
+      }
+    }
   }
 }
