@@ -28,6 +28,10 @@ const namespaceShape = {
   },
   account: {
     me: operations.me,
+    passkeys: {
+      list: operations.passkeys,
+      delete: operations.passkeyDelete,
+    },
     email: {
       initiateChange: operations.emailChangeInitiate,
       confirmChange: operations.emailChangeConfirm,
@@ -141,6 +145,8 @@ const namespaceShape = {
     delete: operations.environmentDelete,
     rename: operations.environmentRename,
     logs: operations.environmentLogs,
+    patch: operations.environmentPatch,
+    stagedChanges: operations.environmentStagedChanges,
     patches: {
       list: operations.environmentPatches,
       commit: operations.environmentPatchCommit,
@@ -220,6 +226,11 @@ const namespaceShape = {
       http: operations.httpLogs,
       build: operations.buildLogs,
     },
+    metrics: operations.metrics,
+    usage: {
+      get: operations.usage,
+      estimated: operations.estimatedUsage,
+    },
   },
   preferences: {
     get: operations.preferences,
@@ -240,6 +251,7 @@ const namespaceShape = {
     transfer: {
       initiate: operations.projectTransferInitiate,
       confirm: operations.projectTransferConfirm,
+      transfer: operations.projectTransfer,
     },
     docker: {
       composeImport: operations.dockerComposeImport,
@@ -306,7 +318,9 @@ const namespaceShape = {
       deploy: operations.serviceInstanceDeploy,
       deployV2: operations.serviceInstanceDeployV2,
       isUpdatable: operations.serviceInstanceIsUpdatable,
+      limits: operations.serviceInstanceLimits,
       limitsUpdate: operations.serviceInstanceLimitsUpdate,
+      limitOverride: operations.serviceInstanceLimitOverride,
       redeploy: operations.serviceInstanceRedeploy,
       update: operations.serviceInstanceUpdate,
     },
@@ -331,6 +345,7 @@ const namespaceShape = {
     },
   },
   variables: {
+    list: operations.variables,
     upsert: operations.variableUpsert,
     delete: operations.variableDelete,
     collectionUpsert: operations.variableCollectionUpsert,
@@ -369,16 +384,37 @@ const namespaceShape = {
   },
   workspaces: {
     get: operations.workspace,
+    list: operations.externalWorkspaces,
+    findByCode: operations.workspaceByCode,
     update: operations.workspaceUpdate,
     delete: operations.workspaceDelete,
     leave: operations.workspaceLeave,
     upsertSlackChannel: operations.workspaceUpsertSlackChannel,
     identityProviders: operations.workspaceIdentityProviders,
+    inviteCode: {
+      create: operations.workspaceInviteCodeCreate,
+      use: operations.workspaceInviteCodeUse,
+    },
+    users: {
+      invite: operations.workspaceUserInvite,
+      remove: operations.workspaceUserRemove,
+    },
+    permissionChange: operations.workspacePermissionChange,
+    templates: operations.workspaceTemplates,
+    trustedDomains: {
+      list: operations.trustedDomains,
+      create: operations.trustedDomainCreate,
+      delete: operations.trustedDomainDelete,
+    },
+  },
+  regions: {
+    list: operations.regions,
   },
   misc: {
     changelogBlockImage: operations.changelogBlockImage,
     platformStatus: operations.platformStatus,
     publicStats: operations.publicStats,
+    allPlatformFeatureFlags: operations.allPlatformFeatureFlags,
   },
 } as const;
 
