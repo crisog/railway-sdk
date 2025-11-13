@@ -5,13 +5,8 @@ async function main() {
 
   const projectsResult = await railway.projects.list({
     variables: {
-      after: null,
-      before: null,
       first: 5,
       includeDeleted: false,
-      last: null,
-      userId: null,
-      workspaceId: null,
     },
   });
 
