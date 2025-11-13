@@ -10,7 +10,23 @@ query events($after: String, $before: String, $environmentId: String, $filter: E
     projectId: $projectId
   ) {
     __typename
-    # edges
-    # pageInfo
+    edges {
+      cursor
+      node {
+        id
+        action
+        createdAt
+        severity
+        environmentId
+        projectId
+        payload
+      }
+    }
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      endCursor
+    }
   }
 }

@@ -8,7 +8,23 @@ query deploymentEvents($after: String, $before: String, $first: Int, $id: String
     last: $last
   ) {
     __typename
-    # edges
-    # pageInfo
+    edges {
+      cursor
+      node {
+        id
+        step
+        createdAt
+        completedAt
+        payload {
+          error
+        }
+      }
+    }
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      endCursor
+    }
   }
 }

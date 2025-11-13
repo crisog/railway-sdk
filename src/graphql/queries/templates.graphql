@@ -8,7 +8,27 @@ query templates($after: String, $before: String, $first: Int, $last: Int, $recom
     recommended: $recommended
   ) {
     __typename
-    # edges
-    # pageInfo
+    edges {
+      cursor
+      node {
+        id
+        code
+        name
+        description
+        category
+        image
+        activeProjects
+        health
+        isApproved
+        isV2Template
+        createdAt
+      }
+    }
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      endCursor
+    }
   }
 }
