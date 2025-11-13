@@ -36,7 +36,7 @@ export type Scalars = {
 
 export type AccessRule = {
   __typename?: 'AccessRule';
-  disallowed: Maybe<Scalars['String']['output']>;
+  disallowed?: Maybe<Scalars['String']['output']>;
 };
 
 export type ActiveFeatureFlag =
@@ -73,12 +73,12 @@ export type ActiveServiceFeatureFlag =
 
 export type AdoptionInfo = Node & {
   __typename?: 'AdoptionInfo';
-  adoptionLevel: Maybe<Scalars['Float']['output']>;
+  adoptionLevel?: Maybe<Scalars['Float']['output']>;
   createdAt: Scalars['DateTime']['output'];
-  deltaLevel: Maybe<Scalars['Float']['output']>;
+  deltaLevel?: Maybe<Scalars['Float']['output']>;
   id: Scalars['ID']['output'];
-  matchedIcpEmail: Maybe<Scalars['String']['output']>;
-  monthlyEstimatedUsage: Maybe<Scalars['Float']['output']>;
+  matchedIcpEmail?: Maybe<Scalars['String']['output']>;
+  monthlyEstimatedUsage?: Maybe<Scalars['Float']['output']>;
   numConfigFile: Scalars['Int']['output'];
   numCronSchedule: Scalars['Int']['output'];
   numDeploys: Scalars['Int']['output'];
@@ -93,9 +93,9 @@ export type AdoptionInfo = Node & {
   numServices: Scalars['Int']['output'];
   numVariables: Scalars['Int']['output'];
   numWatchPatterns: Scalars['Int']['output'];
-  totalCores: Maybe<Scalars['Float']['output']>;
-  totalDisk: Maybe<Scalars['Float']['output']>;
-  totalNetwork: Maybe<Scalars['Float']['output']>;
+  totalCores?: Maybe<Scalars['Float']['output']>;
+  totalDisk?: Maybe<Scalars['Float']['output']>;
+  totalNetwork?: Maybe<Scalars['Float']['output']>;
   updatedAt: Scalars['DateTime']['output'];
   workspace: Workspace;
 };
@@ -122,12 +122,12 @@ export type ApiToken = Node & {
   displayToken: Scalars['String']['output'];
   id: Scalars['ID']['output'];
   name: Scalars['String']['output'];
-  workspaceId: Maybe<Scalars['String']['output']>;
+  workspaceId?: Maybe<Scalars['String']['output']>;
 };
 
 export type ApiTokenCreateInput = {
   name: Scalars['String']['input'];
-  workspaceId: InputMaybe<Scalars['String']['input']>;
+  workspaceId?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type ApiTokenRateLimit = {
@@ -138,23 +138,23 @@ export type ApiTokenRateLimit = {
 
 export type AppliedByMember = {
   __typename?: 'AppliedByMember';
-  avatar: Maybe<Scalars['String']['output']>;
+  avatar?: Maybe<Scalars['String']['output']>;
   email: Scalars['String']['output'];
   id: Scalars['String']['output'];
-  name: Maybe<Scalars['String']['output']>;
-  username: Maybe<Scalars['String']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  username?: Maybe<Scalars['String']['output']>;
 };
 
 export type BanReasonHistory = Node & {
   __typename?: 'BanReasonHistory';
-  actor: Maybe<User>;
-  banReason: Maybe<Scalars['String']['output']>;
+  actor?: Maybe<User>;
+  banReason?: Maybe<Scalars['String']['output']>;
   createdAt: Scalars['DateTime']['output'];
   id: Scalars['ID']['output'];
 };
 
 export type BaseEnvironmentOverrideInput = {
-  baseEnvironmentOverrideId: InputMaybe<Scalars['String']['input']>;
+  baseEnvironmentOverrideId?: InputMaybe<Scalars['String']['input']>;
 };
 
 /** The billing period for a customers subscription. */
@@ -178,9 +178,9 @@ export type CdnProvider =
 export type CertificatePublicData = {
   __typename?: 'CertificatePublicData';
   domainNames: Array<Scalars['String']['output']>;
-  expiresAt: Maybe<Scalars['DateTime']['output']>;
+  expiresAt?: Maybe<Scalars['DateTime']['output']>;
   fingerprintSha256: Scalars['String']['output'];
-  issuedAt: Maybe<Scalars['DateTime']['output']>;
+  issuedAt?: Maybe<Scalars['DateTime']['output']>;
   keyType: KeyType;
 };
 
@@ -194,7 +194,7 @@ export type CertificateStatus =
 
 export type CnameCheck = {
   __typename?: 'CnameCheck';
-  link: Maybe<Scalars['String']['output']>;
+  link?: Maybe<Scalars['String']['output']>;
   message: Scalars['String']['output'];
   status: CnameCheckStatus;
 };
@@ -209,11 +209,11 @@ export type CnameCheckStatus =
 export type Container = Node & {
   __typename?: 'Container';
   createdAt: Scalars['DateTime']['output'];
-  deletedAt: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
   environment: Environment;
   environmentId: Scalars['String']['output'];
   id: Scalars['ID']['output'];
-  migratedAt: Maybe<Scalars['DateTime']['output']>;
+  migratedAt?: Maybe<Scalars['DateTime']['output']>;
   plugin: Plugin;
   pluginId: Scalars['String']['output'];
 };
@@ -224,7 +224,7 @@ export type Credit = Node & {
   createdAt: Scalars['DateTime']['output'];
   customerId: Scalars['String']['output'];
   id: Scalars['ID']['output'];
-  memo: Maybe<Scalars['String']['output']>;
+  memo?: Maybe<Scalars['String']['output']>;
   type: CreditType;
   updatedAt: Scalars['DateTime']['output'];
 };
@@ -241,17 +241,17 @@ export type CustomDomain = Domain & {
   __typename?: 'CustomDomain';
   /** @deprecated Use the `status` field instead. */
   cnameCheck: CnameCheck;
-  createdAt: Maybe<Scalars['DateTime']['output']>;
-  deletedAt: Maybe<Scalars['DateTime']['output']>;
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
   domain: Scalars['String']['output'];
-  edgeId: Maybe<Scalars['String']['output']>;
+  edgeId?: Maybe<Scalars['String']['output']>;
   environmentId: Scalars['String']['output'];
   id: Scalars['ID']['output'];
-  projectId: Maybe<Scalars['String']['output']>;
+  projectId?: Maybe<Scalars['String']['output']>;
   serviceId: Scalars['String']['output'];
   status: CustomDomainStatus;
-  targetPort: Maybe<Scalars['Int']['output']>;
-  updatedAt: Maybe<Scalars['DateTime']['output']>;
+  targetPort?: Maybe<Scalars['Int']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
 
 export type CustomDomainCreateInput = {
@@ -259,14 +259,14 @@ export type CustomDomainCreateInput = {
   environmentId: Scalars['String']['input'];
   projectId: Scalars['String']['input'];
   serviceId: Scalars['String']['input'];
-  targetPort: InputMaybe<Scalars['Int']['input']>;
+  targetPort?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type CustomDomainStatus = {
   __typename?: 'CustomDomainStatus';
-  cdnProvider: Maybe<CdnProvider>;
+  cdnProvider?: Maybe<CdnProvider>;
   certificateStatus: CertificateStatus;
-  certificates: Maybe<Array<CertificatePublicData>>;
+  certificates?: Maybe<Array<CertificatePublicData>>;
   dnsRecords: Array<DnsRecords>;
 };
 
@@ -274,16 +274,16 @@ export type Customer = Node & {
   __typename?: 'Customer';
   /** The total amount of credits that have been applied during the current billing period. */
   appliedCredits: Scalars['Float']['output'];
-  billingAddress: Maybe<CustomerAddress>;
-  billingEmail: Maybe<Scalars['String']['output']>;
+  billingAddress?: Maybe<CustomerAddress>;
+  billingEmail?: Maybe<Scalars['String']['output']>;
   billingPeriod: BillingPeriod;
   /** The total amount of unused credits for the customer. */
   creditBalance: Scalars['Float']['output'];
   credits: CustomerCreditsConnection;
   /** The current usage for the customer. This value is cached and may not be up to date. */
   currentUsage: Scalars['Float']['output'];
-  defaultPaymentMethod: Maybe<PaymentMethod>;
-  defaultPaymentMethodId: Maybe<Scalars['String']['output']>;
+  defaultPaymentMethod?: Maybe<PaymentMethod>;
+  defaultPaymentMethodId?: Maybe<Scalars['String']['output']>;
   hasExhaustedFreePlan: Scalars['Boolean']['output'];
   id: Scalars['ID']['output'];
   invoices: Array<CustomerInvoice>;
@@ -291,7 +291,7 @@ export type Customer = Node & {
   isTrialing: Scalars['Boolean']['output'];
   isUsageSubscriber: Scalars['Boolean']['output'];
   isWithdrawingToCredits: Scalars['Boolean']['output'];
-  planLimitOverride: Maybe<PlanLimitOverride>;
+  planLimitOverride?: Maybe<PlanLimitOverride>;
   remainingUsageCreditBalance: Scalars['Float']['output'];
   state: SubscriptionState;
   stripeCustomerId: Scalars['String']['output'];
@@ -299,27 +299,27 @@ export type Customer = Node & {
   supportedWithdrawalPlatforms: Array<WithdrawalPlatformTypes>;
   taxIds: Array<CustomerTaxId>;
   trialDaysRemaining: Scalars['Int']['output'];
-  usageLimit: Maybe<UsageLimit>;
+  usageLimit?: Maybe<UsageLimit>;
   workspace: Workspace;
 };
 
 
 export type CustomerCreditsArgs = {
-  after: InputMaybe<Scalars['String']['input']>;
-  before: InputMaybe<Scalars['String']['input']>;
-  first: InputMaybe<Scalars['Int']['input']>;
-  last: InputMaybe<Scalars['Int']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type CustomerAddress = {
   __typename?: 'CustomerAddress';
-  city: Maybe<Scalars['String']['output']>;
-  country: Maybe<Scalars['String']['output']>;
-  line1: Maybe<Scalars['String']['output']>;
-  line2: Maybe<Scalars['String']['output']>;
-  name: Maybe<Scalars['String']['output']>;
-  postalCode: Maybe<Scalars['String']['output']>;
-  state: Maybe<Scalars['String']['output']>;
+  city?: Maybe<Scalars['String']['output']>;
+  country?: Maybe<Scalars['String']['output']>;
+  line1?: Maybe<Scalars['String']['output']>;
+  line2?: Maybe<Scalars['String']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  postalCode?: Maybe<Scalars['String']['output']>;
+  state?: Maybe<Scalars['String']['output']>;
 };
 
 export type CustomerCreditsConnection = {
@@ -338,27 +338,27 @@ export type CustomerInvoice = {
   __typename?: 'CustomerInvoice';
   amountDue: Scalars['Float']['output'];
   amountPaid: Scalars['Float']['output'];
-  hostedURL: Maybe<Scalars['String']['output']>;
+  hostedURL?: Maybe<Scalars['String']['output']>;
   invoiceId: Scalars['String']['output'];
   items: Array<SubscriptionItem>;
-  lastPaymentError: Maybe<Scalars['String']['output']>;
-  paymentIntentStatus: Maybe<Scalars['String']['output']>;
-  pdfURL: Maybe<Scalars['String']['output']>;
+  lastPaymentError?: Maybe<Scalars['String']['output']>;
+  paymentIntentStatus?: Maybe<Scalars['String']['output']>;
+  pdfURL?: Maybe<Scalars['String']['output']>;
   periodEnd: Scalars['String']['output'];
   periodStart: Scalars['String']['output'];
-  reissuedInvoiceFrom: Maybe<Scalars['String']['output']>;
-  reissuedInvoiceOf: Maybe<Scalars['String']['output']>;
-  status: Maybe<Scalars['String']['output']>;
-  subscriptionId: Maybe<Scalars['String']['output']>;
+  reissuedInvoiceFrom?: Maybe<Scalars['String']['output']>;
+  reissuedInvoiceOf?: Maybe<Scalars['String']['output']>;
+  status?: Maybe<Scalars['String']['output']>;
+  subscriptionId?: Maybe<Scalars['String']['output']>;
   total: Scalars['Int']['output'];
 };
 
 export type CustomerSubscription = {
   __typename?: 'CustomerSubscription';
   billingCycleAnchor: Scalars['DateTime']['output'];
-  cancelAt: Maybe<Scalars['String']['output']>;
+  cancelAt?: Maybe<Scalars['String']['output']>;
   cancelAtPeriodEnd: Scalars['Boolean']['output'];
-  couponId: Maybe<Scalars['String']['output']>;
+  couponId?: Maybe<Scalars['String']['output']>;
   discounts: Array<SubscriptionDiscount>;
   id: Scalars['String']['output'];
   items: Array<SubscriptionItem>;
@@ -411,33 +411,33 @@ export type Deployment = Node & {
   canRedeploy: Scalars['Boolean']['output'];
   canRollback: Scalars['Boolean']['output'];
   createdAt: Scalars['DateTime']['output'];
-  creator: Maybe<DeploymentCreator>;
+  creator?: Maybe<DeploymentCreator>;
   /** Check if a deployment's instances have all stopped */
   deploymentStopped: Scalars['Boolean']['output'];
   environment: Environment;
   environmentId: Scalars['String']['output'];
   id: Scalars['ID']['output'];
   instances: Array<DeploymentDeploymentInstance>;
-  meta: Maybe<Scalars['DeploymentMeta']['output']>;
+  meta?: Maybe<Scalars['DeploymentMeta']['output']>;
   projectId: Scalars['String']['output'];
   service: Service;
-  serviceId: Maybe<Scalars['String']['output']>;
-  snapshotId: Maybe<Scalars['String']['output']>;
+  serviceId?: Maybe<Scalars['String']['output']>;
+  snapshotId?: Maybe<Scalars['String']['output']>;
   sockets: Array<DeploymentSocket>;
-  staticUrl: Maybe<Scalars['String']['output']>;
+  staticUrl?: Maybe<Scalars['String']['output']>;
   status: DeploymentStatus;
-  statusUpdatedAt: Maybe<Scalars['DateTime']['output']>;
+  statusUpdatedAt?: Maybe<Scalars['DateTime']['output']>;
   suggestAddServiceDomain: Scalars['Boolean']['output'];
   updatedAt: Scalars['DateTime']['output'];
-  url: Maybe<Scalars['String']['output']>;
+  url?: Maybe<Scalars['String']['output']>;
 };
 
 export type DeploymentCreator = {
   __typename?: 'DeploymentCreator';
-  avatar: Maybe<Scalars['String']['output']>;
+  avatar?: Maybe<Scalars['String']['output']>;
   email: Scalars['String']['output'];
   id: Scalars['String']['output'];
-  name: Maybe<Scalars['String']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
 };
 
 export type DeploymentDeploymentInstance = {
@@ -448,16 +448,16 @@ export type DeploymentDeploymentInstance = {
 
 export type DeploymentEvent = Node & {
   __typename?: 'DeploymentEvent';
-  completedAt: Maybe<Scalars['DateTime']['output']>;
+  completedAt?: Maybe<Scalars['DateTime']['output']>;
   createdAt: Scalars['DateTime']['output'];
   id: Scalars['ID']['output'];
-  payload: Maybe<DeploymentEventPayload>;
+  payload?: Maybe<DeploymentEventPayload>;
   step: DeploymentEventStep;
 };
 
 export type DeploymentEventPayload = {
   __typename?: 'DeploymentEventPayload';
-  error: Maybe<Scalars['String']['output']>;
+  error?: Maybe<Scalars['String']['output']>;
 };
 
 export type DeploymentEventStep =
@@ -473,7 +473,7 @@ export type DeploymentEventStep =
 
 export type DeploymentInstanceExecution = Node & {
   __typename?: 'DeploymentInstanceExecution';
-  completedAt: Maybe<Scalars['DateTime']['output']>;
+  completedAt?: Maybe<Scalars['DateTime']['output']>;
   createdAt: Scalars['DateTime']['output'];
   deploymentId: Scalars['String']['output'];
   deploymentMeta: Scalars['DeploymentMeta']['output'];
@@ -508,11 +508,11 @@ export type DeploymentInstanceStatus =
   | 'STOPPED';
 
 export type DeploymentListInput = {
-  environmentId: InputMaybe<Scalars['String']['input']>;
-  includeDeleted: InputMaybe<Scalars['Boolean']['input']>;
-  projectId: InputMaybe<Scalars['String']['input']>;
-  serviceId: InputMaybe<Scalars['String']['input']>;
-  status: InputMaybe<DeploymentStatusInput>;
+  environmentId?: InputMaybe<Scalars['String']['input']>;
+  includeDeleted?: InputMaybe<Scalars['Boolean']['input']>;
+  projectId?: InputMaybe<Scalars['String']['input']>;
+  serviceId?: InputMaybe<Scalars['String']['input']>;
+  status?: InputMaybe<DeploymentStatusInput>;
 };
 
 export type DeploymentSnapshot = Node & {
@@ -547,13 +547,13 @@ export type DeploymentStatus =
   | 'WAITING';
 
 export type DeploymentStatusInput = {
-  in: InputMaybe<Array<DeploymentStatus>>;
-  notIn: InputMaybe<Array<DeploymentStatus>>;
+  in?: InputMaybe<Array<DeploymentStatus>>;
+  notIn?: InputMaybe<Array<DeploymentStatus>>;
 };
 
 export type DeploymentTrigger = Node & {
   __typename?: 'DeploymentTrigger';
-  baseEnvironmentOverrideId: Maybe<Scalars['String']['output']>;
+  baseEnvironmentOverrideId?: Maybe<Scalars['String']['output']>;
   branch: Scalars['String']['output'];
   checkSuites: Scalars['Boolean']['output'];
   environmentId: Scalars['String']['output'];
@@ -561,45 +561,45 @@ export type DeploymentTrigger = Node & {
   projectId: Scalars['String']['output'];
   provider: Scalars['String']['output'];
   repository: Scalars['String']['output'];
-  serviceId: Maybe<Scalars['String']['output']>;
+  serviceId?: Maybe<Scalars['String']['output']>;
   validCheckSuites: Scalars['Int']['output'];
 };
 
 export type DeploymentTriggerCreateInput = {
   branch: Scalars['String']['input'];
-  checkSuites: InputMaybe<Scalars['Boolean']['input']>;
+  checkSuites?: InputMaybe<Scalars['Boolean']['input']>;
   environmentId: Scalars['String']['input'];
   projectId: Scalars['String']['input'];
   provider: Scalars['String']['input'];
   repository: Scalars['String']['input'];
-  rootDirectory: InputMaybe<Scalars['String']['input']>;
+  rootDirectory?: InputMaybe<Scalars['String']['input']>;
   serviceId: Scalars['String']['input'];
 };
 
 export type DeploymentTriggerUpdateInput = {
-  branch: InputMaybe<Scalars['String']['input']>;
-  checkSuites: InputMaybe<Scalars['Boolean']['input']>;
-  repository: InputMaybe<Scalars['String']['input']>;
-  rootDirectory: InputMaybe<Scalars['String']['input']>;
+  branch?: InputMaybe<Scalars['String']['input']>;
+  checkSuites?: InputMaybe<Scalars['Boolean']['input']>;
+  repository?: InputMaybe<Scalars['String']['input']>;
+  rootDirectory?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type DockerComposeImport = {
   __typename?: 'DockerComposeImport';
   errors: Array<Scalars['String']['output']>;
-  patch: Maybe<Scalars['EnvironmentConfig']['output']>;
+  patch?: Maybe<Scalars['EnvironmentConfig']['output']>;
 };
 
 export type Domain = {
-  createdAt: Maybe<Scalars['DateTime']['output']>;
-  deletedAt: Maybe<Scalars['DateTime']['output']>;
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
   domain: Scalars['String']['output'];
-  edgeId: Maybe<Scalars['String']['output']>;
+  edgeId?: Maybe<Scalars['String']['output']>;
   environmentId: Scalars['String']['output'];
   id: Scalars['ID']['output'];
-  projectId: Maybe<Scalars['String']['output']>;
+  projectId?: Maybe<Scalars['String']['output']>;
   serviceId: Scalars['String']['output'];
-  targetPort: Maybe<Scalars['Int']['output']>;
-  updatedAt: Maybe<Scalars['DateTime']['output']>;
+  targetPort?: Maybe<Scalars['Int']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
 
 export type DomainAvailable = {
@@ -610,11 +610,11 @@ export type DomainAvailable = {
 
 export type DomainWithStatus = {
   __typename?: 'DomainWithStatus';
-  cdnProvider: Maybe<CdnProvider>;
+  cdnProvider?: Maybe<CdnProvider>;
   certificateStatus: CertificateStatus;
-  certificates: Maybe<Array<CertificatePublicData>>;
+  certificates?: Maybe<Array<CertificatePublicData>>;
   dnsRecords: Array<DnsRecords>;
-  domain: Maybe<Domain>;
+  domain?: Maybe<Domain>;
 };
 
 export type EgressGateway = {
@@ -625,7 +625,7 @@ export type EgressGateway = {
 
 export type EgressGatewayCreateInput = {
   environmentId: Scalars['String']['input'];
-  region: InputMaybe<Scalars['String']['input']>;
+  region?: InputMaybe<Scalars['String']['input']>;
   serviceId: Scalars['String']['input'];
 };
 
@@ -637,17 +637,17 @@ export type EgressGatewayServiceTargetInput = {
 export type Environment = Node & {
   __typename?: 'Environment';
   createdAt: Scalars['DateTime']['output'];
-  deletedAt: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
   deploymentTriggers: EnvironmentDeploymentTriggersConnection;
   deployments: EnvironmentDeploymentsConnection;
   id: Scalars['ID']['output'];
   isEphemeral: Scalars['Boolean']['output'];
-  meta: Maybe<EnvironmentMeta>;
+  meta?: Maybe<EnvironmentMeta>;
   name: Scalars['String']['output'];
   projectId: Scalars['String']['output'];
   serviceInstances: EnvironmentServiceInstancesConnection;
-  sourceEnvironment: Maybe<Environment>;
-  unmergedChangesCount: Maybe<Scalars['Int']['output']>;
+  sourceEnvironment?: Maybe<Environment>;
+  unmergedChangesCount?: Maybe<Scalars['Int']['output']>;
   updatedAt: Scalars['DateTime']['output'];
   variables: EnvironmentVariablesConnection;
   volumeInstances: EnvironmentVolumeInstancesConnection;
@@ -655,56 +655,56 @@ export type Environment = Node & {
 
 
 export type EnvironmentDeploymentTriggersArgs = {
-  after: InputMaybe<Scalars['String']['input']>;
-  before: InputMaybe<Scalars['String']['input']>;
-  first: InputMaybe<Scalars['Int']['input']>;
-  last: InputMaybe<Scalars['Int']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
 export type EnvironmentDeploymentsArgs = {
-  after: InputMaybe<Scalars['String']['input']>;
-  before: InputMaybe<Scalars['String']['input']>;
-  first: InputMaybe<Scalars['Int']['input']>;
-  last: InputMaybe<Scalars['Int']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
 export type EnvironmentServiceInstancesArgs = {
-  after: InputMaybe<Scalars['String']['input']>;
-  before: InputMaybe<Scalars['String']['input']>;
-  first: InputMaybe<Scalars['Int']['input']>;
-  last: InputMaybe<Scalars['Int']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
 export type EnvironmentVariablesArgs = {
-  after: InputMaybe<Scalars['String']['input']>;
-  before: InputMaybe<Scalars['String']['input']>;
-  first: InputMaybe<Scalars['Int']['input']>;
-  last: InputMaybe<Scalars['Int']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
 export type EnvironmentVolumeInstancesArgs = {
-  after: InputMaybe<Scalars['String']['input']>;
-  before: InputMaybe<Scalars['String']['input']>;
-  first: InputMaybe<Scalars['Int']['input']>;
-  last: InputMaybe<Scalars['Int']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type EnvironmentCreateInput = {
   /** If true, the changes will be applied in the background and the mutation will return immediately. If false, the mutation will wait for the changes to be applied before returning. */
-  applyChangesInBackground: InputMaybe<Scalars['Boolean']['input']>;
-  ephemeral: InputMaybe<Scalars['Boolean']['input']>;
+  applyChangesInBackground?: InputMaybe<Scalars['Boolean']['input']>;
+  ephemeral?: InputMaybe<Scalars['Boolean']['input']>;
   name: Scalars['String']['input'];
   projectId: Scalars['String']['input'];
   /** When committing the changes immediately, skip any initial deployments. */
-  skipInitialDeploys: InputMaybe<Scalars['Boolean']['input']>;
+  skipInitialDeploys?: InputMaybe<Scalars['Boolean']['input']>;
   /** Create the environment with all of the services, volumes, configuration, and variables from this source environment. */
-  sourceEnvironmentId: InputMaybe<Scalars['String']['input']>;
+  sourceEnvironmentId?: InputMaybe<Scalars['String']['input']>;
   /** Stage the initial changes for the environment. If false (default), the changes will be committed immediately. */
-  stageInitialChanges: InputMaybe<Scalars['Boolean']['input']>;
+  stageInitialChanges?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 export type EnvironmentDeploymentTriggersConnection = {
@@ -733,24 +733,24 @@ export type EnvironmentDeploymentsConnectionEdge = {
 
 export type EnvironmentMeta = {
   __typename?: 'EnvironmentMeta';
-  baseBranch: Maybe<Scalars['String']['output']>;
-  branch: Maybe<Scalars['String']['output']>;
-  prCommentId: Maybe<Scalars['Int']['output']>;
-  prNumber: Maybe<Scalars['Int']['output']>;
-  prRepo: Maybe<Scalars['String']['output']>;
-  prTitle: Maybe<Scalars['String']['output']>;
+  baseBranch?: Maybe<Scalars['String']['output']>;
+  branch?: Maybe<Scalars['String']['output']>;
+  prCommentId?: Maybe<Scalars['Int']['output']>;
+  prNumber?: Maybe<Scalars['Int']['output']>;
+  prRepo?: Maybe<Scalars['String']['output']>;
+  prTitle?: Maybe<Scalars['String']['output']>;
 };
 
 export type EnvironmentPatch = Node & {
   __typename?: 'EnvironmentPatch';
-  appliedAt: Maybe<Scalars['DateTime']['output']>;
-  appliedBy: Maybe<AppliedByMember>;
+  appliedAt?: Maybe<Scalars['DateTime']['output']>;
+  appliedBy?: Maybe<AppliedByMember>;
   createdAt: Scalars['DateTime']['output'];
   environment: Environment;
   environmentId: Scalars['String']['output'];
   id: Scalars['ID']['output'];
-  lastAppliedError: Maybe<Scalars['String']['output']>;
-  message: Maybe<Scalars['String']['output']>;
+  lastAppliedError?: Maybe<Scalars['String']['output']>;
+  message?: Maybe<Scalars['String']['output']>;
   status: EnvironmentPatchStatus;
   updatedAt: Scalars['DateTime']['output'];
 };
@@ -820,19 +820,19 @@ export type Event = Node & {
   __typename?: 'Event';
   action: Scalars['String']['output'];
   createdAt: Scalars['DateTime']['output'];
-  environment: Maybe<Environment>;
-  environmentId: Maybe<Scalars['String']['output']>;
+  environment?: Maybe<Environment>;
+  environmentId?: Maybe<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
   object: Scalars['String']['output'];
-  payload: Maybe<Scalars['JSON']['output']>;
+  payload?: Maybe<Scalars['JSON']['output']>;
   project: Project;
-  projectId: Maybe<Scalars['String']['output']>;
+  projectId?: Maybe<Scalars['String']['output']>;
   severity: EventSeverity;
 };
 
 export type EventFilterInput = {
-  action: InputMaybe<EventStringListFilter>;
-  object: InputMaybe<EventStringListFilter>;
+  action?: InputMaybe<EventStringListFilter>;
+  object?: InputMaybe<EventStringListFilter>;
 };
 
 export type EventSeverity =
@@ -842,37 +842,37 @@ export type EventSeverity =
   | 'WARNING';
 
 export type EventStringListFilter = {
-  in: InputMaybe<Array<Scalars['String']['input']>>;
-  notIn: InputMaybe<Array<Scalars['String']['input']>>;
+  in?: InputMaybe<Array<Scalars['String']['input']>>;
+  notIn?: InputMaybe<Array<Scalars['String']['input']>>;
 };
 
 export type ExplicitOwnerInput = {
   /** The ID of the owner */
   id: Scalars['String']['input'];
   /** The type of owner */
-  type: InputMaybe<ResourceOwnerType>;
+  type?: InputMaybe<ResourceOwnerType>;
 };
 
 export type ExternalWorkspace = {
   __typename?: 'ExternalWorkspace';
-  allowDeprecatedRegions: Maybe<Scalars['Boolean']['output']>;
-  avatar: Maybe<Scalars['String']['output']>;
-  banReason: Maybe<Scalars['String']['output']>;
+  allowDeprecatedRegions?: Maybe<Scalars['Boolean']['output']>;
+  avatar?: Maybe<Scalars['String']['output']>;
+  banReason?: Maybe<Scalars['String']['output']>;
   createdAt: Scalars['DateTime']['output'];
-  currentSessionHasAccess: Maybe<Scalars['Boolean']['output']>;
-  customerId: Maybe<Scalars['String']['output']>;
+  currentSessionHasAccess?: Maybe<Scalars['Boolean']['output']>;
+  customerId?: Maybe<Scalars['String']['output']>;
   customerState: SubscriptionState;
-  discordRole: Maybe<Scalars['String']['output']>;
+  discordRole?: Maybe<Scalars['String']['output']>;
   hasBAA: Scalars['Boolean']['output'];
   hasSAML: Scalars['Boolean']['output'];
   id: Scalars['String']['output'];
-  isTrialing: Maybe<Scalars['Boolean']['output']>;
+  isTrialing?: Maybe<Scalars['Boolean']['output']>;
   name: Scalars['String']['output'];
   plan: Plan;
-  preferredRegion: Maybe<Scalars['String']['output']>;
+  preferredRegion?: Maybe<Scalars['String']['output']>;
   projects: Array<Project>;
-  supportTierOverride: Maybe<Scalars['String']['output']>;
-  teamId: Maybe<Scalars['String']['output']>;
+  supportTierOverride?: Maybe<Scalars['String']['output']>;
+  teamId?: Maybe<Scalars['String']['output']>;
 };
 
 export type FeatureFlagToggleInput = {
@@ -915,17 +915,17 @@ export type GitHubBranch = {
 export type GitHubRepo = {
   __typename?: 'GitHubRepo';
   defaultBranch: Scalars['String']['output'];
-  description: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
   fullName: Scalars['String']['output'];
   id: Scalars['Int']['output'];
   installationId: Scalars['String']['output'];
   isPrivate: Scalars['Boolean']['output'];
   name: Scalars['String']['output'];
-  ownerAvatarUrl: Maybe<Scalars['String']['output']>;
+  ownerAvatarUrl?: Maybe<Scalars['String']['output']>;
 };
 
 export type GitHubRepoDeployInput = {
-  branch: InputMaybe<Scalars['String']['input']>;
+  branch?: InputMaybe<Scalars['String']['input']>;
   projectId: Scalars['String']['input'];
   repo: Scalars['String']['input'];
 };
@@ -939,7 +939,7 @@ export type GitHubRepoUpdateInput = {
 export type GitHubRepoWithoutInstallation = {
   __typename?: 'GitHubRepoWithoutInstallation';
   defaultBranch: Scalars['String']['output'];
-  description: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
   fullName: Scalars['String']['output'];
   id: Scalars['Int']['output'];
   isPrivate: Scalars['Boolean']['output'];
@@ -1036,10 +1036,10 @@ export type IntegrationAuth = Node & {
 
 
 export type IntegrationAuthIntegrationsArgs = {
-  after: InputMaybe<Scalars['String']['input']>;
-  before: InputMaybe<Scalars['String']['input']>;
-  first: InputMaybe<Scalars['Int']['input']>;
-  last: InputMaybe<Scalars['Int']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type IntegrationAuthIntegrationsConnection = {
@@ -1056,14 +1056,14 @@ export type IntegrationAuthIntegrationsConnectionEdge = {
 
 export type IntegrationCreateInput = {
   config: Scalars['JSON']['input'];
-  integrationAuthId: InputMaybe<Scalars['String']['input']>;
+  integrationAuthId?: InputMaybe<Scalars['String']['input']>;
   name: Scalars['String']['input'];
   projectId: Scalars['String']['input'];
 };
 
 export type IntegrationUpdateInput = {
   config: Scalars['JSON']['input'];
-  integrationAuthId: InputMaybe<Scalars['String']['input']>;
+  integrationAuthId?: InputMaybe<Scalars['String']['input']>;
   name: Scalars['String']['input'];
   projectId: Scalars['String']['input'];
 };
@@ -1100,9 +1100,9 @@ export type Log = {
   /** The contents of the log message */
   message: Scalars['String']['output'];
   /** The severity of the log message (eg. err) */
-  severity: Maybe<Scalars['String']['output']>;
+  severity?: Maybe<Scalars['String']['output']>;
   /** The tags that were associated with the log */
-  tags: Maybe<LogTags>;
+  tags?: Maybe<LogTags>;
   /** The timestamp of the log message in format RFC3339 (nano) */
   timestamp: Scalars['String']['output'];
 };
@@ -1117,19 +1117,19 @@ export type LogAttribute = {
 /** The tags associated with a specific log */
 export type LogTags = {
   __typename?: 'LogTags';
-  deploymentId: Maybe<Scalars['String']['output']>;
-  deploymentInstanceId: Maybe<Scalars['String']['output']>;
-  environmentId: Maybe<Scalars['String']['output']>;
+  deploymentId?: Maybe<Scalars['String']['output']>;
+  deploymentInstanceId?: Maybe<Scalars['String']['output']>;
+  environmentId?: Maybe<Scalars['String']['output']>;
   /** @deprecated Plugins have been removed */
-  pluginId: Maybe<Scalars['String']['output']>;
-  projectId: Maybe<Scalars['String']['output']>;
-  serviceId: Maybe<Scalars['String']['output']>;
-  snapshotId: Maybe<Scalars['String']['output']>;
+  pluginId?: Maybe<Scalars['String']['output']>;
+  projectId?: Maybe<Scalars['String']['output']>;
+  serviceId?: Maybe<Scalars['String']['output']>;
+  snapshotId?: Maybe<Scalars['String']['output']>;
 };
 
 export type LoginSessionAuthInput = {
   code: Scalars['String']['input'];
-  hostname: InputMaybe<Scalars['String']['input']>;
+  hostname?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type Maintenance = {
@@ -1187,16 +1187,16 @@ export type MetricTag =
 /** The tags that were used to group the metric. */
 export type MetricTags = {
   __typename?: 'MetricTags';
-  deploymentId: Maybe<Scalars['String']['output']>;
-  deploymentInstanceId: Maybe<Scalars['String']['output']>;
-  environmentId: Maybe<Scalars['String']['output']>;
+  deploymentId?: Maybe<Scalars['String']['output']>;
+  deploymentInstanceId?: Maybe<Scalars['String']['output']>;
+  environmentId?: Maybe<Scalars['String']['output']>;
   /** @deprecated Plugins have been removed */
-  pluginId: Maybe<Scalars['String']['output']>;
-  projectId: Maybe<Scalars['String']['output']>;
-  region: Maybe<Scalars['String']['output']>;
-  serviceId: Maybe<Scalars['String']['output']>;
-  volumeId: Maybe<Scalars['String']['output']>;
-  volumeInstanceId: Maybe<Scalars['String']['output']>;
+  pluginId?: Maybe<Scalars['String']['output']>;
+  projectId?: Maybe<Scalars['String']['output']>;
+  region?: Maybe<Scalars['String']['output']>;
+  serviceId?: Maybe<Scalars['String']['output']>;
+  volumeId?: Maybe<Scalars['String']['output']>;
+  volumeInstanceId?: Maybe<Scalars['String']['output']>;
 };
 
 /** The result of a metrics query. */
@@ -1225,7 +1225,7 @@ export type MonitorThresholdCondition =
 export type MonitorThresholdConfig = {
   __typename?: 'MonitorThresholdConfig';
   condition: MonitorThresholdCondition;
-  measurement: Maybe<MetricMeasurement>;
+  measurement?: Maybe<MetricMeasurement>;
   threshold: Scalars['Float']['output'];
   type: Scalars['String']['output'];
 };
@@ -1317,7 +1317,7 @@ export type Mutation = {
   /** Cancel a login session */
   loginSessionCancel: Scalars['Boolean']['output'];
   /** Get a token for a login session if it exists */
-  loginSessionConsume: Maybe<Scalars['String']['output']>;
+  loginSessionConsume?: Maybe<Scalars['String']['output']>;
   /** Start a CLI login session */
   loginSessionCreate: Scalars['String']['output'];
   /** Verify if a login session is valid */
@@ -1534,7 +1534,7 @@ export type Mutation = {
   /** Updates the profile for the authenticated user */
   userProfileUpdate: Scalars['Boolean']['output'];
   /** Update date of TermsAgreedOn */
-  userTermsUpdate: Maybe<User>;
+  userTermsUpdate?: Maybe<User>;
   /** Upserts a collection of variables. */
   variableCollectionUpsert: Scalars['Boolean']['output'];
   /** Deletes a variable. */
@@ -1615,7 +1615,7 @@ export type MutationCustomDomainDeleteArgs = {
 export type MutationCustomDomainUpdateArgs = {
   environmentId: Scalars['String']['input'];
   id: Scalars['String']['input'];
-  targetPort: InputMaybe<Scalars['Int']['input']>;
+  targetPort?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
@@ -1647,7 +1647,7 @@ export type MutationDeploymentInstanceExecutionCreateArgs = {
 
 export type MutationDeploymentRedeployArgs = {
   id: Scalars['String']['input'];
-  usePreviousImageTag: InputMaybe<Scalars['Boolean']['input']>;
+  usePreviousImageTag?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 
@@ -1690,7 +1690,7 @@ export type MutationDeploymentTriggerUpdateArgs = {
 export type MutationDockerComposeImportArgs = {
   environmentId: Scalars['String']['input'];
   projectId: Scalars['String']['input'];
-  skipStagingPatch: InputMaybe<Scalars['Boolean']['input']>;
+  skipStagingPatch?: InputMaybe<Scalars['Boolean']['input']>;
   yaml: Scalars['String']['input'];
 };
 
@@ -1726,9 +1726,9 @@ export type MutationEnvironmentDeleteArgs = {
 
 
 export type MutationEnvironmentPatchCommitArgs = {
-  commitMessage: InputMaybe<Scalars['String']['input']>;
+  commitMessage?: InputMaybe<Scalars['String']['input']>;
   environmentId: Scalars['String']['input'];
-  patch: InputMaybe<Scalars['EnvironmentConfig']['input']>;
+  patch?: InputMaybe<Scalars['EnvironmentConfig']['input']>;
 };
 
 
@@ -1852,7 +1852,7 @@ export type MutationPluginCreateArgs = {
 
 
 export type MutationPluginDeleteArgs = {
-  environmentId: InputMaybe<Scalars['String']['input']>;
+  environmentId?: InputMaybe<Scalars['String']['input']>;
   id: Scalars['String']['input'];
 };
 
@@ -2067,7 +2067,7 @@ export type MutationServiceCreateArgs = {
 
 
 export type MutationServiceDeleteArgs = {
-  environmentId: InputMaybe<Scalars['String']['input']>;
+  environmentId?: InputMaybe<Scalars['String']['input']>;
   id: Scalars['String']['input'];
 };
 
@@ -2109,15 +2109,15 @@ export type MutationServiceFeatureFlagRemoveArgs = {
 
 
 export type MutationServiceInstanceDeployArgs = {
-  commitSha: InputMaybe<Scalars['String']['input']>;
+  commitSha?: InputMaybe<Scalars['String']['input']>;
   environmentId: Scalars['String']['input'];
-  latestCommit: InputMaybe<Scalars['Boolean']['input']>;
+  latestCommit?: InputMaybe<Scalars['Boolean']['input']>;
   serviceId: Scalars['String']['input'];
 };
 
 
 export type MutationServiceInstanceDeployV2Args = {
-  commitSha: InputMaybe<Scalars['String']['input']>;
+  commitSha?: InputMaybe<Scalars['String']['input']>;
   environmentId: Scalars['String']['input'];
   serviceId: Scalars['String']['input'];
 };
@@ -2135,7 +2135,7 @@ export type MutationServiceInstanceRedeployArgs = {
 
 
 export type MutationServiceInstanceUpdateArgs = {
-  environmentId: InputMaybe<Scalars['String']['input']>;
+  environmentId?: InputMaybe<Scalars['String']['input']>;
   input: ServiceInstanceUpdateInput;
   serviceId: Scalars['String']['input'];
 };
@@ -2319,7 +2319,7 @@ export type MutationVolumeInstanceBackupScheduleUpdateArgs = {
 
 
 export type MutationVolumeInstanceUpdateArgs = {
-  environmentId: InputMaybe<Scalars['String']['input']>;
+  environmentId?: InputMaybe<Scalars['String']['input']>;
   input: VolumeInstanceUpdateInput;
   volumeId: Scalars['String']['input'];
 };
@@ -2404,11 +2404,11 @@ export type NotificationDelivery = Node & {
   createdAt: Scalars['DateTime']['output'];
   id: Scalars['ID']['output'];
   notificationInstance: NotificationInstance;
-  readAt: Maybe<Scalars['DateTime']['output']>;
+  readAt?: Maybe<Scalars['DateTime']['output']>;
   status: NotificationDeliveryStatus;
   type: NotificationDeliveryType;
   updatedAt: Scalars['DateTime']['output'];
-  userId: Maybe<Scalars['String']['output']>;
+  userId?: Maybe<Scalars['String']['output']>;
 };
 
 export type NotificationDeliveryCreated = {
@@ -2418,12 +2418,12 @@ export type NotificationDeliveryCreated = {
 };
 
 export type NotificationDeliveryFilterInput = {
-  environmentId: InputMaybe<Scalars['String']['input']>;
-  onlyUnread: InputMaybe<Scalars['Boolean']['input']>;
-  projectId: InputMaybe<Scalars['String']['input']>;
-  status: InputMaybe<NotificationStatus>;
-  type: InputMaybe<NotificationDeliveryType>;
-  workspaceId: InputMaybe<Scalars['String']['input']>;
+  environmentId?: InputMaybe<Scalars['String']['input']>;
+  onlyUnread?: InputMaybe<Scalars['Boolean']['input']>;
+  projectId?: InputMaybe<Scalars['String']['input']>;
+  status?: InputMaybe<NotificationStatus>;
+  type?: InputMaybe<NotificationDeliveryType>;
+  workspaceId?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type NotificationDeliveryResolved = {
@@ -2447,21 +2447,21 @@ export type NotificationDeliveryUpdate = NotificationDeliveryCreated | Notificat
 export type NotificationInstance = Node & {
   __typename?: 'NotificationInstance';
   createdAt: Scalars['DateTime']['output'];
-  environmentId: Maybe<Scalars['String']['output']>;
+  environmentId?: Maybe<Scalars['String']['output']>;
   event: Event;
   eventId: Scalars['String']['output'];
-  eventType: Maybe<Scalars['String']['output']>;
+  eventType?: Maybe<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
   payload: Scalars['NotificationPayload']['output'];
-  projectId: Maybe<Scalars['String']['output']>;
-  resolvedAt: Maybe<Scalars['DateTime']['output']>;
-  resourceId: Maybe<Scalars['String']['output']>;
-  resourceType: Maybe<Scalars['String']['output']>;
-  serviceId: Maybe<Scalars['String']['output']>;
+  projectId?: Maybe<Scalars['String']['output']>;
+  resolvedAt?: Maybe<Scalars['DateTime']['output']>;
+  resourceId?: Maybe<Scalars['String']['output']>;
+  resourceType?: Maybe<Scalars['String']['output']>;
+  serviceId?: Maybe<Scalars['String']['output']>;
   severity: NotificationSeverity;
   status: NotificationStatus;
   updatedAt: Scalars['DateTime']['output'];
-  volumeId: Maybe<Scalars['String']['output']>;
+  volumeId?: Maybe<Scalars['String']['output']>;
   workspaceId: Scalars['String']['output'];
 };
 
@@ -2485,8 +2485,8 @@ export type ObservabilityDashboardAlert = Node & {
   __typename?: 'ObservabilityDashboardAlert';
   createdAt: Scalars['DateTime']['output'];
   id: Scalars['ID']['output'];
-  resolvedAt: Maybe<Scalars['DateTime']['output']>;
-  resourceId: Maybe<Scalars['String']['output']>;
+  resolvedAt?: Maybe<Scalars['DateTime']['output']>;
+  resourceId?: Maybe<Scalars['String']['output']>;
   resourceType: MonitorAlertResourceType;
   status: MonitorStatus;
 };
@@ -2494,13 +2494,13 @@ export type ObservabilityDashboardAlert = Node & {
 export type ObservabilityDashboardCreateInput = {
   environmentId: Scalars['String']['input'];
   /** If no items are provided, a default dashboard will be created. */
-  items: InputMaybe<Array<ObservabilityDashboardUpdateInput>>;
+  items?: InputMaybe<Array<ObservabilityDashboardUpdateInput>>;
 };
 
 export type ObservabilityDashboardItem = Node & {
   __typename?: 'ObservabilityDashboardItem';
   config: ObservabilityDashboardItemConfig;
-  description: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
   monitors: Array<ObservabilityDashboardMonitor>;
   name: Scalars['String']['output'];
@@ -2509,22 +2509,22 @@ export type ObservabilityDashboardItem = Node & {
 
 export type ObservabilityDashboardItemConfig = {
   __typename?: 'ObservabilityDashboardItemConfig';
-  logsFilter: Maybe<Scalars['String']['output']>;
-  measurements: Maybe<Array<MetricMeasurement>>;
-  projectUsageProperties: Maybe<Array<ProjectUsageProperty>>;
-  resourceIds: Maybe<Array<Scalars['String']['output']>>;
+  logsFilter?: Maybe<Scalars['String']['output']>;
+  measurements?: Maybe<Array<MetricMeasurement>>;
+  projectUsageProperties?: Maybe<Array<ProjectUsageProperty>>;
+  resourceIds?: Maybe<Array<Scalars['String']['output']>>;
 };
 
 export type ObservabilityDashboardItemConfigInput = {
-  logsFilter: InputMaybe<Scalars['String']['input']>;
-  measurements: InputMaybe<Array<MetricMeasurement>>;
-  projectUsageProperties: InputMaybe<Array<ProjectUsageProperty>>;
-  resourceIds: InputMaybe<Array<Scalars['String']['input']>>;
+  logsFilter?: InputMaybe<Scalars['String']['input']>;
+  measurements?: InputMaybe<Array<MetricMeasurement>>;
+  projectUsageProperties?: InputMaybe<Array<ProjectUsageProperty>>;
+  resourceIds?: InputMaybe<Array<Scalars['String']['input']>>;
 };
 
 export type ObservabilityDashboardItemCreateInput = {
   config: ObservabilityDashboardItemConfigInput;
-  description: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
   id: Scalars['String']['input'];
   name: Scalars['String']['input'];
   type: ObservabilityDashboardItemType;
@@ -2554,8 +2554,8 @@ export type ObservabilityDashboardMonitor = Node & {
 
 
 export type ObservabilityDashboardMonitorAlertsArgs = {
-  endDate: InputMaybe<Scalars['DateTime']['input']>;
-  startDate: InputMaybe<Scalars['DateTime']['input']>;
+  endDate?: InputMaybe<Scalars['DateTime']['input']>;
+  startDate?: InputMaybe<Scalars['DateTime']['input']>;
 };
 
 export type ObservabilityDashboardMonitorConfig = MonitorThresholdConfig;
@@ -2575,38 +2575,38 @@ export type OverrideInput = {
 
 export type PageInfo = {
   __typename?: 'PageInfo';
-  endCursor: Maybe<Scalars['String']['output']>;
+  endCursor?: Maybe<Scalars['String']['output']>;
   hasNextPage: Scalars['Boolean']['output'];
   hasPreviousPage: Scalars['Boolean']['output'];
-  startCursor: Maybe<Scalars['String']['output']>;
+  startCursor?: Maybe<Scalars['String']['output']>;
 };
 
 export type Passkey = Node & {
   __typename?: 'Passkey';
-  aaguid: Maybe<Scalars['String']['output']>;
+  aaguid?: Maybe<Scalars['String']['output']>;
   backedUp: Scalars['Boolean']['output'];
   createdAt: Scalars['DateTime']['output'];
   credentialId: Scalars['String']['output'];
   deviceName: Scalars['String']['output'];
   deviceType: Scalars['String']['output'];
-  displayName: Maybe<Scalars['String']['output']>;
+  displayName?: Maybe<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
-  lastUsedAt: Maybe<Scalars['DateTime']['output']>;
-  lastUsedDevice: Maybe<Scalars['String']['output']>;
+  lastUsedAt?: Maybe<Scalars['DateTime']['output']>;
+  lastUsedDevice?: Maybe<Scalars['String']['output']>;
   transports: Array<Scalars['String']['output']>;
   updatedAt: Scalars['DateTime']['output'];
 };
 
 export type PaymentMethod = {
   __typename?: 'PaymentMethod';
-  card: Maybe<PaymentMethodCard>;
+  card?: Maybe<PaymentMethodCard>;
   id: Scalars['String']['output'];
 };
 
 export type PaymentMethodCard = {
   __typename?: 'PaymentMethodCard';
   brand: Scalars['String']['output'];
-  country: Maybe<Scalars['String']['output']>;
+  country?: Maybe<Scalars['String']['output']>;
   last4: Scalars['String']['output'];
 };
 
@@ -2650,21 +2650,21 @@ export type PlatformFeatureFlagType =
 
 export type PlatformStatus = {
   __typename?: 'PlatformStatus';
-  incident: Maybe<Incident>;
+  incident?: Maybe<Incident>;
   isStable: Scalars['Boolean']['output'];
-  maintenance: Maybe<Maintenance>;
+  maintenance?: Maybe<Maintenance>;
 };
 
 export type Plugin = Node & {
   __typename?: 'Plugin';
   containers: PluginContainersConnection;
   createdAt: Scalars['DateTime']['output'];
-  deletedAt: Maybe<Scalars['DateTime']['output']>;
-  deprecatedAt: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  deprecatedAt?: Maybe<Scalars['DateTime']['output']>;
   friendlyName: Scalars['String']['output'];
   id: Scalars['ID']['output'];
   logsEnabled: Scalars['Boolean']['output'];
-  migrationDatabaseServiceId: Maybe<Scalars['String']['output']>;
+  migrationDatabaseServiceId?: Maybe<Scalars['String']['output']>;
   name: PluginType;
   project: Project;
   status: PluginStatus;
@@ -2673,18 +2673,18 @@ export type Plugin = Node & {
 
 
 export type PluginContainersArgs = {
-  after: InputMaybe<Scalars['String']['input']>;
-  before: InputMaybe<Scalars['String']['input']>;
-  first: InputMaybe<Scalars['Int']['input']>;
-  last: InputMaybe<Scalars['Int']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
 export type PluginVariablesArgs = {
-  after: InputMaybe<Scalars['String']['input']>;
-  before: InputMaybe<Scalars['String']['input']>;
-  first: InputMaybe<Scalars['Int']['input']>;
-  last: InputMaybe<Scalars['Int']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type PluginContainersConnection = {
@@ -2700,14 +2700,14 @@ export type PluginContainersConnectionEdge = {
 };
 
 export type PluginCreateInput = {
-  environmentId: InputMaybe<Scalars['String']['input']>;
-  friendlyName: InputMaybe<Scalars['String']['input']>;
+  environmentId?: InputMaybe<Scalars['String']['input']>;
+  friendlyName?: InputMaybe<Scalars['String']['input']>;
   name: Scalars['String']['input'];
   projectId: Scalars['String']['input'];
 };
 
 export type PluginRestartInput = {
-  environmentId: InputMaybe<Scalars['String']['input']>;
+  environmentId?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type PluginStatus =
@@ -2766,27 +2766,27 @@ export type Preferences = Node & {
   ephemeralEnvironmentEmail: Scalars['Boolean']['output'];
   id: Scalars['ID']['output'];
   marketingEmail: Scalars['Boolean']['output'];
-  preferenceOverrides: Maybe<Array<PreferenceOverride>>;
+  preferenceOverrides?: Maybe<Array<PreferenceOverride>>;
   subprocessorUpdatesEmail: Scalars['Boolean']['output'];
   usageEmail: Scalars['Boolean']['output'];
 };
 
 export type PreferencesUpdateData = {
-  buildFailedEmail: InputMaybe<Scalars['Boolean']['input']>;
-  changelogEmail: InputMaybe<Scalars['Boolean']['input']>;
-  communityEmail: InputMaybe<Scalars['Boolean']['input']>;
-  deployCrashedEmail: InputMaybe<Scalars['Boolean']['input']>;
-  ephemeralEnvironmentEmail: InputMaybe<Scalars['Boolean']['input']>;
-  marketingEmail: InputMaybe<Scalars['Boolean']['input']>;
-  subprocessorUpdatesEmail: InputMaybe<Scalars['Boolean']['input']>;
-  token: InputMaybe<Scalars['String']['input']>;
-  usageEmail: InputMaybe<Scalars['Boolean']['input']>;
+  buildFailedEmail?: InputMaybe<Scalars['Boolean']['input']>;
+  changelogEmail?: InputMaybe<Scalars['Boolean']['input']>;
+  communityEmail?: InputMaybe<Scalars['Boolean']['input']>;
+  deployCrashedEmail?: InputMaybe<Scalars['Boolean']['input']>;
+  ephemeralEnvironmentEmail?: InputMaybe<Scalars['Boolean']['input']>;
+  marketingEmail?: InputMaybe<Scalars['Boolean']['input']>;
+  subprocessorUpdatesEmail?: InputMaybe<Scalars['Boolean']['input']>;
+  token?: InputMaybe<Scalars['String']['input']>;
+  usageEmail?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 export type PrivateNetwork = {
   __typename?: 'PrivateNetwork';
-  createdAt: Maybe<Scalars['DateTime']['output']>;
-  deletedAt: Maybe<Scalars['DateTime']['output']>;
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
   dnsName: Scalars['String']['output'];
   environmentId: Scalars['String']['output'];
   name: Scalars['String']['output'];
@@ -2805,8 +2805,8 @@ export type PrivateNetworkCreateOrGetInput = {
 
 export type PrivateNetworkEndpoint = {
   __typename?: 'PrivateNetworkEndpoint';
-  createdAt: Maybe<Scalars['DateTime']['output']>;
-  deletedAt: Maybe<Scalars['DateTime']['output']>;
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
   dnsName: Scalars['String']['output'];
   privateIps: Array<Scalars['String']['output']>;
   publicId: Scalars['String']['output'];
@@ -2824,16 +2824,16 @@ export type PrivateNetworkEndpointCreateOrGetInput = {
 
 export type Project = Node & {
   __typename?: 'Project';
-  baseEnvironment: Maybe<Environment>;
-  baseEnvironmentId: Maybe<Scalars['String']['output']>;
+  baseEnvironment?: Maybe<Environment>;
+  baseEnvironmentId?: Maybe<Scalars['String']['output']>;
   botPrEnvironments: Scalars['Boolean']['output'];
   createdAt: Scalars['DateTime']['output'];
-  deletedAt: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
   deploymentTriggers: ProjectDeploymentTriggersConnection;
   deployments: ProjectDeploymentsConnection;
-  description: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
   environments: ProjectEnvironmentsConnection;
-  expiredAt: Maybe<Scalars['DateTime']['output']>;
+  expiredAt?: Maybe<Scalars['DateTime']['output']>;
   groups: ProjectGroupsConnection;
   id: Scalars['ID']['output'];
   isPublic: Scalars['Boolean']['output'];
@@ -2848,98 +2848,98 @@ export type Project = Node & {
   subscriptionPlanLimit: Scalars['SubscriptionPlanLimit']['output'];
   subscriptionType: SubscriptionPlanType;
   /** @deprecated Use workspace */
-  team: Maybe<Team>;
+  team?: Maybe<Team>;
   /** @deprecated Use workspaceId */
-  teamId: Maybe<Scalars['String']['output']>;
+  teamId?: Maybe<Scalars['String']['output']>;
   updatedAt: Scalars['DateTime']['output'];
   volumes: ProjectVolumesConnection;
   webhooks: ProjectWebhooksConnection;
-  workspace: Maybe<Workspace>;
-  workspaceId: Maybe<Scalars['String']['output']>;
+  workspace?: Maybe<Workspace>;
+  workspaceId?: Maybe<Scalars['String']['output']>;
 };
 
 
 export type ProjectDeploymentTriggersArgs = {
-  after: InputMaybe<Scalars['String']['input']>;
-  before: InputMaybe<Scalars['String']['input']>;
-  first: InputMaybe<Scalars['Int']['input']>;
-  last: InputMaybe<Scalars['Int']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
 export type ProjectDeploymentsArgs = {
-  after: InputMaybe<Scalars['String']['input']>;
-  before: InputMaybe<Scalars['String']['input']>;
-  first: InputMaybe<Scalars['Int']['input']>;
-  last: InputMaybe<Scalars['Int']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
 export type ProjectEnvironmentsArgs = {
-  after: InputMaybe<Scalars['String']['input']>;
-  before: InputMaybe<Scalars['String']['input']>;
-  first: InputMaybe<Scalars['Int']['input']>;
-  last: InputMaybe<Scalars['Int']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
 export type ProjectGroupsArgs = {
-  after: InputMaybe<Scalars['String']['input']>;
-  before: InputMaybe<Scalars['String']['input']>;
-  first: InputMaybe<Scalars['Int']['input']>;
-  last: InputMaybe<Scalars['Int']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
 export type ProjectPluginsArgs = {
-  after: InputMaybe<Scalars['String']['input']>;
-  before: InputMaybe<Scalars['String']['input']>;
-  first: InputMaybe<Scalars['Int']['input']>;
-  last: InputMaybe<Scalars['Int']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
 export type ProjectProjectPermissionsArgs = {
-  after: InputMaybe<Scalars['String']['input']>;
-  before: InputMaybe<Scalars['String']['input']>;
-  first: InputMaybe<Scalars['Int']['input']>;
-  last: InputMaybe<Scalars['Int']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
 export type ProjectServicesArgs = {
-  after: InputMaybe<Scalars['String']['input']>;
-  before: InputMaybe<Scalars['String']['input']>;
-  first: InputMaybe<Scalars['Int']['input']>;
-  last: InputMaybe<Scalars['Int']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
 export type ProjectVolumesArgs = {
-  after: InputMaybe<Scalars['String']['input']>;
-  before: InputMaybe<Scalars['String']['input']>;
-  first: InputMaybe<Scalars['Int']['input']>;
-  last: InputMaybe<Scalars['Int']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
 export type ProjectWebhooksArgs = {
-  after: InputMaybe<Scalars['String']['input']>;
-  before: InputMaybe<Scalars['String']['input']>;
-  first: InputMaybe<Scalars['Int']['input']>;
-  last: InputMaybe<Scalars['Int']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type ProjectCreateInput = {
-  defaultEnvironmentName: InputMaybe<Scalars['String']['input']>;
-  description: InputMaybe<Scalars['String']['input']>;
-  isMonorepo: InputMaybe<Scalars['Boolean']['input']>;
-  isPublic: InputMaybe<Scalars['Boolean']['input']>;
-  name: InputMaybe<Scalars['String']['input']>;
-  prDeploys: InputMaybe<Scalars['Boolean']['input']>;
-  repo: InputMaybe<ProjectCreateRepo>;
-  runtime: InputMaybe<PublicRuntime>;
-  workspaceId: InputMaybe<Scalars['String']['input']>;
+  defaultEnvironmentName?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  isMonorepo?: InputMaybe<Scalars['Boolean']['input']>;
+  isPublic?: InputMaybe<Scalars['Boolean']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  prDeploys?: InputMaybe<Scalars['Boolean']['input']>;
+  repo?: InputMaybe<ProjectCreateRepo>;
+  runtime?: InputMaybe<PublicRuntime>;
+  workspaceId?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type ProjectCreateRepo = {
@@ -2999,7 +2999,7 @@ export type ProjectInvitation = {
   email: Scalars['String']['output'];
   expiresAt: Scalars['DateTime']['output'];
   id: Scalars['ID']['output'];
-  inviter: Maybe<ProjectInvitationInviter>;
+  inviter?: Maybe<ProjectInvitationInviter>;
   isExpired: Scalars['Boolean']['output'];
   project: PublicProjectInformation;
 };
@@ -3007,7 +3007,7 @@ export type ProjectInvitation = {
 export type ProjectInvitationInviter = {
   __typename?: 'ProjectInvitationInviter';
   email: Scalars['String']['output'];
-  name: Maybe<Scalars['String']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
 };
 
 export type ProjectInviteUserInput = {
@@ -3022,10 +3022,10 @@ export type ProjectInvitee = {
 
 export type ProjectMember = {
   __typename?: 'ProjectMember';
-  avatar: Maybe<Scalars['String']['output']>;
+  avatar?: Maybe<Scalars['String']['output']>;
   email: Scalars['String']['output'];
   id: Scalars['String']['output'];
-  name: Maybe<Scalars['String']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
   role: ProjectRole;
 };
 
@@ -3118,7 +3118,7 @@ export type ProjectTokenCreateInput = {
 };
 
 export type ProjectTransferConfirmInput = {
-  destinationWorkspaceId: InputMaybe<Scalars['String']['input']>;
+  destinationWorkspaceId?: InputMaybe<Scalars['String']['input']>;
   ownershipTransferId: Scalars['String']['input'];
   projectId: Scalars['String']['input'];
 };
@@ -3137,13 +3137,13 @@ export type ProjectTransferToTeamInput = {
 };
 
 export type ProjectUpdateInput = {
-  baseEnvironmentId: InputMaybe<Scalars['String']['input']>;
+  baseEnvironmentId?: InputMaybe<Scalars['String']['input']>;
   /** Enable/disable pull request environments for PRs created by bots */
-  botPrEnvironments: InputMaybe<Scalars['Boolean']['input']>;
-  description: InputMaybe<Scalars['String']['input']>;
-  isPublic: InputMaybe<Scalars['Boolean']['input']>;
-  name: InputMaybe<Scalars['String']['input']>;
-  prDeploys: InputMaybe<Scalars['Boolean']['input']>;
+  botPrEnvironments?: InputMaybe<Scalars['Boolean']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  isPublic?: InputMaybe<Scalars['Boolean']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  prDeploys?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 export type ProjectUsageProperty =
@@ -3169,9 +3169,9 @@ export type ProjectVolumesConnectionEdge = {
 
 export type ProjectWebhook = Node & {
   __typename?: 'ProjectWebhook';
-  filters: Maybe<Array<Scalars['String']['output']>>;
+  filters?: Maybe<Array<Scalars['String']['output']>>;
   id: Scalars['ID']['output'];
-  lastStatus: Maybe<Scalars['Int']['output']>;
+  lastStatus?: Maybe<Scalars['Int']['output']>;
   projectId: Scalars['String']['output'];
   url: Scalars['String']['output'];
 };
@@ -3246,7 +3246,7 @@ export type Query = {
   /** Fetch logs for a deployment */
   deploymentLogs: Array<Log>;
   /** Find a single DeploymentSnapshot */
-  deploymentSnapshot: Maybe<DeploymentSnapshot>;
+  deploymentSnapshot?: Maybe<DeploymentSnapshot>;
   /** All deployment triggers. */
   deploymentTriggers: QueryDeploymentTriggersConnection;
   /** Get all deployments */
@@ -3310,7 +3310,7 @@ export type Query = {
   me: User;
   /** Get metrics for a project, environment, and service */
   metrics: Array<MetricsResult>;
-  node: Maybe<Node>;
+  node?: Maybe<Node>;
   nodes: Array<Maybe<Node>>;
   /** Gets notification deliveries for the authenticated user */
   notificationDeliveries: QueryNotificationDeliveriesConnection;
@@ -3333,7 +3333,7 @@ export type Query = {
   /** Get the email preferences for a user */
   preferences: Preferences;
   /** Get a private network endpoint for a service instance. */
-  privateNetworkEndpoint: Maybe<PrivateNetworkEndpoint>;
+  privateNetworkEndpoint?: Maybe<PrivateNetworkEndpoint>;
   /** Check if an endpoint name is available. */
   privateNetworkEndpointNameAvailable: Scalars['Boolean']['output'];
   /** List private networks for an environment. */
@@ -3373,7 +3373,7 @@ export type Query = {
   /** Check if the upstream repo for a service has an update available */
   serviceInstanceIsUpdatable: Scalars['Boolean']['output'];
   /** Get the service instance resource limit overrides (null if no overrides set) */
-  serviceInstanceLimitOverride: Maybe<Scalars['ServiceInstanceLimit']['output']>;
+  serviceInstanceLimitOverride?: Maybe<Scalars['ServiceInstanceLimit']['output']>;
   /** Get the merged resource limits for a service instance (includes plan defaults) */
   serviceInstanceLimits: Scalars['ServiceInstanceLimit']['output'];
   /** Gets all sessions for authenticated user. */
@@ -3393,7 +3393,7 @@ export type Query = {
   /** Get a template by code or ID or GitHub owner and repo. */
   template: Template;
   /** Get the source template for a project. */
-  templateSourceForProject: Maybe<Template>;
+  templateSourceForProject?: Maybe<Template>;
   /** Get all published templates. */
   templates: QueryTemplatesConnection;
   /** Count all published templates. */
@@ -3449,19 +3449,19 @@ export type QueryAdminVolumeInstancesForVolumeArgs = {
 
 
 export type QueryApiTokensArgs = {
-  after: InputMaybe<Scalars['String']['input']>;
-  before: InputMaybe<Scalars['String']['input']>;
-  first: InputMaybe<Scalars['Int']['input']>;
-  last: InputMaybe<Scalars['Int']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
 export type QueryBuildLogsArgs = {
   deploymentId: Scalars['String']['input'];
-  endDate: InputMaybe<Scalars['DateTime']['input']>;
-  filter: InputMaybe<Scalars['String']['input']>;
-  limit: InputMaybe<Scalars['Int']['input']>;
-  startDate: InputMaybe<Scalars['DateTime']['input']>;
+  endDate?: InputMaybe<Scalars['DateTime']['input']>;
+  filter?: InputMaybe<Scalars['String']['input']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  startDate?: InputMaybe<Scalars['DateTime']['input']>;
 };
 
 
@@ -3487,29 +3487,29 @@ export type QueryDeploymentArgs = {
 
 
 export type QueryDeploymentEventsArgs = {
-  after: InputMaybe<Scalars['String']['input']>;
-  before: InputMaybe<Scalars['String']['input']>;
-  first: InputMaybe<Scalars['Int']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
   id: Scalars['String']['input'];
-  last: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
 export type QueryDeploymentInstanceExecutionsArgs = {
-  after: InputMaybe<Scalars['String']['input']>;
-  before: InputMaybe<Scalars['String']['input']>;
-  first: InputMaybe<Scalars['Int']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
   input: DeploymentInstanceExecutionListInput;
-  last: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
 export type QueryDeploymentLogsArgs = {
   deploymentId: Scalars['String']['input'];
-  endDate: InputMaybe<Scalars['DateTime']['input']>;
-  filter: InputMaybe<Scalars['String']['input']>;
-  limit: InputMaybe<Scalars['Int']['input']>;
-  startDate: InputMaybe<Scalars['DateTime']['input']>;
+  endDate?: InputMaybe<Scalars['DateTime']['input']>;
+  filter?: InputMaybe<Scalars['String']['input']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  startDate?: InputMaybe<Scalars['DateTime']['input']>;
 };
 
 
@@ -3519,22 +3519,22 @@ export type QueryDeploymentSnapshotArgs = {
 
 
 export type QueryDeploymentTriggersArgs = {
-  after: InputMaybe<Scalars['String']['input']>;
-  before: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
   environmentId: Scalars['String']['input'];
-  first: InputMaybe<Scalars['Int']['input']>;
-  last: InputMaybe<Scalars['Int']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
   projectId: Scalars['String']['input'];
   serviceId: Scalars['String']['input'];
 };
 
 
 export type QueryDeploymentsArgs = {
-  after: InputMaybe<Scalars['String']['input']>;
-  before: InputMaybe<Scalars['String']['input']>;
-  first: InputMaybe<Scalars['Int']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
   input: DeploymentListInput;
-  last: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
@@ -3559,18 +3559,18 @@ export type QueryEgressGatewaysArgs = {
 
 export type QueryEnvironmentArgs = {
   id: Scalars['String']['input'];
-  projectId: InputMaybe<Scalars['String']['input']>;
+  projectId?: InputMaybe<Scalars['String']['input']>;
 };
 
 
 export type QueryEnvironmentLogsArgs = {
-  afterDate: InputMaybe<Scalars['String']['input']>;
-  afterLimit: InputMaybe<Scalars['Int']['input']>;
-  anchorDate: InputMaybe<Scalars['String']['input']>;
-  beforeDate: InputMaybe<Scalars['String']['input']>;
-  beforeLimit: InputMaybe<Scalars['Int']['input']>;
+  afterDate?: InputMaybe<Scalars['String']['input']>;
+  afterLimit?: InputMaybe<Scalars['Int']['input']>;
+  anchorDate?: InputMaybe<Scalars['String']['input']>;
+  beforeDate?: InputMaybe<Scalars['String']['input']>;
+  beforeLimit?: InputMaybe<Scalars['Int']['input']>;
   environmentId: Scalars['String']['input'];
-  filter: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<Scalars['String']['input']>;
 };
 
 
@@ -3580,11 +3580,11 @@ export type QueryEnvironmentPatchArgs = {
 
 
 export type QueryEnvironmentPatchesArgs = {
-  after: InputMaybe<Scalars['String']['input']>;
-  before: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
   environmentId: Scalars['String']['input'];
-  first: InputMaybe<Scalars['Int']['input']>;
-  last: InputMaybe<Scalars['Int']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
@@ -3594,36 +3594,36 @@ export type QueryEnvironmentStagedChangesArgs = {
 
 
 export type QueryEnvironmentsArgs = {
-  after: InputMaybe<Scalars['String']['input']>;
-  before: InputMaybe<Scalars['String']['input']>;
-  first: InputMaybe<Scalars['Int']['input']>;
-  isEphemeral: InputMaybe<Scalars['Boolean']['input']>;
-  last: InputMaybe<Scalars['Int']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  isEphemeral?: InputMaybe<Scalars['Boolean']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
   projectId: Scalars['String']['input'];
 };
 
 
 export type QueryEstimatedUsageArgs = {
-  includeDeleted: InputMaybe<Scalars['Boolean']['input']>;
+  includeDeleted?: InputMaybe<Scalars['Boolean']['input']>;
   measurements: Array<MetricMeasurement>;
-  projectId: InputMaybe<Scalars['String']['input']>;
-  workspaceId: InputMaybe<Scalars['String']['input']>;
+  projectId?: InputMaybe<Scalars['String']['input']>;
+  workspaceId?: InputMaybe<Scalars['String']['input']>;
 };
 
 
 export type QueryEventsArgs = {
-  after: InputMaybe<Scalars['String']['input']>;
-  before: InputMaybe<Scalars['String']['input']>;
-  environmentId: InputMaybe<Scalars['String']['input']>;
-  filter: InputMaybe<EventFilterInput>;
-  first: InputMaybe<Scalars['Int']['input']>;
-  last: InputMaybe<Scalars['Int']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  environmentId?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<EventFilterInput>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
   projectId: Scalars['String']['input'];
 };
 
 
 export type QueryExternalWorkspacesArgs = {
-  projectId: InputMaybe<Scalars['String']['input']>;
+  projectId?: InputMaybe<Scalars['String']['input']>;
 };
 
 
@@ -3654,16 +3654,16 @@ export type QueryGithubRepoBranchesArgs = {
 
 
 export type QueryHttpLogsArgs = {
-  afterDate: InputMaybe<Scalars['String']['input']>;
-  afterLimit: InputMaybe<Scalars['Int']['input']>;
-  anchorDate: InputMaybe<Scalars['String']['input']>;
-  beforeDate: InputMaybe<Scalars['String']['input']>;
-  beforeLimit: InputMaybe<Scalars['Int']['input']>;
+  afterDate?: InputMaybe<Scalars['String']['input']>;
+  afterLimit?: InputMaybe<Scalars['Int']['input']>;
+  anchorDate?: InputMaybe<Scalars['String']['input']>;
+  beforeDate?: InputMaybe<Scalars['String']['input']>;
+  beforeLimit?: InputMaybe<Scalars['Int']['input']>;
   deploymentId: Scalars['String']['input'];
-  endDate: InputMaybe<Scalars['String']['input']>;
-  filter: InputMaybe<Scalars['String']['input']>;
-  limit: InputMaybe<Scalars['Int']['input']>;
-  startDate: InputMaybe<Scalars['String']['input']>;
+  endDate?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<Scalars['String']['input']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  startDate?: InputMaybe<Scalars['String']['input']>;
 };
 
 
@@ -3674,18 +3674,18 @@ export type QueryIntegrationAuthArgs = {
 
 
 export type QueryIntegrationAuthsArgs = {
-  after: InputMaybe<Scalars['String']['input']>;
-  before: InputMaybe<Scalars['String']['input']>;
-  first: InputMaybe<Scalars['Int']['input']>;
-  last: InputMaybe<Scalars['Int']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
 export type QueryIntegrationsArgs = {
-  after: InputMaybe<Scalars['String']['input']>;
-  before: InputMaybe<Scalars['String']['input']>;
-  first: InputMaybe<Scalars['Int']['input']>;
-  last: InputMaybe<Scalars['Int']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
   projectId: Scalars['String']['input'];
 };
 
@@ -3696,19 +3696,19 @@ export type QueryInviteCodeArgs = {
 
 
 export type QueryMetricsArgs = {
-  averagingWindowSeconds: InputMaybe<Scalars['Int']['input']>;
-  endDate: InputMaybe<Scalars['DateTime']['input']>;
-  environmentId: InputMaybe<Scalars['String']['input']>;
-  groupBy: InputMaybe<Array<MetricTag>>;
-  includeDeleted: InputMaybe<Scalars['Boolean']['input']>;
+  averagingWindowSeconds?: InputMaybe<Scalars['Int']['input']>;
+  endDate?: InputMaybe<Scalars['DateTime']['input']>;
+  environmentId?: InputMaybe<Scalars['String']['input']>;
+  groupBy?: InputMaybe<Array<MetricTag>>;
+  includeDeleted?: InputMaybe<Scalars['Boolean']['input']>;
   measurements: Array<MetricMeasurement>;
-  projectId: InputMaybe<Scalars['String']['input']>;
-  sampleRateSeconds: InputMaybe<Scalars['Int']['input']>;
-  serviceId: InputMaybe<Scalars['String']['input']>;
+  projectId?: InputMaybe<Scalars['String']['input']>;
+  sampleRateSeconds?: InputMaybe<Scalars['Int']['input']>;
+  serviceId?: InputMaybe<Scalars['String']['input']>;
   startDate: Scalars['DateTime']['input'];
-  volumeId: InputMaybe<Scalars['String']['input']>;
-  volumeInstanceExternalId: InputMaybe<Scalars['String']['input']>;
-  workspaceId: InputMaybe<Scalars['String']['input']>;
+  volumeId?: InputMaybe<Scalars['String']['input']>;
+  volumeInstanceExternalId?: InputMaybe<Scalars['String']['input']>;
+  workspaceId?: InputMaybe<Scalars['String']['input']>;
 };
 
 
@@ -3723,28 +3723,28 @@ export type QueryNodesArgs = {
 
 
 export type QueryNotificationDeliveriesArgs = {
-  after: InputMaybe<Scalars['String']['input']>;
-  before: InputMaybe<Scalars['String']['input']>;
-  filter: InputMaybe<NotificationDeliveryFilterInput>;
-  first: InputMaybe<Scalars['Int']['input']>;
-  last: InputMaybe<Scalars['Int']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<NotificationDeliveryFilterInput>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
 export type QueryObservabilityDashboardsArgs = {
-  after: InputMaybe<Scalars['String']['input']>;
-  before: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
   environmentId: Scalars['String']['input'];
-  first: InputMaybe<Scalars['Int']['input']>;
-  last: InputMaybe<Scalars['Int']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
 export type QueryPasskeysArgs = {
-  after: InputMaybe<Scalars['String']['input']>;
-  before: InputMaybe<Scalars['String']['input']>;
-  first: InputMaybe<Scalars['Int']['input']>;
-  last: InputMaybe<Scalars['Int']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
@@ -3754,17 +3754,17 @@ export type QueryPluginArgs = {
 
 
 export type QueryPluginLogsArgs = {
-  endDate: InputMaybe<Scalars['DateTime']['input']>;
+  endDate?: InputMaybe<Scalars['DateTime']['input']>;
   environmentId: Scalars['String']['input'];
-  filter: InputMaybe<Scalars['String']['input']>;
-  limit: InputMaybe<Scalars['Int']['input']>;
+  filter?: InputMaybe<Scalars['String']['input']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
   pluginId: Scalars['String']['input'];
-  startDate: InputMaybe<Scalars['DateTime']['input']>;
+  startDate?: InputMaybe<Scalars['DateTime']['input']>;
 };
 
 
 export type QueryPreferencesArgs = {
-  token: InputMaybe<Scalars['String']['input']>;
+  token?: InputMaybe<Scalars['String']['input']>;
 };
 
 
@@ -3819,22 +3819,22 @@ export type QueryProjectResourceAccessArgs = {
 
 
 export type QueryProjectTokensArgs = {
-  after: InputMaybe<Scalars['String']['input']>;
-  before: InputMaybe<Scalars['String']['input']>;
-  first: InputMaybe<Scalars['Int']['input']>;
-  last: InputMaybe<Scalars['Int']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
   projectId: Scalars['String']['input'];
 };
 
 
 export type QueryProjectsArgs = {
-  after: InputMaybe<Scalars['String']['input']>;
-  before: InputMaybe<Scalars['String']['input']>;
-  first: InputMaybe<Scalars['Int']['input']>;
-  includeDeleted: InputMaybe<Scalars['Boolean']['input']>;
-  last: InputMaybe<Scalars['Int']['input']>;
-  userId: InputMaybe<Scalars['String']['input']>;
-  workspaceId: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  includeDeleted?: InputMaybe<Scalars['Boolean']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  userId?: InputMaybe<Scalars['String']['input']>;
+  workspaceId?: InputMaybe<Scalars['String']['input']>;
 };
 
 
@@ -3844,7 +3844,7 @@ export type QueryReferralInfoArgs = {
 
 
 export type QueryRegionsArgs = {
-  projectId: InputMaybe<Scalars['String']['input']>;
+  projectId?: InputMaybe<Scalars['String']['input']>;
 };
 
 
@@ -3888,10 +3888,10 @@ export type QueryServiceInstanceLimitsArgs = {
 
 
 export type QuerySessionsArgs = {
-  after: InputMaybe<Scalars['String']['input']>;
-  before: InputMaybe<Scalars['String']['input']>;
-  first: InputMaybe<Scalars['Int']['input']>;
-  last: InputMaybe<Scalars['Int']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
@@ -3907,19 +3907,19 @@ export type QueryTeamArgs = {
 
 
 export type QueryTeamTemplatesArgs = {
-  after: InputMaybe<Scalars['String']['input']>;
-  before: InputMaybe<Scalars['String']['input']>;
-  first: InputMaybe<Scalars['Int']['input']>;
-  last: InputMaybe<Scalars['Int']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
   teamId: Scalars['String']['input'];
 };
 
 
 export type QueryTemplateArgs = {
-  code: InputMaybe<Scalars['String']['input']>;
-  id: InputMaybe<Scalars['String']['input']>;
-  owner: InputMaybe<Scalars['String']['input']>;
-  repo: InputMaybe<Scalars['String']['input']>;
+  code?: InputMaybe<Scalars['String']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  owner?: InputMaybe<Scalars['String']['input']>;
+  repo?: InputMaybe<Scalars['String']['input']>;
 };
 
 
@@ -3929,32 +3929,32 @@ export type QueryTemplateSourceForProjectArgs = {
 
 
 export type QueryTemplatesArgs = {
-  after: InputMaybe<Scalars['String']['input']>;
-  before: InputMaybe<Scalars['String']['input']>;
-  first: InputMaybe<Scalars['Int']['input']>;
-  last: InputMaybe<Scalars['Int']['input']>;
-  recommended: InputMaybe<Scalars['Boolean']['input']>;
-  verified: InputMaybe<Scalars['Boolean']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  recommended?: InputMaybe<Scalars['Boolean']['input']>;
+  verified?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 
 export type QueryTrustedDomainsArgs = {
-  after: InputMaybe<Scalars['String']['input']>;
-  before: InputMaybe<Scalars['String']['input']>;
-  first: InputMaybe<Scalars['Int']['input']>;
-  last: InputMaybe<Scalars['Int']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
   workspaceId: Scalars['String']['input'];
 };
 
 
 export type QueryUsageArgs = {
-  endDate: InputMaybe<Scalars['DateTime']['input']>;
-  groupBy: InputMaybe<Array<MetricTag>>;
-  includeDeleted: InputMaybe<Scalars['Boolean']['input']>;
+  endDate?: InputMaybe<Scalars['DateTime']['input']>;
+  groupBy?: InputMaybe<Array<MetricTag>>;
+  includeDeleted?: InputMaybe<Scalars['Boolean']['input']>;
   measurements: Array<MetricMeasurement>;
-  projectId: InputMaybe<Scalars['String']['input']>;
-  startDate: InputMaybe<Scalars['DateTime']['input']>;
-  workspaceId: InputMaybe<Scalars['String']['input']>;
+  projectId?: InputMaybe<Scalars['String']['input']>;
+  startDate?: InputMaybe<Scalars['DateTime']['input']>;
+  workspaceId?: InputMaybe<Scalars['String']['input']>;
 };
 
 
@@ -3969,18 +3969,18 @@ export type QueryUserProfileArgs = {
 
 
 export type QueryUserTemplatesArgs = {
-  after: InputMaybe<Scalars['String']['input']>;
-  before: InputMaybe<Scalars['String']['input']>;
-  first: InputMaybe<Scalars['Int']['input']>;
-  last: InputMaybe<Scalars['Int']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
 export type QueryVariablesArgs = {
   environmentId: Scalars['String']['input'];
   projectId: Scalars['String']['input'];
-  serviceId: InputMaybe<Scalars['String']['input']>;
-  unrendered: InputMaybe<Scalars['Boolean']['input']>;
+  serviceId?: InputMaybe<Scalars['String']['input']>;
+  unrendered?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 
@@ -4007,10 +4007,10 @@ export type QueryVolumeInstanceBackupScheduleListArgs = {
 
 
 export type QueryWebhooksArgs = {
-  after: InputMaybe<Scalars['String']['input']>;
-  before: InputMaybe<Scalars['String']['input']>;
-  first: InputMaybe<Scalars['Int']['input']>;
-  last: InputMaybe<Scalars['Int']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
   projectId: Scalars['String']['input'];
 };
 
@@ -4031,19 +4031,19 @@ export type QueryWorkspaceByCodeArgs = {
 
 
 export type QueryWorkspaceIdentityProvidersArgs = {
-  after: InputMaybe<Scalars['String']['input']>;
-  before: InputMaybe<Scalars['String']['input']>;
-  first: InputMaybe<Scalars['Int']['input']>;
-  last: InputMaybe<Scalars['Int']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
   workspaceId: Scalars['String']['input'];
 };
 
 
 export type QueryWorkspaceTemplatesArgs = {
-  after: InputMaybe<Scalars['String']['input']>;
-  before: InputMaybe<Scalars['String']['input']>;
-  first: InputMaybe<Scalars['Int']['input']>;
-  last: InputMaybe<Scalars['Int']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
   workspaceId: Scalars['String']['input'];
 };
 
@@ -4325,7 +4325,7 @@ export type QueryWorkspaceTemplatesConnectionEdge = {
 
 export type RecoveryCodeValidateInput = {
   code: Scalars['String']['input'];
-  twoFactorLinkingKey: InputMaybe<Scalars['String']['input']>;
+  twoFactorLinkingKey?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type RecoveryCodes = {
@@ -4367,12 +4367,12 @@ export type ReferralUser = {
 export type RefundRequest = Node & {
   __typename?: 'RefundRequest';
   amount: Scalars['Int']['output'];
-  decision: Maybe<RefundRequestDecisionEnum>;
+  decision?: Maybe<RefundRequestDecisionEnum>;
   id: Scalars['ID']['output'];
   invoiceId: Scalars['String']['output'];
-  plainThreadId: Maybe<Scalars['String']['output']>;
+  plainThreadId?: Maybe<Scalars['String']['output']>;
   reason: Scalars['String']['output'];
-  userId: Maybe<Scalars['String']['output']>;
+  userId?: Maybe<Scalars['String']['output']>;
   workspace: Workspace;
 };
 
@@ -4386,24 +4386,24 @@ export type Region = {
   __typename?: 'Region';
   /** Region country */
   country: Scalars['String']['output'];
-  deploymentConstraints: Maybe<RegionDeploymentConstraints>;
+  deploymentConstraints?: Maybe<RegionDeploymentConstraints>;
   location: Scalars['String']['output'];
   name: Scalars['String']['output'];
   /** Region is on Railway Metal */
-  railwayMetal: Maybe<Scalars['Boolean']['output']>;
-  region: Maybe<Scalars['String']['output']>;
-  workspaceId: Maybe<Scalars['String']['output']>;
+  railwayMetal?: Maybe<Scalars['Boolean']['output']>;
+  region?: Maybe<Scalars['String']['output']>;
+  workspaceId?: Maybe<Scalars['String']['output']>;
 };
 
 export type RegionDeploymentConstraints = {
   __typename?: 'RegionDeploymentConstraints';
   /** Admin only region */
-  adminOnly: Maybe<Scalars['Boolean']['output']>;
+  adminOnly?: Maybe<Scalars['Boolean']['output']>;
   /** Deprecation information for the region */
-  deprecationInfo: Maybe<RegionDeprecationInfo>;
-  runtimeExclusivity: Maybe<Array<Scalars['String']['output']>>;
+  deprecationInfo?: Maybe<RegionDeprecationInfo>;
+  runtimeExclusivity?: Maybe<Array<Scalars['String']['output']>>;
   /** Staging only region */
-  stagingOnly: Maybe<Scalars['Boolean']['output']>;
+  stagingOnly?: Maybe<Scalars['Boolean']['output']>;
 };
 
 export type RegionDeprecationInfo = {
@@ -4429,7 +4429,7 @@ export type ReissuedInvoice = Node & {
   __typename?: 'ReissuedInvoice';
   id: Scalars['ID']['output'];
   originalInvoiceId: Scalars['String']['output'];
-  reissuedInvoiceId: Maybe<Scalars['String']['output']>;
+  reissuedInvoiceId?: Maybe<Scalars['String']['output']>;
   workspace: Workspace;
   workspaceId: Scalars['String']['output'];
 };
@@ -4474,65 +4474,65 @@ export type RestartPolicyType =
 export type Service = Node & {
   __typename?: 'Service';
   createdAt: Scalars['DateTime']['output'];
-  deletedAt: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
   deployments: ServiceDeploymentsConnection;
   featureFlags: Array<ActiveServiceFeatureFlag>;
-  icon: Maybe<Scalars['String']['output']>;
+  icon?: Maybe<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
   name: Scalars['String']['output'];
   project: Project;
   projectId: Scalars['String']['output'];
   repoTriggers: ServiceRepoTriggersConnection;
   serviceInstances: ServiceServiceInstancesConnection;
-  templateServiceId: Maybe<Scalars['String']['output']>;
-  templateThreadSlug: Maybe<Scalars['String']['output']>;
+  templateServiceId?: Maybe<Scalars['String']['output']>;
+  templateThreadSlug?: Maybe<Scalars['String']['output']>;
   updatedAt: Scalars['DateTime']['output'];
 };
 
 
 export type ServiceDeploymentsArgs = {
-  after: InputMaybe<Scalars['String']['input']>;
-  before: InputMaybe<Scalars['String']['input']>;
-  first: InputMaybe<Scalars['Int']['input']>;
-  last: InputMaybe<Scalars['Int']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
 export type ServiceRepoTriggersArgs = {
-  after: InputMaybe<Scalars['String']['input']>;
-  before: InputMaybe<Scalars['String']['input']>;
-  first: InputMaybe<Scalars['Int']['input']>;
-  last: InputMaybe<Scalars['Int']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
 export type ServiceServiceInstancesArgs = {
-  after: InputMaybe<Scalars['String']['input']>;
-  before: InputMaybe<Scalars['String']['input']>;
-  first: InputMaybe<Scalars['Int']['input']>;
-  last: InputMaybe<Scalars['Int']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type ServiceConnectInput = {
   /** The branch to connect to. e.g. 'main' */
-  branch: InputMaybe<Scalars['String']['input']>;
+  branch?: InputMaybe<Scalars['String']['input']>;
   /** Name of the Dockerhub or GHCR image to connect this service to. */
-  image: InputMaybe<Scalars['String']['input']>;
+  image?: InputMaybe<Scalars['String']['input']>;
   /** The full name of the repo to connect to. e.g. 'railwayapp/starters' */
-  repo: InputMaybe<Scalars['String']['input']>;
+  repo?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type ServiceCreateInput = {
-  branch: InputMaybe<Scalars['String']['input']>;
+  branch?: InputMaybe<Scalars['String']['input']>;
   /** Environment ID. If the specified environment is a fork, the service will only be created in it. Otherwise it will created in all environments that are not forks of other environments */
-  environmentId: InputMaybe<Scalars['String']['input']>;
-  icon: InputMaybe<Scalars['String']['input']>;
-  name: InputMaybe<Scalars['String']['input']>;
+  environmentId?: InputMaybe<Scalars['String']['input']>;
+  icon?: InputMaybe<Scalars['String']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
   projectId: Scalars['String']['input'];
-  registryCredentials: InputMaybe<RegistryCredentialsInput>;
-  source: InputMaybe<ServiceSourceInput>;
-  templateServiceId: InputMaybe<Scalars['String']['input']>;
-  variables: InputMaybe<Scalars['EnvironmentVariables']['input']>;
+  registryCredentials?: InputMaybe<RegistryCredentialsInput>;
+  source?: InputMaybe<ServiceSourceInput>;
+  templateServiceId?: InputMaybe<Scalars['String']['input']>;
+  variables?: InputMaybe<Scalars['EnvironmentVariables']['input']>;
 };
 
 export type ServiceDeploymentsConnection = {
@@ -4549,31 +4549,31 @@ export type ServiceDeploymentsConnectionEdge = {
 
 export type ServiceDomain = Domain & {
   __typename?: 'ServiceDomain';
-  createdAt: Maybe<Scalars['DateTime']['output']>;
-  deletedAt: Maybe<Scalars['DateTime']['output']>;
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
   domain: Scalars['String']['output'];
-  edgeId: Maybe<Scalars['String']['output']>;
+  edgeId?: Maybe<Scalars['String']['output']>;
   environmentId: Scalars['String']['output'];
   id: Scalars['ID']['output'];
-  projectId: Maybe<Scalars['String']['output']>;
+  projectId?: Maybe<Scalars['String']['output']>;
   serviceId: Scalars['String']['output'];
-  suffix: Maybe<Scalars['String']['output']>;
-  targetPort: Maybe<Scalars['Int']['output']>;
-  updatedAt: Maybe<Scalars['DateTime']['output']>;
+  suffix?: Maybe<Scalars['String']['output']>;
+  targetPort?: Maybe<Scalars['Int']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
 
 export type ServiceDomainCreateInput = {
   environmentId: Scalars['String']['input'];
   serviceId: Scalars['String']['input'];
-  targetPort: InputMaybe<Scalars['Int']['input']>;
+  targetPort?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type ServiceDomainUpdateInput = {
   domain: Scalars['String']['input'];
   environmentId: Scalars['String']['input'];
-  serviceDomainId: InputMaybe<Scalars['String']['input']>;
+  serviceDomainId?: InputMaybe<Scalars['String']['input']>;
   serviceId: Scalars['String']['input'];
-  targetPort: InputMaybe<Scalars['Int']['input']>;
+  targetPort?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type ServiceFeatureFlagToggleInput = {
@@ -4583,73 +4583,73 @@ export type ServiceFeatureFlagToggleInput = {
 
 export type ServiceInstance = Node & {
   __typename?: 'ServiceInstance';
-  buildCommand: Maybe<Scalars['String']['output']>;
+  buildCommand?: Maybe<Scalars['String']['output']>;
   builder: Builder;
   createdAt: Scalars['DateTime']['output'];
-  cronSchedule: Maybe<Scalars['String']['output']>;
-  deletedAt: Maybe<Scalars['DateTime']['output']>;
-  dockerfilePath: Maybe<Scalars['String']['output']>;
+  cronSchedule?: Maybe<Scalars['String']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  dockerfilePath?: Maybe<Scalars['String']['output']>;
   domains: AllDomains;
-  drainingSeconds: Maybe<Scalars['Int']['output']>;
+  drainingSeconds?: Maybe<Scalars['Int']['output']>;
   environmentId: Scalars['String']['output'];
-  healthcheckPath: Maybe<Scalars['String']['output']>;
-  healthcheckTimeout: Maybe<Scalars['Int']['output']>;
+  healthcheckPath?: Maybe<Scalars['String']['output']>;
+  healthcheckTimeout?: Maybe<Scalars['Int']['output']>;
   id: Scalars['ID']['output'];
   isUpdatable: Scalars['Boolean']['output'];
-  latestDeployment: Maybe<Deployment>;
-  nextCronRunAt: Maybe<Scalars['DateTime']['output']>;
-  nixpacksPlan: Maybe<Scalars['JSON']['output']>;
-  numReplicas: Maybe<Scalars['Int']['output']>;
-  overlapSeconds: Maybe<Scalars['Int']['output']>;
-  preDeployCommand: Maybe<Scalars['JSON']['output']>;
-  railpackInfo: Maybe<Scalars['RailpackInfo']['output']>;
-  railwayConfigFile: Maybe<Scalars['String']['output']>;
-  region: Maybe<Scalars['String']['output']>;
+  latestDeployment?: Maybe<Deployment>;
+  nextCronRunAt?: Maybe<Scalars['DateTime']['output']>;
+  nixpacksPlan?: Maybe<Scalars['JSON']['output']>;
+  numReplicas?: Maybe<Scalars['Int']['output']>;
+  overlapSeconds?: Maybe<Scalars['Int']['output']>;
+  preDeployCommand?: Maybe<Scalars['JSON']['output']>;
+  railpackInfo?: Maybe<Scalars['RailpackInfo']['output']>;
+  railwayConfigFile?: Maybe<Scalars['String']['output']>;
+  region?: Maybe<Scalars['String']['output']>;
   restartPolicyMaxRetries: Scalars['Int']['output'];
   restartPolicyType: RestartPolicyType;
-  rootDirectory: Maybe<Scalars['String']['output']>;
+  rootDirectory?: Maybe<Scalars['String']['output']>;
   serviceId: Scalars['String']['output'];
   serviceName: Scalars['String']['output'];
-  sleepApplication: Maybe<Scalars['Boolean']['output']>;
-  source: Maybe<ServiceSource>;
-  startCommand: Maybe<Scalars['String']['output']>;
+  sleepApplication?: Maybe<Scalars['Boolean']['output']>;
+  source?: Maybe<ServiceSource>;
+  startCommand?: Maybe<Scalars['String']['output']>;
   updatedAt: Scalars['DateTime']['output'];
-  upstreamUrl: Maybe<Scalars['String']['output']>;
+  upstreamUrl?: Maybe<Scalars['String']['output']>;
   watchPatterns: Array<Scalars['String']['output']>;
 };
 
 export type ServiceInstanceLimitsUpdateInput = {
   environmentId: Scalars['String']['input'];
   /** Amount of memory in GB to allocate to the service instance */
-  memoryGB: InputMaybe<Scalars['Float']['input']>;
+  memoryGB?: InputMaybe<Scalars['Float']['input']>;
   serviceId: Scalars['String']['input'];
   /** Number of vCPUs to allocate to the service instance */
-  vCPUs: InputMaybe<Scalars['Float']['input']>;
+  vCPUs?: InputMaybe<Scalars['Float']['input']>;
 };
 
 export type ServiceInstanceUpdateInput = {
-  buildCommand: InputMaybe<Scalars['String']['input']>;
-  builder: InputMaybe<Builder>;
-  cronSchedule: InputMaybe<Scalars['String']['input']>;
-  dockerfilePath: InputMaybe<Scalars['String']['input']>;
-  drainingSeconds: InputMaybe<Scalars['Int']['input']>;
-  healthcheckPath: InputMaybe<Scalars['String']['input']>;
-  healthcheckTimeout: InputMaybe<Scalars['Int']['input']>;
-  multiRegionConfig: InputMaybe<Scalars['JSON']['input']>;
-  nixpacksPlan: InputMaybe<Scalars['JSON']['input']>;
-  numReplicas: InputMaybe<Scalars['Int']['input']>;
-  overlapSeconds: InputMaybe<Scalars['Int']['input']>;
-  preDeployCommand: InputMaybe<Array<Scalars['String']['input']>>;
-  railwayConfigFile: InputMaybe<Scalars['String']['input']>;
-  region: InputMaybe<Scalars['String']['input']>;
-  registryCredentials: InputMaybe<RegistryCredentialsInput>;
-  restartPolicyMaxRetries: InputMaybe<Scalars['Int']['input']>;
-  restartPolicyType: InputMaybe<RestartPolicyType>;
-  rootDirectory: InputMaybe<Scalars['String']['input']>;
-  sleepApplication: InputMaybe<Scalars['Boolean']['input']>;
-  source: InputMaybe<ServiceSourceInput>;
-  startCommand: InputMaybe<Scalars['String']['input']>;
-  watchPatterns: InputMaybe<Array<Scalars['String']['input']>>;
+  buildCommand?: InputMaybe<Scalars['String']['input']>;
+  builder?: InputMaybe<Builder>;
+  cronSchedule?: InputMaybe<Scalars['String']['input']>;
+  dockerfilePath?: InputMaybe<Scalars['String']['input']>;
+  drainingSeconds?: InputMaybe<Scalars['Int']['input']>;
+  healthcheckPath?: InputMaybe<Scalars['String']['input']>;
+  healthcheckTimeout?: InputMaybe<Scalars['Int']['input']>;
+  multiRegionConfig?: InputMaybe<Scalars['JSON']['input']>;
+  nixpacksPlan?: InputMaybe<Scalars['JSON']['input']>;
+  numReplicas?: InputMaybe<Scalars['Int']['input']>;
+  overlapSeconds?: InputMaybe<Scalars['Int']['input']>;
+  preDeployCommand?: InputMaybe<Array<Scalars['String']['input']>>;
+  railwayConfigFile?: InputMaybe<Scalars['String']['input']>;
+  region?: InputMaybe<Scalars['String']['input']>;
+  registryCredentials?: InputMaybe<RegistryCredentialsInput>;
+  restartPolicyMaxRetries?: InputMaybe<Scalars['Int']['input']>;
+  restartPolicyType?: InputMaybe<RestartPolicyType>;
+  rootDirectory?: InputMaybe<Scalars['String']['input']>;
+  sleepApplication?: InputMaybe<Scalars['Boolean']['input']>;
+  source?: InputMaybe<ServiceSourceInput>;
+  startCommand?: InputMaybe<Scalars['String']['input']>;
+  watchPatterns?: InputMaybe<Array<Scalars['String']['input']>>;
 };
 
 export type ServiceRepoTriggersConnection = {
@@ -4678,18 +4678,18 @@ export type ServiceServiceInstancesConnectionEdge = {
 
 export type ServiceSource = {
   __typename?: 'ServiceSource';
-  image: Maybe<Scalars['String']['output']>;
-  repo: Maybe<Scalars['String']['output']>;
+  image?: Maybe<Scalars['String']['output']>;
+  repo?: Maybe<Scalars['String']['output']>;
 };
 
 export type ServiceSourceInput = {
-  image: InputMaybe<Scalars['String']['input']>;
-  repo: InputMaybe<Scalars['String']['input']>;
+  image?: InputMaybe<Scalars['String']['input']>;
+  repo?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type ServiceUpdateInput = {
-  icon: InputMaybe<Scalars['String']['input']>;
-  name: InputMaybe<Scalars['String']['input']>;
+  icon?: InputMaybe<Scalars['String']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type Session = Node & {
@@ -4720,16 +4720,16 @@ export type SimilarTemplate = {
   __typename?: 'SimilarTemplate';
   code: Scalars['String']['output'];
   createdAt: Scalars['DateTime']['output'];
-  creator: Maybe<TemplateCreator>;
+  creator?: Maybe<TemplateCreator>;
   deploys: Scalars['Int']['output'];
-  description: Maybe<Scalars['String']['output']>;
-  health: Maybe<Scalars['Float']['output']>;
-  image: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  health?: Maybe<Scalars['Float']['output']>;
+  image?: Maybe<Scalars['String']['output']>;
   name: Scalars['String']['output'];
   /** @deprecated Use workspaceId */
-  teamId: Maybe<Scalars['String']['output']>;
-  userId: Maybe<Scalars['String']['output']>;
-  workspaceId: Maybe<Scalars['String']['output']>;
+  teamId?: Maybe<Scalars['String']['output']>;
+  userId?: Maybe<Scalars['String']['output']>;
+  workspaceId?: Maybe<Scalars['String']['output']>;
 };
 
 export type Subscription = {
@@ -4764,8 +4764,8 @@ export type Subscription = {
 
 export type SubscriptionBuildLogsArgs = {
   deploymentId: Scalars['String']['input'];
-  filter: InputMaybe<Scalars['String']['input']>;
-  limit: InputMaybe<Scalars['Int']['input']>;
+  filter?: InputMaybe<Scalars['String']['input']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
@@ -4786,19 +4786,19 @@ export type SubscriptionDeploymentInstanceExecutionsArgs = {
 
 export type SubscriptionDeploymentLogsArgs = {
   deploymentId: Scalars['String']['input'];
-  filter: InputMaybe<Scalars['String']['input']>;
-  limit: InputMaybe<Scalars['Int']['input']>;
+  filter?: InputMaybe<Scalars['String']['input']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
 export type SubscriptionEnvironmentLogsArgs = {
-  afterDate: InputMaybe<Scalars['String']['input']>;
-  afterLimit: InputMaybe<Scalars['Int']['input']>;
-  anchorDate: InputMaybe<Scalars['String']['input']>;
-  beforeDate: InputMaybe<Scalars['String']['input']>;
-  beforeLimit: InputMaybe<Scalars['Int']['input']>;
+  afterDate?: InputMaybe<Scalars['String']['input']>;
+  afterLimit?: InputMaybe<Scalars['Int']['input']>;
+  anchorDate?: InputMaybe<Scalars['String']['input']>;
+  beforeDate?: InputMaybe<Scalars['String']['input']>;
+  beforeLimit?: InputMaybe<Scalars['Int']['input']>;
   environmentId: Scalars['String']['input'];
-  filter: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<Scalars['String']['input']>;
 };
 
 
@@ -4808,20 +4808,20 @@ export type SubscriptionEnvironmentStagedPatchArgs = {
 
 
 export type SubscriptionHttpLogsArgs = {
-  afterDate: InputMaybe<Scalars['String']['input']>;
-  afterLimit: InputMaybe<Scalars['Int']['input']>;
-  anchorDate: InputMaybe<Scalars['String']['input']>;
-  beforeDate: InputMaybe<Scalars['String']['input']>;
-  beforeLimit: InputMaybe<Scalars['Int']['input']>;
+  afterDate?: InputMaybe<Scalars['String']['input']>;
+  afterLimit?: InputMaybe<Scalars['Int']['input']>;
+  anchorDate?: InputMaybe<Scalars['String']['input']>;
+  beforeDate?: InputMaybe<Scalars['String']['input']>;
+  beforeLimit?: InputMaybe<Scalars['Int']['input']>;
   deploymentId: Scalars['String']['input'];
-  filter: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<Scalars['String']['input']>;
 };
 
 
 export type SubscriptionPluginLogsArgs = {
   environmentId: Scalars['String']['input'];
-  filter: InputMaybe<Scalars['String']['input']>;
-  limit: InputMaybe<Scalars['Int']['input']>;
+  filter?: InputMaybe<Scalars['String']['input']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
   pluginId: Scalars['String']['input'];
 };
 
@@ -4840,7 +4840,7 @@ export type SubscriptionItem = {
   itemId: Scalars['String']['output'];
   priceId: Scalars['String']['output'];
   productId: Scalars['String']['output'];
-  quantity: Maybe<Scalars['BigInt']['output']>;
+  quantity?: Maybe<Scalars['BigInt']['output']>;
 };
 
 export type SubscriptionModel =
@@ -4868,14 +4868,14 @@ export type SupportTierOverride =
 export type TcpProxy = {
   __typename?: 'TCPProxy';
   applicationPort: Scalars['Int']['output'];
-  createdAt: Maybe<Scalars['DateTime']['output']>;
-  deletedAt: Maybe<Scalars['DateTime']['output']>;
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
   domain: Scalars['String']['output'];
   environmentId: Scalars['String']['output'];
   id: Scalars['ID']['output'];
   proxyPort: Scalars['Int']['output'];
   serviceId: Scalars['String']['output'];
-  updatedAt: Maybe<Scalars['DateTime']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
 
 export type TcpProxyCreateInput = {
@@ -4891,9 +4891,9 @@ export type Team = Node & {
   /** @deprecated Use workspace object instead */
   adoptionLevel: Scalars['Float']['output'];
   /** @deprecated Use workspace object instead */
-  apiTokenRateLimit: Maybe<ApiTokenRateLimit>;
+  apiTokenRateLimit?: Maybe<ApiTokenRateLimit>;
   /** @deprecated Use workspace object instead */
-  avatar: Maybe<Scalars['String']['output']>;
+  avatar?: Maybe<Scalars['String']['output']>;
   /** @deprecated Use workspace object instead */
   createdAt: Scalars['DateTime']['output'];
   /** @deprecated Use workspace object instead */
@@ -4905,13 +4905,13 @@ export type Team = Node & {
   /** @deprecated Use workspace object instead */
   name: Scalars['String']['output'];
   /** @deprecated Use workspace object instead */
-  preferredRegion: Maybe<Scalars['String']['output']>;
+  preferredRegion?: Maybe<Scalars['String']['output']>;
   /** @deprecated Use workspace object instead */
   projects: TeamProjectsConnection;
   /** @deprecated Use workspace object instead */
-  slackChannelId: Maybe<Scalars['String']['output']>;
+  slackChannelId?: Maybe<Scalars['String']['output']>;
   /** @deprecated Use workspace object instead */
-  supportTierOverride: Maybe<SupportTierOverride>;
+  supportTierOverride?: Maybe<SupportTierOverride>;
   /** @deprecated Use workspace object instead */
   teamPermissions: Array<TeamPermission>;
   /** @deprecated Use workspace object instead */
@@ -4922,20 +4922,20 @@ export type Team = Node & {
 
 
 export type TeamProjectsArgs = {
-  after: InputMaybe<Scalars['String']['input']>;
-  before: InputMaybe<Scalars['String']['input']>;
-  first: InputMaybe<Scalars['Int']['input']>;
-  last: InputMaybe<Scalars['Int']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type TeamMember = {
   __typename?: 'TeamMember';
-  avatar: Maybe<Scalars['String']['output']>;
+  avatar?: Maybe<Scalars['String']['output']>;
   email: Scalars['String']['output'];
   /** Only retrieved if requested by an admin */
-  featureFlags: Maybe<Array<ActiveFeatureFlag>>;
+  featureFlags?: Maybe<Array<ActiveFeatureFlag>>;
   id: Scalars['String']['output'];
-  name: Maybe<Scalars['String']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
   role: TeamRole;
 };
 
@@ -4969,126 +4969,126 @@ export type TeamRole =
 export type Template = Node & {
   __typename?: 'Template';
   activeProjects: Scalars['Int']['output'];
-  canvasConfig: Maybe<Scalars['CanvasConfig']['output']>;
-  category: Maybe<Scalars['String']['output']>;
+  canvasConfig?: Maybe<Scalars['CanvasConfig']['output']>;
+  category?: Maybe<Scalars['String']['output']>;
   code: Scalars['String']['output'];
-  communityThreadSlug: Maybe<Scalars['String']['output']>;
+  communityThreadSlug?: Maybe<Scalars['String']['output']>;
   /** @deprecated Use serializedConfig instead */
   config: Scalars['TemplateConfig']['output'];
   createdAt: Scalars['DateTime']['output'];
-  creator: Maybe<TemplateCreator>;
-  demoProjectId: Maybe<Scalars['String']['output']>;
-  description: Maybe<Scalars['String']['output']>;
-  guides: Maybe<TemplateGuide>;
-  health: Maybe<Scalars['Float']['output']>;
+  creator?: Maybe<TemplateCreator>;
+  demoProjectId?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  guides?: Maybe<TemplateGuide>;
+  health?: Maybe<Scalars['Float']['output']>;
   id: Scalars['ID']['output'];
-  image: Maybe<Scalars['String']['output']>;
+  image?: Maybe<Scalars['String']['output']>;
   isApproved: Scalars['Boolean']['output'];
   isV2Template: Scalars['Boolean']['output'];
   isVerified: Scalars['Boolean']['output'];
-  languages: Maybe<Array<Scalars['String']['output']>>;
+  languages?: Maybe<Array<Scalars['String']['output']>>;
   /** @deprecated Deprecated in favor of listing the fields individually. */
   metadata: Scalars['TemplateMetadata']['output'];
   name: Scalars['String']['output'];
   projects: Scalars['Int']['output'];
-  readme: Maybe<Scalars['String']['output']>;
+  readme?: Maybe<Scalars['String']['output']>;
   recentProjects: Scalars['Int']['output'];
-  serializedConfig: Maybe<Scalars['SerializedTemplateConfig']['output']>;
+  serializedConfig?: Maybe<Scalars['SerializedTemplateConfig']['output']>;
   services: TemplateServicesConnection;
   similarTemplates: Array<SimilarTemplate>;
   status: TemplateStatus;
-  supportHealthMetrics: Maybe<Scalars['SupportHealthMetrics']['output']>;
-  tags: Maybe<Array<Scalars['String']['output']>>;
+  supportHealthMetrics?: Maybe<Scalars['SupportHealthMetrics']['output']>;
+  tags?: Maybe<Array<Scalars['String']['output']>>;
   /** @deprecated Use workspaceId */
-  teamId: Maybe<Scalars['String']['output']>;
+  teamId?: Maybe<Scalars['String']['output']>;
   totalPayout: Scalars['Float']['output'];
-  workspaceId: Maybe<Scalars['String']['output']>;
+  workspaceId?: Maybe<Scalars['String']['output']>;
 };
 
 
 export type TemplateServicesArgs = {
-  after: InputMaybe<Scalars['String']['input']>;
-  before: InputMaybe<Scalars['String']['input']>;
-  first: InputMaybe<Scalars['Int']['input']>;
-  last: InputMaybe<Scalars['Int']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type TemplateCloneInput = {
   code: Scalars['String']['input'];
-  workspaceId: InputMaybe<Scalars['String']['input']>;
+  workspaceId?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type TemplateCreator = {
   __typename?: 'TemplateCreator';
-  avatar: Maybe<Scalars['String']['output']>;
+  avatar?: Maybe<Scalars['String']['output']>;
   hasPublicProfile: Scalars['Boolean']['output'];
-  name: Maybe<Scalars['String']['output']>;
-  username: Maybe<Scalars['String']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  username?: Maybe<Scalars['String']['output']>;
 };
 
 export type TemplateDeleteInput = {
-  workspaceId: InputMaybe<Scalars['String']['input']>;
+  workspaceId?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type TemplateDeployInput = {
-  environmentId: InputMaybe<Scalars['String']['input']>;
-  projectId: InputMaybe<Scalars['String']['input']>;
+  environmentId?: InputMaybe<Scalars['String']['input']>;
+  projectId?: InputMaybe<Scalars['String']['input']>;
   services: Array<TemplateDeployService>;
-  templateCode: InputMaybe<Scalars['String']['input']>;
-  workspaceId: InputMaybe<Scalars['String']['input']>;
+  templateCode?: InputMaybe<Scalars['String']['input']>;
+  workspaceId?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type TemplateDeployPayload = {
   __typename?: 'TemplateDeployPayload';
   projectId: Scalars['String']['output'];
-  workflowId: Maybe<Scalars['String']['output']>;
+  workflowId?: Maybe<Scalars['String']['output']>;
 };
 
 export type TemplateDeployService = {
-  commit: InputMaybe<Scalars['String']['input']>;
-  hasDomain: InputMaybe<Scalars['Boolean']['input']>;
-  healthcheckPath: InputMaybe<Scalars['String']['input']>;
+  commit?: InputMaybe<Scalars['String']['input']>;
+  hasDomain?: InputMaybe<Scalars['Boolean']['input']>;
+  healthcheckPath?: InputMaybe<Scalars['String']['input']>;
   id: Scalars['String']['input'];
-  isPrivate: InputMaybe<Scalars['Boolean']['input']>;
-  name: InputMaybe<Scalars['String']['input']>;
-  owner: InputMaybe<Scalars['String']['input']>;
-  preDeployCommand: InputMaybe<Array<Scalars['String']['input']>>;
-  rootDirectory: InputMaybe<Scalars['String']['input']>;
-  serviceIcon: InputMaybe<Scalars['String']['input']>;
+  isPrivate?: InputMaybe<Scalars['Boolean']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  owner?: InputMaybe<Scalars['String']['input']>;
+  preDeployCommand?: InputMaybe<Array<Scalars['String']['input']>>;
+  rootDirectory?: InputMaybe<Scalars['String']['input']>;
+  serviceIcon?: InputMaybe<Scalars['String']['input']>;
   serviceName: Scalars['String']['input'];
-  startCommand: InputMaybe<Scalars['String']['input']>;
-  tcpProxyApplicationPort: InputMaybe<Scalars['Int']['input']>;
+  startCommand?: InputMaybe<Scalars['String']['input']>;
+  tcpProxyApplicationPort?: InputMaybe<Scalars['Int']['input']>;
   template: Scalars['String']['input'];
-  variables: InputMaybe<Scalars['EnvironmentVariables']['input']>;
-  volumes: InputMaybe<Array<Scalars['TemplateVolume']['input']>>;
+  variables?: InputMaybe<Scalars['EnvironmentVariables']['input']>;
+  volumes?: InputMaybe<Array<Scalars['TemplateVolume']['input']>>;
 };
 
 export type TemplateDeployV2Input = {
-  environmentId: InputMaybe<Scalars['String']['input']>;
-  projectId: InputMaybe<Scalars['String']['input']>;
+  environmentId?: InputMaybe<Scalars['String']['input']>;
+  projectId?: InputMaybe<Scalars['String']['input']>;
   serializedConfig: Scalars['SerializedTemplateConfig']['input'];
   templateId: Scalars['String']['input'];
-  workspaceId: InputMaybe<Scalars['String']['input']>;
+  workspaceId?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type TemplateGenerateInput = {
-  environmentId: InputMaybe<Scalars['String']['input']>;
+  environmentId?: InputMaybe<Scalars['String']['input']>;
   projectId: Scalars['String']['input'];
 };
 
 export type TemplateGuide = {
   __typename?: 'TemplateGuide';
-  post: Maybe<Scalars['String']['output']>;
-  video: Maybe<Scalars['String']['output']>;
+  post?: Maybe<Scalars['String']['output']>;
+  video?: Maybe<Scalars['String']['output']>;
 };
 
 export type TemplatePublishInput = {
   category: Scalars['String']['input'];
-  demoProjectId: InputMaybe<Scalars['String']['input']>;
+  demoProjectId?: InputMaybe<Scalars['String']['input']>;
   description: Scalars['String']['input'];
-  image: InputMaybe<Scalars['String']['input']>;
+  image?: InputMaybe<Scalars['String']['input']>;
   readme: Scalars['String']['input'];
-  workspaceId: InputMaybe<Scalars['String']['input']>;
+  workspaceId?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type TemplateService = Node & {
@@ -5138,8 +5138,8 @@ export type TrustedDomain = {
 
 export type TrustedDomainVerificationData = {
   __typename?: 'TrustedDomainVerificationData';
-  domainMatch: Maybe<Domain>;
-  domainStatus: Maybe<CustomDomainStatus>;
+  domainMatch?: Maybe<Domain>;
+  domainStatus?: Maybe<CustomDomainStatus>;
 };
 
 export type TwoFactorInfo = {
@@ -5160,14 +5160,14 @@ export type TwoFactorInfoSecret = {
 
 export type TwoFactorInfoValidateInput = {
   token: Scalars['String']['input'];
-  twoFactorLinkingKey: InputMaybe<Scalars['String']['input']>;
+  twoFactorLinkingKey?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type UsageAnomaly = Node & {
   __typename?: 'UsageAnomaly';
-  actedOn: Maybe<Scalars['DateTime']['output']>;
-  action: Maybe<UsageAnomalyAction>;
-  actorId: Maybe<Scalars['String']['output']>;
+  actedOn?: Maybe<Scalars['DateTime']['output']>;
+  action?: Maybe<UsageAnomalyAction>;
+  actorId?: Maybe<Scalars['String']['output']>;
   flaggedAt: Scalars['DateTime']['output'];
   flaggedFor: UsageAnomalyFlagReason;
   id: Scalars['ID']['output'];
@@ -5188,7 +5188,7 @@ export type UsageAnomalyFlagReason =
 export type UsageLimit = Node & {
   __typename?: 'UsageLimit';
   customerId: Scalars['String']['output'];
-  hardLimit: Maybe<Scalars['Int']['output']>;
+  hardLimit?: Maybe<Scalars['Int']['output']>;
   id: Scalars['ID']['output'];
   isOverLimit: Scalars['Boolean']['output'];
   softLimit: Scalars['Int']['output'];
@@ -5200,16 +5200,16 @@ export type UsageLimitRemoveInput = {
 
 export type UsageLimitSetInput = {
   customerId: Scalars['String']['input'];
-  hardLimitDollars: InputMaybe<Scalars['Int']['input']>;
+  hardLimitDollars?: InputMaybe<Scalars['Int']['input']>;
   softLimitDollars: Scalars['Int']['input'];
 };
 
 export type User = Node & {
   __typename?: 'User';
   agreedFairUse: Scalars['Boolean']['output'];
-  apiTokenRateLimit: Maybe<ApiTokenRateLimit>;
-  avatar: Maybe<Scalars['String']['output']>;
-  banReason: Maybe<Scalars['String']['output']>;
+  apiTokenRateLimit?: Maybe<ApiTokenRateLimit>;
+  avatar?: Maybe<Scalars['String']['output']>;
+  banReason?: Maybe<Scalars['String']['output']>;
   createdAt: Scalars['DateTime']['output'];
   email: Scalars['String']['output'];
   featureFlags: Array<ActiveFeatureFlag>;
@@ -5220,36 +5220,36 @@ export type User = Node & {
   isConductor: Scalars['Boolean']['output'];
   isVerified: Scalars['Boolean']['output'];
   lastLogin: Scalars['DateTime']['output'];
-  name: Maybe<Scalars['String']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
   platformFeatureFlags: Array<ActivePlatformFlag>;
-  profile: Maybe<UserProfile>;
+  profile?: Maybe<UserProfile>;
   /** @deprecated This field will not return anything anymore, go through the workspace's projects */
   projects: UserProjectsConnection;
   providerAuths: UserProviderAuthsConnection;
   registrationStatus: RegistrationStatus;
-  riskLevel: Maybe<Scalars['Float']['output']>;
-  termsAgreedOn: Maybe<Scalars['DateTime']['output']>;
-  username: Maybe<Scalars['String']['output']>;
+  riskLevel?: Maybe<Scalars['Float']['output']>;
+  termsAgreedOn?: Maybe<Scalars['DateTime']['output']>;
+  username?: Maybe<Scalars['String']['output']>;
   /** @deprecated Use user.workspaces instead, no user are associated to a workspace */
-  workspace: Maybe<Workspace>;
+  workspace?: Maybe<Workspace>;
   /** Workspaces user is member of */
   workspaces: Array<Workspace>;
 };
 
 
 export type UserProjectsArgs = {
-  after: InputMaybe<Scalars['String']['input']>;
-  before: InputMaybe<Scalars['String']['input']>;
-  first: InputMaybe<Scalars['Int']['input']>;
-  last: InputMaybe<Scalars['Int']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
 export type UserProviderAuthsArgs = {
-  after: InputMaybe<Scalars['String']['input']>;
-  before: InputMaybe<Scalars['String']['input']>;
-  first: InputMaybe<Scalars['Int']['input']>;
-  last: InputMaybe<Scalars['Int']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type UserFlag =
@@ -5257,26 +5257,26 @@ export type UserFlag =
 
 export type UserFlagsRemoveInput = {
   flags: Array<UserFlag>;
-  userId: InputMaybe<Scalars['String']['input']>;
+  userId?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type UserFlagsSetInput = {
   flags: Array<UserFlag>;
-  userId: InputMaybe<Scalars['String']['input']>;
+  userId?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type UserGithubRepo = Node & {
   __typename?: 'UserGithubRepo';
   createdAt: Scalars['DateTime']['output'];
   defaultBranch: Scalars['String']['output'];
-  description: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
   fullName: Scalars['String']['output'];
   id: Scalars['ID']['output'];
   installationId: Scalars['String']['output'];
   isPrivate: Scalars['Boolean']['output'];
   lastPushedAt: Scalars['DateTime']['output'];
   name: Scalars['String']['output'];
-  ownerAvatarUrl: Maybe<Scalars['String']['output']>;
+  ownerAvatarUrl?: Maybe<Scalars['String']['output']>;
   updatedAt: Scalars['DateTime']['output'];
 };
 
@@ -5287,35 +5287,35 @@ export type UserKickbackEarnings = {
 
 export type UserProfile = {
   __typename?: 'UserProfile';
-  bio: Maybe<Scalars['String']['output']>;
+  bio?: Maybe<Scalars['String']['output']>;
   isPublic: Scalars['Boolean']['output'];
-  website: Maybe<Scalars['String']['output']>;
+  website?: Maybe<Scalars['String']['output']>;
 };
 
 export type UserProfileResponse = {
   __typename?: 'UserProfileResponse';
-  avatar: Maybe<Scalars['String']['output']>;
+  avatar?: Maybe<Scalars['String']['output']>;
   createdAt: Scalars['DateTime']['output'];
-  customerId: Maybe<Scalars['String']['output']>;
+  customerId?: Maybe<Scalars['String']['output']>;
   id: Scalars['String']['output'];
-  isTrialing: Maybe<Scalars['Boolean']['output']>;
-  name: Maybe<Scalars['String']['output']>;
+  isTrialing?: Maybe<Scalars['Boolean']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
   profile: UserProfile;
   /** Gets all public projects for a user. */
   publicProjects: UserProfileResponsePublicProjectsConnection;
   /** @deprecated There are no personal templates anymore, they all belong to a workspace */
   publishedTemplates: Array<SimilarTemplate>;
-  state: Maybe<Scalars['String']['output']>;
+  state?: Maybe<Scalars['String']['output']>;
   totalDeploys: Scalars['Int']['output'];
-  username: Maybe<Scalars['String']['output']>;
+  username?: Maybe<Scalars['String']['output']>;
 };
 
 
 export type UserProfileResponsePublicProjectsArgs = {
-  after: InputMaybe<Scalars['String']['input']>;
-  before: InputMaybe<Scalars['String']['input']>;
-  first: InputMaybe<Scalars['Int']['input']>;
-  last: InputMaybe<Scalars['Int']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type UserProfileResponsePublicProjectsConnection = {
@@ -5331,9 +5331,9 @@ export type UserProfileResponsePublicProjectsConnectionEdge = {
 };
 
 export type UserProfileUpdateInput = {
-  bio: InputMaybe<Scalars['String']['input']>;
+  bio?: InputMaybe<Scalars['String']['input']>;
   isPublic: Scalars['Boolean']['input'];
-  website: InputMaybe<Scalars['String']['input']>;
+  website?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type UserProjectsConnection = {
@@ -5364,16 +5364,16 @@ export type Variable = Node & {
   __typename?: 'Variable';
   createdAt: Scalars['DateTime']['output'];
   environment: Environment;
-  environmentId: Maybe<Scalars['String']['output']>;
+  environmentId?: Maybe<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
   isSealed: Scalars['Boolean']['output'];
   name: Scalars['String']['output'];
   plugin: Plugin;
   /** @deprecated Plugins have been removed */
-  pluginId: Maybe<Scalars['String']['output']>;
+  pluginId?: Maybe<Scalars['String']['output']>;
   references: Array<Scalars['String']['output']>;
   service: Service;
-  serviceId: Maybe<Scalars['String']['output']>;
+  serviceId?: Maybe<Scalars['String']['output']>;
   updatedAt: Scalars['DateTime']['output'];
 };
 
@@ -5381,10 +5381,10 @@ export type VariableCollectionUpsertInput = {
   environmentId: Scalars['String']['input'];
   projectId: Scalars['String']['input'];
   /** When set to true, removes all existing variables before upserting the new collection. */
-  replace: InputMaybe<Scalars['Boolean']['input']>;
-  serviceId: InputMaybe<Scalars['String']['input']>;
+  replace?: InputMaybe<Scalars['Boolean']['input']>;
+  serviceId?: InputMaybe<Scalars['String']['input']>;
   /** Skip deploys for affected services */
-  skipDeploys: InputMaybe<Scalars['Boolean']['input']>;
+  skipDeploys?: InputMaybe<Scalars['Boolean']['input']>;
   variables: Scalars['EnvironmentVariables']['input'];
 };
 
@@ -5392,16 +5392,16 @@ export type VariableDeleteInput = {
   environmentId: Scalars['String']['input'];
   name: Scalars['String']['input'];
   projectId: Scalars['String']['input'];
-  serviceId: InputMaybe<Scalars['String']['input']>;
+  serviceId?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type VariableUpsertInput = {
   environmentId: Scalars['String']['input'];
   name: Scalars['String']['input'];
   projectId: Scalars['String']['input'];
-  serviceId: InputMaybe<Scalars['String']['input']>;
+  serviceId?: InputMaybe<Scalars['String']['input']>;
   /** Skip deploys for affected services */
-  skipDeploys: InputMaybe<Scalars['Boolean']['input']>;
+  skipDeploys?: InputMaybe<Scalars['Boolean']['input']>;
   value: Scalars['String']['input'];
 };
 
@@ -5410,9 +5410,9 @@ export type VercelAccount = {
   id: Scalars['String']['output'];
   integrationAuthId: Scalars['String']['output'];
   isUser: Scalars['Boolean']['output'];
-  name: Maybe<Scalars['String']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
   projects: Array<VercelProject>;
-  slug: Maybe<Scalars['String']['output']>;
+  slug?: Maybe<Scalars['String']['output']>;
 };
 
 export type VercelInfo = {
@@ -5439,23 +5439,23 @@ export type Volume = Node & {
 
 
 export type VolumeVolumeInstancesArgs = {
-  after: InputMaybe<Scalars['String']['input']>;
-  before: InputMaybe<Scalars['String']['input']>;
-  first: InputMaybe<Scalars['Int']['input']>;
-  last: InputMaybe<Scalars['Int']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type VolumeCreateInput = {
   /** The environment to deploy the volume instances into. If `null`, the volume will not be deployed to any environment. `undefined` will deploy to all environments. */
-  environmentId: InputMaybe<Scalars['String']['input']>;
+  environmentId?: InputMaybe<Scalars['String']['input']>;
   /** The path in the container to mount the volume to */
   mountPath: Scalars['String']['input'];
   /** The project to create the volume in */
   projectId: Scalars['String']['input'];
   /** The region to create the volume instances in. If not provided, the default region will be used. */
-  region: InputMaybe<Scalars['String']['input']>;
+  region?: InputMaybe<Scalars['String']['input']>;
   /** The service to attach the volume to. If not provided, the volume will be disconnected. */
-  serviceId: InputMaybe<Scalars['String']['input']>;
+  serviceId?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type VolumeInstance = Node & {
@@ -5464,14 +5464,14 @@ export type VolumeInstance = Node & {
   currentSizeMB: Scalars['Float']['output'];
   environment: Environment;
   environmentId: Scalars['String']['output'];
-  externalId: Maybe<Scalars['String']['output']>;
+  externalId?: Maybe<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
   mountPath: Scalars['String']['output'];
-  region: Maybe<Scalars['String']['output']>;
+  region?: Maybe<Scalars['String']['output']>;
   service: Service;
-  serviceId: Maybe<Scalars['String']['output']>;
+  serviceId?: Maybe<Scalars['String']['output']>;
   sizeMB: Scalars['Int']['output'];
-  state: Maybe<VolumeState>;
+  state?: Maybe<VolumeState>;
   volume: Volume;
   volumeId: Scalars['String']['output'];
 };
@@ -5479,14 +5479,14 @@ export type VolumeInstance = Node & {
 export type VolumeInstanceBackup = {
   __typename?: 'VolumeInstanceBackup';
   createdAt: Scalars['DateTime']['output'];
-  creatorId: Maybe<Scalars['String']['output']>;
-  expiresAt: Maybe<Scalars['DateTime']['output']>;
+  creatorId?: Maybe<Scalars['String']['output']>;
+  expiresAt?: Maybe<Scalars['DateTime']['output']>;
   externalId: Scalars['String']['output'];
   id: Scalars['String']['output'];
-  name: Maybe<Scalars['String']['output']>;
-  referencedMB: Maybe<Scalars['Int']['output']>;
-  scheduleId: Maybe<Scalars['String']['output']>;
-  usedMB: Maybe<Scalars['Int']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  referencedMB?: Maybe<Scalars['Int']['output']>;
+  scheduleId?: Maybe<Scalars['String']['output']>;
+  usedMB?: Maybe<Scalars['Int']['output']>;
 };
 
 export type VolumeInstanceBackupSchedule = Node & {
@@ -5496,7 +5496,7 @@ export type VolumeInstanceBackupSchedule = Node & {
   id: Scalars['ID']['output'];
   kind: VolumeInstanceBackupScheduleKind;
   name: Scalars['String']['output'];
-  retentionSeconds: Maybe<Scalars['Int']['output']>;
+  retentionSeconds?: Maybe<Scalars['Int']['output']>;
 };
 
 export type VolumeInstanceBackupScheduleKind =
@@ -5509,26 +5509,26 @@ export type VolumeInstanceReplicationProgress = {
   bytesTransferred: Scalars['BigInt']['output'];
   percentComplete: Scalars['Float']['output'];
   timestamp: Scalars['DateTime']['output'];
-  transferRateMbps: Maybe<Scalars['Float']['output']>;
+  transferRateMbps?: Maybe<Scalars['Float']['output']>;
 };
 
 export type VolumeInstanceUpdateInput = {
   /** The mount path of the volume instance. If not provided, the mount path will not be updated. */
-  mountPath: InputMaybe<Scalars['String']['input']>;
+  mountPath?: InputMaybe<Scalars['String']['input']>;
   /** The service to attach the volume to. If not provided, the volume will be disconnected. */
-  serviceId: InputMaybe<Scalars['String']['input']>;
+  serviceId?: InputMaybe<Scalars['String']['input']>;
   /** The state of the volume instance. If not provided, the state will not be updated. */
-  state: InputMaybe<VolumeState>;
+  state?: InputMaybe<VolumeState>;
 };
 
 export type VolumeReplicationProgressUpdate = {
   __typename?: 'VolumeReplicationProgressUpdate';
   currentSnapshot: VolumeSnapshotReplicationProgressUpdate;
   destExternalId: Scalars['String']['output'];
-  destRegion: Maybe<Scalars['String']['output']>;
-  destStackerId: Maybe<Scalars['String']['output']>;
-  error: Maybe<Scalars['String']['output']>;
-  estimatedTimeRemainingMs: Maybe<Scalars['BigInt']['output']>;
+  destRegion?: Maybe<Scalars['String']['output']>;
+  destStackerId?: Maybe<Scalars['String']['output']>;
+  error?: Maybe<Scalars['String']['output']>;
+  estimatedTimeRemainingMs?: Maybe<Scalars['BigInt']['output']>;
   history: Array<VolumeInstanceReplicationProgress>;
   nbSnapshots: Scalars['Int']['output'];
   offlineBytesTransferred: Scalars['BigInt']['output'];
@@ -5538,26 +5538,26 @@ export type VolumeReplicationProgressUpdate = {
   percentComplete: Scalars['Float']['output'];
   snapshotsSizes: Array<Scalars['BigInt']['output']>;
   srcExternalId: Scalars['String']['output'];
-  srcRegion: Maybe<Scalars['String']['output']>;
-  srcStackerId: Maybe<Scalars['String']['output']>;
+  srcRegion?: Maybe<Scalars['String']['output']>;
+  srcStackerId?: Maybe<Scalars['String']['output']>;
   status: ReplicateVolumeInstanceStatus;
-  transferRateMbps: Maybe<Scalars['Float']['output']>;
+  transferRateMbps?: Maybe<Scalars['Float']['output']>;
 };
 
 export type VolumeSnapshotReplicationProgressUpdate = {
   __typename?: 'VolumeSnapshotReplicationProgressUpdate';
   bytesTransferred: Scalars['BigInt']['output'];
   compressedBytesTransferred: Scalars['BigInt']['output'];
-  compressedTransferRateMbps: Maybe<Scalars['Float']['output']>;
+  compressedTransferRateMbps?: Maybe<Scalars['Float']['output']>;
   elapsedMs: Scalars['Int']['output'];
-  error: Maybe<Scalars['String']['output']>;
-  estimatedTimeRemainingMs: Maybe<Scalars['BigInt']['output']>;
+  error?: Maybe<Scalars['String']['output']>;
+  estimatedTimeRemainingMs?: Maybe<Scalars['BigInt']['output']>;
   index: Scalars['Int']['output'];
   percentComplete: Scalars['Float']['output'];
-  startedAt: Maybe<Scalars['DateTime']['output']>;
+  startedAt?: Maybe<Scalars['DateTime']['output']>;
   status: ReplicateVolumeInstanceSnapshotStatus;
   totalBytes: Scalars['BigInt']['output'];
-  transferRateMbps: Maybe<Scalars['Float']['output']>;
+  transferRateMbps?: Maybe<Scalars['Float']['output']>;
 };
 
 export type VolumeState =
@@ -5572,7 +5572,7 @@ export type VolumeState =
 
 export type VolumeUpdateInput = {
   /** The name of the volume */
-  name: InputMaybe<Scalars['String']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type VolumeVolumeInstancesConnection = {
@@ -5588,13 +5588,13 @@ export type VolumeVolumeInstancesConnectionEdge = {
 };
 
 export type WebhookCreateInput = {
-  filters: InputMaybe<Array<Scalars['String']['input']>>;
+  filters?: InputMaybe<Array<Scalars['String']['input']>>;
   projectId: Scalars['String']['input'];
   url: Scalars['String']['input'];
 };
 
 export type WebhookUpdateInput = {
-  filters: InputMaybe<Array<Scalars['String']['input']>>;
+  filters?: InputMaybe<Array<Scalars['String']['input']>>;
   url: Scalars['String']['input'];
 };
 
@@ -5616,13 +5616,13 @@ export type WithdrawalAccount = Node & {
   id: Scalars['ID']['output'];
   platform: WithdrawalPlatformTypes;
   platformDetails: Scalars['String']['output'];
-  stripeConnectInfo: Maybe<WithdrawalAccountStripeConnectInfo>;
+  stripeConnectInfo?: Maybe<WithdrawalAccountStripeConnectInfo>;
 };
 
 export type WithdrawalAccountStripeConnectInfo = {
   __typename?: 'WithdrawalAccountStripeConnectInfo';
-  bankLast4: Maybe<Scalars['String']['output']>;
-  cardLast4: Maybe<Scalars['String']['output']>;
+  bankLast4?: Maybe<Scalars['String']['output']>;
+  cardLast4?: Maybe<Scalars['String']['output']>;
   hasOnboarded: Scalars['Boolean']['output'];
   needsAttention: Scalars['Boolean']['output'];
 };
@@ -5641,12 +5641,12 @@ export type WithdrawalStatusType =
 
 export type WorkflowId = {
   __typename?: 'WorkflowId';
-  workflowId: Maybe<Scalars['String']['output']>;
+  workflowId?: Maybe<Scalars['String']['output']>;
 };
 
 export type WorkflowResult = {
   __typename?: 'WorkflowResult';
-  error: Maybe<Scalars['String']['output']>;
+  error?: Maybe<Scalars['String']['output']>;
   status: WorkflowStatus;
 };
 
@@ -5660,53 +5660,53 @@ export type Workspace = Node & {
   __typename?: 'Workspace';
   adoptionHistory: Array<AdoptionInfo>;
   adoptionLevel: Scalars['Float']['output'];
-  allowDeprecatedRegions: Maybe<Scalars['Boolean']['output']>;
-  apiTokenRateLimit: Maybe<ApiTokenRateLimit>;
-  avatar: Maybe<Scalars['String']['output']>;
-  banReason: Maybe<Scalars['String']['output']>;
+  allowDeprecatedRegions?: Maybe<Scalars['Boolean']['output']>;
+  apiTokenRateLimit?: Maybe<ApiTokenRateLimit>;
+  avatar?: Maybe<Scalars['String']['output']>;
+  banReason?: Maybe<Scalars['String']['output']>;
   createdAt: Scalars['DateTime']['output'];
   customer: Customer;
-  discordRole: Maybe<Scalars['String']['output']>;
+  discordRole?: Maybe<Scalars['String']['output']>;
   hasSAML: Scalars['Boolean']['output'];
   id: Scalars['ID']['output'];
   identityProviders: WorkspaceIdentityProvidersConnection;
   members: Array<WorkspaceMember>;
   name: Scalars['String']['output'];
   plan: Plan;
-  preferredRegion: Maybe<Scalars['String']['output']>;
+  preferredRegion?: Maybe<Scalars['String']['output']>;
   projects: WorkspaceProjectsConnection;
   referredUsers: Array<ReferralUser>;
-  slackChannelId: Maybe<Scalars['String']['output']>;
+  slackChannelId?: Maybe<Scalars['String']['output']>;
   /** @deprecated Use plan field instead */
   subscriptionModel: SubscriptionModel;
-  supportTierOverride: Maybe<SupportTierOverride>;
+  supportTierOverride?: Maybe<SupportTierOverride>;
   /** @deprecated Teams are being removed from the system, don't use it */
-  team: Maybe<Team>;
+  team?: Maybe<Team>;
   updatedAt: Scalars['DateTime']['output'];
 };
 
 
 export type WorkspaceIdentityProvidersArgs = {
-  after: InputMaybe<Scalars['String']['input']>;
-  before: InputMaybe<Scalars['String']['input']>;
-  first: InputMaybe<Scalars['Int']['input']>;
-  last: InputMaybe<Scalars['Int']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
 export type WorkspaceProjectsArgs = {
-  after: InputMaybe<Scalars['String']['input']>;
-  before: InputMaybe<Scalars['String']['input']>;
-  first: InputMaybe<Scalars['Int']['input']>;
-  last: InputMaybe<Scalars['Int']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type WorkspaceIdPConnection = {
   __typename?: 'WorkspaceIdPConnection';
-  createdAt: Maybe<Scalars['DateTime']['output']>;
-  provider: Maybe<Scalars['String']['output']>;
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  provider?: Maybe<Scalars['String']['output']>;
   status: WorkspaceIdPConnectionStatus;
-  updatedAt: Maybe<Scalars['DateTime']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
 
 export type WorkspaceIdPConnectionStatus =
@@ -5720,7 +5720,7 @@ export type WorkspaceIdentityProvider = Node & {
   __typename?: 'WorkspaceIdentityProvider';
   connection: WorkspaceIdPConnection;
   createdAt: Scalars['DateTime']['output'];
-  enforcementEnabledAt: Maybe<Scalars['DateTime']['output']>;
+  enforcementEnabledAt?: Maybe<Scalars['DateTime']['output']>;
   id: Scalars['ID']['output'];
   updatedAt: Scalars['DateTime']['output'];
   workspace: Workspace;
@@ -5745,12 +5745,12 @@ export type WorkspaceInviteCodeCreateInput = {
 
 export type WorkspaceMember = {
   __typename?: 'WorkspaceMember';
-  avatar: Maybe<Scalars['String']['output']>;
+  avatar?: Maybe<Scalars['String']['output']>;
   email: Scalars['String']['output'];
   /** Only retrieved if requested by an admin */
-  featureFlags: Maybe<Array<ActiveFeatureFlag>>;
+  featureFlags?: Maybe<Array<ActiveFeatureFlag>>;
   id: Scalars['String']['output'];
-  name: Maybe<Scalars['String']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
   role: TeamRole;
 };
 
@@ -5779,9 +5779,9 @@ export type WorkspaceTrustedDomainCreateInput = {
 };
 
 export type WorkspaceUpdateInput = {
-  avatar: InputMaybe<Scalars['String']['input']>;
-  name: InputMaybe<Scalars['String']['input']>;
-  preferredRegion: InputMaybe<Scalars['String']['input']>;
+  avatar?: InputMaybe<Scalars['String']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  preferredRegion?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type WorkspaceUserInviteInput = {
@@ -5824,7 +5824,7 @@ export type CustomDomainCreateMutationVariables = Exact<{
 }>;
 
 
-export type CustomDomainCreateMutation = { __typename?: 'Mutation', customDomainCreate: { __typename: 'CustomDomain', createdAt: any | null, deletedAt: any | null, domain: string, edgeId: string | null, environmentId: string, id: string, projectId: string | null, serviceId: string, targetPort: number | null, updatedAt: any | null } };
+export type CustomDomainCreateMutation = { __typename?: 'Mutation', customDomainCreate: { __typename: 'CustomDomain', createdAt?: any | null, deletedAt?: any | null, domain: string, edgeId?: string | null, environmentId: string, id: string, projectId?: string | null, serviceId: string, targetPort?: number | null, updatedAt?: any | null } };
 
 export type CustomDomainDeleteMutationVariables = Exact<{
   id: Scalars['String']['input'];
@@ -5836,7 +5836,7 @@ export type CustomDomainDeleteMutation = { __typename?: 'Mutation', customDomain
 export type CustomDomainUpdateMutationVariables = Exact<{
   environmentId: Scalars['String']['input'];
   id: Scalars['String']['input'];
-  targetPort: InputMaybe<Scalars['Int']['input']>;
+  targetPort?: InputMaybe<Scalars['Int']['input']>;
 }>;
 
 
@@ -5880,11 +5880,11 @@ export type DeploymentInstanceExecutionCreateMutation = { __typename?: 'Mutation
 
 export type DeploymentRedeployMutationVariables = Exact<{
   id: Scalars['String']['input'];
-  usePreviousImageTag: InputMaybe<Scalars['Boolean']['input']>;
+  usePreviousImageTag?: InputMaybe<Scalars['Boolean']['input']>;
 }>;
 
 
-export type DeploymentRedeployMutation = { __typename?: 'Mutation', deploymentRedeploy: { __typename: 'Deployment', canRedeploy: boolean, canRollback: boolean, createdAt: any, deploymentStopped: boolean, environmentId: string, id: string, meta: any | null, projectId: string, serviceId: string | null, snapshotId: string | null, staticUrl: string | null, status: DeploymentStatus, suggestAddServiceDomain: boolean, updatedAt: any, url: string | null } };
+export type DeploymentRedeployMutation = { __typename?: 'Mutation', deploymentRedeploy: { __typename: 'Deployment', canRedeploy: boolean, canRollback: boolean, createdAt: any, deploymentStopped: boolean, environmentId: string, id: string, meta?: any | null, projectId: string, serviceId?: string | null, snapshotId?: string | null, staticUrl?: string | null, status: DeploymentStatus, suggestAddServiceDomain: boolean, updatedAt: any, url?: string | null } };
 
 export type DeploymentRemoveMutationVariables = Exact<{
   id: Scalars['String']['input'];
@@ -5919,7 +5919,7 @@ export type DeploymentTriggerCreateMutationVariables = Exact<{
 }>;
 
 
-export type DeploymentTriggerCreateMutation = { __typename?: 'Mutation', deploymentTriggerCreate: { __typename: 'DeploymentTrigger', baseEnvironmentOverrideId: string | null, branch: string, checkSuites: boolean, environmentId: string, id: string, projectId: string, provider: string, repository: string, serviceId: string | null, validCheckSuites: number } };
+export type DeploymentTriggerCreateMutation = { __typename?: 'Mutation', deploymentTriggerCreate: { __typename: 'DeploymentTrigger', baseEnvironmentOverrideId?: string | null, branch: string, checkSuites: boolean, environmentId: string, id: string, projectId: string, provider: string, repository: string, serviceId?: string | null, validCheckSuites: number } };
 
 export type DeploymentTriggerDeleteMutationVariables = Exact<{
   id: Scalars['String']['input'];
@@ -5934,17 +5934,17 @@ export type DeploymentTriggerUpdateMutationVariables = Exact<{
 }>;
 
 
-export type DeploymentTriggerUpdateMutation = { __typename?: 'Mutation', deploymentTriggerUpdate: { __typename: 'DeploymentTrigger', baseEnvironmentOverrideId: string | null, branch: string, checkSuites: boolean, environmentId: string, id: string, projectId: string, provider: string, repository: string, serviceId: string | null, validCheckSuites: number } };
+export type DeploymentTriggerUpdateMutation = { __typename?: 'Mutation', deploymentTriggerUpdate: { __typename: 'DeploymentTrigger', baseEnvironmentOverrideId?: string | null, branch: string, checkSuites: boolean, environmentId: string, id: string, projectId: string, provider: string, repository: string, serviceId?: string | null, validCheckSuites: number } };
 
 export type DockerComposeImportMutationVariables = Exact<{
   environmentId: Scalars['String']['input'];
   projectId: Scalars['String']['input'];
-  skipStagingPatch: InputMaybe<Scalars['Boolean']['input']>;
+  skipStagingPatch?: InputMaybe<Scalars['Boolean']['input']>;
   yaml: Scalars['String']['input'];
 }>;
 
 
-export type DockerComposeImportMutation = { __typename?: 'Mutation', dockerComposeImport: { __typename: 'DockerComposeImport', errors: Array<string>, patch: any | null } };
+export type DockerComposeImportMutation = { __typename?: 'Mutation', dockerComposeImport: { __typename: 'DockerComposeImport', errors: Array<string>, patch?: any | null } };
 
 export type EgressGatewayAssociationCreateMutationVariables = Exact<{
   input: EgressGatewayCreateInput;
@@ -5979,7 +5979,7 @@ export type EnvironmentCreateMutationVariables = Exact<{
 }>;
 
 
-export type EnvironmentCreateMutation = { __typename?: 'Mutation', environmentCreate: { __typename: 'Environment', createdAt: any, deletedAt: any | null, id: string, isEphemeral: boolean, name: string, projectId: string, unmergedChangesCount: number | null, updatedAt: any } };
+export type EnvironmentCreateMutation = { __typename?: 'Mutation', environmentCreate: { __typename: 'Environment', createdAt: any, deletedAt?: any | null, id: string, isEphemeral: boolean, name: string, projectId: string, unmergedChangesCount?: number | null, updatedAt: any } };
 
 export type EnvironmentDeleteMutationVariables = Exact<{
   id: Scalars['String']['input'];
@@ -5989,9 +5989,9 @@ export type EnvironmentDeleteMutationVariables = Exact<{
 export type EnvironmentDeleteMutation = { __typename?: 'Mutation', environmentDelete: boolean };
 
 export type EnvironmentPatchCommitMutationVariables = Exact<{
-  commitMessage: InputMaybe<Scalars['String']['input']>;
+  commitMessage?: InputMaybe<Scalars['String']['input']>;
   environmentId: Scalars['String']['input'];
-  patch: InputMaybe<Scalars['EnvironmentConfig']['input']>;
+  patch?: InputMaybe<Scalars['EnvironmentConfig']['input']>;
 }>;
 
 
@@ -6003,7 +6003,7 @@ export type EnvironmentRenameMutationVariables = Exact<{
 }>;
 
 
-export type EnvironmentRenameMutation = { __typename?: 'Mutation', environmentRename: { __typename: 'Environment', createdAt: any, deletedAt: any | null, id: string, isEphemeral: boolean, name: string, projectId: string, unmergedChangesCount: number | null, updatedAt: any } };
+export type EnvironmentRenameMutation = { __typename?: 'Mutation', environmentRename: { __typename: 'Environment', createdAt: any, deletedAt?: any | null, id: string, isEphemeral: boolean, name: string, projectId: string, unmergedChangesCount?: number | null, updatedAt: any } };
 
 export type EnvironmentTriggersDeployMutationVariables = Exact<{
   input: EnvironmentTriggersDeployInput;
@@ -6081,7 +6081,7 @@ export type InviteCodeUseMutationVariables = Exact<{
 }>;
 
 
-export type InviteCodeUseMutation = { __typename?: 'Mutation', inviteCodeUse: { __typename: 'Project', baseEnvironmentId: string | null, botPrEnvironments: boolean, createdAt: any, deletedAt: any | null, description: string | null, expiredAt: any | null, id: string, isPublic: boolean, isTempProject: boolean, name: string, prDeploys: boolean, subscriptionPlanLimit: any, subscriptionType: SubscriptionPlanType, teamId: string | null, updatedAt: any } };
+export type InviteCodeUseMutation = { __typename?: 'Mutation', inviteCodeUse: { __typename: 'Project', baseEnvironmentId?: string | null, botPrEnvironments: boolean, createdAt: any, deletedAt?: any | null, description?: string | null, expiredAt?: any | null, id: string, isPublic: boolean, isTempProject: boolean, name: string, prDeploys: boolean, subscriptionPlanLimit: any, subscriptionType: SubscriptionPlanType, teamId?: string | null, updatedAt: any } };
 
 export type JobApplicationCreateMutationVariables = Exact<{
   input: JobApplicationCreateInput;
@@ -6110,7 +6110,7 @@ export type LoginSessionConsumeMutationVariables = Exact<{
 }>;
 
 
-export type LoginSessionConsumeMutation = { __typename?: 'Mutation', loginSessionConsume: string | null };
+export type LoginSessionConsumeMutation = { __typename?: 'Mutation', loginSessionConsume?: string | null };
 
 export type LoginSessionCreateMutationVariables = Exact<{ [key: string]: never; }>;
 
@@ -6186,14 +6186,14 @@ export type PrivateNetworkCreateOrGetMutationVariables = Exact<{
 }>;
 
 
-export type PrivateNetworkCreateOrGetMutation = { __typename?: 'Mutation', privateNetworkCreateOrGet: { __typename: 'PrivateNetwork', createdAt: any | null, deletedAt: any | null, dnsName: string, environmentId: string, name: string, networkId: any, projectId: string, publicId: string, tags: Array<string> } };
+export type PrivateNetworkCreateOrGetMutation = { __typename?: 'Mutation', privateNetworkCreateOrGet: { __typename: 'PrivateNetwork', createdAt?: any | null, deletedAt?: any | null, dnsName: string, environmentId: string, name: string, networkId: any, projectId: string, publicId: string, tags: Array<string> } };
 
 export type PrivateNetworkEndpointCreateOrGetMutationVariables = Exact<{
   input: PrivateNetworkEndpointCreateOrGetInput;
 }>;
 
 
-export type PrivateNetworkEndpointCreateOrGetMutation = { __typename?: 'Mutation', privateNetworkEndpointCreateOrGet: { __typename: 'PrivateNetworkEndpoint', createdAt: any | null, deletedAt: any | null, dnsName: string, privateIps: Array<string>, publicId: string, serviceInstanceId: string, tags: Array<string> } };
+export type PrivateNetworkEndpointCreateOrGetMutation = { __typename?: 'Mutation', privateNetworkEndpointCreateOrGet: { __typename: 'PrivateNetworkEndpoint', createdAt?: any | null, deletedAt?: any | null, dnsName: string, privateIps: Array<string>, publicId: string, serviceInstanceId: string, tags: Array<string> } };
 
 export type PrivateNetworkEndpointDeleteMutationVariables = Exact<{
   id: Scalars['String']['input'];
@@ -6224,14 +6224,14 @@ export type ProjectClaimMutationVariables = Exact<{
 }>;
 
 
-export type ProjectClaimMutation = { __typename?: 'Mutation', projectClaim: { __typename: 'Project', baseEnvironmentId: string | null, botPrEnvironments: boolean, createdAt: any, deletedAt: any | null, description: string | null, expiredAt: any | null, id: string, isPublic: boolean, isTempProject: boolean, name: string, prDeploys: boolean, subscriptionPlanLimit: any, subscriptionType: SubscriptionPlanType, teamId: string | null, updatedAt: any } };
+export type ProjectClaimMutation = { __typename?: 'Mutation', projectClaim: { __typename: 'Project', baseEnvironmentId?: string | null, botPrEnvironments: boolean, createdAt: any, deletedAt?: any | null, description?: string | null, expiredAt?: any | null, id: string, isPublic: boolean, isTempProject: boolean, name: string, prDeploys: boolean, subscriptionPlanLimit: any, subscriptionType: SubscriptionPlanType, teamId?: string | null, updatedAt: any } };
 
 export type ProjectCreateMutationVariables = Exact<{
   input: ProjectCreateInput;
 }>;
 
 
-export type ProjectCreateMutation = { __typename?: 'Mutation', projectCreate: { __typename: 'Project', baseEnvironmentId: string | null, botPrEnvironments: boolean, createdAt: any, deletedAt: any | null, description: string | null, expiredAt: any | null, id: string, isPublic: boolean, isTempProject: boolean, name: string, prDeploys: boolean, subscriptionPlanLimit: any, subscriptionType: SubscriptionPlanType, teamId: string | null, updatedAt: any } };
+export type ProjectCreateMutation = { __typename?: 'Mutation', projectCreate: { __typename: 'Project', baseEnvironmentId?: string | null, botPrEnvironments: boolean, createdAt: any, deletedAt?: any | null, description?: string | null, expiredAt?: any | null, id: string, isPublic: boolean, isTempProject: boolean, name: string, prDeploys: boolean, subscriptionPlanLimit: any, subscriptionType: SubscriptionPlanType, teamId?: string | null, updatedAt: any } };
 
 export type ProjectDeleteMutationVariables = Exact<{
   id: Scalars['String']['input'];
@@ -6289,14 +6289,14 @@ export type ProjectMemberRemoveMutationVariables = Exact<{
 }>;
 
 
-export type ProjectMemberRemoveMutation = { __typename?: 'Mutation', projectMemberRemove: Array<{ __typename: 'ProjectMember', avatar: string | null, email: string, id: string, name: string | null, role: ProjectRole }> };
+export type ProjectMemberRemoveMutation = { __typename?: 'Mutation', projectMemberRemove: Array<{ __typename: 'ProjectMember', avatar?: string | null, email: string, id: string, name?: string | null, role: ProjectRole }> };
 
 export type ProjectMemberUpdateMutationVariables = Exact<{
   input: ProjectMemberUpdateInput;
 }>;
 
 
-export type ProjectMemberUpdateMutation = { __typename?: 'Mutation', projectMemberUpdate: { __typename: 'ProjectMember', avatar: string | null, email: string, id: string, name: string | null, role: ProjectRole } };
+export type ProjectMemberUpdateMutation = { __typename?: 'Mutation', projectMemberUpdate: { __typename: 'ProjectMember', avatar?: string | null, email: string, id: string, name?: string | null, role: ProjectRole } };
 
 export type ProjectScheduleDeleteMutationVariables = Exact<{
   id: Scalars['String']['input'];
@@ -6361,7 +6361,7 @@ export type ProjectUpdateMutationVariables = Exact<{
 }>;
 
 
-export type ProjectUpdateMutation = { __typename?: 'Mutation', projectUpdate: { __typename: 'Project', baseEnvironmentId: string | null, botPrEnvironments: boolean, createdAt: any, deletedAt: any | null, description: string | null, expiredAt: any | null, id: string, isPublic: boolean, isTempProject: boolean, name: string, prDeploys: boolean, subscriptionPlanLimit: any, subscriptionType: SubscriptionPlanType, teamId: string | null, updatedAt: any } };
+export type ProjectUpdateMutation = { __typename?: 'Mutation', projectUpdate: { __typename: 'Project', baseEnvironmentId?: string | null, botPrEnvironments: boolean, createdAt: any, deletedAt?: any | null, description?: string | null, expiredAt?: any | null, id: string, isPublic: boolean, isTempProject: boolean, name: string, prDeploys: boolean, subscriptionPlanLimit: any, subscriptionType: SubscriptionPlanType, teamId?: string | null, updatedAt: any } };
 
 export type ProviderAuthRemoveMutationVariables = Exact<{
   id: Scalars['String']['input'];
@@ -6395,17 +6395,17 @@ export type ServiceConnectMutationVariables = Exact<{
 }>;
 
 
-export type ServiceConnectMutation = { __typename?: 'Mutation', serviceConnect: { __typename: 'Service', createdAt: any, deletedAt: any | null, featureFlags: Array<ActiveServiceFeatureFlag>, icon: string | null, id: string, name: string, projectId: string, templateServiceId: string | null, templateThreadSlug: string | null, updatedAt: any } };
+export type ServiceConnectMutation = { __typename?: 'Mutation', serviceConnect: { __typename: 'Service', createdAt: any, deletedAt?: any | null, featureFlags: Array<ActiveServiceFeatureFlag>, icon?: string | null, id: string, name: string, projectId: string, templateServiceId?: string | null, templateThreadSlug?: string | null, updatedAt: any } };
 
 export type ServiceCreateMutationVariables = Exact<{
   input: ServiceCreateInput;
 }>;
 
 
-export type ServiceCreateMutation = { __typename?: 'Mutation', serviceCreate: { __typename: 'Service', createdAt: any, deletedAt: any | null, featureFlags: Array<ActiveServiceFeatureFlag>, icon: string | null, id: string, name: string, projectId: string, templateServiceId: string | null, templateThreadSlug: string | null, updatedAt: any } };
+export type ServiceCreateMutation = { __typename?: 'Mutation', serviceCreate: { __typename: 'Service', createdAt: any, deletedAt?: any | null, featureFlags: Array<ActiveServiceFeatureFlag>, icon?: string | null, id: string, name: string, projectId: string, templateServiceId?: string | null, templateThreadSlug?: string | null, updatedAt: any } };
 
 export type ServiceDeleteMutationVariables = Exact<{
-  environmentId: InputMaybe<Scalars['String']['input']>;
+  environmentId?: InputMaybe<Scalars['String']['input']>;
   id: Scalars['String']['input'];
 }>;
 
@@ -6417,14 +6417,14 @@ export type ServiceDisconnectMutationVariables = Exact<{
 }>;
 
 
-export type ServiceDisconnectMutation = { __typename?: 'Mutation', serviceDisconnect: { __typename: 'Service', createdAt: any, deletedAt: any | null, featureFlags: Array<ActiveServiceFeatureFlag>, icon: string | null, id: string, name: string, projectId: string, templateServiceId: string | null, templateThreadSlug: string | null, updatedAt: any } };
+export type ServiceDisconnectMutation = { __typename?: 'Mutation', serviceDisconnect: { __typename: 'Service', createdAt: any, deletedAt?: any | null, featureFlags: Array<ActiveServiceFeatureFlag>, icon?: string | null, id: string, name: string, projectId: string, templateServiceId?: string | null, templateThreadSlug?: string | null, updatedAt: any } };
 
 export type ServiceDomainCreateMutationVariables = Exact<{
   input: ServiceDomainCreateInput;
 }>;
 
 
-export type ServiceDomainCreateMutation = { __typename?: 'Mutation', serviceDomainCreate: { __typename: 'ServiceDomain', createdAt: any | null, deletedAt: any | null, domain: string, edgeId: string | null, environmentId: string, id: string, projectId: string | null, serviceId: string, suffix: string | null, targetPort: number | null, updatedAt: any | null } };
+export type ServiceDomainCreateMutation = { __typename?: 'Mutation', serviceDomainCreate: { __typename: 'ServiceDomain', createdAt?: any | null, deletedAt?: any | null, domain: string, edgeId?: string | null, environmentId: string, id: string, projectId?: string | null, serviceId: string, suffix?: string | null, targetPort?: number | null, updatedAt?: any | null } };
 
 export type ServiceDomainDeleteMutationVariables = Exact<{
   id: Scalars['String']['input'];
@@ -6455,9 +6455,9 @@ export type ServiceFeatureFlagRemoveMutationVariables = Exact<{
 export type ServiceFeatureFlagRemoveMutation = { __typename?: 'Mutation', serviceFeatureFlagRemove: boolean };
 
 export type ServiceInstanceDeployMutationVariables = Exact<{
-  commitSha: InputMaybe<Scalars['String']['input']>;
+  commitSha?: InputMaybe<Scalars['String']['input']>;
   environmentId: Scalars['String']['input'];
-  latestCommit: InputMaybe<Scalars['Boolean']['input']>;
+  latestCommit?: InputMaybe<Scalars['Boolean']['input']>;
   serviceId: Scalars['String']['input'];
 }>;
 
@@ -6465,7 +6465,7 @@ export type ServiceInstanceDeployMutationVariables = Exact<{
 export type ServiceInstanceDeployMutation = { __typename?: 'Mutation', serviceInstanceDeploy: boolean };
 
 export type ServiceInstanceDeployV2MutationVariables = Exact<{
-  commitSha: InputMaybe<Scalars['String']['input']>;
+  commitSha?: InputMaybe<Scalars['String']['input']>;
   environmentId: Scalars['String']['input'];
   serviceId: Scalars['String']['input'];
 }>;
@@ -6489,7 +6489,7 @@ export type ServiceInstanceRedeployMutationVariables = Exact<{
 export type ServiceInstanceRedeployMutation = { __typename?: 'Mutation', serviceInstanceRedeploy: boolean };
 
 export type ServiceInstanceUpdateMutationVariables = Exact<{
-  environmentId: InputMaybe<Scalars['String']['input']>;
+  environmentId?: InputMaybe<Scalars['String']['input']>;
   input: ServiceInstanceUpdateInput;
   serviceId: Scalars['String']['input'];
 }>;
@@ -6502,7 +6502,7 @@ export type ServiceRemoveUpstreamUrlMutationVariables = Exact<{
 }>;
 
 
-export type ServiceRemoveUpstreamUrlMutation = { __typename?: 'Mutation', serviceRemoveUpstreamUrl: { __typename: 'Service', createdAt: any, deletedAt: any | null, featureFlags: Array<ActiveServiceFeatureFlag>, icon: string | null, id: string, name: string, projectId: string, templateServiceId: string | null, templateThreadSlug: string | null, updatedAt: any } };
+export type ServiceRemoveUpstreamUrlMutation = { __typename?: 'Mutation', serviceRemoveUpstreamUrl: { __typename: 'Service', createdAt: any, deletedAt?: any | null, featureFlags: Array<ActiveServiceFeatureFlag>, icon?: string | null, id: string, name: string, projectId: string, templateServiceId?: string | null, templateThreadSlug?: string | null, updatedAt: any } };
 
 export type ServiceUpdateMutationVariables = Exact<{
   id: Scalars['String']['input'];
@@ -6510,7 +6510,7 @@ export type ServiceUpdateMutationVariables = Exact<{
 }>;
 
 
-export type ServiceUpdateMutation = { __typename?: 'Mutation', serviceUpdate: { __typename: 'Service', createdAt: any, deletedAt: any | null, featureFlags: Array<ActiveServiceFeatureFlag>, icon: string | null, id: string, name: string, projectId: string, templateServiceId: string | null, templateThreadSlug: string | null, updatedAt: any } };
+export type ServiceUpdateMutation = { __typename?: 'Mutation', serviceUpdate: { __typename: 'Service', createdAt: any, deletedAt?: any | null, featureFlags: Array<ActiveServiceFeatureFlag>, icon?: string | null, id: string, name: string, projectId: string, templateServiceId?: string | null, templateThreadSlug?: string | null, updatedAt: any } };
 
 export type SessionDeleteMutationVariables = Exact<{
   id: Scalars['String']['input'];
@@ -6524,7 +6524,7 @@ export type SharedVariableConfigureMutationVariables = Exact<{
 }>;
 
 
-export type SharedVariableConfigureMutation = { __typename?: 'Mutation', sharedVariableConfigure: { __typename: 'Variable', createdAt: any, environmentId: string | null, id: string, isSealed: boolean, name: string, pluginId: string | null, references: Array<string>, serviceId: string | null, updatedAt: any } };
+export type SharedVariableConfigureMutation = { __typename?: 'Mutation', sharedVariableConfigure: { __typename: 'Variable', createdAt: any, environmentId?: string | null, id: string, isSealed: boolean, name: string, pluginId?: string | null, references: Array<string>, serviceId?: string | null, updatedAt: any } };
 
 export type TcpProxyDeleteMutationVariables = Exact<{
   id: Scalars['String']['input'];
@@ -6538,7 +6538,7 @@ export type TemplateCloneMutationVariables = Exact<{
 }>;
 
 
-export type TemplateCloneMutation = { __typename?: 'Mutation', templateClone: { __typename: 'Template', activeProjects: number, canvasConfig: any | null, category: string | null, code: string, communityThreadSlug: string | null, config: any, createdAt: any, demoProjectId: string | null, description: string | null, health: number | null, id: string, image: string | null, isApproved: boolean, isV2Template: boolean, languages: Array<string> | null, metadata: any, name: string, projects: number, readme: string | null, serializedConfig: any | null, status: TemplateStatus, tags: Array<string> | null, teamId: string | null, totalPayout: number } };
+export type TemplateCloneMutation = { __typename?: 'Mutation', templateClone: { __typename: 'Template', activeProjects: number, canvasConfig?: any | null, category?: string | null, code: string, communityThreadSlug?: string | null, config: any, createdAt: any, demoProjectId?: string | null, description?: string | null, health?: number | null, id: string, image?: string | null, isApproved: boolean, isV2Template: boolean, languages?: Array<string> | null, metadata: any, name: string, projects: number, readme?: string | null, serializedConfig?: any | null, status: TemplateStatus, tags?: Array<string> | null, teamId?: string | null, totalPayout: number } };
 
 export type TemplateDeleteMutationVariables = Exact<{
   id: Scalars['String']['input'];
@@ -6553,14 +6553,14 @@ export type TemplateDeployV2MutationVariables = Exact<{
 }>;
 
 
-export type TemplateDeployV2Mutation = { __typename?: 'Mutation', templateDeployV2: { __typename: 'TemplateDeployPayload', projectId: string, workflowId: string | null } };
+export type TemplateDeployV2Mutation = { __typename?: 'Mutation', templateDeployV2: { __typename: 'TemplateDeployPayload', projectId: string, workflowId?: string | null } };
 
 export type TemplateGenerateMutationVariables = Exact<{
   input: TemplateGenerateInput;
 }>;
 
 
-export type TemplateGenerateMutation = { __typename?: 'Mutation', templateGenerate: { __typename: 'Template', activeProjects: number, canvasConfig: any | null, category: string | null, code: string, communityThreadSlug: string | null, config: any, createdAt: any, demoProjectId: string | null, description: string | null, health: number | null, id: string, image: string | null, isApproved: boolean, isV2Template: boolean, languages: Array<string> | null, metadata: any, name: string, projects: number, readme: string | null, serializedConfig: any | null, status: TemplateStatus, tags: Array<string> | null, teamId: string | null, totalPayout: number } };
+export type TemplateGenerateMutation = { __typename?: 'Mutation', templateGenerate: { __typename: 'Template', activeProjects: number, canvasConfig?: any | null, category?: string | null, code: string, communityThreadSlug?: string | null, config: any, createdAt: any, demoProjectId?: string | null, description?: string | null, health?: number | null, id: string, image?: string | null, isApproved: boolean, isV2Template: boolean, languages?: Array<string> | null, metadata: any, name: string, projects: number, readme?: string | null, serializedConfig?: any | null, status: TemplateStatus, tags?: Array<string> | null, teamId?: string | null, totalPayout: number } };
 
 export type TemplatePublishMutationVariables = Exact<{
   id: Scalars['String']['input'];
@@ -6568,7 +6568,7 @@ export type TemplatePublishMutationVariables = Exact<{
 }>;
 
 
-export type TemplatePublishMutation = { __typename?: 'Mutation', templatePublish: { __typename: 'Template', activeProjects: number, canvasConfig: any | null, category: string | null, code: string, communityThreadSlug: string | null, config: any, createdAt: any, demoProjectId: string | null, description: string | null, health: number | null, id: string, image: string | null, isApproved: boolean, isV2Template: boolean, languages: Array<string> | null, metadata: any, name: string, projects: number, readme: string | null, serializedConfig: any | null, status: TemplateStatus, tags: Array<string> | null, teamId: string | null, totalPayout: number } };
+export type TemplatePublishMutation = { __typename?: 'Mutation', templatePublish: { __typename: 'Template', activeProjects: number, canvasConfig?: any | null, category?: string | null, code: string, communityThreadSlug?: string | null, config: any, createdAt: any, demoProjectId?: string | null, description?: string | null, health?: number | null, id: string, image?: string | null, isApproved: boolean, isV2Template: boolean, languages?: Array<string> | null, metadata: any, name: string, projects: number, readme?: string | null, serializedConfig?: any | null, status: TemplateStatus, tags?: Array<string> | null, teamId?: string | null, totalPayout: number } };
 
 export type TemplateServiceSourceEjectMutationVariables = Exact<{
   input: TemplateServiceSourceEjectInput;
@@ -6682,7 +6682,7 @@ export type UserProfileUpdateMutation = { __typename?: 'Mutation', userProfileUp
 export type UserTermsUpdateMutationVariables = Exact<{ [key: string]: never; }>;
 
 
-export type UserTermsUpdateMutation = { __typename?: 'Mutation', userTermsUpdate: { __typename: 'User', agreedFairUse: boolean, avatar: string | null, banReason: string | null, createdAt: any, email: string, featureFlags: Array<ActiveFeatureFlag>, flags: Array<UserFlag>, has2FA: boolean, id: string, isAdmin: boolean, isConductor: boolean, isVerified: boolean, lastLogin: any, name: string | null, registrationStatus: RegistrationStatus, riskLevel: number | null, termsAgreedOn: any | null, username: string | null } | null };
+export type UserTermsUpdateMutation = { __typename?: 'Mutation', userTermsUpdate?: { __typename: 'User', agreedFairUse: boolean, avatar?: string | null, banReason?: string | null, createdAt: any, email: string, featureFlags: Array<ActiveFeatureFlag>, flags: Array<UserFlag>, has2FA: boolean, id: string, isAdmin: boolean, isConductor: boolean, isVerified: boolean, lastLogin: any, name?: string | null, registrationStatus: RegistrationStatus, riskLevel?: number | null, termsAgreedOn?: any | null, username?: string | null } | null };
 
 export type VariableCollectionUpsertMutationVariables = Exact<{
   input: VariableCollectionUpsertInput;
@@ -6724,7 +6724,7 @@ export type VolumeInstanceBackupCreateMutationVariables = Exact<{
 }>;
 
 
-export type VolumeInstanceBackupCreateMutation = { __typename?: 'Mutation', volumeInstanceBackupCreate: { __typename: 'WorkflowId', workflowId: string | null } };
+export type VolumeInstanceBackupCreateMutation = { __typename?: 'Mutation', volumeInstanceBackupCreate: { __typename: 'WorkflowId', workflowId?: string | null } };
 
 export type VolumeInstanceBackupDeleteMutationVariables = Exact<{
   volumeInstanceBackupId: Scalars['String']['input'];
@@ -6732,7 +6732,7 @@ export type VolumeInstanceBackupDeleteMutationVariables = Exact<{
 }>;
 
 
-export type VolumeInstanceBackupDeleteMutation = { __typename?: 'Mutation', volumeInstanceBackupDelete: { __typename: 'WorkflowId', workflowId: string | null } };
+export type VolumeInstanceBackupDeleteMutation = { __typename?: 'Mutation', volumeInstanceBackupDelete: { __typename: 'WorkflowId', workflowId?: string | null } };
 
 export type VolumeInstanceBackupLockMutationVariables = Exact<{
   volumeInstanceBackupId: Scalars['String']['input'];
@@ -6748,7 +6748,7 @@ export type VolumeInstanceBackupRestoreMutationVariables = Exact<{
 }>;
 
 
-export type VolumeInstanceBackupRestoreMutation = { __typename?: 'Mutation', volumeInstanceBackupRestore: { __typename: 'WorkflowId', workflowId: string | null } };
+export type VolumeInstanceBackupRestoreMutation = { __typename?: 'Mutation', volumeInstanceBackupRestore: { __typename: 'WorkflowId', workflowId?: string | null } };
 
 export type VolumeInstanceBackupScheduleUpdateMutationVariables = Exact<{
   kinds: Array<VolumeInstanceBackupScheduleKind> | VolumeInstanceBackupScheduleKind;
@@ -6759,7 +6759,7 @@ export type VolumeInstanceBackupScheduleUpdateMutationVariables = Exact<{
 export type VolumeInstanceBackupScheduleUpdateMutation = { __typename?: 'Mutation', volumeInstanceBackupScheduleUpdate: boolean };
 
 export type VolumeInstanceUpdateMutationVariables = Exact<{
-  environmentId: InputMaybe<Scalars['String']['input']>;
+  environmentId?: InputMaybe<Scalars['String']['input']>;
   input: VolumeInstanceUpdateInput;
   volumeId: Scalars['String']['input'];
 }>;
@@ -6780,7 +6780,7 @@ export type WebhookCreateMutationVariables = Exact<{
 }>;
 
 
-export type WebhookCreateMutation = { __typename?: 'Mutation', webhookCreate: { __typename: 'ProjectWebhook', filters: Array<string> | null, id: string, lastStatus: number | null, projectId: string, url: string } };
+export type WebhookCreateMutation = { __typename?: 'Mutation', webhookCreate: { __typename: 'ProjectWebhook', filters?: Array<string> | null, id: string, lastStatus?: number | null, projectId: string, url: string } };
 
 export type WebhookDeleteMutationVariables = Exact<{
   id: Scalars['String']['input'];
@@ -6795,7 +6795,7 @@ export type WebhookUpdateMutationVariables = Exact<{
 }>;
 
 
-export type WebhookUpdateMutation = { __typename?: 'Mutation', webhookUpdate: { __typename: 'ProjectWebhook', filters: Array<string> | null, id: string, lastStatus: number | null, projectId: string, url: string } };
+export type WebhookUpdateMutation = { __typename?: 'Mutation', webhookUpdate: { __typename: 'ProjectWebhook', filters?: Array<string> | null, id: string, lastStatus?: number | null, projectId: string, url: string } };
 
 export type WorkspaceDeleteMutationVariables = Exact<{
   id: Scalars['String']['input'];
@@ -6817,7 +6817,7 @@ export type WorkspaceInviteCodeUseMutationVariables = Exact<{
 }>;
 
 
-export type WorkspaceInviteCodeUseMutation = { __typename?: 'Mutation', workspaceInviteCodeUse: { __typename: 'Workspace', adoptionLevel: number, allowDeprecatedRegions: boolean | null, createdAt: any, id: string, name: string, plan: Plan, preferredRegion: string | null, subscriptionModel: SubscriptionModel, updatedAt: any } };
+export type WorkspaceInviteCodeUseMutation = { __typename?: 'Mutation', workspaceInviteCodeUse: { __typename: 'Workspace', adoptionLevel: number, allowDeprecatedRegions?: boolean | null, createdAt: any, id: string, name: string, plan: Plan, preferredRegion?: string | null, subscriptionModel: SubscriptionModel, updatedAt: any } };
 
 export type WorkspaceLeaveMutationVariables = Exact<{
   id: Scalars['String']['input'];
@@ -6869,7 +6869,7 @@ export type AdminVolumeInstancesForVolumeQueryVariables = Exact<{
 }>;
 
 
-export type AdminVolumeInstancesForVolumeQuery = { __typename?: 'Query', adminVolumeInstancesForVolume: Array<{ __typename: 'VolumeInstance', createdAt: any, currentSizeMB: number, environmentId: string, externalId: string | null, id: string, mountPath: string, region: string | null, serviceId: string | null, sizeMB: number, state: VolumeState | null, volumeId: string }> };
+export type AdminVolumeInstancesForVolumeQuery = { __typename?: 'Query', adminVolumeInstancesForVolume: Array<{ __typename: 'VolumeInstance', createdAt: any, currentSizeMB: number, environmentId: string, externalId?: string | null, id: string, mountPath: string, region?: string | null, serviceId?: string | null, sizeMB: number, state?: VolumeState | null, volumeId: string }> };
 
 export type AllPlatformFeatureFlagsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -6877,10 +6877,10 @@ export type AllPlatformFeatureFlagsQueryVariables = Exact<{ [key: string]: never
 export type AllPlatformFeatureFlagsQuery = { __typename?: 'Query', allPlatformFeatureFlags: Array<{ __typename: 'PlatformFeatureFlagStatus', flag: PlatformFeatureFlag, rolloutPercentage: number, status: boolean, type: PlatformFeatureFlagType }> };
 
 export type ApiTokensQueryVariables = Exact<{
-  after: InputMaybe<Scalars['String']['input']>;
-  before: InputMaybe<Scalars['String']['input']>;
-  first: InputMaybe<Scalars['Int']['input']>;
-  last: InputMaybe<Scalars['Int']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
 }>;
 
 
@@ -6888,14 +6888,14 @@ export type ApiTokensQuery = { __typename?: 'Query', apiTokens: { __typename: 'Q
 
 export type BuildLogsQueryVariables = Exact<{
   deploymentId: Scalars['String']['input'];
-  endDate: InputMaybe<Scalars['DateTime']['input']>;
-  filter: InputMaybe<Scalars['String']['input']>;
-  limit: InputMaybe<Scalars['Int']['input']>;
-  startDate: InputMaybe<Scalars['DateTime']['input']>;
+  endDate?: InputMaybe<Scalars['DateTime']['input']>;
+  filter?: InputMaybe<Scalars['String']['input']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  startDate?: InputMaybe<Scalars['DateTime']['input']>;
 }>;
 
 
-export type BuildLogsQuery = { __typename?: 'Query', buildLogs: Array<{ __typename: 'Log', message: string, severity: string | null, timestamp: string }> };
+export type BuildLogsQuery = { __typename?: 'Query', buildLogs: Array<{ __typename: 'Log', message: string, severity?: string | null, timestamp: string }> };
 
 export type ChangelogBlockImageQueryVariables = Exact<{
   id: Scalars['String']['input'];
@@ -6910,7 +6910,7 @@ export type CustomDomainQueryVariables = Exact<{
 }>;
 
 
-export type CustomDomainQuery = { __typename?: 'Query', customDomain: { __typename: 'CustomDomain', createdAt: any | null, deletedAt: any | null, domain: string, edgeId: string | null, environmentId: string, id: string, projectId: string | null, serviceId: string, targetPort: number | null, updatedAt: any | null } };
+export type CustomDomainQuery = { __typename?: 'Query', customDomain: { __typename: 'CustomDomain', createdAt?: any | null, deletedAt?: any | null, domain: string, edgeId?: string | null, environmentId: string, id: string, projectId?: string | null, serviceId: string, targetPort?: number | null, updatedAt?: any | null } };
 
 export type CustomDomainAvailableQueryVariables = Exact<{
   domain: Scalars['String']['input'];
@@ -6924,25 +6924,25 @@ export type DeploymentQueryVariables = Exact<{
 }>;
 
 
-export type DeploymentQuery = { __typename?: 'Query', deployment: { __typename: 'Deployment', canRedeploy: boolean, canRollback: boolean, createdAt: any, deploymentStopped: boolean, environmentId: string, id: string, meta: any | null, projectId: string, serviceId: string | null, snapshotId: string | null, staticUrl: string | null, status: DeploymentStatus, suggestAddServiceDomain: boolean, updatedAt: any, url: string | null } };
+export type DeploymentQuery = { __typename?: 'Query', deployment: { __typename: 'Deployment', canRedeploy: boolean, canRollback: boolean, createdAt: any, deploymentStopped: boolean, environmentId: string, id: string, meta?: any | null, projectId: string, serviceId?: string | null, snapshotId?: string | null, staticUrl?: string | null, status: DeploymentStatus, suggestAddServiceDomain: boolean, updatedAt: any, url?: string | null } };
 
 export type DeploymentEventsQueryVariables = Exact<{
-  after: InputMaybe<Scalars['String']['input']>;
-  before: InputMaybe<Scalars['String']['input']>;
-  first: InputMaybe<Scalars['Int']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
   id: Scalars['String']['input'];
-  last: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
 }>;
 
 
-export type DeploymentEventsQuery = { __typename?: 'Query', deploymentEvents: { __typename: 'QueryDeploymentEventsConnection', edges: Array<{ __typename?: 'QueryDeploymentEventsConnectionEdge', cursor: string, node: { __typename?: 'DeploymentEvent', id: string, step: DeploymentEventStep, createdAt: any, completedAt: any | null, payload: { __typename?: 'DeploymentEventPayload', error: string | null } | null } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor: string | null, endCursor: string | null } } };
+export type DeploymentEventsQuery = { __typename?: 'Query', deploymentEvents: { __typename: 'QueryDeploymentEventsConnection', edges: Array<{ __typename?: 'QueryDeploymentEventsConnectionEdge', cursor: string, node: { __typename?: 'DeploymentEvent', id: string, step: DeploymentEventStep, createdAt: any, completedAt?: any | null, payload?: { __typename?: 'DeploymentEventPayload', error?: string | null } | null } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: string | null, endCursor?: string | null } } };
 
 export type DeploymentInstanceExecutionsQueryVariables = Exact<{
-  after: InputMaybe<Scalars['String']['input']>;
-  before: InputMaybe<Scalars['String']['input']>;
-  first: InputMaybe<Scalars['Int']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
   input: DeploymentInstanceExecutionListInput;
-  last: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
 }>;
 
 
@@ -6950,28 +6950,28 @@ export type DeploymentInstanceExecutionsQuery = { __typename?: 'Query', deployme
 
 export type DeploymentLogsQueryVariables = Exact<{
   deploymentId: Scalars['String']['input'];
-  endDate: InputMaybe<Scalars['DateTime']['input']>;
-  filter: InputMaybe<Scalars['String']['input']>;
-  limit: InputMaybe<Scalars['Int']['input']>;
-  startDate: InputMaybe<Scalars['DateTime']['input']>;
+  endDate?: InputMaybe<Scalars['DateTime']['input']>;
+  filter?: InputMaybe<Scalars['String']['input']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  startDate?: InputMaybe<Scalars['DateTime']['input']>;
 }>;
 
 
-export type DeploymentLogsQuery = { __typename?: 'Query', deploymentLogs: Array<{ __typename: 'Log', message: string, severity: string | null, timestamp: string }> };
+export type DeploymentLogsQuery = { __typename?: 'Query', deploymentLogs: Array<{ __typename: 'Log', message: string, severity?: string | null, timestamp: string }> };
 
 export type DeploymentSnapshotQueryVariables = Exact<{
   deploymentId: Scalars['String']['input'];
 }>;
 
 
-export type DeploymentSnapshotQuery = { __typename?: 'Query', deploymentSnapshot: { __typename: 'DeploymentSnapshot', createdAt: any, id: string, updatedAt: any, variables: any } | null };
+export type DeploymentSnapshotQuery = { __typename?: 'Query', deploymentSnapshot?: { __typename: 'DeploymentSnapshot', createdAt: any, id: string, updatedAt: any, variables: any } | null };
 
 export type DeploymentTriggersQueryVariables = Exact<{
-  after: InputMaybe<Scalars['String']['input']>;
-  before: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
   environmentId: Scalars['String']['input'];
-  first: InputMaybe<Scalars['Int']['input']>;
-  last: InputMaybe<Scalars['Int']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
   projectId: Scalars['String']['input'];
   serviceId: Scalars['String']['input'];
 }>;
@@ -6980,15 +6980,15 @@ export type DeploymentTriggersQueryVariables = Exact<{
 export type DeploymentTriggersQuery = { __typename?: 'Query', deploymentTriggers: { __typename: 'QueryDeploymentTriggersConnection' } };
 
 export type DeploymentsQueryVariables = Exact<{
-  after: InputMaybe<Scalars['String']['input']>;
-  before: InputMaybe<Scalars['String']['input']>;
-  first: InputMaybe<Scalars['Int']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
   input: DeploymentListInput;
-  last: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
 }>;
 
 
-export type DeploymentsQuery = { __typename?: 'Query', deployments: { __typename: 'QueryDeploymentsConnection', edges: Array<{ __typename?: 'QueryDeploymentsConnectionEdge', cursor: string, node: { __typename?: 'Deployment', id: string, status: DeploymentStatus, createdAt: any, updatedAt: any, projectId: string, serviceId: string | null, environmentId: string, url: string | null, staticUrl: string | null, canRedeploy: boolean, canRollback: boolean, service: { __typename?: 'Service', id: string, name: string } } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor: string | null, endCursor: string | null } } };
+export type DeploymentsQuery = { __typename?: 'Query', deployments: { __typename: 'QueryDeploymentsConnection', edges: Array<{ __typename?: 'QueryDeploymentsConnectionEdge', cursor: string, node: { __typename?: 'Deployment', id: string, status: DeploymentStatus, createdAt: any, updatedAt: any, projectId: string, serviceId?: string | null, environmentId: string, url?: string | null, staticUrl?: string | null, canRedeploy: boolean, canRollback: boolean, service: { __typename?: 'Service', id: string, name: string } } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: string | null, endCursor?: string | null } } };
 
 export type DomainsQueryVariables = Exact<{
   environmentId: Scalars['String']['input'];
@@ -7012,34 +7012,34 @@ export type EnvironmentQueryVariables = Exact<{
 }>;
 
 
-export type EnvironmentQuery = { __typename?: 'Query', environment: { __typename: 'Environment', createdAt: any, deletedAt: any | null, id: string, isEphemeral: boolean, name: string, projectId: string, unmergedChangesCount: number | null, updatedAt: any, volumeInstances: { __typename?: 'EnvironmentVolumeInstancesConnection', edges: Array<{ __typename?: 'EnvironmentVolumeInstancesConnectionEdge', node: { __typename: 'VolumeInstance', id: string, environmentId: string, volumeId: string, mountPath: string, state: VolumeState | null, createdAt: any, currentSizeMB: number, sizeMB: number, region: string | null, serviceId: string | null, externalId: string | null } }> } } };
+export type EnvironmentQuery = { __typename?: 'Query', environment: { __typename: 'Environment', createdAt: any, deletedAt?: any | null, id: string, isEphemeral: boolean, name: string, projectId: string, unmergedChangesCount?: number | null, updatedAt: any, volumeInstances: { __typename?: 'EnvironmentVolumeInstancesConnection', edges: Array<{ __typename?: 'EnvironmentVolumeInstancesConnectionEdge', node: { __typename: 'VolumeInstance', id: string, environmentId: string, volumeId: string, mountPath: string, state?: VolumeState | null, createdAt: any, currentSizeMB: number, sizeMB: number, region?: string | null, serviceId?: string | null, externalId?: string | null } }> } } };
 
 export type EnvironmentLogsQueryVariables = Exact<{
-  afterDate: InputMaybe<Scalars['String']['input']>;
-  afterLimit: InputMaybe<Scalars['Int']['input']>;
-  anchorDate: InputMaybe<Scalars['String']['input']>;
-  beforeDate: InputMaybe<Scalars['String']['input']>;
-  beforeLimit: InputMaybe<Scalars['Int']['input']>;
+  afterDate?: InputMaybe<Scalars['String']['input']>;
+  afterLimit?: InputMaybe<Scalars['Int']['input']>;
+  anchorDate?: InputMaybe<Scalars['String']['input']>;
+  beforeDate?: InputMaybe<Scalars['String']['input']>;
+  beforeLimit?: InputMaybe<Scalars['Int']['input']>;
   environmentId: Scalars['String']['input'];
-  filter: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<Scalars['String']['input']>;
 }>;
 
 
-export type EnvironmentLogsQuery = { __typename?: 'Query', environmentLogs: Array<{ __typename: 'Log', message: string, severity: string | null, timestamp: string }> };
+export type EnvironmentLogsQuery = { __typename?: 'Query', environmentLogs: Array<{ __typename: 'Log', message: string, severity?: string | null, timestamp: string }> };
 
 export type EnvironmentPatchQueryVariables = Exact<{
   id: Scalars['String']['input'];
 }>;
 
 
-export type EnvironmentPatchQuery = { __typename?: 'Query', environmentPatch: { __typename: 'EnvironmentPatch', appliedAt: any | null, createdAt: any, environmentId: string, id: string, lastAppliedError: string | null, message: string | null, status: EnvironmentPatchStatus, updatedAt: any } };
+export type EnvironmentPatchQuery = { __typename?: 'Query', environmentPatch: { __typename: 'EnvironmentPatch', appliedAt?: any | null, createdAt: any, environmentId: string, id: string, lastAppliedError?: string | null, message?: string | null, status: EnvironmentPatchStatus, updatedAt: any } };
 
 export type EnvironmentPatchesQueryVariables = Exact<{
-  after: InputMaybe<Scalars['String']['input']>;
-  before: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
   environmentId: Scalars['String']['input'];
-  first: InputMaybe<Scalars['Int']['input']>;
-  last: InputMaybe<Scalars['Int']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
 }>;
 
 
@@ -7050,49 +7050,49 @@ export type EnvironmentStagedChangesQueryVariables = Exact<{
 }>;
 
 
-export type EnvironmentStagedChangesQuery = { __typename?: 'Query', environmentStagedChanges: { __typename: 'EnvironmentPatch', appliedAt: any | null, createdAt: any, environmentId: string, id: string, lastAppliedError: string | null, message: string | null, status: EnvironmentPatchStatus, updatedAt: any } };
+export type EnvironmentStagedChangesQuery = { __typename?: 'Query', environmentStagedChanges: { __typename: 'EnvironmentPatch', appliedAt?: any | null, createdAt: any, environmentId: string, id: string, lastAppliedError?: string | null, message?: string | null, status: EnvironmentPatchStatus, updatedAt: any } };
 
 export type EnvironmentsQueryVariables = Exact<{
-  after: InputMaybe<Scalars['String']['input']>;
-  before: InputMaybe<Scalars['String']['input']>;
-  first: InputMaybe<Scalars['Int']['input']>;
-  isEphemeral: InputMaybe<Scalars['Boolean']['input']>;
-  last: InputMaybe<Scalars['Int']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  isEphemeral?: InputMaybe<Scalars['Boolean']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
   projectId: Scalars['String']['input'];
 }>;
 
 
-export type EnvironmentsQuery = { __typename?: 'Query', environments: { __typename: 'QueryEnvironmentsConnection', edges: Array<{ __typename?: 'QueryEnvironmentsConnectionEdge', cursor: string, node: { __typename?: 'Environment', id: string, name: string, projectId: string, isEphemeral: boolean, createdAt: any, updatedAt: any, deletedAt: any | null, unmergedChangesCount: number | null } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor: string | null, endCursor: string | null } } };
+export type EnvironmentsQuery = { __typename?: 'Query', environments: { __typename: 'QueryEnvironmentsConnection', edges: Array<{ __typename?: 'QueryEnvironmentsConnectionEdge', cursor: string, node: { __typename?: 'Environment', id: string, name: string, projectId: string, isEphemeral: boolean, createdAt: any, updatedAt: any, deletedAt?: any | null, unmergedChangesCount?: number | null } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: string | null, endCursor?: string | null } } };
 
 export type EstimatedUsageQueryVariables = Exact<{
-  includeDeleted: InputMaybe<Scalars['Boolean']['input']>;
+  includeDeleted?: InputMaybe<Scalars['Boolean']['input']>;
   measurements: Array<MetricMeasurement> | MetricMeasurement;
-  projectId: InputMaybe<Scalars['String']['input']>;
-  workspaceId: InputMaybe<Scalars['String']['input']>;
+  projectId?: InputMaybe<Scalars['String']['input']>;
+  workspaceId?: InputMaybe<Scalars['String']['input']>;
 }>;
 
 
 export type EstimatedUsageQuery = { __typename?: 'Query', estimatedUsage: Array<{ __typename: 'EstimatedUsage', estimatedValue: number, measurement: MetricMeasurement, projectId: string }> };
 
 export type EventsQueryVariables = Exact<{
-  after: InputMaybe<Scalars['String']['input']>;
-  before: InputMaybe<Scalars['String']['input']>;
-  environmentId: InputMaybe<Scalars['String']['input']>;
-  filter: InputMaybe<EventFilterInput>;
-  first: InputMaybe<Scalars['Int']['input']>;
-  last: InputMaybe<Scalars['Int']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  environmentId?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<EventFilterInput>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
   projectId: Scalars['String']['input'];
 }>;
 
 
-export type EventsQuery = { __typename?: 'Query', events: { __typename: 'QueryEventsConnection', edges: Array<{ __typename?: 'QueryEventsConnectionEdge', cursor: string, node: { __typename?: 'Event', id: string, action: string, createdAt: any, severity: EventSeverity, environmentId: string | null, projectId: string | null, payload: any | null } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor: string | null, endCursor: string | null } } };
+export type EventsQuery = { __typename?: 'Query', events: { __typename: 'QueryEventsConnection', edges: Array<{ __typename?: 'QueryEventsConnectionEdge', cursor: string, node: { __typename?: 'Event', id: string, action: string, createdAt: any, severity: EventSeverity, environmentId?: string | null, projectId?: string | null, payload?: any | null } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: string | null, endCursor?: string | null } } };
 
 export type ExternalWorkspacesQueryVariables = Exact<{
-  projectId: InputMaybe<Scalars['String']['input']>;
+  projectId?: InputMaybe<Scalars['String']['input']>;
 }>;
 
 
-export type ExternalWorkspacesQuery = { __typename?: 'Query', externalWorkspaces: Array<{ __typename: 'ExternalWorkspace', allowDeprecatedRegions: boolean | null, avatar: string | null, createdAt: any, customerState: SubscriptionState, hasBAA: boolean, id: string, isTrialing: boolean | null, name: string, plan: Plan, preferredRegion: string | null, teamId: string | null }> };
+export type ExternalWorkspacesQuery = { __typename?: 'Query', externalWorkspaces: Array<{ __typename: 'ExternalWorkspace', allowDeprecatedRegions?: boolean | null, avatar?: string | null, createdAt: any, customerState: SubscriptionState, hasBAA: boolean, id: string, isTrialing?: boolean | null, name: string, plan: Plan, preferredRegion?: string | null, teamId?: string | null }> };
 
 export type FunctionRuntimeQueryVariables = Exact<{
   name: FunctionRuntimeName;
@@ -7151,16 +7151,16 @@ export type HerokuAppsQueryVariables = Exact<{ [key: string]: never; }>;
 export type HerokuAppsQuery = { __typename?: 'Query', herokuApps: Array<{ __typename: 'HerokuApp', id: string, name: string }> };
 
 export type HttpLogsQueryVariables = Exact<{
-  afterDate: InputMaybe<Scalars['String']['input']>;
-  afterLimit: InputMaybe<Scalars['Int']['input']>;
-  anchorDate: InputMaybe<Scalars['String']['input']>;
-  beforeDate: InputMaybe<Scalars['String']['input']>;
-  beforeLimit: InputMaybe<Scalars['Int']['input']>;
+  afterDate?: InputMaybe<Scalars['String']['input']>;
+  afterLimit?: InputMaybe<Scalars['Int']['input']>;
+  anchorDate?: InputMaybe<Scalars['String']['input']>;
+  beforeDate?: InputMaybe<Scalars['String']['input']>;
+  beforeLimit?: InputMaybe<Scalars['Int']['input']>;
   deploymentId: Scalars['String']['input'];
-  endDate: InputMaybe<Scalars['String']['input']>;
-  filter: InputMaybe<Scalars['String']['input']>;
-  limit: InputMaybe<Scalars['Int']['input']>;
-  startDate: InputMaybe<Scalars['String']['input']>;
+  endDate?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<Scalars['String']['input']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  startDate?: InputMaybe<Scalars['String']['input']>;
 }>;
 
 
@@ -7175,20 +7175,20 @@ export type IntegrationAuthQueryVariables = Exact<{
 export type IntegrationAuthQuery = { __typename?: 'Query', integrationAuth: { __typename: 'IntegrationAuth', id: string, provider: string, providerId: string } };
 
 export type IntegrationAuthsQueryVariables = Exact<{
-  after: InputMaybe<Scalars['String']['input']>;
-  before: InputMaybe<Scalars['String']['input']>;
-  first: InputMaybe<Scalars['Int']['input']>;
-  last: InputMaybe<Scalars['Int']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
 }>;
 
 
 export type IntegrationAuthsQuery = { __typename?: 'Query', integrationAuths: { __typename: 'QueryIntegrationAuthsConnection' } };
 
 export type IntegrationsQueryVariables = Exact<{
-  after: InputMaybe<Scalars['String']['input']>;
-  before: InputMaybe<Scalars['String']['input']>;
-  first: InputMaybe<Scalars['Int']['input']>;
-  last: InputMaybe<Scalars['Int']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
   projectId: Scalars['String']['input'];
 }>;
 
@@ -7205,33 +7205,33 @@ export type InviteCodeQuery = { __typename?: 'Query', inviteCode: { __typename: 
 export type MeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type MeQuery = { __typename?: 'Query', me: { __typename: 'User', agreedFairUse: boolean, avatar: string | null, banReason: string | null, createdAt: any, email: string, featureFlags: Array<ActiveFeatureFlag>, flags: Array<UserFlag>, has2FA: boolean, id: string, isAdmin: boolean, isConductor: boolean, isVerified: boolean, lastLogin: any, name: string | null, registrationStatus: RegistrationStatus, riskLevel: number | null, termsAgreedOn: any | null, username: string | null, workspaces: Array<{ __typename: 'Workspace', id: string, name: string, avatar: string | null, createdAt: any, preferredRegion: string | null, subscriptionModel: SubscriptionModel, supportTierOverride: SupportTierOverride | null, banReason: string | null, discordRole: string | null, slackChannelId: string | null }> } };
+export type MeQuery = { __typename?: 'Query', me: { __typename: 'User', agreedFairUse: boolean, avatar?: string | null, banReason?: string | null, createdAt: any, email: string, featureFlags: Array<ActiveFeatureFlag>, flags: Array<UserFlag>, has2FA: boolean, id: string, isAdmin: boolean, isConductor: boolean, isVerified: boolean, lastLogin: any, name?: string | null, registrationStatus: RegistrationStatus, riskLevel?: number | null, termsAgreedOn?: any | null, username?: string | null, workspaces: Array<{ __typename: 'Workspace', id: string, name: string, avatar?: string | null, createdAt: any, preferredRegion?: string | null, subscriptionModel: SubscriptionModel, supportTierOverride?: SupportTierOverride | null, banReason?: string | null, discordRole?: string | null, slackChannelId?: string | null }> } };
 
 export type MetricsQueryVariables = Exact<{
-  averagingWindowSeconds: InputMaybe<Scalars['Int']['input']>;
-  endDate: InputMaybe<Scalars['DateTime']['input']>;
-  environmentId: InputMaybe<Scalars['String']['input']>;
-  groupBy: InputMaybe<Array<MetricTag> | MetricTag>;
-  includeDeleted: InputMaybe<Scalars['Boolean']['input']>;
+  averagingWindowSeconds?: InputMaybe<Scalars['Int']['input']>;
+  endDate?: InputMaybe<Scalars['DateTime']['input']>;
+  environmentId?: InputMaybe<Scalars['String']['input']>;
+  groupBy?: InputMaybe<Array<MetricTag> | MetricTag>;
+  includeDeleted?: InputMaybe<Scalars['Boolean']['input']>;
   measurements: Array<MetricMeasurement> | MetricMeasurement;
-  projectId: InputMaybe<Scalars['String']['input']>;
-  sampleRateSeconds: InputMaybe<Scalars['Int']['input']>;
-  serviceId: InputMaybe<Scalars['String']['input']>;
+  projectId?: InputMaybe<Scalars['String']['input']>;
+  sampleRateSeconds?: InputMaybe<Scalars['Int']['input']>;
+  serviceId?: InputMaybe<Scalars['String']['input']>;
   startDate: Scalars['DateTime']['input'];
-  volumeId: InputMaybe<Scalars['String']['input']>;
-  volumeInstanceExternalId: InputMaybe<Scalars['String']['input']>;
-  workspaceId: InputMaybe<Scalars['String']['input']>;
+  volumeId?: InputMaybe<Scalars['String']['input']>;
+  volumeInstanceExternalId?: InputMaybe<Scalars['String']['input']>;
+  workspaceId?: InputMaybe<Scalars['String']['input']>;
 }>;
 
 
-export type MetricsQuery = { __typename?: 'Query', metrics: Array<{ __typename: 'MetricsResult', measurement: MetricMeasurement, tags: { __typename: 'MetricTags', deploymentId: string | null, deploymentInstanceId: string | null, environmentId: string | null, pluginId: string | null, projectId: string | null, region: string | null, serviceId: string | null, volumeId: string | null, volumeInstanceId: string | null }, values: Array<{ __typename: 'Metric', ts: number, value: number }> }> };
+export type MetricsQuery = { __typename?: 'Query', metrics: Array<{ __typename: 'MetricsResult', measurement: MetricMeasurement, tags: { __typename: 'MetricTags', deploymentId?: string | null, deploymentInstanceId?: string | null, environmentId?: string | null, pluginId?: string | null, projectId?: string | null, region?: string | null, serviceId?: string | null, volumeId?: string | null, volumeInstanceId?: string | null }, values: Array<{ __typename: 'Metric', ts: number, value: number }> }> };
 
 export type NodeQueryVariables = Exact<{
   id: Scalars['ID']['input'];
 }>;
 
 
-export type NodeQuery = { __typename?: 'Query', node:
+export type NodeQuery = { __typename?: 'Query', node?:
     | { __typename: 'AdoptionInfo', id: string }
     | { __typename: 'ApiToken', id: string }
     | { __typename: 'BanReasonHistory', id: string }
@@ -7355,32 +7355,32 @@ export type NodesQuery = { __typename?: 'Query', nodes: Array<
    | null> };
 
 export type NotificationDeliveriesQueryVariables = Exact<{
-  after: InputMaybe<Scalars['String']['input']>;
-  before: InputMaybe<Scalars['String']['input']>;
-  first: InputMaybe<Scalars['Int']['input']>;
-  last: InputMaybe<Scalars['Int']['input']>;
-  filter: InputMaybe<NotificationDeliveryFilterInput>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  filter?: InputMaybe<NotificationDeliveryFilterInput>;
 }>;
 
 
-export type NotificationDeliveriesQuery = { __typename?: 'Query', notificationDeliveries: { __typename: 'QueryNotificationDeliveriesConnection', edges: Array<{ __typename: 'QueryNotificationDeliveriesConnectionEdge', cursor: string, node: { __typename: 'NotificationDelivery', id: string, createdAt: any, readAt: any | null, status: NotificationDeliveryStatus, type: NotificationDeliveryType, updatedAt: any, userId: string | null, notificationInstance: { __typename: 'NotificationInstance', id: string, createdAt: any, environmentId: string | null, eventId: string, eventType: string | null, projectId: string | null, resolvedAt: any | null, resourceId: string | null, resourceType: string | null, serviceId: string | null, severity: NotificationSeverity, status: NotificationStatus, updatedAt: any, volumeId: string | null, workspaceId: string } } }>, pageInfo: { __typename: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor: string | null, endCursor: string | null } } };
+export type NotificationDeliveriesQuery = { __typename?: 'Query', notificationDeliveries: { __typename: 'QueryNotificationDeliveriesConnection', edges: Array<{ __typename: 'QueryNotificationDeliveriesConnectionEdge', cursor: string, node: { __typename: 'NotificationDelivery', id: string, createdAt: any, readAt?: any | null, status: NotificationDeliveryStatus, type: NotificationDeliveryType, updatedAt: any, userId?: string | null, notificationInstance: { __typename: 'NotificationInstance', id: string, createdAt: any, environmentId?: string | null, eventId: string, eventType?: string | null, projectId?: string | null, resolvedAt?: any | null, resourceId?: string | null, resourceType?: string | null, serviceId?: string | null, severity: NotificationSeverity, status: NotificationStatus, updatedAt: any, volumeId?: string | null, workspaceId: string } } }>, pageInfo: { __typename: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: string | null, endCursor?: string | null } } };
 
 export type ObservabilityDashboardsQueryVariables = Exact<{
-  after: InputMaybe<Scalars['String']['input']>;
-  before: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
   environmentId: Scalars['String']['input'];
-  first: InputMaybe<Scalars['Int']['input']>;
-  last: InputMaybe<Scalars['Int']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
 }>;
 
 
 export type ObservabilityDashboardsQuery = { __typename?: 'Query', observabilityDashboards: { __typename: 'QueryObservabilityDashboardsConnection' } };
 
 export type PasskeysQueryVariables = Exact<{
-  after: InputMaybe<Scalars['String']['input']>;
-  before: InputMaybe<Scalars['String']['input']>;
-  first: InputMaybe<Scalars['Int']['input']>;
-  last: InputMaybe<Scalars['Int']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
 }>;
 
 
@@ -7392,7 +7392,7 @@ export type PlatformStatusQueryVariables = Exact<{ [key: string]: never; }>;
 export type PlatformStatusQuery = { __typename?: 'Query', platformStatus: { __typename: 'PlatformStatus', isStable: boolean } };
 
 export type PreferencesQueryVariables = Exact<{
-  token: InputMaybe<Scalars['String']['input']>;
+  token?: InputMaybe<Scalars['String']['input']>;
 }>;
 
 
@@ -7405,7 +7405,7 @@ export type PrivateNetworkEndpointQueryVariables = Exact<{
 }>;
 
 
-export type PrivateNetworkEndpointQuery = { __typename?: 'Query', privateNetworkEndpoint: { __typename: 'PrivateNetworkEndpoint', createdAt: any | null, deletedAt: any | null, dnsName: string, privateIps: Array<string>, publicId: string, serviceInstanceId: string, tags: Array<string> } | null };
+export type PrivateNetworkEndpointQuery = { __typename?: 'Query', privateNetworkEndpoint?: { __typename: 'PrivateNetworkEndpoint', createdAt?: any | null, deletedAt?: any | null, dnsName: string, privateIps: Array<string>, publicId: string, serviceInstanceId: string, tags: Array<string> } | null };
 
 export type PrivateNetworkEndpointNameAvailableQueryVariables = Exact<{
   environmentId: Scalars['String']['input'];
@@ -7421,14 +7421,14 @@ export type PrivateNetworksQueryVariables = Exact<{
 }>;
 
 
-export type PrivateNetworksQuery = { __typename?: 'Query', privateNetworks: Array<{ __typename: 'PrivateNetwork', createdAt: any | null, deletedAt: any | null, dnsName: string, environmentId: string, name: string, networkId: any, projectId: string, publicId: string, tags: Array<string> }> };
+export type PrivateNetworksQuery = { __typename?: 'Query', privateNetworks: Array<{ __typename: 'PrivateNetwork', createdAt?: any | null, deletedAt?: any | null, dnsName: string, environmentId: string, name: string, networkId: any, projectId: string, publicId: string, tags: Array<string> }> };
 
 export type ProjectQueryVariables = Exact<{
   id: Scalars['String']['input'];
 }>;
 
 
-export type ProjectQuery = { __typename?: 'Query', project: { __typename: 'Project', baseEnvironmentId: string | null, botPrEnvironments: boolean, createdAt: any, deletedAt: any | null, description: string | null, expiredAt: any | null, id: string, isPublic: boolean, isTempProject: boolean, name: string, prDeploys: boolean, subscriptionPlanLimit: any, subscriptionType: SubscriptionPlanType, teamId: string | null, updatedAt: any } };
+export type ProjectQuery = { __typename?: 'Query', project: { __typename: 'Project', baseEnvironmentId?: string | null, botPrEnvironments: boolean, createdAt: any, deletedAt?: any | null, description?: string | null, expiredAt?: any | null, id: string, isPublic: boolean, isTempProject: boolean, name: string, prDeploys: boolean, subscriptionPlanLimit: any, subscriptionType: SubscriptionPlanType, teamId?: string | null, updatedAt: any } };
 
 export type ProjectInvitationQueryVariables = Exact<{
   code: Scalars['String']['input'];
@@ -7460,7 +7460,7 @@ export type ProjectMembersQueryVariables = Exact<{
 }>;
 
 
-export type ProjectMembersQuery = { __typename?: 'Query', projectMembers: Array<{ __typename: 'ProjectMember', avatar: string | null, email: string, id: string, name: string | null, role: ProjectRole }> };
+export type ProjectMembersQuery = { __typename?: 'Query', projectMembers: Array<{ __typename: 'ProjectMember', avatar?: string | null, email: string, id: string, name?: string | null, role: ProjectRole }> };
 
 export type ProjectResourceAccessQueryVariables = Exact<{
   projectId: Scalars['String']['input'];
@@ -7475,10 +7475,10 @@ export type ProjectTokenQueryVariables = Exact<{ [key: string]: never; }>;
 export type ProjectTokenQuery = { __typename?: 'Query', projectToken: { __typename: 'ProjectToken', createdAt: any, displayToken: string, environmentId: string, id: string, name: string, projectId: string } };
 
 export type ProjectTokensQueryVariables = Exact<{
-  after: InputMaybe<Scalars['String']['input']>;
-  before: InputMaybe<Scalars['String']['input']>;
-  first: InputMaybe<Scalars['Int']['input']>;
-  last: InputMaybe<Scalars['Int']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
   projectId: Scalars['String']['input'];
 }>;
 
@@ -7486,17 +7486,17 @@ export type ProjectTokensQueryVariables = Exact<{
 export type ProjectTokensQuery = { __typename?: 'Query', projectTokens: { __typename: 'QueryProjectTokensConnection' } };
 
 export type ProjectsQueryVariables = Exact<{
-  after: InputMaybe<Scalars['String']['input']>;
-  before: InputMaybe<Scalars['String']['input']>;
-  first: InputMaybe<Scalars['Int']['input']>;
-  includeDeleted: InputMaybe<Scalars['Boolean']['input']>;
-  last: InputMaybe<Scalars['Int']['input']>;
-  userId: InputMaybe<Scalars['String']['input']>;
-  workspaceId: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  includeDeleted?: InputMaybe<Scalars['Boolean']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  userId?: InputMaybe<Scalars['String']['input']>;
+  workspaceId?: InputMaybe<Scalars['String']['input']>;
 }>;
 
 
-export type ProjectsQuery = { __typename?: 'Query', projects: { __typename: 'QueryProjectsConnection', edges: Array<{ __typename?: 'QueryProjectsConnectionEdge', cursor: string, node: { __typename?: 'Project', id: string, name: string, description: string | null, createdAt: any, updatedAt: any, isPublic: boolean, isTempProject: boolean, teamId: string | null } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor: string | null, endCursor: string | null } } };
+export type ProjectsQuery = { __typename?: 'Query', projects: { __typename: 'QueryProjectsConnection', edges: Array<{ __typename?: 'QueryProjectsConnectionEdge', cursor: string, node: { __typename?: 'Project', id: string, name: string, description?: string | null, createdAt: any, updatedAt: any, isPublic: boolean, isTempProject: boolean, teamId?: string | null } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: string | null, endCursor?: string | null } } };
 
 export type PublicStatsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -7511,11 +7511,11 @@ export type ReferralInfoQueryVariables = Exact<{
 export type ReferralInfoQuery = { __typename?: 'Query', referralInfo: { __typename: 'ReferralInfo', code: string, id: string, status: string } };
 
 export type RegionsQueryVariables = Exact<{
-  projectId: InputMaybe<Scalars['String']['input']>;
+  projectId?: InputMaybe<Scalars['String']['input']>;
 }>;
 
 
-export type RegionsQuery = { __typename?: 'Query', regions: Array<{ __typename: 'Region', country: string, location: string, name: string, railwayMetal: boolean | null, region: string | null, workspaceId: string | null }> };
+export type RegionsQuery = { __typename?: 'Query', regions: Array<{ __typename: 'Region', country: string, location: string, name: string, railwayMetal?: boolean | null, region?: string | null, workspaceId?: string | null }> };
 
 export type ResourceAccessQueryVariables = Exact<{
   explicitResourceOwner: ExplicitOwnerInput;
@@ -7529,7 +7529,7 @@ export type ServiceQueryVariables = Exact<{
 }>;
 
 
-export type ServiceQuery = { __typename?: 'Query', service: { __typename: 'Service', createdAt: any, deletedAt: any | null, featureFlags: Array<ActiveServiceFeatureFlag>, icon: string | null, id: string, name: string, projectId: string, templateServiceId: string | null, templateThreadSlug: string | null, updatedAt: any } };
+export type ServiceQuery = { __typename?: 'Query', service: { __typename: 'Service', createdAt: any, deletedAt?: any | null, featureFlags: Array<ActiveServiceFeatureFlag>, icon?: string | null, id: string, name: string, projectId: string, templateServiceId?: string | null, templateThreadSlug?: string | null, updatedAt: any } };
 
 export type ServiceDomainAvailableQueryVariables = Exact<{
   domain: Scalars['String']['input'];
@@ -7544,7 +7544,7 @@ export type ServiceInstanceQueryVariables = Exact<{
 }>;
 
 
-export type ServiceInstanceQuery = { __typename?: 'Query', serviceInstance: { __typename: 'ServiceInstance', buildCommand: string | null, builder: Builder, createdAt: any, cronSchedule: string | null, deletedAt: any | null, environmentId: string, healthcheckPath: string | null, healthcheckTimeout: number | null, id: string, isUpdatable: boolean, nextCronRunAt: any | null, nixpacksPlan: any | null, numReplicas: number | null, preDeployCommand: any | null, railpackInfo: any | null, railwayConfigFile: string | null, region: string | null, restartPolicyMaxRetries: number, restartPolicyType: RestartPolicyType, rootDirectory: string | null, serviceId: string, serviceName: string, sleepApplication: boolean | null, startCommand: string | null, updatedAt: any, upstreamUrl: string | null, watchPatterns: Array<string> } };
+export type ServiceInstanceQuery = { __typename?: 'Query', serviceInstance: { __typename: 'ServiceInstance', buildCommand?: string | null, builder: Builder, createdAt: any, cronSchedule?: string | null, deletedAt?: any | null, environmentId: string, healthcheckPath?: string | null, healthcheckTimeout?: number | null, id: string, isUpdatable: boolean, nextCronRunAt?: any | null, nixpacksPlan?: any | null, numReplicas?: number | null, preDeployCommand?: any | null, railpackInfo?: any | null, railwayConfigFile?: string | null, region?: string | null, restartPolicyMaxRetries: number, restartPolicyType: RestartPolicyType, rootDirectory?: string | null, serviceId: string, serviceName: string, sleepApplication?: boolean | null, startCommand?: string | null, updatedAt: any, upstreamUrl?: string | null, watchPatterns: Array<string> } };
 
 export type ServiceInstanceIsUpdatableQueryVariables = Exact<{
   environmentId: Scalars['String']['input'];
@@ -7560,7 +7560,7 @@ export type ServiceInstanceLimitOverrideQueryVariables = Exact<{
 }>;
 
 
-export type ServiceInstanceLimitOverrideQuery = { __typename?: 'Query', serviceInstanceLimitOverride: any | null };
+export type ServiceInstanceLimitOverrideQuery = { __typename?: 'Query', serviceInstanceLimitOverride?: any | null };
 
 export type ServiceInstanceLimitsQueryVariables = Exact<{
   environmentId: Scalars['String']['input'];
@@ -7572,20 +7572,20 @@ export type ServiceInstanceLimitsQuery = { __typename?: 'Query', serviceInstance
 
 export type ServicesQueryVariables = Exact<{
   projectId: Scalars['String']['input'];
-  after: InputMaybe<Scalars['String']['input']>;
-  before: InputMaybe<Scalars['String']['input']>;
-  first: InputMaybe<Scalars['Int']['input']>;
-  last: InputMaybe<Scalars['Int']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
 }>;
 
 
-export type ServicesQuery = { __typename?: 'Query', project: { __typename?: 'Project', id: string, services: { __typename?: 'ProjectServicesConnection', edges: Array<{ __typename?: 'ProjectServicesConnectionEdge', cursor: string, node: { __typename?: 'Service', id: string, name: string, icon: string | null, createdAt: any, updatedAt: any, deletedAt: any | null, projectId: string, templateServiceId: string | null, templateThreadSlug: string | null } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor: string | null, endCursor: string | null } } } };
+export type ServicesQuery = { __typename?: 'Query', project: { __typename?: 'Project', id: string, services: { __typename?: 'ProjectServicesConnection', edges: Array<{ __typename?: 'ProjectServicesConnectionEdge', cursor: string, node: { __typename?: 'Service', id: string, name: string, icon?: string | null, createdAt: any, updatedAt: any, deletedAt?: any | null, projectId: string, templateServiceId?: string | null, templateThreadSlug?: string | null } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: string | null, endCursor?: string | null } } } };
 
 export type SessionsQueryVariables = Exact<{
-  after: InputMaybe<Scalars['String']['input']>;
-  before: InputMaybe<Scalars['String']['input']>;
-  first: InputMaybe<Scalars['Int']['input']>;
-  last: InputMaybe<Scalars['Int']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
 }>;
 
 
@@ -7597,34 +7597,34 @@ export type TcpProxiesQueryVariables = Exact<{
 }>;
 
 
-export type TcpProxiesQuery = { __typename?: 'Query', tcpProxies: Array<{ __typename: 'TCPProxy', applicationPort: number, createdAt: any | null, deletedAt: any | null, domain: string, environmentId: string, id: string, proxyPort: number, serviceId: string, updatedAt: any | null }> };
+export type TcpProxiesQuery = { __typename?: 'Query', tcpProxies: Array<{ __typename: 'TCPProxy', applicationPort: number, createdAt?: any | null, deletedAt?: any | null, domain: string, environmentId: string, id: string, proxyPort: number, serviceId: string, updatedAt?: any | null }> };
 
 export type TemplateQueryVariables = Exact<{
-  code: InputMaybe<Scalars['String']['input']>;
-  owner: InputMaybe<Scalars['String']['input']>;
-  repo: InputMaybe<Scalars['String']['input']>;
+  code?: InputMaybe<Scalars['String']['input']>;
+  owner?: InputMaybe<Scalars['String']['input']>;
+  repo?: InputMaybe<Scalars['String']['input']>;
 }>;
 
 
-export type TemplateQuery = { __typename?: 'Query', template: { __typename: 'Template', activeProjects: number, canvasConfig: any | null, category: string | null, code: string, communityThreadSlug: string | null, config: any, createdAt: any, demoProjectId: string | null, description: string | null, health: number | null, id: string, image: string | null, isApproved: boolean, isV2Template: boolean, languages: Array<string> | null, metadata: any, name: string, projects: number, readme: string | null, serializedConfig: any | null, status: TemplateStatus, tags: Array<string> | null, teamId: string | null, totalPayout: number } };
+export type TemplateQuery = { __typename?: 'Query', template: { __typename: 'Template', activeProjects: number, canvasConfig?: any | null, category?: string | null, code: string, communityThreadSlug?: string | null, config: any, createdAt: any, demoProjectId?: string | null, description?: string | null, health?: number | null, id: string, image?: string | null, isApproved: boolean, isV2Template: boolean, languages?: Array<string> | null, metadata: any, name: string, projects: number, readme?: string | null, serializedConfig?: any | null, status: TemplateStatus, tags?: Array<string> | null, teamId?: string | null, totalPayout: number } };
 
 export type TemplateSourceForProjectQueryVariables = Exact<{
   projectId: Scalars['String']['input'];
 }>;
 
 
-export type TemplateSourceForProjectQuery = { __typename?: 'Query', templateSourceForProject: { __typename: 'Template', activeProjects: number, canvasConfig: any | null, category: string | null, code: string, communityThreadSlug: string | null, config: any, createdAt: any, demoProjectId: string | null, description: string | null, health: number | null, id: string, image: string | null, isApproved: boolean, isV2Template: boolean, languages: Array<string> | null, metadata: any, name: string, projects: number, readme: string | null, serializedConfig: any | null, status: TemplateStatus, tags: Array<string> | null, teamId: string | null, totalPayout: number } | null };
+export type TemplateSourceForProjectQuery = { __typename?: 'Query', templateSourceForProject?: { __typename: 'Template', activeProjects: number, canvasConfig?: any | null, category?: string | null, code: string, communityThreadSlug?: string | null, config: any, createdAt: any, demoProjectId?: string | null, description?: string | null, health?: number | null, id: string, image?: string | null, isApproved: boolean, isV2Template: boolean, languages?: Array<string> | null, metadata: any, name: string, projects: number, readme?: string | null, serializedConfig?: any | null, status: TemplateStatus, tags?: Array<string> | null, teamId?: string | null, totalPayout: number } | null };
 
 export type TemplatesQueryVariables = Exact<{
-  after: InputMaybe<Scalars['String']['input']>;
-  before: InputMaybe<Scalars['String']['input']>;
-  first: InputMaybe<Scalars['Int']['input']>;
-  last: InputMaybe<Scalars['Int']['input']>;
-  recommended: InputMaybe<Scalars['Boolean']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  recommended?: InputMaybe<Scalars['Boolean']['input']>;
 }>;
 
 
-export type TemplatesQuery = { __typename?: 'Query', templates: { __typename: 'QueryTemplatesConnection', edges: Array<{ __typename?: 'QueryTemplatesConnectionEdge', cursor: string, node: { __typename?: 'Template', id: string, code: string, name: string, description: string | null, category: string | null, image: string | null, activeProjects: number, health: number | null, isApproved: boolean, isV2Template: boolean, createdAt: any } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor: string | null, endCursor: string | null } } };
+export type TemplatesQuery = { __typename?: 'Query', templates: { __typename: 'QueryTemplatesConnection', edges: Array<{ __typename?: 'QueryTemplatesConnectionEdge', cursor: string, node: { __typename?: 'Template', id: string, code: string, name: string, description?: string | null, category?: string | null, image?: string | null, activeProjects: number, health?: number | null, isApproved: boolean, isV2Template: boolean, createdAt: any } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: string | null, endCursor?: string | null } } };
 
 export type TemplatesCountQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -7632,10 +7632,10 @@ export type TemplatesCountQueryVariables = Exact<{ [key: string]: never; }>;
 export type TemplatesCountQuery = { __typename?: 'Query', templatesCount: number };
 
 export type TrustedDomainsQueryVariables = Exact<{
-  after: InputMaybe<Scalars['String']['input']>;
-  before: InputMaybe<Scalars['String']['input']>;
-  first: InputMaybe<Scalars['Int']['input']>;
-  last: InputMaybe<Scalars['Int']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
   workspaceId: Scalars['String']['input'];
 }>;
 
@@ -7648,30 +7648,30 @@ export type TwoFactorInfoQueryVariables = Exact<{ [key: string]: never; }>;
 export type TwoFactorInfoQuery = { __typename?: 'Query', twoFactorInfo: { __typename: 'TwoFactorInfo', hasRecoveryCodes: boolean, isVerified: boolean } };
 
 export type UsageQueryVariables = Exact<{
-  endDate: InputMaybe<Scalars['DateTime']['input']>;
-  groupBy: InputMaybe<Array<MetricTag> | MetricTag>;
-  includeDeleted: InputMaybe<Scalars['Boolean']['input']>;
+  endDate?: InputMaybe<Scalars['DateTime']['input']>;
+  groupBy?: InputMaybe<Array<MetricTag> | MetricTag>;
+  includeDeleted?: InputMaybe<Scalars['Boolean']['input']>;
   measurements: Array<MetricMeasurement> | MetricMeasurement;
-  projectId: InputMaybe<Scalars['String']['input']>;
-  startDate: InputMaybe<Scalars['DateTime']['input']>;
-  workspaceId: InputMaybe<Scalars['String']['input']>;
+  projectId?: InputMaybe<Scalars['String']['input']>;
+  startDate?: InputMaybe<Scalars['DateTime']['input']>;
+  workspaceId?: InputMaybe<Scalars['String']['input']>;
 }>;
 
 
-export type UsageQuery = { __typename?: 'Query', usage: Array<{ __typename: 'AggregatedUsage', measurement: MetricMeasurement, value: number, tags: { __typename: 'MetricTags', deploymentId: string | null, deploymentInstanceId: string | null, environmentId: string | null, pluginId: string | null, projectId: string | null, region: string | null, serviceId: string | null, volumeId: string | null, volumeInstanceId: string | null } }> };
+export type UsageQuery = { __typename?: 'Query', usage: Array<{ __typename: 'AggregatedUsage', measurement: MetricMeasurement, value: number, tags: { __typename: 'MetricTags', deploymentId?: string | null, deploymentInstanceId?: string | null, environmentId?: string | null, pluginId?: string | null, projectId?: string | null, region?: string | null, serviceId?: string | null, volumeId?: string | null, volumeInstanceId?: string | null } }> };
 
 export type UserProfileQueryVariables = Exact<{
   username: Scalars['String']['input'];
 }>;
 
 
-export type UserProfileQuery = { __typename?: 'Query', userProfile: { __typename: 'UserProfileResponse', avatar: string | null, createdAt: any, customerId: string | null, id: string, isTrialing: boolean | null, name: string | null, state: string | null, totalDeploys: number, username: string | null } };
+export type UserProfileQuery = { __typename?: 'Query', userProfile: { __typename: 'UserProfileResponse', avatar?: string | null, createdAt: any, customerId?: string | null, id: string, isTrialing?: boolean | null, name?: string | null, state?: string | null, totalDeploys: number, username?: string | null } };
 
 export type VariablesQueryVariables = Exact<{
   environmentId: Scalars['String']['input'];
   projectId: Scalars['String']['input'];
-  serviceId: InputMaybe<Scalars['String']['input']>;
-  unrendered: InputMaybe<Scalars['Boolean']['input']>;
+  serviceId?: InputMaybe<Scalars['String']['input']>;
+  unrendered?: InputMaybe<Scalars['Boolean']['input']>;
 }>;
 
 
@@ -7696,27 +7696,27 @@ export type VolumeInstanceQueryVariables = Exact<{
 }>;
 
 
-export type VolumeInstanceQuery = { __typename?: 'Query', volumeInstance: { __typename: 'VolumeInstance', createdAt: any, currentSizeMB: number, environmentId: string, externalId: string | null, id: string, mountPath: string, region: string | null, serviceId: string | null, sizeMB: number, state: VolumeState | null, volumeId: string } };
+export type VolumeInstanceQuery = { __typename?: 'Query', volumeInstance: { __typename: 'VolumeInstance', createdAt: any, currentSizeMB: number, environmentId: string, externalId?: string | null, id: string, mountPath: string, region?: string | null, serviceId?: string | null, sizeMB: number, state?: VolumeState | null, volumeId: string } };
 
 export type VolumeInstanceBackupListQueryVariables = Exact<{
   volumeInstanceId: Scalars['String']['input'];
 }>;
 
 
-export type VolumeInstanceBackupListQuery = { __typename?: 'Query', volumeInstanceBackupList: Array<{ __typename: 'VolumeInstanceBackup', createdAt: any, creatorId: string | null, expiresAt: any | null, externalId: string, id: string, name: string | null, referencedMB: number | null, usedMB: number | null }> };
+export type VolumeInstanceBackupListQuery = { __typename?: 'Query', volumeInstanceBackupList: Array<{ __typename: 'VolumeInstanceBackup', createdAt: any, creatorId?: string | null, expiresAt?: any | null, externalId: string, id: string, name?: string | null, referencedMB?: number | null, usedMB?: number | null }> };
 
 export type VolumeInstanceBackupScheduleListQueryVariables = Exact<{
   volumeInstanceId: Scalars['String']['input'];
 }>;
 
 
-export type VolumeInstanceBackupScheduleListQuery = { __typename?: 'Query', volumeInstanceBackupScheduleList: Array<{ __typename: 'VolumeInstanceBackupSchedule', createdAt: any, cron: string, id: string, kind: VolumeInstanceBackupScheduleKind, name: string, retentionSeconds: number | null }> };
+export type VolumeInstanceBackupScheduleListQuery = { __typename?: 'Query', volumeInstanceBackupScheduleList: Array<{ __typename: 'VolumeInstanceBackupSchedule', createdAt: any, cron: string, id: string, kind: VolumeInstanceBackupScheduleKind, name: string, retentionSeconds?: number | null }> };
 
 export type WebhooksQueryVariables = Exact<{
-  after: InputMaybe<Scalars['String']['input']>;
-  before: InputMaybe<Scalars['String']['input']>;
-  first: InputMaybe<Scalars['Int']['input']>;
-  last: InputMaybe<Scalars['Int']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
   projectId: Scalars['String']['input'];
 }>;
 
@@ -7728,38 +7728,38 @@ export type WorkflowStatusQueryVariables = Exact<{
 }>;
 
 
-export type WorkflowStatusQuery = { __typename?: 'Query', workflowStatus: { __typename: 'WorkflowResult', error: string | null, status: WorkflowStatus } };
+export type WorkflowStatusQuery = { __typename?: 'Query', workflowStatus: { __typename: 'WorkflowResult', error?: string | null, status: WorkflowStatus } };
 
 export type WorkspaceQueryVariables = Exact<{
   workspaceId: Scalars['String']['input'];
 }>;
 
 
-export type WorkspaceQuery = { __typename?: 'Query', workspace: { __typename: 'Workspace', avatar: string | null, banReason: string | null, createdAt: any, discordRole: string | null, id: string, name: string, preferredRegion: string | null, slackChannelId: string | null, subscriptionModel: SubscriptionModel, supportTierOverride: SupportTierOverride | null } };
+export type WorkspaceQuery = { __typename?: 'Query', workspace: { __typename: 'Workspace', avatar?: string | null, banReason?: string | null, createdAt: any, discordRole?: string | null, id: string, name: string, preferredRegion?: string | null, slackChannelId?: string | null, subscriptionModel: SubscriptionModel, supportTierOverride?: SupportTierOverride | null } };
 
 export type WorkspaceByCodeQueryVariables = Exact<{
   code: Scalars['String']['input'];
 }>;
 
 
-export type WorkspaceByCodeQuery = { __typename?: 'Query', workspaceByCode: { __typename: 'Workspace', adoptionLevel: number, allowDeprecatedRegions: boolean | null, createdAt: any, id: string, name: string, plan: Plan, preferredRegion: string | null, subscriptionModel: SubscriptionModel, updatedAt: any } };
+export type WorkspaceByCodeQuery = { __typename?: 'Query', workspaceByCode: { __typename: 'Workspace', adoptionLevel: number, allowDeprecatedRegions?: boolean | null, createdAt: any, id: string, name: string, plan: Plan, preferredRegion?: string | null, subscriptionModel: SubscriptionModel, updatedAt: any } };
 
 export type WorkspaceIdentityProvidersQueryVariables = Exact<{
   workspaceId: Scalars['String']['input'];
-  after: InputMaybe<Scalars['String']['input']>;
-  before: InputMaybe<Scalars['String']['input']>;
-  first: InputMaybe<Scalars['Int']['input']>;
-  last: InputMaybe<Scalars['Int']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
 }>;
 
 
-export type WorkspaceIdentityProvidersQuery = { __typename?: 'Query', workspaceIdentityProviders: { __typename: 'QueryWorkspaceIdentityProvidersConnection', edges: Array<{ __typename: 'QueryWorkspaceIdentityProvidersConnectionEdge', cursor: string, node: { __typename: 'WorkspaceIdentityProvider', id: string, createdAt: any, updatedAt: any, workspaceId: string, enforcementEnabledAt: any | null, connection: { __typename: 'WorkspaceIdPConnection', provider: string | null, status: WorkspaceIdPConnectionStatus, createdAt: any | null, updatedAt: any | null } } }>, pageInfo: { __typename: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor: string | null, endCursor: string | null } } };
+export type WorkspaceIdentityProvidersQuery = { __typename?: 'Query', workspaceIdentityProviders: { __typename: 'QueryWorkspaceIdentityProvidersConnection', edges: Array<{ __typename: 'QueryWorkspaceIdentityProvidersConnectionEdge', cursor: string, node: { __typename: 'WorkspaceIdentityProvider', id: string, createdAt: any, updatedAt: any, workspaceId: string, enforcementEnabledAt?: any | null, connection: { __typename: 'WorkspaceIdPConnection', provider?: string | null, status: WorkspaceIdPConnectionStatus, createdAt?: any | null, updatedAt?: any | null } } }>, pageInfo: { __typename: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: string | null, endCursor?: string | null } } };
 
 export type WorkspaceTemplatesQueryVariables = Exact<{
-  after: InputMaybe<Scalars['String']['input']>;
-  before: InputMaybe<Scalars['String']['input']>;
-  first: InputMaybe<Scalars['Int']['input']>;
-  last: InputMaybe<Scalars['Int']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
   workspaceId: Scalars['String']['input'];
 }>;
 
