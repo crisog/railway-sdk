@@ -9,7 +9,24 @@ query environments($after: String, $before: String, $first: Int, $isEphemeral: B
     projectId: $projectId
   ) {
     __typename
-    # edges
-    # pageInfo
+    edges {
+      cursor
+      node {
+        id
+        name
+        projectId
+        isEphemeral
+        createdAt
+        updatedAt
+        deletedAt
+        unmergedChangesCount
+      }
+    }
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      endCursor
+    }
   }
 }
