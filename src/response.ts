@@ -1,4 +1,5 @@
 import { err, ok, type Result } from 'neverthrow';
+import type { FlattenGraphQLResponse } from './flatten.js';
 
 export class ResponseFieldError extends Error {
   constructor(message: string) {
@@ -77,15 +78,45 @@ export const unwrapArray = <
   return ok(fieldValue as TItem[]);
 };
 
+// Helper to get a key from FlattenGraphQLResponse
+// Accesses T[K] directly to preserve intersection types (e.g., Service[] & { pageInfo: PageInfo })
+type GetFlattenKey<T, K extends string> =
+  T extends FlattenGraphQLResponse<infer U>
+    ? K extends keyof U
+      ? K extends keyof T
+        ? T[K]
+        : never
+      : K extends keyof T
+        ? T[K]
+        : never
+    : K extends keyof T
+      ? T[K]
+      : never;
+
+type NestedPathType<
+  TData extends Record<string, unknown>,
+  TPath extends readonly string[],
+> = TPath extends readonly []
+  ? TData
+  : TPath extends readonly [infer First, ...infer Rest]
+    ? First extends string
+      ? Rest extends readonly string[]
+        ? GetFlattenKey<TData, First> extends Record<string, unknown>
+          ? NestedPathType<GetFlattenKey<TData, First>, Rest>
+          : GetFlattenKey<TData, First>
+        : GetFlattenKey<TData, First>
+      : never
+    : never;
+
 export const unwrapNested = <
   TData extends Record<string, unknown>,
+  TPath extends readonly string[],
   TError extends Error,
-  TField = unknown,
 >(
   result: Result<TData, TError>,
-  path: readonly string[],
+  path: TPath,
   errorMessage?: string,
-): Result<TField, TError | ResponseFieldError> => {
+): Result<NestedPathType<TData, TPath>, TError | ResponseFieldError> => {
   if (result.isErr()) {
     return err(result.error);
   }
@@ -112,7 +143,7 @@ export const unwrapNested = <
     );
   }
 
-  return ok(current as TField);
+  return ok(current as NestedPathType<TData, TPath>);
 };
 
 const isRecord = (value: unknown): value is Record<string, unknown> =>
