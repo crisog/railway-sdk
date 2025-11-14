@@ -18,6 +18,7 @@ import {
   PermissionError,
   ValidationError,
 } from './errors';
+import { flattenGraphQLResponse, type FlattenGraphQLResponse } from './flatten';
 
 export { GraphQLRequestError } from './errors';
 
@@ -72,7 +73,7 @@ export class RailwayClient {
 
   request<TData = unknown, TVariables = Record<string, unknown>>(
     options: GraphQLRequestOptions<TVariables>,
-  ): ResultAsync<TData, GraphQLRequestError> {
+  ): ResultAsync<FlattenGraphQLResponse<TData>, GraphQLRequestError> {
     const headers = {
       ...this.baseHeaders,
       ...options.headers,
@@ -88,34 +89,35 @@ export class RailwayClient {
     const retryOptions = options.retry ?? this.retryOptions;
     const signal = options.signal;
 
-    return executeWithRetry<TData>(
-      () =>
-        ResultAsync.fromPromise(
-          (async () => {
-            const requestInit: RequestInit = {
-              method: 'POST',
-              headers,
-              body,
-            };
+    const operation = (): ResultAsync<FlattenGraphQLResponse<TData>, GraphQLRequestError> =>
+      ResultAsync.fromPromise<Response, GraphQLRequestError>(
+        (async () => {
+          const requestInit: RequestInit = {
+            method: 'POST',
+            headers,
+            body,
+          };
 
-            if (signal) {
-              requestInit.signal = signal as unknown as AbortSignal;
-            }
+          if (signal) {
+            requestInit.signal = signal as unknown as AbortSignal;
+          }
 
-            return fetchImpl(this.endpoint, requestInit);
-          })(),
-          (error) => toNetworkError(error),
-        ).andThen((response) => parseResponse<TData>(response)),
-      retryOptions,
-      signal,
-    );
+          return fetchImpl(this.endpoint, requestInit);
+        })(),
+        (error) => toNetworkError(error),
+      ).andThen((response) => parseResponse<TData>(response)) as ResultAsync<
+        FlattenGraphQLResponse<TData>,
+        GraphQLRequestError
+      >;
+
+    return executeWithRetry<FlattenGraphQLResponse<TData>>(operation, retryOptions, signal);
   }
 
   requestDocument<TData = unknown, TVariables = Record<string, unknown>>(
     document: TypedDocumentNode<TData, TVariables>,
     variables?: TVariables,
     options: GraphQLDocumentRequestOptions = {},
-  ): ResultAsync<TData, GraphQLRequestError> {
+  ): ResultAsync<FlattenGraphQLResponse<TData>, GraphQLRequestError> {
     const operationName = inferOperationName(document);
 
     return this.request<TData, TVariables>({
@@ -196,8 +198,10 @@ const executeWithRetry = <T>(
   );
 };
 
-const parseResponse = <TData>(response: Response): ResultAsync<TData, GraphQLRequestError> =>
-  ResultAsync.fromPromise(
+const parseResponse = <TData>(
+  response: Response,
+): ResultAsync<FlattenGraphQLResponse<TData>, GraphQLRequestError> =>
+  ResultAsync.fromPromise<string, GraphQLRequestError>(
     response.text(),
     (error) =>
       new GraphQLRequestError(
@@ -259,8 +263,8 @@ const parseResponse = <TData>(response: Response): ResultAsync<TData, GraphQLReq
       );
     }
 
-    return ok(normalizedPayload.data);
-  });
+    return ok(flattenGraphQLResponse(normalizedPayload.data));
+  }) as ResultAsync<FlattenGraphQLResponse<TData>, GraphQLRequestError>;
 
 const categorizeError = (
   response: Response,

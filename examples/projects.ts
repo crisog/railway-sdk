@@ -16,8 +16,8 @@ async function main() {
 
   const { projects } = projectsResult.value;
 
-  for (const edge of projects.edges) {
-    console.log(`${edge.node.id} – ${edge.node.name}`);
+  for (const project of projects) {
+    console.log(`${project.id} – ${project.name}`);
   }
 
   if (projects.pageInfo.hasNextPage) {

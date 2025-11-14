@@ -350,6 +350,7 @@ export type CustomerInvoice = {
   reissuedInvoiceOf?: Maybe<Scalars['String']['output']>;
   status?: Maybe<Scalars['String']['output']>;
   subscriptionId?: Maybe<Scalars['String']['output']>;
+  subscriptionStatus?: Maybe<Scalars['String']['output']>;
   total: Scalars['Int']['output'];
 };
 
@@ -1559,11 +1560,20 @@ export type Mutation = {
   volumeInstanceUpdate: Scalars['Boolean']['output'];
   /** Update a persistent volume in a project */
   volumeUpdate: Volume;
-  /** Create a webhook on a project */
+  /**
+   * Create a webhook on a project
+   * @deprecated Project webhooks are deprecated. Use the notification rule API instead.
+   */
   webhookCreate: ProjectWebhook;
-  /** Delete a webhook from a project */
+  /**
+   * Delete a webhook from a project
+   * @deprecated Project webhooks are deprecated. Use the notification rule API instead.
+   */
   webhookDelete: Scalars['Boolean']['output'];
-  /** Update a webhook on a project */
+  /**
+   * Update a webhook on a project
+   * @deprecated Project webhooks are deprecated. Use the notification rule API instead.
+   */
   webhookUpdate: ProjectWebhook;
   /** Delete a workspace and all data associated with it */
   workspaceDelete: Scalars['Boolean']['output'];
@@ -3428,7 +3438,10 @@ export type Query = {
   volumeInstanceBackupList: Array<VolumeInstanceBackup>;
   /** List backups schedules of a volume instance */
   volumeInstanceBackupScheduleList: Array<VolumeInstanceBackupSchedule>;
-  /** Get all webhooks for a project */
+  /**
+   * Get all webhooks for a project
+   * @deprecated Project webhooks are deprecated. Use the notification rule API instead.
+   */
   webhooks: QueryWebhooksConnection;
   /** Gets the status of a workflow */
   workflowStatus: WorkflowResult;

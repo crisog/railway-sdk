@@ -148,6 +148,7 @@ const generateFile = async (operations: OperationMeta[]): Promise<void> => {
     `import type { GraphQLDocumentRequestOptions } from '../types';`,
     `import type { ResultAsync } from 'neverthrow';`,
     `import type { GraphQLRequestError } from '../errors';`,
+    `import type { FlattenGraphQLResponse } from '../flatten';`,
     `import {`,
     ...Array.from(documentImports).map((name) => `  ${name},`),
     ...Array.from(new Set<string>([...dataTypeImports, ...variableTypeImports])).map(
@@ -211,7 +212,7 @@ const buildCallExpression = (operation: OperationMeta): string => {
 };
 
 const buildReturnType = (operation: OperationMeta): string =>
-  `ResultAsync<${operation.dataTypeName}, GraphQLRequestError>`;
+  `ResultAsync<FlattenGraphQLResponse<${operation.dataTypeName}>, GraphQLRequestError>`;
 
 async function main(): Promise<void> {
   const files = await collectGraphQLFiles(GRAPHQL_ROOT);
