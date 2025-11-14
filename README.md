@@ -36,13 +36,26 @@ import { createRailwayFromEnv } from '@crisog/railway-sdk';
 
 const railway = createRailwayFromEnv();
 
-const meResult = await railway.account.me();
+const projectsResult = await railway.projects.list({
+  variables: {
+    first: 5,
+    includeDeleted: false,
+  },
+});
 
-if (meResult.isErr()) {
-  throw meResult.error;
+if (projectsResult.isErr()) {
+  throw projectsResult.error;
 }
 
-console.log(`Logged in as ${meResult.value.me.email}`);
+const { projects } = projectsResult.value;
+
+for (const project of projects) {
+  console.log(`${project.id} – ${project.name}`);
+}
+
+if (projects.pageInfo.hasNextPage) {
+  console.log('More projects available…');
+}
 ```
 
 `createRailwayFromEnv` and `createRailway` provide two ways to initialise the same namespaced API surface (`railway.projects.list`, `railway.account.me`, etc.).
