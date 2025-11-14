@@ -18,7 +18,7 @@ npm install @crisog/railway-sdk
 Most operations require an API token. You can pass the token directly when constructing a client or rely on the built‑in environment discovery:
 
 ```bash
-export RAILWAY_API_TOKEN=rw_acc_...
+export RAILWAY_API_TOKEN=...
 ```
 
 Supported environment variables, in lookup order:
