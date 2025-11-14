@@ -135,8 +135,9 @@ describe('Railway namespace', () => {
     if (projectsResult.isErr()) {
       throw projectsResult.error;
     }
-    expect(projectsResult.value.projects.edges).toHaveLength(1);
-    expect(projectsResult.value.projects.edges[0]?.node.name).toBe('Test Project');
+    expect(projectsResult.value.projects).toHaveLength(1);
+    expect(projectsResult.value.projects[0]?.name).toBe('Test Project');
+    expect(projectsResult.value.projects.pageInfo?.hasNextPage).toBe(false);
 
     expect(operations).toEqual(['me', 'projects']);
     expect(fetchMock).toHaveBeenCalledTimes(2);

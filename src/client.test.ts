@@ -99,6 +99,105 @@ describe('RailwayClient', () => {
     expect(fetchMock).toHaveBeenCalledTimes(1);
   });
 
+  test('flattens connection edges into arrays while preserving metadata', async () => {
+    const fetchMock = createFetchMock(async () =>
+      createJsonResponse({
+        data: {
+          projects: {
+            __typename: 'QueryProjectsConnection',
+            edges: [
+              {
+                cursor: 'cursor-1',
+                node: {
+                  __typename: 'Project',
+                  id: 'proj_1',
+                  name: 'Test Project',
+                  services: {
+                    __typename: 'ProjectServicesConnection',
+                    edges: [
+                      {
+                        cursor: 'svc-1',
+                        node: {
+                          __typename: 'Service',
+                          id: 'svc_1',
+                          name: 'First Service',
+                        },
+                      },
+                    ],
+                    pageInfo: {
+                      __typename: 'PageInfo',
+                      hasNextPage: false,
+                      hasPreviousPage: false,
+                      startCursor: 'svc-1',
+                      endCursor: 'svc-1',
+                    },
+                  },
+                },
+              },
+            ],
+            pageInfo: {
+              __typename: 'PageInfo',
+              hasNextPage: true,
+              hasPreviousPage: false,
+              startCursor: 'cursor-1',
+              endCursor: 'cursor-1',
+            },
+          },
+        },
+      }),
+    );
+
+    const client = createClient({
+      fetch: fetchMock,
+      endpoint: TEST_ENDPOINT,
+    });
+
+    interface ServiceConnection {
+      __typename: string;
+      edges: { cursor: string; node: { __typename: string; id: string; name: string } }[];
+      pageInfo: {
+        __typename: string;
+        hasNextPage: boolean;
+        hasPreviousPage: boolean;
+        startCursor: string;
+        endCursor: string;
+      };
+    }
+
+    interface ProjectsConnection {
+      __typename: string;
+      edges: {
+        cursor: string;
+        node: { __typename: string; id: string; name: string; services: ServiceConnection };
+      }[];
+      pageInfo: {
+        __typename: string;
+        hasNextPage: boolean;
+        hasPreviousPage: boolean;
+        startCursor: string;
+        endCursor: string;
+      };
+    }
+
+    const result = await client.request<{ projects: ProjectsConnection }>({
+      query: '{ projects { __typename } }',
+    });
+
+    expect(result.isOk()).toBe(true);
+    if (result.isErr()) {
+      throw result.error;
+    }
+
+    const projects = result.value.projects;
+    expect(Array.isArray(projects)).toBe(true);
+    expect(projects).toHaveLength(1);
+    expect(projects[0]?.name).toBe('Test Project');
+    expect(projects.pageInfo.hasNextPage).toBe(true);
+    expect(projects[0]?.services).toHaveLength(1);
+    expect(projects[0]?.services.pageInfo.hasNextPage).toBe(false);
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+  });
+
   test('requestDocument prints operation and forwards variables', async () => {
     const fetchMock = createFetchMock(async (_input: FetchInput, init?: FetchInit) => {
       const body = JSON.parse(init?.body as string);

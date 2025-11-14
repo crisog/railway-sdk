@@ -18,7 +18,7 @@ npm install @crisog/railway-sdk
 Most operations require an API token. You can pass the token directly when constructing a client or rely on the built‑in environment discovery:
 
 ```bash
-export RAILWAY_API_TOKEN=rw_acc_...
+export RAILWAY_API_TOKEN=...
 ```
 
 Supported environment variables, in lookup order:
@@ -36,13 +36,26 @@ import { createRailwayFromEnv } from '@crisog/railway-sdk';
 
 const railway = createRailwayFromEnv();
 
-const meResult = await railway.account.me();
+const projectsResult = await railway.projects.list({
+  variables: {
+    first: 5,
+    includeDeleted: false,
+  },
+});
 
-if (meResult.isErr()) {
-  throw meResult.error;
+if (projectsResult.isErr()) {
+  throw projectsResult.error;
 }
 
-console.log(`Logged in as ${meResult.value.me.email}`);
+const { projects } = projectsResult.value;
+
+for (const project of projects) {
+  console.log(`${project.id} – ${project.name}`);
+}
+
+if (projects.pageInfo.hasNextPage) {
+  console.log('More projects available…');
+}
 ```
 
 `createRailwayFromEnv` and `createRailway` provide two ways to initialise the same namespaced API surface (`railway.projects.list`, `railway.account.me`, etc.).
@@ -50,7 +63,7 @@ console.log(`Logged in as ${meResult.value.me.email}`);
 - Use `createRailwayFromEnv()` when your Railway token lives in environment variables. You can pass extra client options (custom headers, retries, fetch) via the optional argument.
 - Use `createRailway(options)` when you need to supply the token programmatically (for example, when pulling it from a secret store).
 
-Every generated helper returns `ResultAsync<TData, GraphQLRequestError>`. Awaiting the helper yields a `Result`; branch with `.isOk()` / `.isErr()`, `unwrapOr`, or `.match()` to handle success and failure explicitly.
+Every generated helper returns `ResultAsync<FlattenGraphQLResponse<TData>, GraphQLRequestError>`. Awaiting the helper yields a `Result`; branch with `.isOk()` / `.isErr()`, `unwrapOr`, or `.match()` to handle success and failure explicitly. `FlattenGraphQLResponse<TData>` collapses GraphQL connection-style fields (`edges`/`node` or `nodes`) into plain arrays while preserving metadata (such as `pageInfo` and `__typename`) on the array object.
 
 ```ts
 import { createRailway } from '@crisog/railway-sdk';
@@ -65,29 +78,28 @@ const railway = createRailway({
 
 Both helpers return a `Railway` client with these namespaces. Use them to discover what each part of the API can do:
 
-| Namespace | Summary |
-| --- | --- |
-| `projects` | Cover the full project lifecycle: CRUD, membership, invitations, feature flags, schedules, tokens, access checks, workflows, and transfers. |
-| `services` | Manage services and deployments, including instance operations (limits, overrides), domains, feature flags, and runtimes. |
-| `deployments` | Inspect and operate deployments: approvals, retries, logs/events, triggers, and snapshots. |
-| `domains` | Work with custom domains attached to Railway services. |
-| `account` | Manage the authenticated account: profile, email updates, invites, flags, passkeys, beta access, terms, and deletion. |
-| `environments` | Manage environment lifecycle, logs, configuration patches (including staged changes), and deploy triggers. |
-| `networking` | Administer private networks, endpoints, egress gateways, nodes, and TCP proxies. |
-| `templates` | Discover, clone, generate, publish, or delete templates (including project sources). |
-| `volumes` | Create, update, delete volumes, and administer backups and schedules. |
-| `variables` | List, upsert, and manage variables, collections, and shared configurations. |
-| `auth` | Handle login sessions, recovery codes, active sessions, and two-factor authentication flows. |
-| `apiTokens` | Create, list, and revoke personal API tokens. |
-| `billing` | Control customer subscriptions, referral info, usage limits, and fair use acknowledgements. |
-| `integrations` | Configure third-party integrations (GitHub, Heroku, Vercel, providers) and their auth records. |
-| `observability` | Access platform observability dashboards, logs, events, metrics, and usage statistics. |
-| `preferences` | Retrieve and update user preferences plus per-resource overrides. |
-| `webhooks` | Create, update, delete, and list project webhooks. |
-| `workspaces` | Inspect and update workspaces, manage users and permissions, invite codes, templates, trusted domains, Slack channels, and identity providers. |
-| `regions` | List available deployment regions. |
-| `misc` | Miscellaneous public platform endpoints such as changelog assets, status, and platform feature flags. |
-
+| Namespace       | Summary                                                                                                                                        |
+| --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| `projects`      | Cover the full project lifecycle: CRUD, membership, invitations, feature flags, schedules, tokens, access checks, workflows, and transfers.    |
+| `services`      | Manage services and deployments, including instance operations (limits, overrides), domains, feature flags, and runtimes.                      |
+| `deployments`   | Inspect and operate deployments: approvals, retries, logs/events, triggers, and snapshots.                                                     |
+| `domains`       | Work with custom domains attached to Railway services.                                                                                         |
+| `account`       | Manage the authenticated account: profile, email updates, invites, flags, passkeys, beta access, terms, and deletion.                          |
+| `environments`  | Manage environment lifecycle, logs, configuration patches (including staged changes), and deploy triggers.                                     |
+| `networking`    | Administer private networks, endpoints, egress gateways, nodes, and TCP proxies.                                                               |
+| `templates`     | Discover, clone, generate, publish, or delete templates (including project sources).                                                           |
+| `volumes`       | Create, update, delete volumes, and administer backups and schedules.                                                                          |
+| `variables`     | List, upsert, and manage variables, collections, and shared configurations.                                                                    |
+| `auth`          | Handle login sessions, recovery codes, active sessions, and two-factor authentication flows.                                                   |
+| `apiTokens`     | Create, list, and revoke personal API tokens.                                                                                                  |
+| `billing`       | Control customer subscriptions, referral info, usage limits, and fair use acknowledgements.                                                    |
+| `integrations`  | Configure third-party integrations (GitHub, Heroku, Vercel, providers) and their auth records.                                                 |
+| `observability` | Access platform observability dashboards, logs, events, metrics, and usage statistics.                                                         |
+| `preferences`   | Retrieve and update user preferences plus per-resource overrides.                                                                              |
+| `webhooks`      | Create, update, delete, and list project webhooks.                                                                                             |
+| `workspaces`    | Inspect and update workspaces, manage users and permissions, invite codes, templates, trusted domains, Slack channels, and identity providers. |
+| `regions`       | List available deployment regions.                                                                                                             |
+| `misc`          | Miscellaneous public platform endpoints such as changelog assets, status, and platform feature flags.                                          |
 
 > Refer to `src/api.ts` for the precise helper mapping and regenerate wrappers after schema or document changes (`bun run generate:wrappers`).
 
@@ -104,7 +116,7 @@ const result = await projects(railway.client, {
 });
 ```
 
-Each helper enforces the correct variables shape and accepts optional `GraphQLDocumentRequestOptions` (custom headers, alternate `fetch`, abort signals, retry configuration, …).
+Each helper enforces the correct variables shape and accepts optional `GraphQLDocumentRequestOptions` (custom headers, alternate `fetch`, abort signals, retry configuration, …). Responses use the flattened representation described above so you can iterate directly over arrays instead of traversing `edges`/`node` wrappers.
 
 ## Retries & Cancellation
 
@@ -124,7 +136,7 @@ Retries never run by default. `shouldRetry` must return `true` to trigger anothe
 
 ## Error Handling
 
-- Generated operations resolve to `ResultAsync<TData, GraphQLRequestError>`. The `Err` variant includes `GraphQLRequestError` (or subclasses such as `NetworkError`, `NotFoundError`, `PermissionError`, `ValidationError`).
+- Generated operations resolve to `ResultAsync<FlattenGraphQLResponse<TData>, GraphQLRequestError>`. The `Err` variant includes `GraphQLRequestError` (or subclasses such as `NetworkError`, `NotFoundError`, `PermissionError`, `ValidationError`).
 - Inspect `error.response`, `error.body`, or `error.rawBody` on the error instance for full context.
 - Missing or empty tokens still throw `MissingTokenError` during client construction.
 
@@ -165,7 +177,7 @@ Run both commands whenever the upstream schema changes or after adding/editing `
 Example scripts live under `examples/`. Execute them with Bun:
 
 ```bash
-bun run examples/me.ts
+bun run examples/projects.ts
 ```
 
 Available scripts:
