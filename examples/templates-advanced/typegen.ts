@@ -3,6 +3,7 @@ import * as path from 'node:path';
 import { createRailway } from '../../src/railway';
 import { requireTokenFromEnv } from '../../src/auth';
 import type { TokenType } from '../../src/auth';
+import { TEMPLATE_CODE } from './config';
 
 interface TemplateTypeInfo {
   code: string;
@@ -141,18 +142,17 @@ const generateTemplateTypes = async (options: GenerateOptions): Promise<Generate
 
 async function main() {
   const { token } = requireTokenFromEnv();
-  const templates = ['ffmpeg-rest-api'];
 
-  console.log(`Generating config for: ${templates.join(', ')}\n`);
+  console.log(`Generating config for: ${TEMPLATE_CODE}\n`);
 
-  const result = await generateTemplateTypes({ templates, token });
+  const result = await generateTemplateTypes({ templates: [TEMPLATE_CODE], token });
 
   for (const template of result.templates) {
     console.log(`  ✓ ${template.name} (${template.code})`);
   }
 
   const outputDir = path.join(import.meta.dirname, 'generated');
-  const outputFile = path.join(outputDir, 'ffmpeg-rest-api.ts');
+  const outputFile = path.join(outputDir, `${TEMPLATE_CODE}.ts`);
 
   await fs.mkdir(outputDir, { recursive: true });
   await fs.writeFile(outputFile, result.types, 'utf-8');
