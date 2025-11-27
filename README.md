@@ -29,6 +29,46 @@ Supported environment variables, in lookup order:
 
 If no token is discovered, the helpers throw `MissingTokenError`.
 
+### Token Types
+
+The SDK's `tokenType` option determines which HTTP header is used:
+
+| tokenType   | HTTP Header             |
+| ----------- | ----------------------- |
+| `'account'` | `Authorization: Bearer` |
+| `'team'`    | `Team-Access-Token`     |
+| `'project'` | `Project-Access-Token`  |
+
+> [!NOTE]
+> The default `tokenType` is `'account'`. For workspace tokens, use `'team'`. For project tokens, use `'project'`.
+
+<details>
+<summary><strong>Token Scope Matrix</strong></summary>
+
+| Category           | Account Token  | Workspace Token   | Project Token       |
+| ------------------ | -------------- | ----------------- | ------------------- |
+| **projects/**      | ✅ Full Access | ✅ Full Access    | ⚠️ Get Only         |
+| **services/**      | ✅ Full Access | ✅ Full Access    | ✅ Full Access      |
+| **environments/**  | ✅ Full Access | ✅ Full Access    | ✅ Full Access      |
+| **deployments/**   | ✅ Full Access | ✅ Full Access    | ❌ Not Authorized   |
+| **variables/**     | ✅ Full Access | ✅ Full Access    | ✅ Full Access      |
+| **domains/**       | ✅ Full Access | ✅ Full Access    | ✅ Full Access      |
+| **templates/**     | ✅ Full Access | ✅ Full Access    | ⚠️ Existing Project |
+| **networking/**    | ✅ Full Access | ✅ Full Access    | ✅ Full Access      |
+| **observability/** | ✅ Full Access | ✅ Full Access    | ⚠️ Events Only      |
+| **workflows/**     | ⚠️ Limited     | ⚠️ Limited        | ❌ Not Authorized   |
+| **integrations/**  | ✅ Full Access | ❌ Not Authorized | ❌ Not Authorized   |
+| **volumes/**       | ✅ Full Access | ✅ Full Access    | ✅ Backups Only     |
+| **account/**       | ✅ Full Access | ✅ Full Access    | ❌ Not Authorized   |
+
+**Legend:** ✅ Full Access · ⚠️ Limited · ❌ Not Authorized
+
+- **Account Token**: Required for GitHub integrations. Use `tokenType: 'account'` (default).
+- **Workspace Token**: Best for workspace-level operations. Use `tokenType: 'team'`. Can create new projects and deploy templates.
+- **Project Token**: Scoped to specific project/environment. Use `tokenType: 'project'`. Has broad access within the scoped project but cannot list deployments or access metrics.
+
+</details>
+
 ## Quick Start
 
 ```ts
