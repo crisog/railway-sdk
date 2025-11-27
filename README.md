@@ -13,13 +13,66 @@ npm install @crisog/railway-sdk
 > **Note**  
 > The SDK is published as ESM-only. Import it using `import`/dynamic `import()`; CommonJS `require()` is not supported.
 
-## Authentication
-
-Most operations require an API token. You can pass the token directly when constructing a client or rely on the built‑in environment discovery:
+## Quick Start
 
 ```bash
-export RAILWAY_API_TOKEN=...
+export RAILWAY_API_TOKEN=your-token-here
 ```
+
+```ts
+import { createRailwayFromEnv } from '@crisog/railway-sdk';
+
+const railway = createRailwayFromEnv();
+
+const projectsResult = await railway.projects.list({
+  variables: {
+    first: 5,
+    includeDeleted: false,
+  },
+});
+
+if (projectsResult.isErr()) {
+  throw projectsResult.error;
+}
+
+const { projects } = projectsResult.value;
+
+for (const project of projects) {
+  console.log(`${project.id} – ${project.name}`);
+}
+
+if (projects.pageInfo.hasNextPage) {
+  console.log('More projects available…');
+}
+```
+
+### Initialization
+
+| Method                   | Use When                                                       |
+| ------------------------ | -------------------------------------------------------------- |
+| `createRailwayFromEnv()` | Token lives in environment variables                           |
+| `createRailway(options)` | Token is supplied programmatically (e.g., from a secret store) |
+
+```ts
+import { createRailway } from '@crisog/railway-sdk';
+
+const railway = createRailway({
+  token: myToken,
+  tokenType: 'team',
+});
+```
+
+### Response Handling
+
+Every helper returns `ResultAsync<FlattenGraphQLResponse<TData>, GraphQLRequestError>`. Branch with `.isOk()` / `.isErr()`, `unwrapOr`, or `.match()` to handle success and failure.
+
+The `FlattenGraphQLResponse` type collapses GraphQL connections (`edges`/`node`) into plain arrays while preserving metadata like `pageInfo`.
+
+### Examples
+
+Browse more examples at [github.com/crisog/railway-sdk/tree/main/examples](https://github.com/crisog/railway-sdk/tree/main/examples).
+
+## Authentication
 
 Supported environment variables, in lookup order:
 
@@ -68,51 +121,6 @@ The SDK's `tokenType` option determines which HTTP header is used:
 - **Project Token**: Scoped to specific project/environment. Use `tokenType: 'project'`. Has broad access within the scoped project but cannot list deployments or access metrics.
 
 </details>
-
-## Quick Start
-
-```ts
-import { createRailwayFromEnv } from '@crisog/railway-sdk';
-
-const railway = createRailwayFromEnv();
-
-const projectsResult = await railway.projects.list({
-  variables: {
-    first: 5,
-    includeDeleted: false,
-  },
-});
-
-if (projectsResult.isErr()) {
-  throw projectsResult.error;
-}
-
-const { projects } = projectsResult.value;
-
-for (const project of projects) {
-  console.log(`${project.id} – ${project.name}`);
-}
-
-if (projects.pageInfo.hasNextPage) {
-  console.log('More projects available…');
-}
-```
-
-`createRailwayFromEnv` and `createRailway` provide two ways to initialise the same namespaced API surface (`railway.projects.list`, `railway.account.me`, etc.).
-
-- Use `createRailwayFromEnv()` when your Railway token lives in environment variables. You can pass extra client options (custom headers, retries, fetch) via the optional argument.
-- Use `createRailway(options)` when you need to supply the token programmatically (for example, when pulling it from a secret store).
-
-Every generated helper returns `ResultAsync<FlattenGraphQLResponse<TData>, GraphQLRequestError>`. Awaiting the helper yields a `Result`; branch with `.isOk()` / `.isErr()`, `unwrapOr`, or `.match()` to handle success and failure explicitly. `FlattenGraphQLResponse<TData>` collapses GraphQL connection-style fields (`edges`/`node` or `nodes`) into plain arrays while preserving metadata (such as `pageInfo` and `__typename`) on the array object.
-
-```ts
-import { createRailway } from '@crisog/railway-sdk';
-
-const railway = createRailway({
-  token: myToken,
-  tokenType: 'team',
-});
-```
 
 ## Supported Namespaced Methods
 
@@ -211,21 +219,6 @@ The repository includes scripts for keeping schema artifacts and wrappers in syn
    Produces `src/generated/operations.ts`, which powers the namespaced API surface.
 
 Run both commands whenever the upstream schema changes or after adding/editing `.graphql` documents under `src/graphql/`.
-
-## Examples
-
-Example scripts live under `examples/`. Execute them with Bun:
-
-```bash
-bun run examples/projects.ts
-```
-
-Available scripts:
-
-- `examples/me.ts` – basic authenticated call using the high-level API.
-- `examples/projects.ts` – list the first few projects with pagination variables.
-
-Feel free to copy these as starting points for your own tooling.
 
 ## Development
 
