@@ -42,11 +42,11 @@ export type AccessRule = {
 export type ActiveFeatureFlag =
   | 'BUCKETS'
   | 'BUCKET_FILE_BROWSER'
-  | 'DATA_UI_SSH'
+  | 'ENVIRONMENT_RESTRICTIONS'
+  | 'GLOBAL_BUCKET_REGION'
   | 'HTTP_SERVICE_METRICS'
   | 'MAGIC_CONFIG'
   | 'MONOREPO_SUPPORT'
-  | 'NOTIFICATIONS'
   | 'PRIORITY_BOARDING'
   | 'RAW_SQL_QUERIES'
   | 'UNIFIED_TEMPLATE_EDITOR';
@@ -56,12 +56,9 @@ export type ActivePlatformFlag =
   | 'BUCKETS'
   | 'BUILDER_V3_ROLLOUT_EXISTING_SERVICES'
   | 'BUILDER_V3_ROLLOUT_NEW_SERVICES'
-  | 'DATA_UI_SSH'
   | 'DEMO_PERCENTAGE_ROLLOUT'
   | 'ENABLE_RAW_SQL_QUERIES'
   | 'MONOREPO_SUPPORT'
-  | 'NEW_BILLING_FLOW'
-  | 'NOTIFICATION_ENGINE'
   | 'UPDATED_VM_QUERIES'
   | 'USE_GH_WEBHOOKS_FOR_CHANGE_DETECTION'
   | 'VM_TIME_RANGE_QUERY';
@@ -69,7 +66,9 @@ export type ActivePlatformFlag =
 export type ActiveServiceFeatureFlag =
   | 'COPY_VOLUME_TO_ENVIRONMENT'
   | 'PLACEHOLDER'
-  | 'USE_GH_WEBHOOKS_FOR_CHANGE_DETECTION';
+  | 'USE_BUILDER_V3_FOR_CLI_DEPLOYS'
+  | 'USE_GH_WEBHOOKS_FOR_CHANGE_DETECTION'
+  | 'USE_VM_RUNTIME';
 
 export type AdoptionInfo = Node & {
   __typename?: 'AdoptionInfo';
@@ -205,6 +204,14 @@ export type CnameCheckStatus =
   | 'INVALID'
   | 'VALID'
   | 'WAITING';
+
+export type ComplianceAgreementsInfo = {
+  __typename?: 'ComplianceAgreementsInfo';
+  /** Whether the workspace has a signed Business Associate Agreement (HIPAA) */
+  hasBAA: Scalars['Boolean']['output'];
+  /** Whether the workspace has a Data Processing Agreement (GDPR) */
+  hasDPA: Scalars['Boolean']['output'];
+};
 
 export type Container = Node & {
   __typename?: 'Container';
@@ -637,6 +644,7 @@ export type EgressGatewayServiceTargetInput = {
 
 export type Environment = Node & {
   __typename?: 'Environment';
+  canAccess: Scalars['Boolean']['output'];
   createdAt: Scalars['DateTime']['output'];
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
   deploymentTriggers: EnvironmentDeploymentTriggersConnection;
@@ -865,6 +873,7 @@ export type ExternalWorkspace = {
   customerState: SubscriptionState;
   discordRole?: Maybe<Scalars['String']['output']>;
   hasBAA: Scalars['Boolean']['output'];
+  hasRBAC: Scalars['Boolean']['output'];
   hasSAML: Scalars['Boolean']['output'];
   id: Scalars['String']['output'];
   isTrialing?: Maybe<Scalars['Boolean']['output']>;
@@ -927,6 +936,7 @@ export type GitHubRepo = {
 
 export type GitHubRepoDeployInput = {
   branch?: InputMaybe<Scalars['String']['input']>;
+  environmentId?: InputMaybe<Scalars['String']['input']>;
   projectId: Scalars['String']['input'];
   repo: Scalars['String']['input'];
 };
@@ -1368,10 +1378,6 @@ export type Mutation = {
    * @deprecated Plugins are deprecated
    */
   pluginUpdate: Plugin;
-  /** Create/Updates preferences overrides for a specific resource belonging to a user */
-  preferenceOverridesCreateUpdate: Scalars['Boolean']['output'];
-  /** Destroy preferences overrides for a specific resource belonging to a user */
-  preferenceOverridesDestroyForResource: Scalars['Boolean']['output'];
   /** Update the email preferences for a user */
   preferencesUpdate: Preferences;
   /** Create or get a private network. */
@@ -1560,21 +1566,6 @@ export type Mutation = {
   volumeInstanceUpdate: Scalars['Boolean']['output'];
   /** Update a persistent volume in a project */
   volumeUpdate: Volume;
-  /**
-   * Create a webhook on a project
-   * @deprecated Project webhooks are deprecated. Use the notification rule API instead.
-   */
-  webhookCreate: ProjectWebhook;
-  /**
-   * Delete a webhook from a project
-   * @deprecated Project webhooks are deprecated. Use the notification rule API instead.
-   */
-  webhookDelete: Scalars['Boolean']['output'];
-  /**
-   * Update a webhook on a project
-   * @deprecated Project webhooks are deprecated. Use the notification rule API instead.
-   */
-  webhookUpdate: ProjectWebhook;
   /** Delete a workspace and all data associated with it */
   workspaceDelete: Scalars['Boolean']['output'];
   /** Get an invite code for a workspace and role */
@@ -1894,16 +1885,6 @@ export type MutationPluginStartArgs = {
 export type MutationPluginUpdateArgs = {
   id: Scalars['String']['input'];
   input: PluginUpdateInput;
-};
-
-
-export type MutationPreferenceOverridesCreateUpdateArgs = {
-  input: PreferenceOverridesCreateUpdateData;
-};
-
-
-export type MutationPreferenceOverridesDestroyForResourceArgs = {
-  input: PreferenceOverridesDestroyData;
 };
 
 
@@ -2341,22 +2322,6 @@ export type MutationVolumeUpdateArgs = {
 };
 
 
-export type MutationWebhookCreateArgs = {
-  input: WebhookCreateInput;
-};
-
-
-export type MutationWebhookDeleteArgs = {
-  id: Scalars['String']['input'];
-};
-
-
-export type MutationWebhookUpdateArgs = {
-  id: Scalars['String']['input'];
-  input: WebhookUpdateInput;
-};
-
-
 export type MutationWorkspaceDeleteArgs = {
   id: Scalars['String']['input'];
 };
@@ -2576,13 +2541,6 @@ export type ObservabilityDashboardUpdateInput = {
   id: Scalars['String']['input'];
 };
 
-export type OverrideInput = {
-  enabled: Scalars['Boolean']['input'];
-  name: Scalars['String']['input'];
-  resource: Scalars['String']['input'];
-  resourceId: Scalars['String']['input'];
-};
-
 export type PageInfo = {
   __typename?: 'PageInfo';
   endCursor?: Maybe<Scalars['String']['output']>;
@@ -2590,6 +2548,20 @@ export type PageInfo = {
   hasPreviousPage: Scalars['Boolean']['output'];
   startCursor?: Maybe<Scalars['String']['output']>;
 };
+
+export type PartnerProfile = {
+  __typename?: 'PartnerProfile';
+  category: Scalars['String']['output'];
+  description: Scalars['String']['output'];
+  slug: Scalars['String']['output'];
+  type: PartnerProfileType;
+  website: Scalars['String']['output'];
+};
+
+export type PartnerProfileType =
+  | 'BASIC_PARTNER'
+  | 'LIMITED_PARTNER'
+  | 'TEMPLATE_MAINTAINER';
 
 export type Passkey = Node & {
   __typename?: 'Passkey';
@@ -2636,12 +2608,9 @@ export type PlatformFeatureFlag =
   | 'BUCKETS'
   | 'BUILDER_V3_ROLLOUT_EXISTING_SERVICES'
   | 'BUILDER_V3_ROLLOUT_NEW_SERVICES'
-  | 'DATA_UI_SSH'
   | 'DEMO_PERCENTAGE_ROLLOUT'
   | 'ENABLE_RAW_SQL_QUERIES'
   | 'MONOREPO_SUPPORT'
-  | 'NEW_BILLING_FLOW'
-  | 'NOTIFICATION_ENGINE'
   | 'UPDATED_VM_QUERIES'
   | 'USE_GH_WEBHOOKS_FOR_CHANGE_DETECTION'
   | 'VM_TIME_RANGE_QUERY';
@@ -2749,24 +2718,6 @@ export type PluginVariablesConnectionEdge = {
   node: Variable;
 };
 
-export type PreferenceOverride = Node & {
-  __typename?: 'PreferenceOverride';
-  enabled: Scalars['Boolean']['output'];
-  id: Scalars['ID']['output'];
-  name: Scalars['String']['output'];
-  resource: Scalars['String']['output'];
-  resourceId: Scalars['String']['output'];
-};
-
-export type PreferenceOverridesCreateUpdateData = {
-  overrides: Array<OverrideInput>;
-};
-
-export type PreferenceOverridesDestroyData = {
-  resource: Scalars['String']['input'];
-  resourceId: Scalars['String']['input'];
-};
-
 export type Preferences = Node & {
   __typename?: 'Preferences';
   buildFailedEmail: Scalars['Boolean']['output'];
@@ -2776,8 +2727,8 @@ export type Preferences = Node & {
   ephemeralEnvironmentEmail: Scalars['Boolean']['output'];
   id: Scalars['ID']['output'];
   marketingEmail: Scalars['Boolean']['output'];
-  preferenceOverrides?: Maybe<Array<PreferenceOverride>>;
   subprocessorUpdatesEmail: Scalars['Boolean']['output'];
+  templateQueueEmail: Scalars['Boolean']['output'];
   usageEmail: Scalars['Boolean']['output'];
 };
 
@@ -2789,6 +2740,7 @@ export type PreferencesUpdateData = {
   ephemeralEnvironmentEmail?: InputMaybe<Scalars['Boolean']['input']>;
   marketingEmail?: InputMaybe<Scalars['Boolean']['input']>;
   subprocessorUpdatesEmail?: InputMaybe<Scalars['Boolean']['input']>;
+  templateQueueEmail?: InputMaybe<Scalars['Boolean']['input']>;
   token?: InputMaybe<Scalars['String']['input']>;
   usageEmail?: InputMaybe<Scalars['Boolean']['input']>;
 };
@@ -2839,7 +2791,9 @@ export type Project = Node & {
   botPrEnvironments: Scalars['Boolean']['output'];
   createdAt: Scalars['DateTime']['output'];
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** @deprecated Use environment.deploymentTriggers for properly scoped access control */
   deploymentTriggers: ProjectDeploymentTriggersConnection;
+  /** @deprecated Use environment.deployments for properly scoped access control */
   deployments: ProjectDeploymentsConnection;
   description?: Maybe<Scalars['String']['output']>;
   environments: ProjectEnvironmentsConnection;
@@ -2863,7 +2817,6 @@ export type Project = Node & {
   teamId?: Maybe<Scalars['String']['output']>;
   updatedAt: Scalars['DateTime']['output'];
   volumes: ProjectVolumesConnection;
-  webhooks: ProjectWebhooksConnection;
   workspace?: Maybe<Workspace>;
   workspaceId?: Maybe<Scalars['String']['output']>;
 };
@@ -2932,12 +2885,17 @@ export type ProjectVolumesArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
 };
 
-
-export type ProjectWebhooksArgs = {
-  after?: InputMaybe<Scalars['String']['input']>;
-  before?: InputMaybe<Scalars['String']['input']>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  last?: InputMaybe<Scalars['Int']['input']>;
+export type ProjectComplianceInfo = {
+  __typename?: 'ProjectComplianceInfo';
+  /** Permissions for each project member */
+  memberPermissions: Array<ProjectMemberPermissionsInfo>;
+  projectId: Scalars['String']['output'];
+  projectName: Scalars['String']['output'];
+  /** Backup schedules for database services */
+  serviceBackups: Array<ServiceBackupInfo>;
+  /** 2FA status for each project member */
+  twoFactorMembers: Array<ProjectMemberTwoFactorInfo>;
+  workspaceId: Scalars['String']['output'];
 };
 
 export type ProjectCreateInput = {
@@ -3039,9 +2997,25 @@ export type ProjectMember = {
   role: ProjectRole;
 };
 
+export type ProjectMemberPermissionsInfo = {
+  __typename?: 'ProjectMemberPermissionsInfo';
+  email: Scalars['String']['output'];
+  name?: Maybe<Scalars['String']['output']>;
+  role: ProjectRole;
+};
+
 export type ProjectMemberRemoveInput = {
   projectId: Scalars['String']['input'];
   userId: Scalars['String']['input'];
+};
+
+export type ProjectMemberTwoFactorInfo = {
+  __typename?: 'ProjectMemberTwoFactorInfo';
+  email: Scalars['String']['output'];
+  /** List of enabled 2FA methods (AUTHENTICATOR, PASSKEY) */
+  enabledMethods: Array<TwoFactorMethodCompliance>;
+  name?: Maybe<Scalars['String']['output']>;
+  twoFactorAuthEnabled: Scalars['Boolean']['output'];
 };
 
 export type ProjectMemberUpdateInput = {
@@ -3177,25 +3151,21 @@ export type ProjectVolumesConnectionEdge = {
   node: Volume;
 };
 
-export type ProjectWebhook = Node & {
-  __typename?: 'ProjectWebhook';
-  filters?: Maybe<Array<Scalars['String']['output']>>;
-  id: Scalars['ID']['output'];
-  lastStatus?: Maybe<Scalars['Int']['output']>;
+export type ProjectWorkspaceMember = {
+  __typename?: 'ProjectWorkspaceMember';
+  email: Scalars['String']['output'];
+  /** List of enabled 2FA methods (AUTHENTICATOR, PASSKEY) */
+  enabledMethods: Array<TwoFactorMethodProjectWorkspace>;
+  name?: Maybe<Scalars['String']['output']>;
+  twoFactorAuthEnabled: Scalars['Boolean']['output'];
+};
+
+export type ProjectWorkspaceMembersResponse = {
+  __typename?: 'ProjectWorkspaceMembersResponse';
+  members: Array<ProjectWorkspaceMember>;
   projectId: Scalars['String']['output'];
-  url: Scalars['String']['output'];
-};
-
-export type ProjectWebhooksConnection = {
-  __typename?: 'ProjectWebhooksConnection';
-  edges: Array<ProjectWebhooksConnectionEdge>;
-  pageInfo: PageInfo;
-};
-
-export type ProjectWebhooksConnectionEdge = {
-  __typename?: 'ProjectWebhooksConnectionEdge';
-  cursor: Scalars['String']['output'];
-  node: ProjectWebhook;
+  projectName: Scalars['String']['output'];
+  workspaceId: Scalars['String']['output'];
 };
 
 export type ProviderAuth = Node & {
@@ -3243,6 +3213,8 @@ export type Query = {
   buildLogs: Array<Log>;
   /** Gets the image URL for a Notion image block */
   changelogBlockImage: Scalars['String']['output'];
+  /** Get compliance agreements for a workspace including HIPAA BAA and GDPR DPA status. */
+  complianceAgreements: ComplianceAgreementsInfo;
   /** Fetch details for a custom domain */
   customDomain: CustomDomain;
   /** Checks if a custom domain is available. */
@@ -3350,6 +3322,8 @@ export type Query = {
   privateNetworks: Array<PrivateNetwork>;
   /** Get a project by ID */
   project: Project;
+  /** Get comprehensive compliance information for a project including 2FA status, member permissions, backup schedules, and compliance agreements. Requires workspace API token with admin access. */
+  projectCompliance: ProjectComplianceInfo;
   /** Get a project invitation by code */
   projectInvitation: PublicProjectInvitation;
   /** Get invitations for a project */
@@ -3364,6 +3338,8 @@ export type Query = {
   projectToken: ProjectToken;
   /** Get all project tokens for a project */
   projectTokens: QueryProjectTokensConnection;
+  /** Get workspace members for a project with 2FA details */
+  projectWorkspaceMembers: ProjectWorkspaceMembersResponse;
   /** Gets all projects for a user or workspace. */
   projects: QueryProjectsConnection;
   /** Get public Railway stats. */
@@ -3438,11 +3414,6 @@ export type Query = {
   volumeInstanceBackupList: Array<VolumeInstanceBackup>;
   /** List backups schedules of a volume instance */
   volumeInstanceBackupScheduleList: Array<VolumeInstanceBackupSchedule>;
-  /**
-   * Get all webhooks for a project
-   * @deprecated Project webhooks are deprecated. Use the notification rule API instead.
-   */
-  webhooks: QueryWebhooksConnection;
   /** Gets the status of a workflow */
   workflowStatus: WorkflowResult;
   /** Get the workspace */
@@ -3480,6 +3451,11 @@ export type QueryBuildLogsArgs = {
 
 export type QueryChangelogBlockImageArgs = {
   id: Scalars['String']['input'];
+};
+
+
+export type QueryComplianceAgreementsArgs = {
+  workspaceId: Scalars['String']['input'];
 };
 
 
@@ -3805,6 +3781,11 @@ export type QueryProjectArgs = {
 };
 
 
+export type QueryProjectComplianceArgs = {
+  projectId: Scalars['String']['input'];
+};
+
+
 export type QueryProjectInvitationArgs = {
   code: Scalars['String']['input'];
 };
@@ -3836,6 +3817,11 @@ export type QueryProjectTokensArgs = {
   before?: InputMaybe<Scalars['String']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
+  projectId: Scalars['String']['input'];
+};
+
+
+export type QueryProjectWorkspaceMembersArgs = {
   projectId: Scalars['String']['input'];
 };
 
@@ -4016,15 +4002,6 @@ export type QueryVolumeInstanceBackupListArgs = {
 
 export type QueryVolumeInstanceBackupScheduleListArgs = {
   volumeInstanceId: Scalars['String']['input'];
-};
-
-
-export type QueryWebhooksArgs = {
-  after?: InputMaybe<Scalars['String']['input']>;
-  before?: InputMaybe<Scalars['String']['input']>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  last?: InputMaybe<Scalars['Int']['input']>;
-  projectId: Scalars['String']['input'];
 };
 
 
@@ -4300,18 +4277,6 @@ export type QueryUserTemplatesConnectionEdge = {
   node: Template;
 };
 
-export type QueryWebhooksConnection = {
-  __typename?: 'QueryWebhooksConnection';
-  edges: Array<QueryWebhooksConnectionEdge>;
-  pageInfo: PageInfo;
-};
-
-export type QueryWebhooksConnectionEdge = {
-  __typename?: 'QueryWebhooksConnectionEdge';
-  cursor: Scalars['String']['output'];
-  node: ProjectWebhook;
-};
-
 export type QueryWorkspaceIdentityProvidersConnection = {
   __typename?: 'QueryWorkspaceIdentityProvidersConnection';
   edges: Array<QueryWorkspaceIdentityProvidersConnectionEdge>;
@@ -4488,6 +4453,7 @@ export type Service = Node & {
   __typename?: 'Service';
   createdAt: Scalars['DateTime']['output'];
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** @deprecated Use environment.deployments for properly scoped access control */
   deployments: ServiceDeploymentsConnection;
   featureFlags: Array<ActiveServiceFeatureFlag>;
   icon?: Maybe<Scalars['String']['output']>;
@@ -4496,6 +4462,7 @@ export type Service = Node & {
   project: Project;
   projectId: Scalars['String']['output'];
   repoTriggers: ServiceRepoTriggersConnection;
+  /** @deprecated Use environment.serviceInstances for properly scoped access control */
   serviceInstances: ServiceServiceInstancesConnection;
   templateServiceId?: Maybe<Scalars['String']['output']>;
   templateThreadSlug?: Maybe<Scalars['String']['output']>;
@@ -4524,6 +4491,14 @@ export type ServiceServiceInstancesArgs = {
   before?: InputMaybe<Scalars['String']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type ServiceBackupInfo = {
+  __typename?: 'ServiceBackupInfo';
+  /** List of enabled backup schedule kinds (DAILY, WEEKLY, MONTHLY) */
+  schedules: Array<VolumeInstanceBackupScheduleKind>;
+  serviceId: Scalars['String']['output'];
+  serviceName: Scalars['String']['output'];
 };
 
 export type ServiceConnectInput = {
@@ -4584,7 +4559,7 @@ export type ServiceDomainCreateInput = {
 export type ServiceDomainUpdateInput = {
   domain: Scalars['String']['input'];
   environmentId: Scalars['String']['input'];
-  serviceDomainId?: InputMaybe<Scalars['String']['input']>;
+  serviceDomainId: Scalars['String']['input'];
   serviceId: Scalars['String']['input'];
   targetPort?: InputMaybe<Scalars['Int']['input']>;
 };
@@ -5176,6 +5151,14 @@ export type TwoFactorInfoValidateInput = {
   twoFactorLinkingKey?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type TwoFactorMethodCompliance =
+  | 'AUTHENTICATOR'
+  | 'PASSKEY';
+
+export type TwoFactorMethodProjectWorkspace =
+  | 'AUTHENTICATOR'
+  | 'PASSKEY';
+
 export type UsageAnomaly = Node & {
   __typename?: 'UsageAnomaly';
   actedOn?: Maybe<Scalars['DateTime']['output']>;
@@ -5227,6 +5210,8 @@ export type User = Node & {
   email: Scalars['String']['output'];
   featureFlags: Array<ActiveFeatureFlag>;
   flags: Array<UserFlag>;
+  githubProviderId?: Maybe<Scalars['String']['output']>;
+  githubUsername?: Maybe<Scalars['String']['output']>;
   has2FA: Scalars['Boolean']['output'];
   id: Scalars['ID']['output'];
   isAdmin: Scalars['Boolean']['output'];
@@ -5447,6 +5432,7 @@ export type Volume = Node & {
   name: Scalars['String']['output'];
   project: Project;
   projectId: Scalars['String']['output'];
+  /** @deprecated Use environment.volumeInstances for properly scoped access control */
   volumeInstances: VolumeVolumeInstancesConnection;
 };
 
@@ -5500,6 +5486,7 @@ export type VolumeInstanceBackup = {
   referencedMB?: Maybe<Scalars['Int']['output']>;
   scheduleId?: Maybe<Scalars['String']['output']>;
   usedMB?: Maybe<Scalars['Int']['output']>;
+  volumeInstanceSizeMB?: Maybe<Scalars['Int']['output']>;
 };
 
 export type VolumeInstanceBackupSchedule = Node & {
@@ -5600,17 +5587,6 @@ export type VolumeVolumeInstancesConnectionEdge = {
   node: VolumeInstance;
 };
 
-export type WebhookCreateInput = {
-  filters?: InputMaybe<Array<Scalars['String']['input']>>;
-  projectId: Scalars['String']['input'];
-  url: Scalars['String']['input'];
-};
-
-export type WebhookUpdateInput = {
-  filters?: InputMaybe<Array<Scalars['String']['input']>>;
-  url: Scalars['String']['input'];
-};
-
 export type Withdrawal = Node & {
   __typename?: 'Withdrawal';
   amount: Scalars['Float']['output'];
@@ -5685,6 +5661,7 @@ export type Workspace = Node & {
   identityProviders: WorkspaceIdentityProvidersConnection;
   members: Array<WorkspaceMember>;
   name: Scalars['String']['output'];
+  partnerProfile?: Maybe<PartnerProfile>;
   plan: Plan;
   preferredRegion?: Maybe<Scalars['String']['output']>;
   projects: WorkspaceProjectsConnection;
@@ -5696,6 +5673,8 @@ export type Workspace = Node & {
   /** @deprecated Teams are being removed from the system, don't use it */
   team?: Maybe<Team>;
   updatedAt: Scalars['DateTime']['output'];
+  /** Get a list of user emails in the workspace who do not have verified 2FA enabled. Returns an empty array if all users have 2FA enabled. */
+  usersWithout2FA: Array<Scalars['String']['output']>;
 };
 
 
@@ -5765,6 +5744,8 @@ export type WorkspaceMember = {
   id: Scalars['String']['output'];
   name?: Maybe<Scalars['String']['output']>;
   role: TeamRole;
+  /** Only retrieved if requested by an admin */
+  twoFactorAuthEnabled?: Maybe<Scalars['Boolean']['output']>;
 };
 
 export type WorkspacePermissionChangeInput = {
@@ -6172,20 +6153,6 @@ export type PasskeyDeleteMutationVariables = Exact<{
 
 
 export type PasskeyDeleteMutation = { __typename?: 'Mutation', passkeyDelete: boolean };
-
-export type PreferenceOverridesCreateUpdateMutationVariables = Exact<{
-  input: PreferenceOverridesCreateUpdateData;
-}>;
-
-
-export type PreferenceOverridesCreateUpdateMutation = { __typename?: 'Mutation', preferenceOverridesCreateUpdate: boolean };
-
-export type PreferenceOverridesDestroyForResourceMutationVariables = Exact<{
-  input: PreferenceOverridesDestroyData;
-}>;
-
-
-export type PreferenceOverridesDestroyForResourceMutation = { __typename?: 'Mutation', preferenceOverridesDestroyForResource: boolean };
 
 export type PreferencesUpdateMutationVariables = Exact<{
   input: PreferencesUpdateData;
@@ -6788,28 +6755,6 @@ export type VolumeUpdateMutationVariables = Exact<{
 
 export type VolumeUpdateMutation = { __typename?: 'Mutation', volumeUpdate: { __typename: 'Volume', createdAt: any, id: string, name: string, projectId: string } };
 
-export type WebhookCreateMutationVariables = Exact<{
-  input: WebhookCreateInput;
-}>;
-
-
-export type WebhookCreateMutation = { __typename?: 'Mutation', webhookCreate: { __typename: 'ProjectWebhook', filters?: Array<string> | null, id: string, lastStatus?: number | null, projectId: string, url: string } };
-
-export type WebhookDeleteMutationVariables = Exact<{
-  id: Scalars['String']['input'];
-}>;
-
-
-export type WebhookDeleteMutation = { __typename?: 'Mutation', webhookDelete: boolean };
-
-export type WebhookUpdateMutationVariables = Exact<{
-  id: Scalars['String']['input'];
-  input: WebhookUpdateInput;
-}>;
-
-
-export type WebhookUpdateMutation = { __typename?: 'Mutation', webhookUpdate: { __typename: 'ProjectWebhook', filters?: Array<string> | null, id: string, lastStatus?: number | null, projectId: string, url: string } };
-
 export type WorkspaceDeleteMutationVariables = Exact<{
   id: Scalars['String']['input'];
 }>;
@@ -7010,7 +6955,7 @@ export type DomainsQueryVariables = Exact<{
 }>;
 
 
-export type DomainsQuery = { __typename?: 'Query', domains: { __typename: 'AllDomains' } };
+export type DomainsQuery = { __typename?: 'Query', domains: { __typename: 'AllDomains', customDomains: Array<{ __typename?: 'CustomDomain', id: string, domain: string, status: { __typename?: 'CustomDomainStatus', dnsRecords: Array<{ __typename?: 'DNSRecords', requiredValue: string, currentValue: string, status: DnsRecordStatus, hostlabel: string, zone: string }> } }>, serviceDomains: Array<{ __typename?: 'ServiceDomain', id: string, domain: string, suffix?: string | null, targetPort?: number | null, serviceId: string, environmentId: string }> } };
 
 export type EgressGatewaysQueryVariables = Exact<{
   environmentId: Scalars['String']['input'];
@@ -7272,12 +7217,10 @@ export type NodeQuery = { __typename?: 'Query', node?:
     | { __typename: 'Passkey', id: string }
     | { __typename: 'PlanLimitOverride', id: string }
     | { __typename: 'Plugin', id: string }
-    | { __typename: 'PreferenceOverride', id: string }
     | { __typename: 'Preferences', id: string }
     | { __typename: 'Project', id: string }
     | { __typename: 'ProjectPermission', id: string }
     | { __typename: 'ProjectToken', id: string }
-    | { __typename: 'ProjectWebhook', id: string }
     | { __typename: 'ProviderAuth', id: string }
     | { __typename: 'ReferralInfo', id: string }
     | { __typename: 'RefundRequest', id: string }
@@ -7336,12 +7279,10 @@ export type NodesQuery = { __typename?: 'Query', nodes: Array<
     | { __typename: 'Passkey', id: string }
     | { __typename: 'PlanLimitOverride', id: string }
     | { __typename: 'Plugin', id: string }
-    | { __typename: 'PreferenceOverride', id: string }
     | { __typename: 'Preferences', id: string }
     | { __typename: 'Project', id: string }
     | { __typename: 'ProjectPermission', id: string }
     | { __typename: 'ProjectToken', id: string }
-    | { __typename: 'ProjectWebhook', id: string }
     | { __typename: 'ProviderAuth', id: string }
     | { __typename: 'ReferralInfo', id: string }
     | { __typename: 'RefundRequest', id: string }
@@ -7725,17 +7666,6 @@ export type VolumeInstanceBackupScheduleListQueryVariables = Exact<{
 
 export type VolumeInstanceBackupScheduleListQuery = { __typename?: 'Query', volumeInstanceBackupScheduleList: Array<{ __typename: 'VolumeInstanceBackupSchedule', createdAt: any, cron: string, id: string, kind: VolumeInstanceBackupScheduleKind, name: string, retentionSeconds?: number | null }> };
 
-export type WebhooksQueryVariables = Exact<{
-  after?: InputMaybe<Scalars['String']['input']>;
-  before?: InputMaybe<Scalars['String']['input']>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  last?: InputMaybe<Scalars['Int']['input']>;
-  projectId: Scalars['String']['input'];
-}>;
-
-
-export type WebhooksQuery = { __typename?: 'Query', webhooks: { __typename: 'QueryWebhooksConnection' } };
-
 export type WorkflowStatusQueryVariables = Exact<{
   workflowId: Scalars['String']['input'];
 }>;
@@ -7830,8 +7760,6 @@ export const ObservabilityDashboardCreateDocument = {"kind":"Document","definiti
 export const ObservabilityDashboardResetDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"observabilityDashboardReset"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"observabilityDashboardReset"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}]}}]} as unknown as DocumentNode<ObservabilityDashboardResetMutation, ObservabilityDashboardResetMutationVariables>;
 export const ObservabilityDashboardUpdateDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"observabilityDashboardUpdate"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ObservabilityDashboardUpdateInput"}}}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"observabilityDashboardUpdate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}},{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}]}]}}]} as unknown as DocumentNode<ObservabilityDashboardUpdateMutation, ObservabilityDashboardUpdateMutationVariables>;
 export const PasskeyDeleteDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"passkeyDelete"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"passkeyDelete"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}]}}]} as unknown as DocumentNode<PasskeyDeleteMutation, PasskeyDeleteMutationVariables>;
-export const PreferenceOverridesCreateUpdateDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"preferenceOverridesCreateUpdate"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"PreferenceOverridesCreateUpdateData"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"preferenceOverridesCreateUpdate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}]}]}}]} as unknown as DocumentNode<PreferenceOverridesCreateUpdateMutation, PreferenceOverridesCreateUpdateMutationVariables>;
-export const PreferenceOverridesDestroyForResourceDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"preferenceOverridesDestroyForResource"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"PreferenceOverridesDestroyData"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"preferenceOverridesDestroyForResource"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}]}]}}]} as unknown as DocumentNode<PreferenceOverridesDestroyForResourceMutation, PreferenceOverridesDestroyForResourceMutationVariables>;
 export const PreferencesUpdateDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"preferencesUpdate"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"PreferencesUpdateData"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"preferencesUpdate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"buildFailedEmail"}},{"kind":"Field","name":{"kind":"Name","value":"changelogEmail"}},{"kind":"Field","name":{"kind":"Name","value":"communityEmail"}},{"kind":"Field","name":{"kind":"Name","value":"deployCrashedEmail"}},{"kind":"Field","name":{"kind":"Name","value":"ephemeralEnvironmentEmail"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"marketingEmail"}},{"kind":"Field","name":{"kind":"Name","value":"subprocessorUpdatesEmail"}},{"kind":"Field","name":{"kind":"Name","value":"usageEmail"}}]}}]}}]} as unknown as DocumentNode<PreferencesUpdateMutation, PreferencesUpdateMutationVariables>;
 export const PrivateNetworkCreateOrGetDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"privateNetworkCreateOrGet"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"PrivateNetworkCreateOrGetInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"privateNetworkCreateOrGet"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"deletedAt"}},{"kind":"Field","name":{"kind":"Name","value":"dnsName"}},{"kind":"Field","name":{"kind":"Name","value":"environmentId"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"networkId"}},{"kind":"Field","name":{"kind":"Name","value":"projectId"}},{"kind":"Field","name":{"kind":"Name","value":"publicId"}},{"kind":"Field","name":{"kind":"Name","value":"tags"}}]}}]}}]} as unknown as DocumentNode<PrivateNetworkCreateOrGetMutation, PrivateNetworkCreateOrGetMutationVariables>;
 export const PrivateNetworkEndpointCreateOrGetDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"privateNetworkEndpointCreateOrGet"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"PrivateNetworkEndpointCreateOrGetInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"privateNetworkEndpointCreateOrGet"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"deletedAt"}},{"kind":"Field","name":{"kind":"Name","value":"dnsName"}},{"kind":"Field","name":{"kind":"Name","value":"privateIps"}},{"kind":"Field","name":{"kind":"Name","value":"publicId"}},{"kind":"Field","name":{"kind":"Name","value":"serviceInstanceId"}},{"kind":"Field","name":{"kind":"Name","value":"tags"}}]}}]}}]} as unknown as DocumentNode<PrivateNetworkEndpointCreateOrGetMutation, PrivateNetworkEndpointCreateOrGetMutationVariables>;
@@ -7916,9 +7844,6 @@ export const VolumeInstanceBackupRestoreDocument = {"kind":"Document","definitio
 export const VolumeInstanceBackupScheduleUpdateDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"volumeInstanceBackupScheduleUpdate"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"kinds"}},"type":{"kind":"NonNullType","type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"VolumeInstanceBackupScheduleKind"}}}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"volumeInstanceId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"volumeInstanceBackupScheduleUpdate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"kinds"},"value":{"kind":"Variable","name":{"kind":"Name","value":"kinds"}}},{"kind":"Argument","name":{"kind":"Name","value":"volumeInstanceId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"volumeInstanceId"}}}]}]}}]} as unknown as DocumentNode<VolumeInstanceBackupScheduleUpdateMutation, VolumeInstanceBackupScheduleUpdateMutationVariables>;
 export const VolumeInstanceUpdateDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"volumeInstanceUpdate"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"environmentId"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"VolumeInstanceUpdateInput"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"volumeId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"volumeInstanceUpdate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"environmentId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"environmentId"}}},{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}},{"kind":"Argument","name":{"kind":"Name","value":"volumeId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"volumeId"}}}]}]}}]} as unknown as DocumentNode<VolumeInstanceUpdateMutation, VolumeInstanceUpdateMutationVariables>;
 export const VolumeUpdateDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"volumeUpdate"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"VolumeUpdateInput"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"volumeId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"volumeUpdate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}},{"kind":"Argument","name":{"kind":"Name","value":"volumeId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"volumeId"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"projectId"}}]}}]}}]} as unknown as DocumentNode<VolumeUpdateMutation, VolumeUpdateMutationVariables>;
-export const WebhookCreateDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"webhookCreate"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"WebhookCreateInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"webhookCreate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"filters"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"lastStatus"}},{"kind":"Field","name":{"kind":"Name","value":"projectId"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]} as unknown as DocumentNode<WebhookCreateMutation, WebhookCreateMutationVariables>;
-export const WebhookDeleteDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"webhookDelete"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"webhookDelete"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}]}}]} as unknown as DocumentNode<WebhookDeleteMutation, WebhookDeleteMutationVariables>;
-export const WebhookUpdateDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"webhookUpdate"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"WebhookUpdateInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"webhookUpdate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}},{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"filters"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"lastStatus"}},{"kind":"Field","name":{"kind":"Name","value":"projectId"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]} as unknown as DocumentNode<WebhookUpdateMutation, WebhookUpdateMutationVariables>;
 export const WorkspaceDeleteDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"workspaceDelete"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"workspaceDelete"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}]}}]} as unknown as DocumentNode<WorkspaceDeleteMutation, WorkspaceDeleteMutationVariables>;
 export const WorkspaceInviteCodeCreateDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"workspaceInviteCodeCreate"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"WorkspaceInviteCodeCreateInput"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"workspaceId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"workspaceInviteCodeCreate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}},{"kind":"Argument","name":{"kind":"Name","value":"workspaceId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"workspaceId"}}}]}]}}]} as unknown as DocumentNode<WorkspaceInviteCodeCreateMutation, WorkspaceInviteCodeCreateMutationVariables>;
 export const WorkspaceInviteCodeUseDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"workspaceInviteCodeUse"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"code"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"workspaceInviteCodeUse"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"code"},"value":{"kind":"Variable","name":{"kind":"Name","value":"code"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"adoptionLevel"}},{"kind":"Field","name":{"kind":"Name","value":"allowDeprecatedRegions"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"plan"}},{"kind":"Field","name":{"kind":"Name","value":"preferredRegion"}},{"kind":"Field","name":{"kind":"Name","value":"subscriptionModel"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}}]}}]}}]} as unknown as DocumentNode<WorkspaceInviteCodeUseMutation, WorkspaceInviteCodeUseMutationVariables>;
@@ -7942,7 +7867,7 @@ export const DeploymentLogsDocument = {"kind":"Document","definitions":[{"kind":
 export const DeploymentSnapshotDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"deploymentSnapshot"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"deploymentId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"deploymentSnapshot"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"deploymentId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"deploymentId"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}},{"kind":"Field","name":{"kind":"Name","value":"variables"}}]}}]}}]} as unknown as DocumentNode<DeploymentSnapshotQuery, DeploymentSnapshotQueryVariables>;
 export const DeploymentTriggersDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"deploymentTriggers"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"after"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"before"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"environmentId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"first"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"last"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"projectId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"serviceId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"deploymentTriggers"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"after"},"value":{"kind":"Variable","name":{"kind":"Name","value":"after"}}},{"kind":"Argument","name":{"kind":"Name","value":"before"},"value":{"kind":"Variable","name":{"kind":"Name","value":"before"}}},{"kind":"Argument","name":{"kind":"Name","value":"environmentId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"environmentId"}}},{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"Variable","name":{"kind":"Name","value":"first"}}},{"kind":"Argument","name":{"kind":"Name","value":"last"},"value":{"kind":"Variable","name":{"kind":"Name","value":"last"}}},{"kind":"Argument","name":{"kind":"Name","value":"projectId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"projectId"}}},{"kind":"Argument","name":{"kind":"Name","value":"serviceId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"serviceId"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}}]}}]}}]} as unknown as DocumentNode<DeploymentTriggersQuery, DeploymentTriggersQueryVariables>;
 export const DeploymentsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"deployments"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"after"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"before"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"first"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"DeploymentListInput"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"last"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"deployments"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"after"},"value":{"kind":"Variable","name":{"kind":"Name","value":"after"}}},{"kind":"Argument","name":{"kind":"Name","value":"before"},"value":{"kind":"Variable","name":{"kind":"Name","value":"before"}}},{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"Variable","name":{"kind":"Name","value":"first"}}},{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}},{"kind":"Argument","name":{"kind":"Name","value":"last"},"value":{"kind":"Variable","name":{"kind":"Name","value":"last"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"cursor"}},{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"status"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}},{"kind":"Field","name":{"kind":"Name","value":"projectId"}},{"kind":"Field","name":{"kind":"Name","value":"serviceId"}},{"kind":"Field","name":{"kind":"Name","value":"service"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"environmentId"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"staticUrl"}},{"kind":"Field","name":{"kind":"Name","value":"canRedeploy"}},{"kind":"Field","name":{"kind":"Name","value":"canRollback"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"pageInfo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hasNextPage"}},{"kind":"Field","name":{"kind":"Name","value":"hasPreviousPage"}},{"kind":"Field","name":{"kind":"Name","value":"startCursor"}},{"kind":"Field","name":{"kind":"Name","value":"endCursor"}}]}}]}}]}}]} as unknown as DocumentNode<DeploymentsQuery, DeploymentsQueryVariables>;
-export const DomainsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"domains"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"environmentId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"projectId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"serviceId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"domains"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"environmentId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"environmentId"}}},{"kind":"Argument","name":{"kind":"Name","value":"projectId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"projectId"}}},{"kind":"Argument","name":{"kind":"Name","value":"serviceId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"serviceId"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}}]}}]}}]} as unknown as DocumentNode<DomainsQuery, DomainsQueryVariables>;
+export const DomainsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"domains"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"environmentId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"projectId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"serviceId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"domains"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"environmentId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"environmentId"}}},{"kind":"Argument","name":{"kind":"Name","value":"projectId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"projectId"}}},{"kind":"Argument","name":{"kind":"Name","value":"serviceId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"serviceId"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"customDomains"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"domain"}},{"kind":"Field","name":{"kind":"Name","value":"status"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"dnsRecords"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"requiredValue"}},{"kind":"Field","name":{"kind":"Name","value":"currentValue"}},{"kind":"Field","name":{"kind":"Name","value":"status"}},{"kind":"Field","name":{"kind":"Name","value":"hostlabel"}},{"kind":"Field","name":{"kind":"Name","value":"zone"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"serviceDomains"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"domain"}},{"kind":"Field","name":{"kind":"Name","value":"suffix"}},{"kind":"Field","name":{"kind":"Name","value":"targetPort"}},{"kind":"Field","name":{"kind":"Name","value":"serviceId"}},{"kind":"Field","name":{"kind":"Name","value":"environmentId"}}]}}]}}]}}]} as unknown as DocumentNode<DomainsQuery, DomainsQueryVariables>;
 export const EgressGatewaysDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"egressGateways"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"environmentId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"serviceId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"egressGateways"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"environmentId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"environmentId"}}},{"kind":"Argument","name":{"kind":"Name","value":"serviceId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"serviceId"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"ipv4"}},{"kind":"Field","name":{"kind":"Name","value":"region"}}]}}]}}]} as unknown as DocumentNode<EgressGatewaysQuery, EgressGatewaysQueryVariables>;
 export const EnvironmentDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"environment"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"environment"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"deletedAt"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"isEphemeral"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"projectId"}},{"kind":"Field","name":{"kind":"Name","value":"unmergedChangesCount"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}},{"kind":"Field","name":{"kind":"Name","value":"volumeInstances"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"environmentId"}},{"kind":"Field","name":{"kind":"Name","value":"volumeId"}},{"kind":"Field","name":{"kind":"Name","value":"mountPath"}},{"kind":"Field","name":{"kind":"Name","value":"state"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"currentSizeMB"}},{"kind":"Field","name":{"kind":"Name","value":"sizeMB"}},{"kind":"Field","name":{"kind":"Name","value":"region"}},{"kind":"Field","name":{"kind":"Name","value":"serviceId"}},{"kind":"Field","name":{"kind":"Name","value":"externalId"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<EnvironmentQuery, EnvironmentQueryVariables>;
 export const EnvironmentLogsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"environmentLogs"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"afterDate"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"afterLimit"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"anchorDate"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"beforeDate"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"beforeLimit"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"environmentId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"filter"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"environmentLogs"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"afterDate"},"value":{"kind":"Variable","name":{"kind":"Name","value":"afterDate"}}},{"kind":"Argument","name":{"kind":"Name","value":"afterLimit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"afterLimit"}}},{"kind":"Argument","name":{"kind":"Name","value":"anchorDate"},"value":{"kind":"Variable","name":{"kind":"Name","value":"anchorDate"}}},{"kind":"Argument","name":{"kind":"Name","value":"beforeDate"},"value":{"kind":"Variable","name":{"kind":"Name","value":"beforeDate"}}},{"kind":"Argument","name":{"kind":"Name","value":"beforeLimit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"beforeLimit"}}},{"kind":"Argument","name":{"kind":"Name","value":"environmentId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"environmentId"}}},{"kind":"Argument","name":{"kind":"Name","value":"filter"},"value":{"kind":"Variable","name":{"kind":"Name","value":"filter"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"message"}},{"kind":"Field","name":{"kind":"Name","value":"severity"}},{"kind":"Field","name":{"kind":"Name","value":"timestamp"}}]}}]}}]} as unknown as DocumentNode<EnvironmentLogsQuery, EnvironmentLogsQueryVariables>;
@@ -8015,7 +7940,6 @@ export const VercelInfoDocument = {"kind":"Document","definitions":[{"kind":"Ope
 export const VolumeInstanceDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"volumeInstance"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"volumeInstance"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"currentSizeMB"}},{"kind":"Field","name":{"kind":"Name","value":"environmentId"}},{"kind":"Field","name":{"kind":"Name","value":"externalId"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"mountPath"}},{"kind":"Field","name":{"kind":"Name","value":"region"}},{"kind":"Field","name":{"kind":"Name","value":"serviceId"}},{"kind":"Field","name":{"kind":"Name","value":"sizeMB"}},{"kind":"Field","name":{"kind":"Name","value":"state"}},{"kind":"Field","name":{"kind":"Name","value":"volumeId"}}]}}]}}]} as unknown as DocumentNode<VolumeInstanceQuery, VolumeInstanceQueryVariables>;
 export const VolumeInstanceBackupListDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"volumeInstanceBackupList"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"volumeInstanceId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"volumeInstanceBackupList"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"volumeInstanceId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"volumeInstanceId"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"creatorId"}},{"kind":"Field","name":{"kind":"Name","value":"expiresAt"}},{"kind":"Field","name":{"kind":"Name","value":"externalId"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"referencedMB"}},{"kind":"Field","name":{"kind":"Name","value":"usedMB"}}]}}]}}]} as unknown as DocumentNode<VolumeInstanceBackupListQuery, VolumeInstanceBackupListQueryVariables>;
 export const VolumeInstanceBackupScheduleListDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"volumeInstanceBackupScheduleList"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"volumeInstanceId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"volumeInstanceBackupScheduleList"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"volumeInstanceId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"volumeInstanceId"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"cron"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"kind"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"retentionSeconds"}}]}}]}}]} as unknown as DocumentNode<VolumeInstanceBackupScheduleListQuery, VolumeInstanceBackupScheduleListQueryVariables>;
-export const WebhooksDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"webhooks"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"after"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"before"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"first"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"last"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"projectId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"webhooks"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"after"},"value":{"kind":"Variable","name":{"kind":"Name","value":"after"}}},{"kind":"Argument","name":{"kind":"Name","value":"before"},"value":{"kind":"Variable","name":{"kind":"Name","value":"before"}}},{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"Variable","name":{"kind":"Name","value":"first"}}},{"kind":"Argument","name":{"kind":"Name","value":"last"},"value":{"kind":"Variable","name":{"kind":"Name","value":"last"}}},{"kind":"Argument","name":{"kind":"Name","value":"projectId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"projectId"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}}]}}]}}]} as unknown as DocumentNode<WebhooksQuery, WebhooksQueryVariables>;
 export const WorkflowStatusDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"workflowStatus"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"workflowId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"workflowStatus"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"workflowId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"workflowId"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"error"}},{"kind":"Field","name":{"kind":"Name","value":"status"}}]}}]}}]} as unknown as DocumentNode<WorkflowStatusQuery, WorkflowStatusQueryVariables>;
 export const WorkspaceDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"workspace"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"workspaceId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"workspace"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"workspaceId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"workspaceId"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"avatar"}},{"kind":"Field","name":{"kind":"Name","value":"banReason"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"discordRole"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"preferredRegion"}},{"kind":"Field","name":{"kind":"Name","value":"slackChannelId"}},{"kind":"Field","name":{"kind":"Name","value":"subscriptionModel"}},{"kind":"Field","name":{"kind":"Name","value":"supportTierOverride"}}]}}]}}]} as unknown as DocumentNode<WorkspaceQuery, WorkspaceQueryVariables>;
 export const WorkspaceByCodeDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"workspaceByCode"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"code"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"workspaceByCode"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"code"},"value":{"kind":"Variable","name":{"kind":"Name","value":"code"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"adoptionLevel"}},{"kind":"Field","name":{"kind":"Name","value":"allowDeprecatedRegions"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"plan"}},{"kind":"Field","name":{"kind":"Name","value":"preferredRegion"}},{"kind":"Field","name":{"kind":"Name","value":"subscriptionModel"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}}]}}]}}]} as unknown as DocumentNode<WorkspaceByCodeQuery, WorkspaceByCodeQueryVariables>;

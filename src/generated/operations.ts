@@ -101,8 +101,6 @@ import {
   PasskeyDeleteDocument,
   PasskeysDocument,
   PlatformStatusDocument,
-  PreferenceOverridesCreateUpdateDocument,
-  PreferenceOverridesDestroyForResourceDocument,
   PreferencesDocument,
   PreferencesUpdateDocument,
   PrivateNetworkCreateOrGetDocument,
@@ -227,10 +225,6 @@ import {
   VolumeInstanceBackupScheduleUpdateDocument,
   VolumeInstanceUpdateDocument,
   VolumeUpdateDocument,
-  WebhookCreateDocument,
-  WebhookDeleteDocument,
-  WebhooksDocument,
-  WebhookUpdateDocument,
   WorkflowStatusDocument,
   WorkspaceDocument,
   WorkspaceByCodeDocument,
@@ -342,8 +336,6 @@ import {
   type PasskeyDeleteMutation,
   type PasskeysQuery,
   type PlatformStatusQuery,
-  type PreferenceOverridesCreateUpdateMutation,
-  type PreferenceOverridesDestroyForResourceMutation,
   type PreferencesQuery,
   type PreferencesUpdateMutation,
   type PrivateNetworkCreateOrGetMutation,
@@ -468,10 +460,6 @@ import {
   type VolumeInstanceBackupScheduleUpdateMutation,
   type VolumeInstanceUpdateMutation,
   type VolumeUpdateMutation,
-  type WebhookCreateMutation,
-  type WebhookDeleteMutation,
-  type WebhooksQuery,
-  type WebhookUpdateMutation,
   type WorkflowStatusQuery,
   type WorkspaceQuery,
   type WorkspaceByCodeQuery,
@@ -575,8 +563,6 @@ import {
   type ObservabilityDashboardUpdateMutationVariables,
   type PasskeyDeleteMutationVariables,
   type PasskeysQueryVariables,
-  type PreferenceOverridesCreateUpdateMutationVariables,
-  type PreferenceOverridesDestroyForResourceMutationVariables,
   type PreferencesQueryVariables,
   type PreferencesUpdateMutationVariables,
   type PrivateNetworkCreateOrGetMutationVariables,
@@ -689,10 +675,6 @@ import {
   type VolumeInstanceBackupScheduleUpdateMutationVariables,
   type VolumeInstanceUpdateMutationVariables,
   type VolumeUpdateMutationVariables,
-  type WebhookCreateMutationVariables,
-  type WebhookDeleteMutationVariables,
-  type WebhooksQueryVariables,
-  type WebhookUpdateMutationVariables,
   type WorkflowStatusQueryVariables,
   type WorkspaceQueryVariables,
   type WorkspaceByCodeQueryVariables,
@@ -996,12 +978,6 @@ export const passkeys = (client: RailwayClient, request?: { variables?: Passkeys
 
 /** Get the current status of the platform */
 export const platformStatus = (client: RailwayClient, request?: { options?: GraphQLDocumentRequestOptions }): ResultAsync<FlattenGraphQLResponse<PlatformStatusQuery>, GraphQLRequestError> => client.requestDocument(PlatformStatusDocument, undefined, request?.options);
-
-/** Create/Updates preferences overrides for a specific resource belonging to a user */
-export const preferenceOverridesCreateUpdate = (client: RailwayClient, request: { variables: PreferenceOverridesCreateUpdateMutationVariables; options?: GraphQLDocumentRequestOptions }): ResultAsync<FlattenGraphQLResponse<PreferenceOverridesCreateUpdateMutation>, GraphQLRequestError> => client.requestDocument(PreferenceOverridesCreateUpdateDocument, request.variables, request?.options);
-
-/** Destroy preferences overrides for a specific resource belonging to a user */
-export const preferenceOverridesDestroyForResource = (client: RailwayClient, request: { variables: PreferenceOverridesDestroyForResourceMutationVariables; options?: GraphQLDocumentRequestOptions }): ResultAsync<FlattenGraphQLResponse<PreferenceOverridesDestroyForResourceMutation>, GraphQLRequestError> => client.requestDocument(PreferenceOverridesDestroyForResourceDocument, request.variables, request?.options);
 
 /** Get the email preferences for a user */
 export const preferences = (client: RailwayClient, request?: { variables?: PreferencesQueryVariables; options?: GraphQLDocumentRequestOptions }): ResultAsync<FlattenGraphQLResponse<PreferencesQuery>, GraphQLRequestError> => client.requestDocument(PreferencesDocument, request?.variables, request?.options);
@@ -1374,18 +1350,6 @@ export const volumeInstanceUpdate = (client: RailwayClient, request: { variables
 
 /** Update a persistent volume in a project */
 export const volumeUpdate = (client: RailwayClient, request: { variables: VolumeUpdateMutationVariables; options?: GraphQLDocumentRequestOptions }): ResultAsync<FlattenGraphQLResponse<VolumeUpdateMutation>, GraphQLRequestError> => client.requestDocument(VolumeUpdateDocument, request.variables, request?.options);
-
-/** Create a webhook on a project */
-export const webhookCreate = (client: RailwayClient, request: { variables: WebhookCreateMutationVariables; options?: GraphQLDocumentRequestOptions }): ResultAsync<FlattenGraphQLResponse<WebhookCreateMutation>, GraphQLRequestError> => client.requestDocument(WebhookCreateDocument, request.variables, request?.options);
-
-/** Delete a webhook from a project */
-export const webhookDelete = (client: RailwayClient, request: { variables: WebhookDeleteMutationVariables; options?: GraphQLDocumentRequestOptions }): ResultAsync<FlattenGraphQLResponse<WebhookDeleteMutation>, GraphQLRequestError> => client.requestDocument(WebhookDeleteDocument, request.variables, request?.options);
-
-/** Get all webhooks for a project */
-export const webhooks = (client: RailwayClient, request: { variables: WebhooksQueryVariables; options?: GraphQLDocumentRequestOptions }): ResultAsync<FlattenGraphQLResponse<WebhooksQuery>, GraphQLRequestError> => client.requestDocument(WebhooksDocument, request.variables, request?.options);
-
-/** Update a webhook on a project */
-export const webhookUpdate = (client: RailwayClient, request: { variables: WebhookUpdateMutationVariables; options?: GraphQLDocumentRequestOptions }): ResultAsync<FlattenGraphQLResponse<WebhookUpdateMutation>, GraphQLRequestError> => client.requestDocument(WebhookUpdateDocument, request.variables, request?.options);
 
 /** Gets the status of a workflow */
 export const workflowStatus = (client: RailwayClient, request: { variables: WorkflowStatusQueryVariables; options?: GraphQLDocumentRequestOptions }): ResultAsync<FlattenGraphQLResponse<WorkflowStatusQuery>, GraphQLRequestError> => client.requestDocument(WorkflowStatusDocument, request.variables, request?.options);
