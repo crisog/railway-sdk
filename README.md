@@ -72,17 +72,17 @@ Browse more examples at [github.com/crisog/railway-sdk/tree/main/examples](https
 
 ## Authentication
 
-Supported environment variables, in lookup order:
+`createRailwayFromEnv()` looks for tokens in this order:
 
 1. `RAILWAY_API_TOKEN` (account / personal tokens)
 2. `RAILWAY_TEAM_TOKEN`
 3. `RAILWAY_PROJECT_TOKEN`
 
-If no token is discovered, the helpers throw `MissingTokenError`.
+If none are found, it throws `MissingTokenError`.
 
 ### Token Types
 
-The SDK's `tokenType` option determines which HTTP header is used:
+When using `createRailway()`, the `tokenType` option determines which HTTP header is used:
 
 | tokenType   | HTTP Header             |
 | ----------- | ----------------------- |
