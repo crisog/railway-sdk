@@ -1,8 +1,8 @@
 import * as fs from 'node:fs/promises';
 import * as path from 'node:path';
-import { createRailway } from '../../src/railway';
-import { requireTokenFromEnv } from '../../src/auth';
-import type { TokenType } from '../../src/auth';
+import { createRailway } from '../../../src/railway';
+import { requireTokenFromEnv } from '../../../src/auth';
+import type { TokenType } from '../../../src/auth';
 import { TEMPLATE_CODE } from './config';
 
 interface TemplateTypeInfo {

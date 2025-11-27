@@ -3,11 +3,11 @@
  *
  * Before running this example:
  * 1. Update config.ts with your desired template code
- * 2. Run: tsx --env-file=.env examples/templates-advanced/typegen.ts
+ * 2. Run: tsx --env-file=.env examples/templates/advanced/typegen.ts
  * 3. Update the imports below to match your generated types
  */
 
-import { createRailwayFromEnv } from '../../src/index';
+import { createRailwayFromEnv } from '../../../src/index';
 import {
   createFfmpegRestApiConfig,
   FFMPEG_REST_API_DEFAULT_CONFIG,
