@@ -15,9 +15,7 @@ npm install @crisog/railway-sdk
 
 ## Quick Start
 
-```bash
-export RAILWAY_API_TOKEN=your-token-here
-```
+> Set `RAILWAY_API_TOKEN` in your environment before running.
 
 ```ts
 import { createRailwayFromEnv } from '@crisog/railway-sdk';
