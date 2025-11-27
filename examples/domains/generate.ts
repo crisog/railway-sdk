@@ -1,4 +1,4 @@
-import { createRailwayFromEnv, unwrapField } from '../src/index';
+import { createRailwayFromEnv, unwrapField } from '../../src/index';
 
 async function main() {
   const railway = createRailwayFromEnv();
@@ -8,22 +8,14 @@ async function main() {
 
   const result = await railway.services.domains.create({
     variables: {
-      input: {
-        serviceId,
-        environmentId,
-      },
+      input: { serviceId, environmentId },
     },
   });
 
-  if (result.isErr()) {
-    throw result.error;
-  }
+  if (result.isErr()) throw result.error;
 
-  const domain = unwrapField(result, 'serviceDomainCreate', 'No domain created');
-
-  if (domain.isErr()) {
-    throw domain.error;
-  }
+  const domain = unwrapField(result, 'serviceDomainCreate', 'Domain creation failed');
+  if (domain.isErr()) throw domain.error;
 
   console.log(`Generated domain: https://${domain.value.domain}`);
 }
