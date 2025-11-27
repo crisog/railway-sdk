@@ -126,6 +126,60 @@ const transformDefaultValueToValue = (obj: unknown): unknown => {
   return result;
 };
 
+const ensureVariablesHaveValue = (config: unknown): unknown => {
+  if (!config || typeof config !== 'object') {
+    return config;
+  }
+
+  const configObj = config as Record<string, unknown>;
+  const services = configObj['services'];
+
+  if (!services || typeof services !== 'object') {
+    return config;
+  }
+
+  const servicesObj = services as Record<string, unknown>;
+  const normalizedServices: Record<string, unknown> = {};
+
+  for (const [serviceId, service] of Object.entries(servicesObj)) {
+    if (!service || typeof service !== 'object') {
+      normalizedServices[serviceId] = service;
+      continue;
+    }
+
+    const serviceObj = service as Record<string, unknown>;
+    const normalizedService: Record<string, unknown> = { ...serviceObj };
+    const variables = serviceObj['variables'];
+
+    if (variables && typeof variables === 'object') {
+      const variablesObj = variables as Record<string, unknown>;
+      const normalizedVariables: Record<string, unknown> = {};
+
+      for (const [varName, varConfig] of Object.entries(variablesObj)) {
+        if (!varConfig || typeof varConfig !== 'object') {
+          normalizedVariables[varName] = varConfig;
+          continue;
+        }
+
+        const varConfigObj = varConfig as Record<string, unknown>;
+        normalizedVariables[varName] = {
+          ...varConfigObj,
+          value: varConfigObj['value'] ?? '',
+        };
+      }
+
+      normalizedService['variables'] = normalizedVariables;
+    }
+
+    normalizedServices[serviceId] = normalizedService;
+  }
+
+  return {
+    ...configObj,
+    services: normalizedServices,
+  };
+};
+
 const generateTemplateTypes = async (options: GenerateOptions): Promise<GenerateResult> => {
   const railway = createRailway({
     token: options.token,
@@ -150,12 +204,13 @@ const generateTemplateTypes = async (options: GenerateOptions): Promise<Generate
     }
 
     const transformedConfig = transformDefaultValueToValue(template.serializedConfig);
+    const normalizedConfig = ensureVariablesHaveValue(transformedConfig);
 
     templateInfos.push({
       code: template.code,
       name: template.name,
       typeName: toPascalCase(template.code),
-      config: transformedConfig,
+      config: normalizedConfig,
     });
   }
 
