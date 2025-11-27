@@ -1,4 +1,4 @@
-import { createRailwayFromEnv, unwrapArray } from '../../src/index';
+import { createRailwayFromEnv, unwrapArray } from '@crisog/railway-sdk';
 
 async function main() {
   const railway = createRailwayFromEnv();
