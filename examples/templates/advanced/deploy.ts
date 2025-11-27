@@ -38,30 +38,28 @@ async function main() {
   console.log(`Template: ${template.name}\n`);
 
   const defaults = FFMPEG_REST_API_DEFAULT_CONFIG.services[FFMPEG_SERVICE_ID].variables;
-  console.log('Variables that need configuration (empty defaults):');
-  console.log(
-    `  STORAGE_MODE: "${defaults.STORAGE_MODE.defaultValue}" <- empty, set to "s3" for S3 mode`,
-  );
-  console.log(`  S3_BUCKET: "${defaults.S3_BUCKET.defaultValue}" <- empty`);
-  console.log(`  S3_REGION: "${defaults.S3_REGION.defaultValue}" <- empty`);
-  console.log(`  S3_ACCESS_KEY_ID: "${defaults.S3_ACCESS_KEY_ID.defaultValue}" <- empty`);
-  console.log(`  S3_SECRET_ACCESS_KEY: "${defaults.S3_SECRET_ACCESS_KEY.defaultValue}" <- empty`);
+  console.log('Variables that need configuration (empty values):');
+  console.log(`  STORAGE_MODE: "${defaults.STORAGE_MODE.value}" <- empty, set to "s3" for S3 mode`);
+  console.log(`  S3_BUCKET: "${defaults.S3_BUCKET.value}" <- empty`);
+  console.log(`  S3_REGION: "${defaults.S3_REGION.value}" <- empty`);
+  console.log(`  S3_ACCESS_KEY_ID: "${defaults.S3_ACCESS_KEY_ID.value}" <- empty`);
+  console.log(`  S3_SECRET_ACCESS_KEY: "${defaults.S3_SECRET_ACCESS_KEY.value}" <- empty`);
 
   console.log('\nVariables with defaults (no changes needed):');
-  console.log(`  PORT: "${defaults.PORT.defaultValue}"`);
-  console.log(`  NODE_ENV: "${defaults.NODE_ENV.defaultValue}"`);
-  console.log(`  MAX_FILE_SIZE: "${defaults.MAX_FILE_SIZE.defaultValue}"`);
+  console.log(`  PORT: "${defaults.PORT.value}"`);
+  console.log(`  NODE_ENV: "${defaults.NODE_ENV.value}"`);
+  console.log(`  MAX_FILE_SIZE: "${defaults.MAX_FILE_SIZE.value}"`);
 
   const config = createFfmpegRestApiConfig();
   const ffmpegRestVars = config.services[FFMPEG_SERVICE_ID].variables;
 
-  ffmpegRestVars.STORAGE_MODE.defaultValue = 's3';
-  ffmpegRestVars.S3_BUCKET.defaultValue = 'your-bucket-name';
-  ffmpegRestVars.S3_REGION.defaultValue = 'us-east-1';
-  ffmpegRestVars.S3_ENDPOINT.defaultValue = 'https://s3.us-east-1.amazonaws.com';
-  ffmpegRestVars.S3_ACCESS_KEY_ID.defaultValue = 'your-access-key-id';
-  ffmpegRestVars.S3_SECRET_ACCESS_KEY.defaultValue = 'your-secret-access-key';
-  ffmpegRestVars.S3_PUBLIC_URL.defaultValue = 'https://your-bucket-name.s3.amazonaws.com';
+  ffmpegRestVars.STORAGE_MODE.value = 's3';
+  ffmpegRestVars.S3_BUCKET.value = 'your-bucket-name';
+  ffmpegRestVars.S3_REGION.value = 'us-east-1';
+  ffmpegRestVars.S3_ENDPOINT.value = 'https://s3.us-east-1.amazonaws.com';
+  ffmpegRestVars.S3_ACCESS_KEY_ID.value = 'your-access-key-id';
+  ffmpegRestVars.S3_SECRET_ACCESS_KEY.value = 'your-secret-access-key';
+  ffmpegRestVars.S3_PUBLIC_URL.value = 'https://your-bucket-name.s3.amazonaws.com';
 
   console.log('\n✓ Configured S3 variables');
 

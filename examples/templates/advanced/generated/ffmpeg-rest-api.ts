@@ -21,33 +21,32 @@ export const FFMPEG_REST_API_DEFAULT_CONFIG = {
       variables: {
         REDISHOST: {
           isOptional: false,
-          defaultValue: '${{RAILWAY_PRIVATE_DOMAIN}}',
+          value: '${{RAILWAY_PRIVATE_DOMAIN}}',
         },
         REDISPORT: {
           isOptional: false,
-          defaultValue: '6379',
+          value: '6379',
         },
         REDISUSER: {
           isOptional: false,
-          defaultValue: 'default',
+          value: 'default',
         },
         REDIS_URL: {
           isOptional: false,
           description: 'Connection string for connecting to redis using the private network',
-          defaultValue:
-            'redis://${{ REDISUSER }}:${{ REDIS_PASSWORD }}@${{ REDISHOST }}:${{ REDISPORT }}',
+          value: 'redis://${{ REDISUSER }}:${{ REDIS_PASSWORD }}@${{ REDISHOST }}:${{ REDISPORT }}',
         },
         REDISPASSWORD: {
           isOptional: false,
-          defaultValue: '${{REDIS_PASSWORD}}',
+          value: '${{REDIS_PASSWORD}}',
         },
         REDIS_PASSWORD: {
           isOptional: false,
-          defaultValue: '${{ secret(32, "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ") }}',
+          value: '${{ secret(32, "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ") }}',
         },
         REDIS_PUBLIC_URL: {
           description: 'Connection string for connecting to redis externally',
-          defaultValue:
+          value:
             'redis://default:${{ REDIS_PASSWORD }}@${{ RAILWAY_TCP_PROXY_DOMAIN }}:${{ RAILWAY_TCP_PROXY_PORT }}',
         },
       },
@@ -62,7 +61,6 @@ export const FFMPEG_REST_API_DEFAULT_CONFIG = {
         },
       },
     },
-    // Service ID from the generated config - use this to access service-specific variables with full type safety
     '7a5f33d0-fc76-4ba3-a311-b46b17f050f0': {
       name: 'ffmpeg-rest',
       source: {
@@ -72,70 +70,70 @@ export const FFMPEG_REST_API_DEFAULT_CONFIG = {
       },
       variables: {
         PORT: {
-          defaultValue: '3000',
+          value: '3000',
         },
         NODE_ENV: {
-          defaultValue: 'production',
+          value: 'production',
         },
         TEMP_DIR: {
-          defaultValue: '/tmp/ffmpeg-rest',
+          value: '/tmp/ffmpeg-rest',
         },
         REDIS_URL: {
           description: '',
-          defaultValue: '${{Redis.REDIS_URL}}',
+          value: '${{Redis.REDIS_URL}}',
         },
         S3_BUCKET: {
           isOptional: true,
           description: '',
-          defaultValue: '',
+          value: '',
         },
         S3_REGION: {
           isOptional: true,
           description: '',
-          defaultValue: '',
+          value: '',
         },
         S3_ENDPOINT: {
           isOptional: true,
           description: '',
-          defaultValue: '',
+          value: '',
         },
         STORAGE_MODE: {
           description:
             "Set to `s3` if you want to enable S3 mode. You'll need to configure S3 variables.",
-          defaultValue: '',
+          value: '',
         },
         MAX_FILE_SIZE: {
-          defaultValue: '104857600',
+          value: '104857600',
         },
         S3_PUBLIC_URL: {
           isOptional: true,
           description: 'Publicly accessible URL to the S3 bucket',
-          defaultValue: '',
+          value: '',
         },
         S3_PATH_PREFIX: {
           isOptional: true,
           description: 'Subdirectory where files will be stored within the bucket',
-          defaultValue: '',
+          value: '',
         },
         S3_ACCESS_KEY_ID: {
           isOptional: true,
           description: '',
-          defaultValue: '',
+          value: '',
         },
         S3_DEDUP_ENABLED: {
           isOptional: true,
           description: '',
-          defaultValue: 'true',
+          value: 'true',
         },
         S3_DEDUP_TTL_DAYS: {
           isOptional: true,
           description: '',
-          defaultValue: '90',
+          value: '90',
         },
         S3_SECRET_ACCESS_KEY: {
           isOptional: true,
           description: '',
-          defaultValue: '',
+          value: '',
         },
       },
     },
