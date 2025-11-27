@@ -1,9 +1,9 @@
-import { createRailwayFromEnv, unwrapField } from '../../src/index';
+import { createRailwayFromEnv } from '../../src/index';
 
 async function main() {
   const railway = createRailwayFromEnv();
 
-  const domain = 'my-cool-app.example.com';
+  const domain = 'api.example.com';
 
   const result = await railway.domains.custom.available({
     variables: { domain },
@@ -11,13 +11,10 @@ async function main() {
 
   if (result.isErr()) throw result.error;
 
-  const availability = unwrapField(result, 'customDomainAvailable', 'Check failed');
-  if (availability.isErr()) throw availability.error;
-
-  const data = availability.value as { available: boolean; message: string };
+  const { customDomainAvailable } = result.value;
   console.log(`Domain: ${domain}`);
-  console.log(`Available: ${data.available}`);
-  console.log(`Message: ${data.message}`);
+  console.log(`Available: ${customDomainAvailable.available}`);
+  console.log(`Message: ${customDomainAvailable.message}`);
 }
 
 main().catch(console.error);

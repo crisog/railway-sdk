@@ -1,11 +1,11 @@
-import { createRailwayFromEnv, unwrapField } from '../../src/index';
+import { createRailwayFromEnv } from '../../src/index';
 
 async function main() {
   const railway = createRailwayFromEnv();
 
-  const projectId = '554e1d8a-4087-4955-9d70-cb66dfe78834';
-  const environmentId = 'bd1e400e-21f9-45b6-9f8d-9e02f19fef03';
-  const serviceId = '8cdf7de4-a9f4-4693-9f84-edd0b52fbbb3';
+  const projectId = 'a1b2c3d4-e5f6-7890-abcd-ef1234567890';
+  const environmentId = 'b2c3d4e5-f6a7-8901-bcde-f12345678901';
+  const serviceId = 'c3d4e5f6-a7b8-9012-cdef-123456789012';
 
   const result = await railway.domains.custom.create({
     variables: {
@@ -13,17 +13,14 @@ async function main() {
         projectId,
         environmentId,
         serviceId,
-        domain: 'api.myapp.com',
+        domain: 'api.example.com',
       },
     },
   });
 
   if (result.isErr()) throw result.error;
 
-  const domain = unwrapField(result, 'customDomainCreate', 'Custom domain creation failed');
-  if (domain.isErr()) throw domain.error;
-
-  console.log(`Created custom domain: https://${domain.value.domain}`);
+  console.log(`Created custom domain: https://${result.value.customDomainCreate.domain}`);
 }
 
 main().catch(console.error);

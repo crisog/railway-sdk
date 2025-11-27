@@ -1,11 +1,11 @@
-import { createRailwayFromEnv, unwrapField } from '../../src/index';
+import { createRailwayFromEnv } from '../../src/index';
 
 async function main() {
   const railway = createRailwayFromEnv();
 
-  const projectId = '554e1d8a-4087-4955-9d70-cb66dfe78834';
-  const environmentId = 'bd1e400e-21f9-45b6-9f8d-9e02f19fef03';
-  const serviceId = '8cdf7de4-a9f4-4693-9f84-edd0b52fbbb3';
+  const projectId = 'a1b2c3d4-e5f6-7890-abcd-ef1234567890';
+  const environmentId = 'b2c3d4e5-f6a7-8901-bcde-f12345678901';
+  const serviceId = 'c3d4e5f6-a7b8-9012-cdef-123456789012';
 
   const result = await railway.domains.list({
     variables: { projectId, environmentId, serviceId },
@@ -13,11 +13,17 @@ async function main() {
 
   if (result.isErr()) throw result.error;
 
-  const domains = unwrapField(result, 'domains', 'Domains not found');
-  if (domains.isErr()) throw domains.error;
+  const { domains } = result.value;
 
-  console.log('Domains retrieved successfully');
-  console.log(domains.value);
+  console.log('Service Domains (Railway-generated):');
+  for (const d of domains.serviceDomains) {
+    console.log(`  - https://${d.domain} (port: ${d.targetPort ?? 'default'})`);
+  }
+
+  console.log('\nCustom Domains:');
+  for (const d of domains.customDomains) {
+    console.log(`  - https://${d.domain}`);
+  }
 }
 
 main().catch(console.error);
