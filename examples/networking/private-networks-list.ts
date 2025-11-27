@@ -1,4 +1,4 @@
-import { createRailwayFromEnv, unwrapArray } from '../src/index';
+import { createRailwayFromEnv, unwrapArray } from '../../src/index';
 
 async function main() {
   const railway = createRailwayFromEnv();
@@ -9,15 +9,10 @@ async function main() {
     variables: { environmentId },
   });
 
-  if (result.isErr()) {
-    throw result.error;
-  }
+  if (result.isErr()) throw result.error;
 
   const networks = unwrapArray(result, 'privateNetworks', 'No networks found');
-
-  if (networks.isErr()) {
-    throw networks.error;
-  }
+  if (networks.isErr()) throw networks.error;
 
   console.log(`Found ${networks.value.length} private networks:\n`);
   for (const network of networks.value) {
