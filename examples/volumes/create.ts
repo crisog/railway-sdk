@@ -1,4 +1,4 @@
-import { createRailwayFromEnv, unwrapField } from '../src/index';
+import { createRailwayFromEnv, unwrapField } from '../../src/index';
 
 async function main() {
   const railway = createRailwayFromEnv();
@@ -18,15 +18,10 @@ async function main() {
     },
   });
 
-  if (result.isErr()) {
-    throw result.error;
-  }
+  if (result.isErr()) throw result.error;
 
-  const volume = unwrapField(result, 'volumeCreate', 'No volume created');
-
-  if (volume.isErr()) {
-    throw volume.error;
-  }
+  const volume = unwrapField(result, 'volumeCreate', 'Volume creation failed');
+  if (volume.isErr()) throw volume.error;
 
   console.log(`Created volume: ${volume.value.name} (${volume.value.id})`);
 }
