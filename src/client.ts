@@ -43,13 +43,13 @@ export class RailwayClient {
 
   private readonly token: string;
 
-  private readonly tokenType: TokenType;
+  private readonly tokenType?: TokenType;
 
   private readonly baseHeaders: Record<string, string>;
 
   constructor(options: RailwayClientOptions) {
     this.token = options.token;
-    this.tokenType = options.tokenType ?? 'account';
+    this.tokenType = options.tokenType;
     this.endpoint = options.endpoint ?? DEFAULT_ENDPOINT;
     this.fetchImpl = options.fetch ?? globalThis.fetch;
     this.retryOptions = options.retry;

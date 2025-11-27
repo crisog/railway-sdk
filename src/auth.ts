@@ -1,8 +1,8 @@
-export type TokenType = 'account' | 'team' | 'project';
+export type TokenType = 'project';
 
 export interface EnvToken {
   token: string;
-  type: TokenType;
+  type?: TokenType;
   envVar: string;
 }
 
@@ -15,9 +15,8 @@ export class MissingTokenError extends Error {
   }
 }
 
-const tokenSources: readonly { env: string; type: TokenType }[] = Object.freeze([
-  { env: 'RAILWAY_API_TOKEN', type: 'account' },
-  { env: 'RAILWAY_TEAM_TOKEN', type: 'team' },
+const tokenSources: readonly { env: string; type?: TokenType }[] = Object.freeze([
+  { env: 'RAILWAY_API_TOKEN' },
   { env: 'RAILWAY_PROJECT_TOKEN', type: 'project' },
 ]);
 
@@ -37,26 +36,18 @@ export const requireTokenFromEnv = (): EnvToken => {
 
   if (!envToken) {
     throw new MissingTokenError(
-      'No Railway token found in environment: set RAILWAY_API_TOKEN, RAILWAY_TEAM_TOKEN, or RAILWAY_PROJECT_TOKEN.',
+      'No Railway token found in environment: set RAILWAY_API_TOKEN or RAILWAY_PROJECT_TOKEN.',
     );
   }
 
   return envToken;
 };
 
-export const resolveAuthHeader = (token: string, type: TokenType): Record<string, string> => {
-  switch (type) {
-    case 'account':
-      return { Authorization: `Bearer ${token}` };
-    case 'team':
-      return { 'Team-Access-Token': token };
-    case 'project':
-      return { 'Project-Access-Token': token };
-    default: {
-      const neverType: never = type;
-      throw new Error(`Unsupported token type: ${String(neverType)}`);
-    }
+export const resolveAuthHeader = (token: string, type?: TokenType): Record<string, string> => {
+  if (type === 'project') {
+    return { 'Project-Access-Token': token };
   }
+  return { Authorization: `Bearer ${token}` };
 };
 
 export const TOKEN_ENV_PRIORITY = tokenSources;

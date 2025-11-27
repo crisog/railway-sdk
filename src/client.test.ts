@@ -48,7 +48,6 @@ const restoreEnv = (backup: Record<string, string | undefined>): void => {
 
 const snapshotEnv = (): Record<string, string | undefined> => ({
   RAILWAY_API_TOKEN: process.env['RAILWAY_API_TOKEN'],
-  RAILWAY_TEAM_TOKEN: process.env['RAILWAY_TEAM_TOKEN'],
   RAILWAY_PROJECT_TOKEN: process.env['RAILWAY_PROJECT_TOKEN'],
 });
 
@@ -309,15 +308,14 @@ describe('RailwayClient', () => {
     expect(onRetry).toHaveBeenCalledTimes(1);
   });
 
-  test('fromEnv discovers team token and applies correct header', async () => {
+  test('fromEnv discovers RAILWAY_API_TOKEN and applies Bearer header', async () => {
     envBackup = snapshotEnv();
-    setEnv('RAILWAY_API_TOKEN', undefined);
-    setEnv('RAILWAY_TEAM_TOKEN', 'team-token');
+    setEnv('RAILWAY_API_TOKEN', 'api-token');
     setEnv('RAILWAY_PROJECT_TOKEN', undefined);
 
     const fetchMock = createFetchMock(async (_input: FetchInput, init?: FetchInit) => {
       const headers = init?.headers as Record<string, string>;
-      expect(headers['Team-Access-Token']).toBe('team-token');
+      expect(headers['Authorization']).toBe('Bearer api-token');
       return createJsonResponse({ data: { ok: true } });
     });
 
@@ -328,11 +326,27 @@ describe('RailwayClient', () => {
     const result = await client.request({ query: '{ __typename }' });
 
     expect(result.isOk()).toBe(true);
-    if (result.isErr()) {
-      throw result.error;
-    }
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+  });
 
-    expect(result.value).toEqual({ ok: true });
+  test('fromEnv discovers RAILWAY_PROJECT_TOKEN and applies Project-Access-Token header', async () => {
+    envBackup = snapshotEnv();
+    setEnv('RAILWAY_API_TOKEN', undefined);
+    setEnv('RAILWAY_PROJECT_TOKEN', 'project-token');
+
+    const fetchMock = createFetchMock(async (_input: FetchInput, init?: FetchInit) => {
+      const headers = init?.headers as Record<string, string>;
+      expect(headers['Project-Access-Token']).toBe('project-token');
+      return createJsonResponse({ data: { ok: true } });
+    });
+
+    const client = RailwayClient.fromEnv({
+      fetch: fetchMock,
+      endpoint: TEST_ENDPOINT,
+    });
+    const result = await client.request({ query: '{ __typename }' });
+
+    expect(result.isOk()).toBe(true);
     expect(fetchMock).toHaveBeenCalledTimes(1);
   });
 });

@@ -183,7 +183,7 @@ const ensureVariablesHaveValue = (config: unknown): unknown => {
 const generateTemplateTypes = async (options: GenerateOptions): Promise<GenerateResult> => {
   const railway = createRailway({
     token: options.token,
-    tokenType: options.tokenType ?? 'account',
+    tokenType: options.tokenType,
   });
 
   const templateInfos: TemplateTypeInfo[] = [];
