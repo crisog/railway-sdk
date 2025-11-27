@@ -6,7 +6,26 @@ query domains($environmentId: String!, $projectId: String!, $serviceId: String!)
     serviceId: $serviceId
   ) {
     __typename
-    # customDomains
-    # serviceDomains
+    customDomains {
+      id
+      domain
+      status {
+        dnsRecords {
+          requiredValue
+          currentValue
+          status
+          hostlabel
+          zone
+        }
+      }
+    }
+    serviceDomains {
+      id
+      domain
+      suffix
+      targetPort
+      serviceId
+      environmentId
+    }
   }
 }
