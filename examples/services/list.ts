@@ -1,4 +1,4 @@
-import { createRailwayFromEnv, unwrapNested } from '../src/index';
+import { createRailwayFromEnv, unwrapNested } from '../../src/index';
 
 async function main() {
   const railway = createRailwayFromEnv();
@@ -9,15 +9,10 @@ async function main() {
     variables: { projectId, first: 10 },
   });
 
-  if (result.isErr()) {
-    throw result.error;
-  }
+  if (result.isErr()) throw result.error;
 
   const services = unwrapNested(result, ['project', 'services'] as const, 'Services not found');
-
-  if (services.isErr()) {
-    throw services.error;
-  }
+  if (services.isErr()) throw services.error;
 
   console.log(`Found ${services.value.length} services:\n`);
   for (const service of services.value) {
