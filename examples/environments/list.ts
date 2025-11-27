@@ -1,4 +1,4 @@
-import { createRailwayFromEnv, unwrapField } from '../src/index';
+import { createRailwayFromEnv, unwrapField } from '../../src/index';
 
 async function main() {
   const railway = createRailwayFromEnv();
@@ -9,15 +9,10 @@ async function main() {
     variables: { projectId, first: 20 },
   });
 
-  if (result.isErr()) {
-    throw result.error;
-  }
+  if (result.isErr()) throw result.error;
 
   const environments = unwrapField(result, 'environments', 'Environments not found');
-
-  if (environments.isErr()) {
-    throw environments.error;
-  }
+  if (environments.isErr()) throw environments.error;
 
   console.log(`Found ${environments.value.length} environments:\n`);
   for (const env of environments.value) {
