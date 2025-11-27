@@ -56,7 +56,6 @@ import { createRailway } from '@crisog/railway-sdk';
 
 const railway = createRailway({
   token: myToken,
-  tokenType: 'team',
 });
 ```
 
@@ -74,9 +73,8 @@ Browse more examples at [github.com/crisog/railway-sdk/tree/main/examples](https
 
 `createRailwayFromEnv()` looks for tokens in this order:
 
-1. `RAILWAY_API_TOKEN` (account / personal tokens)
-2. `RAILWAY_TEAM_TOKEN`
-3. `RAILWAY_PROJECT_TOKEN`
+1. `RAILWAY_API_TOKEN` (account or workspace tokens)
+2. `RAILWAY_PROJECT_TOKEN`
 
 If none are found, it throws `MissingTokenError`.
 
@@ -86,12 +84,11 @@ When using `createRailway()`, the `tokenType` option determines which HTTP heade
 
 | tokenType   | HTTP Header             |
 | ----------- | ----------------------- |
-| `'account'` | `Authorization: Bearer` |
-| `'team'`    | `Team-Access-Token`     |
+| _(default)_ | `Authorization: Bearer` |
 | `'project'` | `Project-Access-Token`  |
 
 > [!NOTE]
-> The default `tokenType` is `'account'`. For workspace tokens, use `'team'`. For project tokens, use `'project'`.
+> Account and workspace tokens use Bearer authentication by default. Only specify `tokenType: 'project'` for project tokens.
 
 <details>
 <summary><strong>Token Scope Matrix</strong></summary>
@@ -114,8 +111,8 @@ When using `createRailway()`, the `tokenType` option determines which HTTP heade
 
 **Legend:** ✅ Full Access · ⚠️ Limited · ❌ Not Authorized
 
-- **Account Token**: Required for GitHub integrations. Use `tokenType: 'account'` (default).
-- **Workspace Token**: Best for workspace-level operations. Use `tokenType: 'team'`. Can create new projects and deploy templates.
+- **Account Token**: Required for GitHub integrations. Uses Bearer authentication (default).
+- **Workspace Token**: Scoped to workspace-level operations. Uses Bearer authentication (default). Can create new projects and deploy templates.
 - **Project Token**: Scoped to specific project/environment. Use `tokenType: 'project'`. Has broad access within the scoped project but cannot list deployments or access metrics.
 
 </details>
