@@ -235,10 +235,6 @@ const namespaceShape = {
   preferences: {
     get: operations.preferences,
     update: operations.preferencesUpdate,
-    overrides: {
-      upsert: operations.preferenceOverridesCreateUpdate,
-      destroyForResource: operations.preferenceOverridesDestroyForResource,
-    },
   },
   projects: {
     get: operations.project,
@@ -375,12 +371,6 @@ const namespaceShape = {
         },
       },
     },
-  },
-  webhooks: {
-    create: operations.webhookCreate,
-    update: operations.webhookUpdate,
-    delete: operations.webhookDelete,
-    list: operations.webhooks,
   },
   workspaces: {
     get: operations.workspace,

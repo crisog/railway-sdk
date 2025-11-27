@@ -1,4 +1,0 @@
-# Delete a webhook from a project
-mutation webhookDelete($id: String!) {
-  webhookDelete(id: $id)
-}
